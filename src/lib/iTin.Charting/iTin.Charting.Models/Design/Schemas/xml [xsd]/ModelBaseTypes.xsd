@@ -1,0 +1,1747 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           version="1.0">
+
+  <!-- ================================== -->
+  <!-- Definition of new basic data types -->
+  <!-- ================================== -->
+    
+  <!-- Integer data type. Represents an integer, the minimum allowed value is 1. -->
+  <xs:simpleType name='intMinValueIsOneType'>
+    <xs:restriction base='xs:integer'>
+      <xs:minInclusive value='1'/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Integer data type. Represents an integer, the minimum allowed value is -1. -->
+  <xs:simpleType name='intMinValueIsMinusOneType'>
+    <xs:restriction base='xs:integer'>
+      <xs:minInclusive value='-1'/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <!-- Integer array. Defines an integer array where each element is greater or equal to 1. -->
+  <xs:simpleType name="integerArrayWhereMinValueIsOneType">
+    <xs:list itemType="intMinValueIsOneType"/>
+  </xs:simpleType>
+
+  <!-- Integer array. Defines an integer array where each element is greater or equal to -1. -->
+  <xs:simpleType name="integerArrayWhereMinValueIsMinusOneType">
+    <xs:list itemType="intMinValueIsMinusOneType"/>
+  </xs:simpleType>
+
+
+  <!-- =============================== -->
+  <!-- Definition of string data types -->
+  <!-- =============================== -->
+
+  <!-- String array. Defines a string array. -->
+  <xs:simpleType name="stringArrayType">
+    <xs:list itemType="xs:string"/>
+  </xs:simpleType>
+
+  
+  <!-- ================================ -->
+  <!-- Definition of drawing data types -->
+  <!-- ================================ -->
+
+  <!-- RGB color. Expressed in hexadecimal notation (#RRGGBB). -->
+  <xs:simpleType name="rgbHexColorType" id ="rgbHexColorType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="#[0-9a-fA-F]{6}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- RGB color. Defined by a value representing a % for each RGB component. -->
+  <xs:simpleType name="scColorType" id ="scColorType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value ="sc#\W\d+.\d+\W\d+.\d+\W\d+.\d+"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <!-- System colors. Represents a list of known system colors. -->
+  <xs:simpleType name="rgbNameColorType" id="rgbNameColorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AliceBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #F0F8FF.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AntiqueWhite">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FAEBD7.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Aqua">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #00FFFF.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Aquamarine">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #7FFFD4.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Azure">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #F0FFFF.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Beige">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #F5F5DC.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Bisque">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFE4C4.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Black">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #000000.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BlanchedAlmond">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFEBCD.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Blue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #0000FF.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BlueViolet">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #8A2BE2.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Brown">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #A52A2A.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BurlyWood">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #DEB887.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CadetBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #5F9EA0.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Chartreuse">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #7FFF00.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Chocolate">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #D2691E.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Coral">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FF7F50.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CornflowerBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #6495ED.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Cornsilk">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFF8DC.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Crimson">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #DC143C.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Cyan">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #00FFFF.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #00008B.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkCyan">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #008B8B.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkGoldenrod">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #B8860B.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkGray">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #A9A9A9.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #006400.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkKhaki">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #BDB76B.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkMagenta">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #8B008B.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkOliveGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #556B2F.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkOrange">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FF8C00.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkOrchid">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #9932CC.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkRed">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #8B0000.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkSalmon">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #E9967A.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkSeaGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #8FBC8F.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkSlateBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #483D8B.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkSlateGray">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #2F4F4F.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkTurquoise">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #00CED1.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DarkViolet">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #9400D3.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DeepPink">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FF1493.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DeepSkyBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #00BFFF.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DimGray">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #696969.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DodgerBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #1E90FF.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Firebrick">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #B22222.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FloralWhite">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFFAF0.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ForestGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #228B22.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Fuchsia">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FF00FF.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Gainsboro">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #DCDCDC.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GhostWhite">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #F8F8FF.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Gold">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFD700.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Goldenrod">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #DAA520.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Gray">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #808080.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Green">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #008000.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GreenYellow">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #ADFF2F.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Honeydew">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #F0FFF0.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HotPink">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FF69B4.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IndianRed">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #CD5C5C.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Indigo">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #4B0082.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Ivory">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFFFF0.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Khaki">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #F0E68C.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Lavender">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #E6E6FA.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LavenderBlush">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFF0F5.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LawnGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #7CFC00.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LemonChiffon">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFFACD.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LightBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #ADD8E6.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LightCoral">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #F08080.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LightCyan">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #E0FFFF.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LightGoldenrodYellow">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FAFAD2.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LightGray">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #D3D3D3.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LightGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #90EE90.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LightPink">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFB6C1.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LightSalmon">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFA07A.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LightSeaGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #20B2AA.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LightSkyBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #87CEFA.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LightSlateGray">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #778899.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LightSteelBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #B0C4DE.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LightYellow">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFFFE0.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Lime">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #00FF00.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LimeGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #32CD32.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Linen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FAF0E6.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Magenta">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FF00FF.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Maroon">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #800000.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MediumAquamarine">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #66CDAA.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MediumBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #0000CD.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MediumOrchid">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #BA55D3.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MediumPurple">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #9370DB.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MediumSeaGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #3CB371.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MediumSlateBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #7B68EE.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MediumSpringGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #00FA9A.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MediumTurquoise">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #48D1CC.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MediumVioletRed">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #C71585.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MidnightBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #191970.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MintCream">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #F5FFFA.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MistyRose">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFE4E1.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Moccasin">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFE4B5.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NavajoWhite">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFDEAD.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Navy">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #000080.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OldLace">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FDF5E6.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Olive">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #808000.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OliveDrab">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #6B8E23.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Orange">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFA500.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OrangeRed">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FF4500.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Orchid">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #DA70D6.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PaleGoldenrod">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #EEE8AA.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PaleGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #98FB98.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PaleTurquoise">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #AFEEEE.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PaleVioletRed">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #DB7093.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PapayaWhip">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFEFD5.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PeachPuff">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFDAB9.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Peru">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #CD853F.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Pink">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFC0CB.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Plum">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #DDA0DD.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PowderBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #B0E0E6.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Purple">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #800080.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Red">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FF0000.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RosyBrown">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #BC8F8F.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RoyalBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #4169E1.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SaddleBrown">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #8B4513.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Salmon">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FA8072.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SandyBrown">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #F4A460.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SeaGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #2E8B57.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SeaShell">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFF5EE.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Sienna">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #A0522D.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Silver">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #C0C0C0.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SkyBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #87CEEB.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SlateBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #6A5ACD.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SlateGray">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #708090.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Snow">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFFAFA.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SpringGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #00FF7F.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SteelBlue">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #4682B4.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Tan">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #D2B48C.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Teal">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #008080.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Thistle">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #D8BFD8.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Tomato">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FF6347.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Transparent">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FF6347.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Turquoise">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #40E0D0.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Violet">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #EE82EE.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Wheat">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #F5DEB3.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="White">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFFFFF.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WhiteSmoke">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #F5F5F5.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Yellow">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #FFFF00.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="YellowGreen">
+        <xs:annotation>
+          <xs:documentation>Gets a system-defined color that has an RGB value of #9ACD32.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ShortCut: Hexadecimal and Space Color. -->
+  <xs:simpleType name="shortCutColorType" id="shortCutColorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="#">
+        <xs:annotation>
+          <xs:documentation>Custom color as hexadecimal notation (#RRGGBB, #RGB).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="sc#">
+        <xs:annotation>
+          <xs:documentation>Defines a custom color by color space as % for each RGB component.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- RGB color. Defined by name or by its RGB components. -->
+  <xs:simpleType name="rgbColorType" id ="rgbColorType">
+    <xs:union memberTypes="shortCutColorType rgbNameColorType rgbHexColorType scColorType"/>
+  </xs:simpleType>
+  
+  
+  <!-- Horizontal alignment. List of possible types of horizontal alignment. -->
+  <xs:simpleType name="HorizontalAlignmentListType">
+    <xs:restriction base ="xs:string">
+      <xs:enumeration value="Left">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Content is aligned horizontally on the left
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Center">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Content is aligned horizontally in the center
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Right">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Content is aligned horizontally on the right
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Vertical alignment. List of possible types of Vertical alignment. -->
+  <xs:simpleType name="VerticalAlignmentListType">
+    <xs:restriction base ="xs:string">
+      <xs:enumeration value="Top">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Content is aligned vertically at the top
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Center">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Content is aligned vertically at the center
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Bottom">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Content is aligned vertically at the bottom
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Orientations. List of possible types of orientation. -->
+  <xs:simpleType id="OrientationListType" name="OrientationListType">
+    <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+      <xs:documentation xml:lang="en">
+        Specifies the possibles orientations
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Automatic">
+        <xs:annotation>
+          <xs:documentation>The orientation is automatic.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Downward">
+        <xs:annotation>
+          <xs:documentation>The orientation is downward.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Horizontal">
+        <xs:annotation>
+          <xs:documentation>The orientation is horizontal.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Upward">
+        <xs:annotation>
+          <xs:documentation>The orientation is upward.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Vertical">
+        <xs:annotation>
+          <xs:documentation>The orientation is vertical.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:whiteSpace value="collapse" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- System fonts. Represents a list of known list of fonts. -->
+  <xs:simpleType name="fontNameListType">
+    <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+      <xs:documentation xml:lang="en">
+        List of available fonts
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Aharoni">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Aharoni font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Andalus">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Andalus font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Angsana New">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Angsana New font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AngsanaUPC">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            AngsanaUPC font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Arabic Typesetting">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Arabic Typesetting font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Arial">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Arial font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Arial Black">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Arial Black font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Batang">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Batang font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BatangChe">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            BatangChe font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Browallia New">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Browallia New font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Browallia New">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            BrowalliaUPC font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Calibri">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Calibri font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Cambria">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Cambria font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Cambria Math">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Cambria Math font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Candara">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Candara font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Comic Sans MS">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Comic Sans MS font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Consolas">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Consolas font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Constantia">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Constantia font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Corbel">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Corbel font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Cordia New">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Cordia New font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CordiaUPC">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            CordiaUPC font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CordiaUPC">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            CordiaUPC font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Courier">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Courier font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Courier New">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Courier New font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DaunPenh">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            DaunPenh font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="David">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            David font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DFKai-SB">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            DFKai-SB font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DilleniaUPC">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            DilleniaUPC font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DokChampa">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            DokChampa font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Dotum">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Dotum font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DotomChe">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            DotomChe font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Estrangelo Edessa">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Estrangelo Edessa font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EucrosiaUPC">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            EucrosiaUPC font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Euphemia">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Euphemia font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FangSong">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            FangSong font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Franklin Gothic Medium">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Franklin Gothic Medium font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FrankRuehl">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            FrankRuehl font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FreesiaUPC">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            FreesiaUPC font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Gautami">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Gautami font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Georgia">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Georgia font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Gisha">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Gisha font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Gulim">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Gulim font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GulimChe">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            GulimChe font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Gungsuh">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Gungsuh font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GungsuhChe">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            GungsuhChe font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Impact">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Impact font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IrisUPC">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            IrisUPC font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Iskoola Pota">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Iskoola Pota font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="JasmineUPC">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            JasmineUPC font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KaiTi">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            KaiTi font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Kalinga">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Kalinga font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Kartika">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Kartika font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KodchiangUTC">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            KodchiangUTC font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Latha">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Latha font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Leelawadee">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Leelawadee font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Levenim MT">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Levenim MT font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LilyUPC">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            LilyUPC font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Lucida Console">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Lucida Console font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Lucida Sans Unicode">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Lucida Sans Unicode font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Malgun Gothic">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Malgun Gothic font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Mangal">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Mangal font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Meiryo">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Meiryo font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Microsoft Himalaya">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Microsoft Himalaya font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Microsoft JhengHei">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Microsoft JhengHei font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Microsoft Sans Serif">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Microsoft Sans Serif font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Microsoft Uighur">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Microsoft Uighur font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Microsoft YaHei">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Microsoft YaHei font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Microsoft Yi Baiti">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Microsoft Yi Baiti font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MingLiU">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            MingLiU font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MingLiU-ExtB">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            MingLiU-ExtB font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MingLiU_HKSCS">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            MingLiU_HKSCS font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MingLiU_HKSCS-ExtB">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            MingLiU_HKSCS-ExtB font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Miriam">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Miriam font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Miriam Fixed">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Miriam Fixed font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Modern">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Modern font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Mongolian Baiti">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Mongolian Baiti font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MoolBoran">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            MoolBoran font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MS Gothic">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            MS Gothic font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MS Mincho">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            MS Mincho font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MS PGothic">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            MS PGothic font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MS PMincho">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            MS PMincho font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MS Sans Saerif">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            MS Sans Saerif font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MS Serif">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            MS Serif font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MS UI Gothic">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            MS UI Gothic font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MV Boli">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            MV Boli font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Narkisim">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Narkisim font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NSimSun">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            NSimSun font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Nyala">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Nyala font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Palatino Linotype">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Palatino Linotype font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Plantagenet Cherokee">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Plantagenet Cherokee font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PMingLiU">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            PMingLiU font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PMingLiU-ExtB">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            PMingLiU-ExtB font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Raavi">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Raavi font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Rod">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Rod font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Roman">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Roman font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Script">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Script font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Segoe Print">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Segoe Print font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Segoe Script">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Segoe Script font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Segoe UI">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Segoe UI font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Shruti">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Shruti font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SimHei">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            SimHei font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Simplified Arabic">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Simplified Arabic font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SimSun">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            SimSun font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SimSun-ExtB">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            SimSun-ExtB font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Small Fonts">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Small Fonts font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Sylfaen">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Sylfaen font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Symbol">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Symbol font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Tahoma">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Tahoma font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Times New Roman">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Times New Roman font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Traditional Arabic">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Traditional Arabic font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Trebuchet MS">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Trebuchet MS font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Tunga">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Tunga font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Verdana">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Verdana font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Vrinda">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Vrinda font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Webdings">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Webdings font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Wingdings">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Wingdings font.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Font sizes. Represents a list of available sizes for font. -->
+  <xs:simpleType name="fontSizeListType" id="fontSizeListType">
+    <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+      <xs:documentation xml:lang="en">
+        List of available sizes for font
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:nonNegativeInteger">
+      <xs:enumeration value="8"/>
+      <xs:enumeration value="9"/>
+      <xs:enumeration value="10"/>
+      <xs:enumeration value="12"/>
+      <xs:enumeration value="13"/>
+      <xs:enumeration value="14"/>
+      <xs:enumeration value="15"/>
+      <xs:enumeration value="16"/>
+      <xs:enumeration value="17"/>
+      <xs:enumeration value="18"/>
+      <xs:enumeration value="20"/>
+      <xs:enumeration value="22"/>
+      <xs:enumeration value="24"/>
+      <xs:enumeration value="26"/>
+      <xs:enumeration value="28"/>
+      <xs:enumeration value="32"/>
+      <xs:enumeration value="36"/>
+      <xs:enumeration value="40"/>
+      <xs:enumeration value="48"/>
+      <xs:enumeration value="56"/>
+      <xs:enumeration value="64"/>
+      <xs:enumeration value="72"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

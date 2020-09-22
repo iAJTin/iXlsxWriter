@@ -1,0 +1,1720 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ChartModel",
+  "definitions": {
+    "AxesModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfAxesModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting for axes of a chart. Includes information of primary and secondary axes",
+          "properties": {
+            "Primary": {
+              "description": "Gets or sets a reference to information of primary axes",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AxisModel"
+                }
+              ]
+            },
+            "Secondary": {
+              "description": "Gets or sets a reference to information of secondary axes",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AxisModel"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "AxisModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfAxisModel"
+        },
+        {
+          "type": "object",
+          "description": "Includes information for the category and value axes",
+          "properties": {
+            "Horizontal": {
+              "description": "Gets or sets a reference that contains the visual setting of category axis",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AxisDefinitionModel"
+                }
+              ]
+            },
+            "Vertical": {
+              "description": "Gets or sets a reference that contains the visual setting of values axis",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AxisDefinitionModel"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "AxisDefinitionModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfAxisDefinitionModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting of a axis",
+          "properties": {
+            "Grid": {
+              "description": "Gets or sets a reference that contains the visual setting of axis grid",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AxisGridModel"
+                }
+              ]
+            },
+            "Labels": {
+              "description": "Gets or sets a reference that contains the visual setting of labels axis",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AxisLabelsModel"
+                }
+              ]
+            },
+            "LineColor": {
+              "type": "string",
+              "description": "Gets or sets the line color of axis line. The default value is 'Black'",
+              "default": "Black"
+            },
+            "LineDashStyle": {
+              "description": "Gets or sets the line style of axis line. The default value is 'Black'",
+              "default": "Continuous",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownLineStyle"
+                }
+              ]
+            },
+            "LineWidth": {
+              "type": "integer",
+              "description": "Gets or sets the line width of axis line. The default value is one (1)",
+              "format": "int32",
+              "default": 1
+            },
+            "Marks": {
+              "description": "Gets or sets a reference that contains the visual setting of mark axis",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AxisMarksModel"
+                }
+              ]
+            },
+            "Name": {
+              "type": "string",
+              "description": "Gets or sets a value that contains the axis identifier name",
+              "default": ""
+            },
+            "Show": {
+              "description": "Gets or sets a value that determines whether displays the axis",
+              "default": "Yes",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            },
+            "Title": {
+              "description": "Gets or sets a reference that contains the visual setting of axis title",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AxisTitleModel"
+                }
+              ]
+            },
+            "Values": {
+              "description": "Gets or sets a reference that contains the visual setting of values axis",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AxisValueModel"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "AxisGridModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfAxisGridModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting the lines for a grid axis",
+          "properties": {
+            "MajorGrid": {
+              "description": "Gets or sets a reference that contains the line properties for a main grid axis",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AxisGridDefinitionModel"
+                }
+              ]
+            },
+            "MinorGrid": {
+              "description": "Gets or sets a reference that contains the line properties for a secondary grid axis",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AxisGridDefinitionModel"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "AxisGridDefinitionModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfAxisGridDefinitionModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting the labels of a axis",
+          "properties": {
+            "Interval": {
+              "type": "number",
+              "description": "Gets or sets the interval between the main or secondary grid lines. The default value is zero (0.0)",
+              "format": "double",
+              "default": 0.0
+            },
+            "LineColor": {
+              "type": "string",
+              "description": "Gets or sets the line color of grid lines. The default value is 'Black'",
+              "default": "Black"
+            },
+            "LineDashStyle": {
+              "description": "Gets or sets the line style of a grid. The default value is 'Continuous'",
+              "default": "Continuous",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownLineStyle"
+                }
+              ]
+            },
+            "LineWidth": {
+              "type": "integer",
+              "description": "Gets or sets the line width of grid lines. The default value is one (1)",
+              "format": "int32",
+              "default": 1
+            },
+            "Show": {
+              "description": "Gets or sets a value that determines whether the lines grid are visible. The default value is 'No'",
+              "default": "No",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "KnownLineStyle": {
+      "type": "string",
+      "description": "Defines a line style",
+      "x-enumNames": [
+        "None",
+        "Continuous",
+        "Dash",
+        "DashDot",
+        "DashDotDot",
+        "Dot"
+      ],
+      "enum": [
+        "None",
+        "Continuous",
+        "Dash",
+        "DashDot",
+        "DashDotDot",
+        "Dot"
+      ]
+    },
+    "YesNo": {
+      "type": "string",
+      "description": "Represents a boolean value",
+      "x-enumNames": [
+        "Yes",
+        "No"
+      ],
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    },
+    "BaseModelOfAxisGridDefinitionModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "PropertyModel": {
+      "type": "object",
+      "description": "Defines a user custom property",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Gets or sets the custom property name"
+        },
+        "Value": {
+          "type": "string",
+          "description": "Gets or sets the custom property value"
+        }
+      }
+    },
+    "BaseModelOfAxisGridModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "AxisLabelsModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfAxisLabelsModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting the labels of a axis",
+          "properties": {
+            "Angle": {
+              "type": "integer",
+              "description": "Gets or sets a value that represents the angle at which the font is drawn. The default value is zero (0)",
+              "format": "int32",
+              "default": 0
+            },
+            "Font": {
+              "description": "Gets or sets a reference to the font model defined for this labels",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/FontModel"
+                }
+              ]
+            },
+            "Format": {
+              "type": "string",
+              "description": "Gets or sets the interval labels of axis.The default is '{0.00}'",
+              "default": "{0.00}"
+            },
+            "Interval": {
+              "type": "number",
+              "description": "Gets or sets the interval labels of axis. The default value is zero (0.0)",
+              "format": "double",
+              "default": 0.0
+            },
+            "Show": {
+              "description": "Gets or sets a value that determines whether the labels axis are visible. The default value is 'No'",
+              "default": "Yes",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "FontModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfFontModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents a font. Defines a particular format for text, including font face, size, and style attributes",
+          "properties": {
+            "Name": {
+              "type": "string",
+              "description": "Gets or sets preferred font name. The default is 'Segoe UI'",
+              "default": "Segoe UI"
+            },
+            "Size": {
+              "type": "number",
+              "description": "Gets or sets preferred font size. The default is (10.0)",
+              "format": "double",
+              "default": 10.0
+            },
+            "Color": {
+              "type": "string",
+              "description": "Gets or sets preferred font color. The default is 'Black'",
+              "default": "Black"
+            },
+            "IsScalable": {
+              "description": "Gets or sets a value indicating whether this font is scalable. The default is 'Yes'",
+              "default": "Yes",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            },
+            "Bold": {
+              "description": "Gets or sets a value indicating whether bold style is applied for this font. The default is 'No'",
+              "default": "No",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            },
+            "Italic": {
+              "description": "Gets or sets a value indicating whether italic style is applied for this font. The default is 'No'",
+              "default": "No",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            },
+            "Underline": {
+              "description": "Gets or sets a value indicating whether the underline style is applied for this font. The default is 'No'",
+              "default": "No",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "BaseModelOfFontModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "BaseModelOfAxisLabelsModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "AxisMarksModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfAxisMarksModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting the lines for a marks axis",
+          "properties": {
+            "MajorMarks": {
+              "description": "Gets or sets a reference that contains the line properties for a main marks axis",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AxisMarkModel"
+                }
+              ]
+            },
+            "MinorMarks": {
+              "description": "Gets or sets a reference that contains the line properties for a secondary marks axis",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AxisMarkModel"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "AxisMarkModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfAxisMarkModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting the marks of a axis.",
+          "properties": {
+            "Interval": {
+              "type": "number",
+              "description": "Gets or sets the interval between the main or secondary grid lines. The default value is zero (0.0)",
+              "format": "double",
+              "default": 0.0
+            },
+            "LineColor": {
+              "type": "string",
+              "description": "Gets or sets the line color of grid lines. The default value is 'Black'",
+              "default": "Black"
+            },
+            "LineDashStyle": {
+              "description": "Gets or sets the line style of a grid. The default value is 'Continuous'",
+              "default": "Continuous",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownLineStyle"
+                }
+              ]
+            },
+            "LineWidth": {
+              "type": "integer",
+              "description": "Gets or sets the line width of grid lines. The default value is one (1)",
+              "format": "int32",
+              "default": 1
+            },
+            "Show": {
+              "description": "Gets or sets a value that determines whether the lines grid are visible. The default value is 'No'",
+              "default": "No",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            },
+            "TickStyle": {
+              "description": "Gets or sets the style of a mark. The default value is 'Cross'",
+              "default": "Cross",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownTickMarkStyle"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "KnownTickMarkStyle": {
+      "type": "string",
+      "description": "Specifies the position of major and minor tick marks for an axis",
+      "x-enumNames": [
+        "None",
+        "Cross",
+        "Inside",
+        "Outside"
+      ],
+      "enum": [
+        "None",
+        "Cross",
+        "Inside",
+        "Outside"
+      ]
+    },
+    "BaseModelOfAxisMarkModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "BaseModelOfAxisMarksModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "AxisTitleModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfAxisTitleModel"
+        },
+        {
+          "type": "object",
+          "description": "A Specialization of TitleModel class.\nRepresents the visual setting of axis title. Includes a text, visibility, orientation, border and font",
+          "properties": {
+            "BackColor": {
+              "type": "string",
+              "description": "Gets or sets preferred back color for this chart title. The default is 'White'",
+              "default": "White"
+            },
+            "Border": {
+              "description": "Gets or sets a reference that contains the visual setting for border of title",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/BorderModel"
+                }
+              ]
+            },
+            "Font": {
+              "description": "Gets or sets a reference to the font model defined for this title",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/FontModel"
+                }
+              ]
+            },
+            "Show": {
+              "description": "Gets or sets a value that determines whether displays the title. The default is 'Yes'",
+              "default": "Yes",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            },
+            "Text": {
+              "type": "string",
+              "description": "Gets or sets text of title. The default is ''",
+              "default": ""
+            },
+            "Alignment": {
+              "description": "Gets or sets preferred horizontal alignment for axis title. The default value is 'Center'",
+              "default": "Center",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownTextAlignment"
+                }
+              ]
+            },
+            "Orientation": {
+              "description": "Gets or sets the orientation of the text in the axis title. The default value is 'Auto'",
+              "default": "Auto",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownTextOrientation"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "BorderModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfBorderModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting of chart border. Includes visibility, shadow definition, line style, width and color",
+          "properties": {
+            "Color": {
+              "type": "string",
+              "description": "Gets or sets preferred border color. The default is 'Black'",
+              "default": "Black"
+            },
+            "Shadow": {
+              "description": "Gets or sets a reference that contains the visual setting of border's shadow",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ShadowModel"
+                }
+              ]
+            },
+            "Show": {
+              "description": "Gets or sets a value that determines whether to display the border. The default is 'No'",
+              "default": "No",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            },
+            "Style": {
+              "description": "Gets or sets preferred border line style. The default is 'Continuous'",
+              "default": "Continuous",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownLineStyle"
+                }
+              ]
+            },
+            "Width": {
+              "type": "integer",
+              "description": "Gets or sets the width of the title border. The default is (1)",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        }
+      ]
+    },
+    "ShadowModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfShadowModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting of border's shadow. Includes the shadow color and visibility",
+          "properties": {
+            "Color": {
+              "type": "string",
+              "description": "Gets or sets preferred border color. The default is 'LightGray'",
+              "default": "LightGray"
+            },
+            "Offset": {
+              "type": "integer",
+              "description": "Gets or sets the shadow shift, in pixels. The default is (2)",
+              "format": "int32",
+              "default": 2
+            },
+            "Show": {
+              "description": "Gets or sets a value that determines whether displays shadow. The default is 'No'",
+              "default": "No",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "BaseModelOfShadowModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "BaseModelOfBorderModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "KnownTextAlignment": {
+      "type": "string",
+      "description": "Specifies the alignment of a text string in relation to its container",
+      "x-enumNames": [
+        "Near",
+        "Center",
+        "Far"
+      ],
+      "enum": [
+        "Near",
+        "Center",
+        "Far"
+      ]
+    },
+    "KnownTextOrientation": {
+      "type": "string",
+      "description": "Specifies the alignment of a text string in relation to its container",
+      "x-enumNames": [
+        "Auto",
+        "Horizontal",
+        "Rotated90",
+        "Rotated270"
+      ],
+      "enum": [
+        "Auto",
+        "Horizontal",
+        "Rotated90",
+        "Rotated270"
+      ]
+    },
+    "BaseModelOfAxisTitleModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "AxisValueModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfAxisValueModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting the values of a axis",
+          "properties": {
+            "Interval": {
+              "type": "number",
+              "description": "Gets or sets the interval value of axis expressed in tenths of a second. The default is (10.0)",
+              "format": "double",
+              "default": 10.0
+            },
+            "Maximun": {
+              "type": "number",
+              "description": "Gets or sets maximun value of axis expressed in tenths of a second",
+              "format": "double"
+            },
+            "Minimun": {
+              "type": "number",
+              "description": "Gets or sets maximun value of axis expressed in tenths of a second. The default is (0.0)",
+              "format": "double",
+              "default": 0.0
+            }
+          }
+        }
+      ]
+    },
+    "BaseModelOfAxisValueModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "BaseModelOfAxisDefinitionModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "BaseModelOfAxisModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "BaseModelOfAxesModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "FooterTitleModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfTitleModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting of bottom title. Includes a text, visibility, orientation, border and font",
+          "properties": {
+            "BackColor": {
+              "type": "string",
+              "description": "Gets or sets preferred back color for this chart title. The default is 'White'",
+              "default": "White"
+            },
+            "Border": {
+              "description": "Gets or sets a reference that contains the visual setting for border of title",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/BorderModel"
+                }
+              ]
+            },
+            "Font": {
+              "description": "Gets or sets a reference to the font model defined for this title",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/FontModel"
+                }
+              ]
+            },
+            "Show": {
+              "description": "Gets or sets a value that determines whether displays the title. The default is 'No'",
+              "default": "No",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            },
+            "Text": {
+              "type": "string",
+              "description": "Gets or sets text of title. The default is ''",
+              "default": ""
+            },
+            "Alignment": {
+              "description": "Gets or sets preferred alignment of bottom chart title",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ContentAlignmentModel"
+                }
+              ]
+            },
+            "Orientation": {
+              "description": "Gets or sets the orientation of the text in the axis title. The default value is 'Auto'",
+              "default": "Auto",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownTextOrientation"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "ContentAlignmentModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfContentAlignmentModel"
+        },
+        {
+          "type": "object",
+          "description": "Defines content alignment.",
+          "properties": {
+            "Horizontal": {
+              "description": "Gets or sets horizontal alignment. The default is 'Center'",
+              "default": "Center",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownHorizontalAlignment"
+                }
+              ]
+            },
+            "Vertical": {
+              "description": "Gets or sets vertical alignment. The default is 'Top'",
+              "default": "Top",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownVerticalAlignment"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "KnownHorizontalAlignment": {
+      "type": "string",
+      "description": "Specifies how an object or text is horizontally aligned relative to a content",
+      "x-enumNames": [
+        "Left",
+        "Center",
+        "Right"
+      ],
+      "enum": [
+        "Left",
+        "Center",
+        "Right"
+      ]
+    },
+    "KnownVerticalAlignment": {
+      "type": "string",
+      "description": "Specifies how an object or text is vertically aligned relative to a content",
+      "x-enumNames": [
+        "Top",
+        "Center",
+        "Bottom"
+      ],
+      "enum": [
+        "Top",
+        "Center",
+        "Bottom"
+      ]
+    },
+    "BaseModelOfContentAlignmentModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "BaseModelOfTitleModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "LegendModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfLegendModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting of chart legend. Includes visibility, location, border and font",
+          "properties": {
+            "Alignment": {
+              "description": "Gets or sets preferred horizontal alignment for chart legend. The default value is 'Center'",
+              "default": "Center",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownTextAlignment"
+                }
+              ]
+            },
+            "BackColor": {
+              "type": "string",
+              "description": "Gets or sets preferred back color for this chart legend. The default is 'White'",
+              "default": "White"
+            },
+            "Border": {
+              "description": "Gets or sets a reference that contains the visual setting of legend border",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/BorderModel"
+                }
+              ]
+            },
+            "Font": {
+              "description": "Gets or sets a reference for font model defined for this legend",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/FontModel"
+                }
+              ]
+            },
+            "Location": {
+              "description": "Gets or sets preferred location for chart legend. The default value is 'Bottom'",
+              "default": "Bottom",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownLegendLocation"
+                }
+              ]
+            },
+            "Show": {
+              "description": "Gets or sets a value that determines whether displays the chart legend. The default is 'No'",
+              "default": "No",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "KnownLegendLocation": {
+      "type": "string",
+      "description": "Specifies the known location for legend.",
+      "x-enumNames": [
+        "Top",
+        "Right",
+        "Bottom",
+        "Left"
+      ],
+      "enum": [
+        "Top",
+        "Right",
+        "Bottom",
+        "Left"
+      ]
+    },
+    "BaseModelOfLegendModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "PlotsModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfPlotsModel"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "BackColor": {
+              "type": "string",
+              "description": "Gets or sets preferred back color for this chart plot area. The default is 'White'",
+              "default": "White"
+            },
+            "Border": {
+              "description": "Gets or sets a reference that contains the visual setting for common border of plots",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/BorderModel"
+                }
+              ]
+            },
+            "Show": {
+              "description": "Gets or sets a value that determines whether the chart plot area is visible. The default value is 'Yes'",
+              "default": "Yes",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            },
+            "PlotAreas": {
+              "description": "Gets or sets collection of plots for a chart",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/PlotAreasModel"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "PlotAreasModel": {
+      "OneOf": [
+        {
+          "$ref": "#/definitions/BaseComplexModelCollectionOfPlotAreaModelAndPlotsModelAndString"
+        }
+      ]
+    },
+    "BaseComplexModelCollectionOfPlotAreaModelAndPlotsModelAndString": {
+      "allOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlotAreaModel"
+          }
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "properties": {
+            "Item": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/PlotAreaModel"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "PlotAreaModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfPlotAreaModel"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Name": {
+              "type": "string",
+              "description": "Defines plot's name of plot area"
+            },
+            "Series": {
+              "description": "Collection of series for a plot",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/SeriesModel"
+                }
+              ]
+            },
+            "UseSecondaryAxis": {
+              "description": "Determines whether the plot uses secondary axis. The default is 'No'",
+              "default": "No",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "SeriesModel": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SerieModel"
+      }
+    },
+    "SerieModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfSerieModel"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ChartType": {
+              "description": "Preferred chart type",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownChartType"
+                }
+              ]
+            },
+            "Color": {
+              "type": "string",
+              "description": "Preferred color for this data serie. The default is 'Black'",
+              "default": "Black"
+            },
+            "Name": {
+              "type": "string",
+              "description": "Name of this serie"
+            },
+            "Show": {
+              "description": "Indicates whether the series is shown. The default is 'Yes'",
+              "default": "Yes",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            },
+            "ShowInLegend": {
+              "description": "Indicates whether the series is shown in the chart legend. The default is 'Yes'",
+              "default": "Yes",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            },
+            "UseSecondaryAxis": {
+              "description": "Determines whether the series uses secondary axis. The default is 'No'",
+              "default": "No",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            },
+            "Width": {
+              "type": "integer",
+              "description": "Value that indicates width of this serie. The default is (1)",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        }
+      ]
+    },
+    "KnownChartType": {
+      "type": "string",
+      "description": "Defines known chart types",
+      "x-enumNames": [
+        "Bars",
+        "Bars3D",
+        "Columns",
+        "XYScatter",
+        "Radar",
+        "Doughnut",
+        "Pie3D",
+        "Line3D",
+        "Column3D",
+        "Area3D",
+        "Area",
+        "Line",
+        "Pie",
+        "Bubble",
+        "ColumnClustered",
+        "ColumnStacked",
+        "ColumnStacked100",
+        "ColumnClustered3D",
+        "ColumnStacked3D",
+        "ColumnStacked1003D",
+        "BarClustered",
+        "BarStacked",
+        "BarStacked100",
+        "BarClustered3D",
+        "BarStacked3D",
+        "BarStacked1003D",
+        "LineStacked",
+        "LineStacked100",
+        "LineMarkers",
+        "LineMarkersStacked",
+        "LineMarkersStacked100",
+        "PieOfPie",
+        "PieExploded",
+        "PieExploded3D",
+        "BarOfPie",
+        "XYScatterSmooth",
+        "XYScatterSmoothNoMarkers",
+        "XYScatterLines",
+        "XYScatterLinesNoMarkers",
+        "AreaStacked",
+        "AreaStacked100",
+        "AreaStacked3D",
+        "AreaStacked1003D",
+        "DoughnutExploded",
+        "RadarMarkers",
+        "RadarFilled",
+        "Surface",
+        "SurfaceWireframe",
+        "SurfaceTopView",
+        "SurfaceTopViewWireframe",
+        "Bubble3DEffect",
+        "StockHLC",
+        "StockOHLC",
+        "StockVHLC",
+        "StockVOHLC",
+        "CylinderColClustered",
+        "CylinderColStacked",
+        "CylinderColStacked100",
+        "CylinderBarClustered",
+        "CylinderBarStacked",
+        "CylinderBarStacked100",
+        "CylinderCol",
+        "ConeColClustered",
+        "ConeColStacked",
+        "ConeColStacked100",
+        "ConeBarClustered",
+        "ConeBarStacked",
+        "ConeBarStacked100",
+        "ConeCol",
+        "PyramidColClustered",
+        "PyramidColStacked",
+        "PyramidColStacked100",
+        "PyramidBarClustered",
+        "PyramidBarStacked",
+        "PyramidBarStacked100",
+        "PyramidCol"
+      ],
+      "enum": [
+        "Bars",
+        "Bars3D",
+        "Columns",
+        "XYScatter",
+        "Radar",
+        "Doughnut",
+        "Pie3D",
+        "Line3D",
+        "Column3D",
+        "Area3D",
+        "Area",
+        "Line",
+        "Pie",
+        "Bubble",
+        "ColumnClustered",
+        "ColumnStacked",
+        "ColumnStacked100",
+        "ColumnClustered3D",
+        "ColumnStacked3D",
+        "ColumnStacked1003D",
+        "BarClustered",
+        "BarStacked",
+        "BarStacked100",
+        "BarClustered3D",
+        "BarStacked3D",
+        "BarStacked1003D",
+        "LineStacked",
+        "LineStacked100",
+        "LineMarkers",
+        "LineMarkersStacked",
+        "LineMarkersStacked100",
+        "PieOfPie",
+        "PieExploded",
+        "PieExploded3D",
+        "BarOfPie",
+        "XYScatterSmooth",
+        "XYScatterSmoothNoMarkers",
+        "XYScatterLines",
+        "XYScatterLinesNoMarkers",
+        "AreaStacked",
+        "AreaStacked100",
+        "AreaStacked3D",
+        "AreaStacked1003D",
+        "DoughnutExploded",
+        "RadarMarkers",
+        "RadarFilled",
+        "Surface",
+        "SurfaceWireframe",
+        "SurfaceTopView",
+        "SurfaceTopViewWireframe",
+        "Bubble3DEffect",
+        "StockHLC",
+        "StockOHLC",
+        "StockVHLC",
+        "StockVOHLC",
+        "CylinderColClustered",
+        "CylinderColStacked",
+        "CylinderColStacked100",
+        "CylinderBarClustered",
+        "CylinderBarStacked",
+        "CylinderBarStacked100",
+        "CylinderCol",
+        "ConeColClustered",
+        "ConeColStacked",
+        "ConeColStacked100",
+        "ConeBarClustered",
+        "ConeBarStacked",
+        "ConeBarStacked100",
+        "ConeCol",
+        "PyramidColClustered",
+        "PyramidColStacked",
+        "PyramidColStacked100",
+        "PyramidBarClustered",
+        "PyramidBarStacked",
+        "PyramidBarStacked100",
+        "PyramidCol"
+      ]
+    },
+    "BaseModelOfSerieModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "BaseModelOfPlotAreaModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "BaseModelOfPlotsModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "SizeModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfSizeModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting of chart size",
+          "properties": {
+            "CustomSize": {
+              "description": "Defines custom chart size defined by user",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/CustomSizeModel"
+                }
+              ]
+            },
+            "Resolution": {
+              "description": "Chart surface dimensions measured in pixels. The default is 'SXGA'",
+              "default": "SXGA",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownChartResolution"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "CustomSizeModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfCustomSizeModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting of chart size",
+          "properties": {
+            "Height": {
+              "type": "integer",
+              "description": "Preferred chart height. The default value is (1024)",
+              "format": "int32",
+              "default": 1024
+            },
+            "Width": {
+              "type": "integer",
+              "description": "Preferred chart width. The default value is (768)",
+              "format": "int32",
+              "default": 768
+            }
+          }
+        }
+      ]
+    },
+    "BaseModelOfCustomSizeModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "KnownChartResolution": {
+      "type": "string",
+      "description": "Defines chart resolution",
+      "x-enumNames": [
+        "Custom",
+        "CGA",
+        "JBCGenericDisplay",
+        "QVGA",
+        "EGA",
+        "VGA",
+        "HGC",
+        "Lisa",
+        "SVGA",
+        "WVGA",
+        "XGA",
+        "HDReady",
+        "WXGA",
+        "SXGA",
+        "WSXGA",
+        "UXGA",
+        "FHD",
+        "WUXGA",
+        "Retina",
+        "UHDV",
+        "Cinema4K",
+        "Retina5K",
+        "UHDV8k",
+        "Cinema8K"
+      ],
+      "enum": [
+        "Custom",
+        "CGA",
+        "JBCGenericDisplay",
+        "QVGA",
+        "EGA",
+        "VGA",
+        "HGC",
+        "Lisa",
+        "SVGA",
+        "WVGA",
+        "XGA",
+        "HDReady",
+        "WXGA",
+        "SXGA",
+        "WSXGA",
+        "UXGA",
+        "FHD",
+        "WUXGA",
+        "Retina",
+        "UHDV",
+        "Cinema4K",
+        "Retina5K",
+        "UHDV8k",
+        "Cinema8K"
+      ]
+    },
+    "BaseModelOfSizeModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    },
+    "TitleModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseModelOfTitleModel"
+        },
+        {
+          "type": "object",
+          "description": "Represents the visual setting of title. Includes a text, visibility, orientation, border and font",
+          "properties": {
+            "BackColor": {
+              "type": "string",
+              "description": "Preferred back color for this chart title. The default is 'White'",
+              "default": "White"
+            },
+            "Border": {
+              "description": "Defines visual setting for border of title",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/BorderModel"
+                }
+              ]
+            },
+            "Font": {
+              "description": "Defines the font model for this title",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/FontModel"
+                }
+              ]
+            },
+            "Show": {
+              "description": "Determines whether displays the title. The default is 'Yes'",
+              "default": "Yes",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/YesNo"
+                }
+              ]
+            },
+            "Text": {
+              "type": "string",
+              "description": "Title's text. The default is ''",
+              "default": ""
+            },
+            "Alignment": {
+              "description": "Defines the visual alignment of chart title",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ContentAlignmentModel"
+                }
+              ]
+            },
+            "Orientation": {
+              "description": "Defines the orientation of the text in the axis title. The default value is 'Auto'",
+              "default": "Auto",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/KnownTextOrientation"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "BaseModelOfChartModel": {
+      "type": "object",
+      "properties": {
+        "Properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyModel"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/BaseModelOfChartModel"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "Axes": {
+          "description": "Defines the visual setting of the chart axes",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AxesModel"
+            }
+          ]
+        },
+        "BackColor": {
+          "type": "string",
+          "description": "Preferred background color for this chart. The default is 'White'",
+          "default": "White"
+        },
+        "Border": {
+          "description": "Defines the visual setting of chart border.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/BorderModel"
+            }
+          ]
+        },
+        "FooterTitle": {
+          "description": "Defines the visual setting of bottom chart title (footer)",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/FooterTitleModel"
+            }
+          ]
+        },
+        "Legend": {
+          "description": "Defines the visual setting of chart legend",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/LegendModel"
+            }
+          ]
+        },
+        "Plots": {
+          "description": "Defines the visual setting of the chart plot areas",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/PlotsModel"
+            }
+          ]
+        },
+        "Size": {
+          "description": "Defines the chart size information",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SizeModel"
+            }
+          ]
+        },
+        "Title": {
+          "description": "Gets or sets a reference that contains the visual setting of chart title.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/TitleModel"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

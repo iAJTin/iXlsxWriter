@@ -1,0 +1,173 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net461;netcoreapp2.1;netstandard2.0</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <Version>1.0.0</Version>
+    <Description>Base library containing various extensions, helpers, common constants for charting</Description>
+    <Copyright>Copyright © 2020</Copyright>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageId>iTin.Charting.Models</PackageId>
+    <Company>iTin</Company>
+    <Product>iTin.Charting.Models</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\iTin.Core\iTin.Core.Models\iTin.Core.Models.csproj" />
+  </ItemGroup>
+
+  <!-- Nested Items -->
+
+  <!-- Design > Chart -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\ChartModel.*.cs">
+      <DependentUpon>ChartModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Axes -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Axes\AxesModel.*.cs">
+      <DependentUpon>AxesModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Axes > Axis -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Axes\Axis\AxisModel.*.cs">
+      <DependentUpon>AxisModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Axes > Axis > AxisDefinition -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Axes\Axis\AxisDefinition\AxisDefinitionModel.*.cs">
+      <DependentUpon>AxisDefinitionModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Axes > Axis > AxisDefinition > Grid -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Axes\Axis\AxisDefinition\Grid\AxisGridModel.*.cs">
+      <DependentUpon>AxisGridModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Axes > Axis > AxisDefinition > Grid > AxisGridDefinition -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Axes\Axis\AxisDefinition\Grid\AxisGridDefinition\AxisGridDefinitionModel.*.cs">
+      <DependentUpon>AxisGridDefinitionModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Axes > Axis > AxisDefinition > Labels -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Axes\Axis\AxisDefinition\Labels\AxisLabelsModel.*.cs">
+      <DependentUpon>AxisLabelsModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Axes > Axis > AxisDefinition > Marks -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Axes\Axis\AxisDefinition\Marks\AxisMarksModel.*.cs">
+      <DependentUpon>AxisMarksModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Axes > Axis > AxisDefinition > Marks > Mark-->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Axes\Axis\AxisDefinition\Marks\Mark\AxisMarkModel.*.cs">
+      <DependentUpon>AxisMarkModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Axes > Axis > AxisDefinition > Title -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Axes\Axis\AxisDefinition\Title\AxisTitleModel.*.cs">
+      <DependentUpon>AxisTitleModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Axes > Axis > AxisDefinition > Values -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Axes\Axis\AxisDefinition\Values\AxisValueModel.*.cs">
+      <DependentUpon>AxisValueModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Legend -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Legend\LegendModel.*.cs">
+      <DependentUpon>LegendModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Plots -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Plots\PlotsModel.*.cs">
+      <DependentUpon>PlotsModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Plots > Plot -->
+
+  <!-- Design > Chart > Plots > Plot > Series -->
+
+  <!-- Design > Chart > Plots > Plot > Series > Serie -->
+
+  <!-- Design > Chart > Shared -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Shared\FontModel.*.cs">
+      <DependentUpon>FontModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Design\Chart\Shared\ContentAlignmentModel.*.cs">
+      <DependentUpon>ContentAlignmentModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Shared > Border -->
+
+  <!-- Design > Chart > Shared > Border > Shadow -->
+
+  <!-- Design > Chart > Shared > Properties -->
+
+  <!-- Design > Chart > Shared > Property -->
+
+  <!-- Design > Chart > Shared > Size -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Shared\Size\SizeModel.*.cs">
+      <DependentUpon>SizeModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Shared > Title -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Shared\Title\FooterTitleModel.*.cs">
+      <DependentUpon>FooterTitleModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Design > Chart > Shared > Title -->
+  <ItemGroup>
+    <Compile Update="Design\Chart\Shared\Title\TitleModel.*.cs">
+      <DependentUpon>TitleModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Design\Chart\Plots\PlotAreas\PlotArea\PlotAreaModel.designer.cs">
+      <DependentUpon>PlotAreaModel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
+</Project>

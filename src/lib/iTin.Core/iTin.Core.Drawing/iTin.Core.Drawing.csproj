@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net461;netcoreapp2.1;netstandard2.0</TargetFrameworks>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Version>1.0.0</Version>
+    <Description>Drawing objects, extension, helpers, common constants</Description>
+    <Copyright>Copyright © 2020</Copyright>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageId>iTin.Core.Drawing</PackageId>
+    <Company>iTin</Company>
+    <Product>iTin.Core.Drawing</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\iTin.Core\iTin.Core.csproj" />
+  </ItemGroup>
+
+</Project>

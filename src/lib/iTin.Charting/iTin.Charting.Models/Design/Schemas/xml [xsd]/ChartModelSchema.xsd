@@ -1,0 +1,1703 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema id="ChartModelSchema"
+           targetNamespace="http://schemas.iTin.com/charting/chart/v1.0"
+           elementFormDefault="qualified"
+           xmlns="http://schemas.iTin.com/charting/chart/v1.0"
+           xmlns:mstns="http://schemas.iTin.com/charting/chart/v1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           version="1.0">
+
+  <!-- Base types -->
+  <xs:include schemaLocation="ModelSharedTypes.xsd" />
+
+  <!-- Root -->
+  <xs:element name="Chart" type="ChartModel">
+    <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+      <xs:documentation xml:lang="en">
+        Represents a user-defined chart
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+
+  <!-- Root: Chart -->
+  <xs:complexType name="ChartModel" id="ChartModel">
+    <xs:all>
+      <xs:element name="Axes" type="AxesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual settings of chart axes
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Border" type="BorderModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual settings of chart border
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="FooterTitle" type="FooterTitleModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual settings of chart footer title
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Legend" type="LegendModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual settings of chart legend
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Plots" type="PlotsModel" minOccurs="1" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual settings of chart footer title
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Size" type="SizeModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines size of chart
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Title" type="TitleModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual settings of chart title
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Quality" type="QualityModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines quality of chart
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="BackColor" type="rgbColorType" use="optional" default="White">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred background color for the chart. The default is 'White'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Chart: Axes -->
+  <xs:complexType name="AxesModel" id="AxesModel">
+    <xs:all>
+      <xs:element name="Primary" type="AxisModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines the information about the primary axes. Includes information for the horizontal and vertical axis
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Secondary" type="AxisModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines the information about the secondary axes. Includes information for the horizontal and vertical axis
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+
+  <!-- Chart: Border -->
+  <xs:complexType name="BorderModel" id="BorderModel">
+    <xs:all>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Shadow" type="ShadowModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual setting of border's shadow. Includes the shadow color and its visibility
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Color" type="rgbColorType" use="optional" default="Black">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred border color. The default is 'Black'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Style" type="KnownLineStyle" use="optional" default="Continuous">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred border line style. The default is 'Continuous'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Show" type="YesNo" use="optional" default="No">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines if the border is displayed. The default is 'No'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Width" type="intMinValueIsOneType" use="optional" default="1">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred width of the edge line. The default is '1'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Chart: FooterTitle -->
+  <xs:complexType name="FooterTitleModel" id="FooterTitleModel">
+    <xs:all>
+      <xs:element name="Alignment" type="ContentAlignmentModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines content distribution
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Border" type="BorderModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual settings of footer title border
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Font" type="FontModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines font to use
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="BackColor" type="rgbColorType" use="optional" default="White">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred background color. The default is 'White'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Orientation" type="KnownTextOrientation" use="optional" default="Auto">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred orientation for the footer title. The default is 'Auto'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Text" type="freeStringType" use="optional" default="">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred footer title text. The default is ''.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Show" type="YesNo" use="optional" default="No">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines if the footer is displayed. The default is 'No'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Chart: Legend -->
+  <xs:complexType name="LegendModel" id="LegendModel">
+    <xs:all>
+      <xs:element name="Border" type="BorderModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual settings of legend border
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Font" type="FontModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines font to use
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Alignment" type="KnownTextAlignment" use="optional" default="Center">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred text alignment. The default is 'Center'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="BackColor" type="rgbColorType" use="optional" default="White">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred background color for chart legend. The default is 'White'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Location" type="KnownLegendLocation" use="optional" default="Bottom">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred location for chart legend. The default is 'Bottom'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Show" type="YesNo" use="optional" default="No">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines if the legend is displayed. The default is 'No'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Chart: Plots -->
+  <xs:complexType name="PlotsModel" id="PlotsModel">
+    <xs:sequence>
+      <xs:element name="Border" type="BorderModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Visual setting for common border of plots.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PlotAreas" type="PlotAreasModel" minOccurs="1" maxOccurs="unbounded">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Collection of plot areas for a chart. Each element represents a chart plot area
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="BackColor" type="rgbColorType" use="optional" default="White">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred back color. The default is 'White'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Show" type="YesNo" use="optional" default="Yes">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines if chart plot area is displayed. The default is 'Yes'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Chart: Size -->
+  <xs:complexType name="SizeModel" id="SizeModel">
+    <xs:all>
+      <xs:element name="CustomSize" type="CustomSizeModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a custom size
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Resolution" type="xs:string" use="optional" default="SXGA">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred chart resolution. The default is 'SXGA'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Chart: Title -->
+  <xs:complexType name="TitleModel" id="TitleModel">
+    <xs:all>
+      <xs:element name="Alignment" type="ContentAlignmentModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines content distribution
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Border" type="BorderModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual settings of title border
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Font" type="FontModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines font to use
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="BackColor" type="rgbColorType" use="optional" default="White">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred background color. The default is 'White'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Orientation" type="KnownTextOrientation" use="optional" default="Auto">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred orientation for the title. The default is 'Auto'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Text" type="freeStringType" use="optional" default="">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred title text. The default is ''.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Show" type="YesNo" use="optional" default="Yes">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines if the title is displayed. The default is 'Yes'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Chart: Quality -->
+  <xs:complexType name="QualityModel" id="QualityModel">
+    <xs:all>
+      <xs:element name="CustomQuality" type="CustomQualityModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a custom chart quality
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Quality" type="xs:string" use="optional" default="High">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred chart quality. The default is 'High'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+
+  <!-- Axes: Axis -->
+  <xs:complexType name="AxisModel" id="AxisModel">
+    <xs:all>
+      <xs:element name="Horizontal" type="AxisDefinitionModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual setting of horizontal axis. Allows you to configure the axis title, the axis labels, axis marks and axis values.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Vertical" type="AxisDefinitionModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual setting of vertical axis. Allows you to configure the axis title, the axis labels, axis marks and axis values.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+
+  <!-- Axis: AxisDefinition -->
+  <xs:complexType name="AxisDefinitionModel" id="AxisDefinitionModel">
+    <xs:all>
+      <xs:element name="Grid" type="AxisGridModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual setting of axis grid
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Labels" type="AxisLabelsModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual setting of axis grid
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Marks" type="AxisMarksModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual setting of axis marks
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Title" type="AxisTitleModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual settings of axis title
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Values" type="AxisValuesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual setting of axis values
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="LineColor" type="rgbColorType" use="optional" default="Black">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred color of shaft line. The default is 'Black'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="LineDashStyle" type="KnownLineStyle" use="optional" default="Continuous">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred line style of axis. The default is 'Continuous'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="LineWidth" type="intMinValueIsOneType" use="optional" default="1">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred width of axis line. The default is '1'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Name" type="freeStringType" use="optional" default="">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Axis name. The default is ''.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Show" type="YesNo" use="optional" default="Yes">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines if the axis is displayed. The default is 'Yes'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- AxisDefinition: Grid -->
+  <xs:complexType name="AxisGridModel" id="AxisGridModel">
+    <xs:all>
+      <xs:element name="MajorGrid" type="AxisGridDefinitionModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual setting of major grid
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MinorGrid" type="AxisGridDefinitionModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual setting of minor grid
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+
+  <!-- AxisDefinition: Marks -->
+  <xs:complexType name="AxisMarksModel" id="AxisMarksModel">
+    <xs:all>
+      <xs:element name="MajorMarks" type="AxisMarkModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual setting of major marks
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MinorMarks" type="AxisMarkModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual setting of minor marks
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+
+  <!-- AxisDefinition: Labels -->
+  <xs:complexType name="AxisLabelsModel" id="AxisLabelsModel">
+    <xs:all>
+      <xs:element name="Font" type="FontModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines font to use
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Angle" type="xs:nonNegativeInteger" use="optional" default="0">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred angle at which the font is drawn. The default is '0'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Format" type="freeStringType" use="optional" default="{0.00}">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Label format. The default is '{0.00}'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Interval" type="xs:double" use="optional" default="0.0">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred label interval value. The default is '0.0'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Show" type="YesNo" use="optional" default="Yes">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines if the label is displayed. The default is 'Yes'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- AxisDefinition: Title -->
+  <xs:complexType name="AxisTitleModel" id="AxisTitleModel">
+    <xs:all>
+      <xs:element name="Border" type="BorderModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines visual settings of title border
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Font" type="FontModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines font to use
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Alignment" type="KnownTextAlignment" use="optional" default="Far">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred alignment for the title. The default is 'Far'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Orientation" type="KnownTextOrientation" use="optional" default="Auto">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred orientation for the title. The default is 'Auto'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Text" type="freeStringType" use="optional" default="">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred title text. The default is ''.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Show" type="YesNo" use="optional" default="Yes">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines if the title is displayed. The default is 'Yes'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- AxisDefinition: Values -->
+  <xs:complexType name="AxisValuesModel" id="AxisValuesModel">
+    <xs:all>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Interval" type="xs:double" use="optional" default="10.0">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred value interval value. The default is '10.0'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Maximun" type="xs:double" use="optional" default="0.0">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred minimum value. The default is '0.0'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Minimun" type="xs:double" use="optional" default="0.0">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred maximum value. The default is '0.0'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+
+  <!-- Border: Shadow -->
+  <xs:complexType name="ShadowModel" id="ShadowModel">
+    <xs:all>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Color" type="rgbColorType" use="optional" default="LightGray">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred shadow color. The default is 'LightGray'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Offset" type="xs:nonNegativeInteger" use="optional" default="2">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred shadow width. The default is '2'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Show" type="YesNo" use="optional" default="No">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines if the shadow is displayed. The default is 'No'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+
+  <!-- Grid: AxisGridDefinition -->
+  <xs:complexType name="AxisGridDefinitionModel" id="AxisGridDefinitionModel">
+    <xs:attribute name="Interval" type="xs:double" use="optional" default="0.0">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred grid interval value. The default is '0.0'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="LineColor" type="rgbColorType" use="optional" default="Black">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred color of grid. The default is 'Black'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="LineDashStyle" type="KnownLineStyle" use="optional" default="Continuous">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred line style of grid. The default is 'Continuous'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="LineWidth" type="intMinValueIsOneType" use="optional" default="1">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred width of grid line. The default is '1'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Show" type="YesNo" use="optional" default="No">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines if the grid is displayed. The default is 'No'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Marks: Mark -->
+  <xs:complexType name="AxisMarkModel" id="AxisMarkModel">
+    <xs:attribute name="Interval" type="xs:double" use="optional" default="0.0">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred grid interval value. The default is '0.0'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="LineColor" type="rgbColorType" use="optional" default="Black">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred color of grid. The default is 'Black'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="LineDashStyle" type="KnownLineStyle" use="optional" default="Continuous">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred line style of grid. The default is 'Continuous'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="LineWidth" type="intMinValueIsOneType" use="optional" default="1">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred width of grid line. The default is '1'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Show" type="YesNo" use="optional" default="No">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines if the grid is displayed. The default is 'No'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="TickStyle" type="KnownTickStyle" use="optional" default="Cross">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred mark style. The default is 'Cross'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+
+  <!-- Plots: PlotAreas -->
+  <xs:complexType name="PlotAreasModel" id="PlotAreasModel">
+    <xs:sequence>
+      <xs:element name="PlotArea" type="PlotAreaModel" minOccurs="1" maxOccurs="unbounded">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Represents a chart plot
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- PlotAreas: PlotArea -->
+  <xs:complexType name="PlotAreaModel" id="PlotAreaModel">
+    <xs:all>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Series" type="SeriesModel" minOccurs="1" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Collection of data series for a plot. Each element represents a data serie of a plot
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Name" type="freeStringType" use="required">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          The name of plot
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="UseSecondaryAxis" type="YesNo" use="optional" default="No">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines whether the plot uses secondary axis. The default is 'No'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- PlotArea: Series -->
+  <xs:complexType name="SeriesModel" id="SeriesModel">
+    <xs:sequence>
+      <xs:element name="Serie" type="SerieModel" minOccurs="1" maxOccurs="unbounded">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Represents a serie data of plot.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Series: Serie -->
+  <xs:complexType name="SerieModel" id="SerieModel">
+    <xs:all>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Color" type="rgbColorType" use="optional" default="Black">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          Preferred color for this data serie. The default is 'Black'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Name" type="freeStringType" use="required">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          Defines the name of this serie.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ChartType" use="required">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          Preferred chart type.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType id="KnownChartType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="XYScatter">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                XYScatter chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Radar">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                Radar chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Doughnut">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                Doughnut chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Pie3D">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                Pie3D chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Line3D">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                Line3D chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Column3D">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                Column3D chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Area3D">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                Area 3D chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Area">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                Area chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Line">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                Line chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Pie">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                Pie chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Bubble">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                Bubble chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ColumnClustered">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                ColumnClustered chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ColumnStacked">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                ColumnStacked chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ColumnStacked100">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                ColumnStacked100 chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ColumnClustered3D">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                ColumnClustered3D chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ColumnStacked3D">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                ColumnStacked3D chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ColumnStacked1003D">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                ColumnStacked1003D chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BarClustered">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                BarClustered chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BarStacked">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                BarStacked chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BarStacked100">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                BarStacked100 chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BarClustered3D">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                BarClustered3D chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BarStacked3D">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                BarStacked3D chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BarStacked1003D">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                BarStacked1003D chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="LineStacked">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                LineStacked chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="LineStacked100">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                LineStacked100 chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="LineMarkers">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                LineMarkers chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="LineMarkersStacked">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                LineMarkersStacked chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="LineMarkersStacked100">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                LineMarkersStacked100 chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PieOfPie">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                PieOfPie chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PieExploded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                PieExploded chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PieExploded3D">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                PieExploded3D chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="BarOfPie">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                BarOfPie chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="XYScatterSmooth">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                XYScatterSmooth chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="XYScatterSmoothNoMarkers">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                XYScatterSmoothNoMarkers chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="XYScatterLines">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                XYScatterLines chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="XYScatterLinesNoMarkers">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                XYScatterLinesNoMarkers chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="AreaStacked">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                AreaStacked chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="AreaStacked100">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                AreaStacked100 chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="AreaStacked3D">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                AreaStacked3D chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="AreaStacked1003D">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                AreaStacked1003D chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DoughnutExploded">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                DoughnutExploded chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="RadarMarkers">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                RadarMarkers chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="RadarFilled">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                RadarFilled chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Surface">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                Surface chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SurfaceWireframe">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                SurfaceWireframe chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SurfaceTopView">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                SurfaceTopView chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SurfaceTopViewWireframe">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                SurfaceTopViewWireframe chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Bubble3DEffect">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                Bubble3DEffect chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="StockHLC">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                StockHLC chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="StockOHLC">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                StockOHLC chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="StockVHLC">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                StockVHLC chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="StockVOHLC">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                StockVOHLC chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CylinderColClustered">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                CylinderColClustered chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CylinderColStacked">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                CylinderColStacked chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CylinderColStacked100">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                CylinderColStacked100 chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CylinderBarClustered">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                CylinderBarClustered chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CylinderBarStacked">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                CylinderBarStacked chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CylinderBarStacked100">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                CylinderBarStacked100 chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CylinderCol">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                CylinderCol chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ConeColClustered">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                ConeColClustered chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ConeColStacked">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                ConeColStacked chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ConeColStacked100">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                ConeColStacked100 chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ConeBarClustered">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                ConeBarClustered chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ConeBarStacked">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                ConeBarStacked chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ConeBarStacked100">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                ConeBarStacked100 chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ConeCol">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                ConeCol chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PyramidColClustered">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                PyramidColClustered chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PyramidColStacked">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                PyramidColStacked chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PyramidColStacked100">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                PyramidColStacked100 chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PyramidBarClustered">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                PyramidBarClustered chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PyramidBarStacked">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                PyramidBarStacked chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PyramidBarStacked100">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                PyramidBarStacked100 chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PyramidCol">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                PyramidCol chart
+              </xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Show" type="YesNo" use="optional" default="Yes">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines whether displays the chart serie. The default is 'Yes'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ShowInLegend" type="YesNo" use="optional" default="Yes">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines whether displays the chart serie. The default is 'Yes'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="UseSecondaryAxis" type="YesNo" use="optional" default="No">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines whether serie uses secondary axis. The default is 'No'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Width" type="xs:integer" use="optional" default="1">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred style for width of the border line. The default is '1'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+
+  <!-- Alignment -->
+  <xs:complexType name="ContentAlignmentModel" id="ContentAlignmentModel">
+    <xs:all>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Horizontal" type="HorizontalAlignmentListType" use="optional" default="Center">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred horizontal alignment. The default is 'Center'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Vertical" type="VerticalAlignmentListType" use="optional" default="Top">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred vertical alignment. The default is 'Top'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+
+  <!-- CustomSize -->
+  <xs:complexType name="CustomSizeModel" id="CustomSizeModel">
+    <xs:all>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines an item property. Contains item definition with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Height" type="xs:nonNegativeInteger" use="optional" default="800">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          Height value
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Width" type="xs:nonNegativeInteger" use="optional" default="1024">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          Width value
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- CustomQuality -->
+  <xs:complexType name="CustomQualityModel" id="CustomQualityModel">
+    <xs:all>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines an item property. Contains item definition with name / value
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Graphics" type="xs:string" use="optional" default="UseAntiAliasing">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          Graphics value
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Text" type="xs:string" use="optional" default="High">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          Text value
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Font -->
+  <xs:complexType name="FontModel" id="FontModel">
+    <xs:all>
+      <xs:element name="Properties" type="PropertiesModel" minOccurs="0" maxOccurs="1">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Defines a set of custom properties. List of keys item with name / value.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="Name" use="optional" default="Segoe UI">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred font name. The default is 'Segoe UI'.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType id="fontNameAttribute">
+        <xs:union memberTypes="xs:string fontNameListType" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Size" use="optional" default="10">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred font size. The default is '10.0'.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType id="fontSizeAttribute">
+        <xs:union memberTypes="xs:nonNegativeInteger fontSizeListType" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Color" type="rgbColorType" use="optional" default="Black">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Preferred font color. The default is 'Black'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Bold" type="YesNo" use="optional" default="No">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines whether bold style is applied for this font. The default is 'No'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Italic" type="YesNo" use="optional" default="No">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines whether italic style is applied for this font. The default is 'No'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsScalable" type="YesNo" use="optional" default="Yes">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines whether this font is scalable. The default is 'Yes'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Underline" type="YesNo" use="optional" default="No">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          [Optional] Determines whether the underline style is applied for this font. The default is 'No'.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Properties -->
+  <xs:complexType name="PropertiesModel" id="PropertiesModel">
+    <xs:sequence>
+      <xs:element name="Property" type="PropertyModel" minOccurs="1" maxOccurs="unbounded">
+        <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+          <xs:documentation xml:lang="en">
+            Contains item definition with name / value.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Properties: Property -->
+  <xs:complexType name="PropertyModel" id="PropertyModel">
+    <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+      <xs:documentation xml:lang="en">
+        Defines an item property. Contains item definition with name / value
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Name" type="freeStringType" use="required">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          Custom property name.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Value" type="freeStringType" use="required">
+      <xs:annotation xmlns="http://www.w3.org/2001/XMLSchema">
+        <xs:documentation xml:lang="en">
+          Custom property value.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+</xs:schema>
