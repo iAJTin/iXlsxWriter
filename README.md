@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://cdn.rawgit.com/iAJTin/iPdfWriter/master/nuget/iXlsxWriter.png"  
+  <img src="https://cdn.rawgit.com/iAJTin/iXlsxWriter/master/nuget/iXlsxWriter.png"  
        height="32"/>
 </p>
 <p align="center">
@@ -14,6 +14,8 @@
 **iXlsxWriter** is a lightweight implementation that allows creates a xlsx document totally or partially.
 
 # Install via NuGet
+
+- From nuget gallery
 
 <table>
   <tr>
@@ -30,6 +32,11 @@
     </td>  
   </tr>
 </table>
+
+- From package manager console
+
+```PM> Install-Package iXlsxWriter```
+
 
 # Usage
 

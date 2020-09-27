@@ -7,7 +7,7 @@ iXlsxWriter is a lightweight implementation that allows creates a xlsx document 
 Library versions
 ================
 
-Library versions for current iPdfWriter version (1.0.0.0)
+Library versions for current iXlsxWriter version (1.0.0.0)
 
 •———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
 | Library                                   Version       Description                                                           |
@@ -37,6 +37,8 @@ Library versions for current iPdfWriter version (1.0.0.0)
 
 Install via NuGet
 =================
+
+PM> Install-Package iXlsxWriter
 
 For more information, please see https://www.nuget.org/packages/iXlsxWriter/
 

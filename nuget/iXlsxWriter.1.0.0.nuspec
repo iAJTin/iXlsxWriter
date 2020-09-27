@@ -1,38 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
-    <metadata>
-        <id>iXlsxWriter</id>
-        <version>1.0.0</version>
-        <title>iXlsxWriter</title>
-        <authors>iAJTin</authors>
-        <owners>iAJTin</owners>
-        <license type="expression">MIT</license>
-        <projectUrl>https://github.com/iAJTin/iXlsxWriter</projectUrl>
-        <iconUrl>https://raw.githubusercontent.com/iAJTin/iXlsxWriter/master/nuget/iXlsxWriter.png</iconUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>iXlsxWriter is a lightweight implementation that allows creates a xlsx document totally or partially</description>
-        <copyright>Copyright © 2020 iAJTin</copyright>
-        <tags>Xlsx Writer iTin</tags>
-        <repository type="git" url="https://github.com/iAJTin/iXlsxWriter"/>
-        <!--<dependencies>
-          <group targetFramework="net45">
-          </group>
-          <group targetFramework=".NETStandard2.0">
-            <dependency id="System.Management" version="4.5.0" exclude="Build,Analyzers" />
-          </group>
-          <group targetFramework=".NETCoreApp2.1">
-            <dependency id="System.Management" version="4.5.0" exclude="Build,Analyzers" />
-          </group>
-          <group targetFramework=".NETCoreApp2.1">
-            <dependency id="System.Management" version="4.5.0" exclude="Build,Analyzers" />
-          </group>
-        </dependencies>
-        <frameworkAssemblies>
-          <frameworkAssembly assemblyName="System.Management" targetFramework="net45" />
-        </frameworkAssemblies>-->
-    </metadata>
-    <files>
-      <file src="..\README.txt" target="." />
-      <file src="..\src\lib\iTin.Utilities\iTin.Utilities.Xlsx\iTin.Utilities.Xlsx.Writer\bin\Release\**" target="lib" exclude="**\*.deps.json;**\*.pdb;" />
-    </files>
+  <metadata>
+    <id>iXlsxWriter</id>
+    <version>1.0.0</version>
+    <title>iXlsxWriter</title>
+    <authors>iAJTin</authors>
+    <owners>iAJTin</owners>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/iAJTin/iXlsxWriter</projectUrl>
+    <icon>.\iXlsxWriter.png</icon>
+    <iconUrl>https://raw.githubusercontent.com/iAJTin/iXlsxWriter/master/nuget/iXlsxWriter.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>iXlsxWriter is a lightweight implementation that allows creates a xlsx document totally or partially</description>
+    <copyright>Copyright © 2020 iAJTin</copyright>
+    <tags>Excel Xlsx Writer ooxml iTin</tags>
+    <repository type="git" url="https://github.com/iAJTin/iXlsxWriter"/>
+    <dependencies>
+      <group targetFramework="net461">
+        <dependency id="EPPlus" version="4.5.3.3"/>
+        <dependency id="DotNetZip" version="1.13.8"/>
+        <dependency id="Newtonsoft.Json" version="12.0.3"/>
+        <dependency id="System.Drawing.Common" version="4.7.0"/>
+        <dependency id="Microsoft.Win32.Registry" version="4.7.0"/>
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="EPPlus" version="4.5.3.3"/>
+        <dependency id="DotNetZip" version="1.13.8"/>
+        <dependency id="Newtonsoft.Json" version="12.0.3"/>
+        <dependency id="System.Drawing.Common" version="4.7.0"/>
+        <dependency id="Microsoft.Win32.Registry" version="4.7.0"/>
+      </group>
+      <group targetFramework=".NETCoreApp2.1">
+        <dependency id="EPPlus" version="4.5.3.3"/>
+        <dependency id="DotNetZip" version="1.13.8"/>
+        <dependency id="Newtonsoft.Json" version="12.0.3"/>
+        <dependency id="System.Drawing.Common" version="4.7.0"/>
+        <dependency id="Microsoft.Win32.Registry" version="4.7.0"/>
+      </group>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="EPPlus" version="4.5.3.3"/>
+        <dependency id="DotNetZip" version="1.13.8"/>
+        <dependency id="Newtonsoft.Json" version="12.0.3"/>
+        <dependency id="System.Drawing.Common" version="4.7.0"/>
+        <dependency id="Microsoft.Win32.Registry" version="4.7.0"/>
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\README.txt" target="." />
+    <file src=".\iXlsxWriter.png" target="." />
+    <file src="..\src\lib\iTin.Utilities\iTin.Utilities.Xlsx\iTin.Utilities.Xlsx.Writer\bin\Debug\**" target="lib" exclude="**\*.deps.json;**\*.pdb;" />
+  </files>
 </package>
