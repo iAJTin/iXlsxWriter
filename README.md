@@ -1,6 +1,5 @@
 <p align="center">
-  <img src="https://cdn.rawgit.com/iAJTin/iXlsxWriter/master/nuget/iXlsxWriter.png"  
-       height="32"/>
+  <img src="https://github.com/iAJTin/iXlsxWriter/blob/master/nuget/iXlsxWriter.png" height="32"/>
 </p>
 <p align="center">
   <a href="https://github.com/iAJTin/iXlsxWriter">
