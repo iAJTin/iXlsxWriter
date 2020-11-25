@@ -126,23 +126,23 @@ namespace iTin.Utilities.Xlsx.Writer
 
         #region public properties
 
-        #region [public] (bool) AutoUpdateChanges: Gets or sets a value indicating whether automatic updates for changes
+        #region [public] (bool) AutoUpdateChanges: Gets or sets a Result indicating whether automatic updates for changes
         /// <summary>
-        /// Gets or sets a value indicating whether automatic updates for changes.
+        /// Gets or sets a Result indicating whether automatic updates for changes.
         /// </summary>
-        /// <value>
+        /// <Result>
         /// <b>true</b> if automatic update changes; otherwise, <b>false</b>.
-        /// </value>
+        /// </Result>
         public bool AutoUpdateChanges { get; set; }
         #endregion
 
-        #region [public] (bool) DeletePhysicalFilesAfterMerge: Gets or sets a value indicating whether delete physical files after merge
+        #region [public] (bool) DeletePhysicalFilesAfterMerge: Gets or sets a Result indicating whether delete physical files after merge
         /// <summary>
-        /// Gets or sets a value indicating whether delete physical files after merge.
+        /// Gets or sets a Result indicating whether delete physical files after merge.
         /// </summary>
-        /// <value>
+        /// <Result>
         /// <b>true</b> if delete physical files after merge; otherwise, <b>false</b>.
-        /// </value>
+        /// </Result>
         public bool DeletePhysicalFilesAfterMerge { get; set; }
         #endregion
 
@@ -150,9 +150,9 @@ namespace iTin.Utilities.Xlsx.Writer
         /// <summary>
         /// Gets or sets the input object.
         /// </summary>
-        /// <value>
+        /// <Result>
         /// The input.
-        /// </value>
+        /// </Result>
         public object Input { get; set; }
         #endregion
 
@@ -160,9 +160,9 @@ namespace iTin.Utilities.Xlsx.Writer
         /// <summary>
         /// Gets input type.
         /// </summary>
-        /// <value>
-        /// An value of enumeration <see cref="KnownInputType"/> indicating type of the input.
-        /// </value>
+        /// <Result>
+        /// An Result of enumeration <see cref="KnownInputType"/> indicating type of the input.
+        /// </Result>
         public KnownInputType InputType
         {
             get
@@ -207,11 +207,11 @@ namespace iTin.Utilities.Xlsx.Writer
         /// <returns>
         /// <para>
         /// A <see cref="OutputResult"/> reference that contains the result of the operation, to check if the operation is correct, the <b>Success</b>
-        /// property will be <b>true</b> and the <b>Value</b> property will contain the value; Otherwise, the the <b>Success</b> property
+        /// property will be <b>true</b> and the <b>Result</b> property will contain the Result; Otherwise, the the <b>Success</b> property
         /// will be false and the <b>Errors</b> property will contain the errors associated with the operation, if they have been filled in.
         /// </para>
         /// <para>
-        /// The type of the return value is <see cref="OutputResultData"/>, which contains the operation result
+        /// The type of the return Result is <see cref="OutputResultData"/>, which contains the operation result
         /// </para>
         /// </returns>
         public OutputResult CreateResult(OutputResultConfig config = null)
@@ -249,7 +249,7 @@ namespace iTin.Utilities.Xlsx.Writer
                 }
 
                 OutputResult zippedOutputResult = OutputResult.CreateSuccessResult(null); // new[] { Clone() }.CreateJoinResult(new[] { configToApply.Filename });
-                //zippedOutputResult.Value.Configuration = configToApply;
+                //zippedOutputResult.Result.Configuration = configToApply;
 
                 return zippedOutputResult;
             }
@@ -268,11 +268,11 @@ namespace iTin.Utilities.Xlsx.Writer
         /// <returns>
         /// <para>
         /// A <see cref="InsertResult"/> reference that contains the result of the operation, to check if the operation is correct, the <b>Success</b>
-        /// property will be <b>true</b> and the <b>Value</b> property will contain the value; Otherwise, the the <b>Success</b> property
+        /// property will be <b>true</b> and the <b>Result</b> property will contain the Result; Otherwise, the the <b>Success</b> property
         /// will be false and the <b>Errors</b> property will contain the errors associated with the operation, if they have been filled in.
         /// </para>
         /// <para>
-        /// The type of the return value is <see cref="InsertResultData"/>, which contains the operation result
+        /// The type of the return Result is <see cref="InsertResultData"/>, which contains the operation result
         /// </para>
         /// </returns>
         public InsertResult Insert(IInsert data)
@@ -287,7 +287,7 @@ namespace iTin.Utilities.Xlsx.Writer
 
             if (AutoUpdateChanges)
             {
-                Input = result.Value.OutputStream;
+                Input = result.Result.OutputStream;
             }
 
             Logger.Instance.Debug($" > Output: Inserted = {result.Success}");
@@ -304,11 +304,11 @@ namespace iTin.Utilities.Xlsx.Writer
         /// <returns>
         /// <para>
         /// A <see cref="ReplaceResult"/> reference that contains the result of the operation, to check if the operation is correct, the <b>Success</b>
-        /// property will be <b>true</b> and the <b>Value</b> property will contain the value; Otherwise, the the <b>Success</b> property
+        /// property will be <b>true</b> and the <b>Result</b> property will contain the Result; Otherwise, the the <b>Success</b> property
         /// will be false and the <b>Errors</b> property will contain the errors associated with the operation, if they have been filled in.
         /// </para>
         /// <para>
-        /// The type of the return value is <see cref="ReplaceResultData"/>, which contains the operation result
+        /// The type of the return Result is <see cref="ReplaceResultData"/>, which contains the operation result
         /// </para>
         /// </returns>
         public ReplaceResult Replace(IReplace data)
@@ -323,7 +323,7 @@ namespace iTin.Utilities.Xlsx.Writer
 
             if (AutoUpdateChanges)
             {
-                Input = result.Value.OutputStream;
+                Input = result.Result.OutputStream;
             }
 
             Logger.Instance.Debug($" > Output: Replacement = {result.Success}");
@@ -340,11 +340,11 @@ namespace iTin.Utilities.Xlsx.Writer
         /// <returns>
         /// <para>
         /// A <see cref="SetResult"/> reference that contains the result of the operation, to check if the operation is correct, the <b>Success</b>
-        /// property will be <b>true</b> and the <b>Value</b> property will contain the value; Otherwise, the the <b>Success</b> property
+        /// property will be <b>true</b> and the <b>Result</b> property will contain the Result; Otherwise, the the <b>Success</b> property
         /// will be false and the <b>Errors</b> property will contain the errors associated with the operation, if they have been filled in.
         /// </para>
         /// <para>
-        /// The type of the return value is <see cref="SetResultData"/>, which contains the operation result
+        /// The type of the return Result is <see cref="SetResultData"/>, which contains the operation result
         /// </para>
         /// </returns>
         public SetResult Set(ISet data)
@@ -359,7 +359,7 @@ namespace iTin.Utilities.Xlsx.Writer
 
             if (AutoUpdateChanges)
             {
-                Input = result.Value.OutputStream;
+                Input = result.Result.OutputStream;
             }
 
             Logger.Instance.Debug($" > Output: Setted = {result.Success}");
@@ -377,11 +377,11 @@ namespace iTin.Utilities.Xlsx.Writer
         /// <returns>
         /// <para>
         /// A <see cref="BooleanResult"/> which implements the <see cref="IResult"/> interface reference that contains the result of the operation, to check if the operation is correct, the <b>Success</b>
-        /// property will be <b>true</b> and the <b>Value</b> property will contain the value; Otherwise, the the <b>Success</b> property
+        /// property will be <b>true</b> and the <b>Result</b> property will contain the Result; Otherwise, the the <b>Success</b> property
         /// will be false and the <b>Errors</b> property will contain the errors associated with the operation, if they have been filled in.
         /// </para>
         /// <para>
-        /// The type of the return value is <see cref="bool"/>, which contains the operation result
+        /// The type of the return Result is <see cref="bool"/>, which contains the operation result
         /// </para>
         /// </returns>
         public IResult SaveToFile(string outputPath, SaveOptions options = null)
@@ -415,7 +415,7 @@ namespace iTin.Utilities.Xlsx.Writer
                     return new NativeIO.MemoryStream(TypeHelper.ToType<byte[]>(Input));
 
                 case KnownInputType.XlsxInput:
-                    return TypeHelper.ToType<XlsxInput>(Input).CreateResult().Value.UncompressOutputStream;
+                    return TypeHelper.ToType<XlsxInput>(Input).CreateResult().Result.UncompressOutputStream;
 
                 case KnownInputType.Stream:
                     NativeIO.Stream stream = TypeHelper.ToType<NativeIO.Stream>(Input);

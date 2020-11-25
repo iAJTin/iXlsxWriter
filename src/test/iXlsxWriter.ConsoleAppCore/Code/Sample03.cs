@@ -552,7 +552,7 @@ namespace iXlsxWriter.Samples
 
             #region Saves output result
 
-            var saveResult = result.Value.Action(new SaveToFile { OutputPath = "~/Output/Sample03/Sample-03" });
+            var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample03/Sample-03" });
             if (!saveResult.Success)
             {
                 logger.Info("   > Error while saving to disk");

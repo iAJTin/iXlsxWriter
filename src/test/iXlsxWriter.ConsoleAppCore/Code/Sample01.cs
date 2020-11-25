@@ -420,7 +420,7 @@ namespace iXlsxWriter.Samples
 
             #region Saves output result
 
-            var saveResult = result.Value.Action(new SaveToFile { OutputPath = "~/Output/Sample01/Sample-01" });
+            var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample01/Sample-01" });
             var ts = sw.Elapsed;
             sw.Stop();
 
