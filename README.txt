@@ -8,6 +8,12 @@ iXlsxWriter is a lightweight implementation that allows creates a xlsx document 
 Changes in this version 1.0.1
 =============================
 
+· Fixed
+  -----
+
+  - Upgrade Newtonsoft.Json nuget package to version 13.0.1 (without critical errors)
+  - Upgrade nuget packages not critical
+
 · Added
   -----
 
@@ -29,7 +35,7 @@ Changes in this version 1.0.1
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
     | Library                               Version     Description                                                                        |
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Charting.Models                  1.0.0.0     Base library containing various extensions, helpers, common constants for charting |
+    | iTin.Charting.Models                  1.0.0.1     Base library containing various extensions, helpers, common constants for charting |
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
     | iTin.Core                             2.0.0.3     Base library containing various extensions, helpers, common constants              |
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
@@ -45,7 +51,7 @@ Changes in this version 1.0.1
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
     | iTin.Core.Models.Design.Styling       1.0.0.1     Base styling models                                                                |
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Logging                          1.0.0.0     Logging library                                                                    |
+    | iTin.Logging                          1.0.0.1     Logging library                                                                    |
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
     | iTin.Registry.Windows                 1.0.0.1     Common classes for model definitions                                               |
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•

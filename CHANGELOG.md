@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.0.1 - 
+## [1.0.1] - 2022-25-06 
+
+### Fixes
+
+ - Upgrade Newtonsoft.Json nuget package to version 13.0.1 (without critical errors) and others nuget packages
 
 ### Added
 
@@ -22,7 +26,7 @@ All notable changes to this project will be documented in this file.
   
     | Library | Version | Description |
     |:------|:------|:----------|
-    | iTin.Charting.Models | 1.0.0.0 | Base library containing various extensions, helpers, common constants for charting |
+    | iTin.Charting.Models | **1.0.0.1** | Base library containing various extensions, helpers, common constants for charting |
     | iTin.Core | **2.0.0.3** | Base library containing various extensions, helpers, common constants |
     | iTin.Core.Drawing | **1.0.0.1** | Drawing objects, extension, helpers, common constants |
     | iTin.Core.IO | 1.0.0.0 | Common I/O calls |
@@ -30,7 +34,7 @@ All notable changes to this project will be documented in this file.
     | iTin.Core.Models | **1.0.0.1** | Data models base |
     | iTin.Core.Models.Design.Charting | **1.0.0.1** | Base charting models |
     | iTin.Core.Models.Design.Styling | **1.0.0.1** | Base styling models |
-    | iTin.Logging | 1.0.0.0 | Logging library |
+    | iTin.Logging | **1.0.0.1** | Logging library |
     | iTin.Registry.Windows | **1.0.0.1** | Windows registry access |
     | iTin.Utilities.Xlsx.Design | **1.0.0.1** | Xlsx design objects |
     | iTin.Utilities.Xlsx.Writer | **1.0.0.1** | Xlsx Writer |

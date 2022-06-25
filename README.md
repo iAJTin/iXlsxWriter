@@ -40,7 +40,7 @@
 
 # Usage
 
-   ###### Coming soon!!
+   - **Coming soon!**, Please see [Test samples] in solution.
 
 
 # Documentation
@@ -58,3 +58,4 @@ My email address is
 
 [email]: ./assets/email.png "email"
 [documentation]: ./documentation/iTin.Utilities.Xlsx.Writer.md
+[Test samples]: https://github.com/iAJTin/iXlsxWriter/tree/master/src/test/iXlsxWriter.ConsoleAppCore
