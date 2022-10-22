@@ -1,8 +1,8 @@
 ﻿
+using System;
+
 namespace iTin.Utilities.Xlsx.Design.Shared
 {
-    using System;
-
     /// <summary>
     /// Represents a cell styles to use with data.
     /// </summary>

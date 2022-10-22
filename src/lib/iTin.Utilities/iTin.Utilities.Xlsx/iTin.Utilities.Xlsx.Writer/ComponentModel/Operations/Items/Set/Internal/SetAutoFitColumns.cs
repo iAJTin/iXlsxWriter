@@ -1,13 +1,13 @@
 ﻿
+using System;
+using System.IO;
+
+using OfficeOpenXml;
+
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Set;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System;
-    using System.IO;
-
-    using OfficeOpenXml;
-
-    using Result.Set;
-
     /// <summary>
     /// A Specialization of <see cref="SetBase"/> class.<br/>
     /// Allows autofit columns.

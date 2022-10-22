@@ -1,16 +1,16 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Utilities.Xlsx.Design.Settings.Document;
+using iTin.Utilities.Xlsx.Design.Settings.Sheets;
+
 namespace iTin.Utilities.Xlsx.Design.Settings
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using Document;
-    using Sheets;
-
     /// <summary>
     /// Defines sheets collection settings. Allows to set the document metadata, margins, header, footer, default view, size and orientation.
     /// </summary>

@@ -1,15 +1,15 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Models.Design;
+
 namespace iTin.Utilities.Xlsx.Design.Charts
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Models.Design;
-
     /// <summary>
     /// Defines a generic axis chart. Includes information for the category and value axes.
     /// </summary>

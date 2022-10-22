@@ -1,8 +1,8 @@
 
+using System;
+
 namespace iTin.Utilities.Xlsx.Design.Styles
 {
-    using System;
-
     /// <summary>
     /// A Specialization of <see cref="BaseDataType"/> class.<br />
     /// Treats the content as text and displays the content exactly as written, even when numbers are typed.

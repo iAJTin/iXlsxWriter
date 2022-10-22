@@ -1,14 +1,14 @@
 ﻿
+using System;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Helpers;
+
 namespace iTin.Utilities.Xlsx.Design.Shared
 {
-    using System;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Helpers;
-
     /// <summary>
     /// A Specialization of <see cref="XlsxBaseRange"/> class.<br/>
     /// Represents a Excel cells range by alphaNumeric representation. Ex. "A1:B2", "A1", "$B$3:$F$33"

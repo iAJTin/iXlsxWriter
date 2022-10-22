@@ -1,19 +1,18 @@
 ﻿
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Enums;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+
 namespace iTin.Utilities.Xlsx.Design.Charts
 {
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Helpers;
-
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Enums;
-
-    using Shared;
-
     /// <summary>
     /// Represents the visual setting of chart legend. Includes visibility, location, border and font.
     /// </summary>

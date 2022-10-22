@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\lib\iTin.Core\iTin.Core.Drawing\iTin.Core.Drawing.csproj" />
     <ProjectReference Include="..\..\lib\iTin.Core\iTin.Core\iTin.Core.csproj" />
+    <ProjectReference Include="..\..\lib\iTin.Core\iTin.Core.Drawing\iTin.Core.Drawing.csproj" />
     <ProjectReference Include="..\..\lib\iTin.Utilities\iTin.Utilities.Xlsx\iTin.Utilities.Xlsx.Design\iTin.Utilities.Xlsx.Design.csproj" />
     <ProjectReference Include="..\..\lib\iTin.Utilities\iTin.Utilities.Xlsx\iTin.Utilities.Xlsx.Writer\iTin.Utilities.Xlsx.Writer.csproj" />
   </ItemGroup>

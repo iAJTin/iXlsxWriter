@@ -1,19 +1,19 @@
 
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core;
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design.Enums;
+
 namespace iTin.Utilities.Xlsx.Design.Styles
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Linq;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core;
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design.Enums;
-
     /// <summary>
     /// A Specialization of <see cref="BaseDataType"/> class.<br/>
     /// Displays data field as datetime format. You can specify the output culture.

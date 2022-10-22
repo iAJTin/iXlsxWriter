@@ -1,13 +1,13 @@
 
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
 namespace iTin.Utilities.Xlsx.Design.Styles
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
     /// <summary>
     /// A Specialization of <see cref="RealDataType"/> class.<br/>
     /// Displays a number in exponential notation, which replaces part of the number with E + n, where E (exponent) multiplies the preceding number by 10 to n.

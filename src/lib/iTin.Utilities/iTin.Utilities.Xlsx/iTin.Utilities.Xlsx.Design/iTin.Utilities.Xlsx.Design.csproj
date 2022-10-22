@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp3.1;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
-    <Version>1.0.0.1</Version>
+    <Version>1.0.0.2</Version>
     <Description>Xlsx design elements</Description>
-    <Copyright>Copyright © 2020</Copyright>
+    <Copyright>Copyright © 2022</Copyright>
     <PackageProjectUrl></PackageProjectUrl>
     <PackageId>iTin.Utilities.Xlsx.Design</PackageId>
     <Company>iTin</Company>
@@ -26,12 +26,12 @@
   </ProjectExtensions>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\iTin.Core\iTin.Core\iTin.Core.csproj" />
     <ProjectReference Include="..\..\..\iTin.Core\iTin.Core.Drawing\iTin.Core.Drawing.csproj" />
     <ProjectReference Include="..\..\..\iTin.Core\iTin.Core.IO.Compression\iTin.Core.IO.Compression.csproj" />
+    <ProjectReference Include="..\..\..\iTin.Core\iTin.Core.Models\iTin.Core.Models.csproj" />
     <ProjectReference Include="..\..\..\iTin.Core\iTin.Core.Models.Design\iTin.Core.Models.Design.Charting\iTin.Core.Models.Design.Charting.csproj" />
     <ProjectReference Include="..\..\..\iTin.Core\iTin.Core.Models.Design\iTin.Core.Models.Design.Styling\iTin.Core.Models.Design.Styling.csproj" />
-    <ProjectReference Include="..\..\..\iTin.Core\iTin.Core.Models\iTin.Core.Models.csproj" />
-    <ProjectReference Include="..\..\..\iTin.Core\iTin.Core\iTin.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

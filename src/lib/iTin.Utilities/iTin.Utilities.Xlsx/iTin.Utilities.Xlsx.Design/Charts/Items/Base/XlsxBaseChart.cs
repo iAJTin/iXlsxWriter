@@ -1,22 +1,22 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Helpers;
+
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Charting;
+using iTin.Core.Models.Design.Enums;
+
+using iTinIO = iTin.Core.IO;
+
 namespace iTin.Utilities.Xlsx.Design.Charts
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Helpers;
-
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Charting;
-    using iTin.Core.Models.Design.Enums;
-
-    using iTinIO = iTin.Core.IO;
-
     /// <summary>
     /// A Specialization of <see cref="IXlsxChart"/> interface.<br/>
     /// Defines a generic <b>xlsx</b> chart.

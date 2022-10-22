@@ -1,13 +1,13 @@
 ﻿
+using System;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+using iTin.Core.ComponentModel;
+
 namespace iTin.Utilities.Xlsx.Design.Styles
 {
-    using System;
-
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-
-    using iTin.Core.ComponentModel;
-
     /// <summary>
     /// Specifies content data type.
     /// </summary>

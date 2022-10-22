@@ -1,15 +1,15 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Helpers;
+
 namespace iTin.Utilities.Xlsx.Design.Settings.Sheets
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Helpers;
-
     /// <summary>
     /// Defines a <b>Xlsx</b> section settings.
     /// </summary>

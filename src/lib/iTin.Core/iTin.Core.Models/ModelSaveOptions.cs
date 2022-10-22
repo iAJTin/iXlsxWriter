@@ -1,10 +1,10 @@
 ﻿
+using System.Text;
+
+using iTin.Core.ComponentModel;
+
 namespace iTin.Core.Models
 {
-    using System.Text;
-
-    using iTin.Core.ComponentModel;
-
     /// <summary>
     /// Defines file save options. Allows defining if the directory is created automatically if it does not exist, output document without indentation. 
     /// By defaults uses <b>UTF8</b> encoding.
@@ -31,12 +31,12 @@ namespace iTin.Core.Models
 
         #region [public] {static} (ModelSaveOptions) Default: Gets a reference that contains default options for save, by default it creates the directory if it does not exist
         /// <summary>
-        /// Gets a reference that contains default options for save, by default it creates the directory if it does not exist.
+        /// Gets a reference that contains default options for save, by default it creates the directory if it does not exist, uses <see cref="T:System.Text.Encoding.UTF8"/> encoding and not applies indent.
         /// </summary>
         /// <value>
         /// A <see cref="T:iTin.Core.Models.ModelSaveOptions"/> that contains default options for save.
         /// </value>
-        public static ModelSaveOptions Default => new ModelSaveOptions();
+        public static ModelSaveOptions Default => new();
         #endregion
 
         #endregion

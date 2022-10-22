@@ -1,10 +1,10 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Xml;
+
 namespace OfficeOpenXml.Helpers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Xml;
-
     /// <summary>
     /// Defines a generic XML helper.
     /// </summary>

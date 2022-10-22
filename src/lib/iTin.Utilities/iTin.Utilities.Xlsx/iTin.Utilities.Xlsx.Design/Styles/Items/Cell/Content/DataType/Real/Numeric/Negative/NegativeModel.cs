@@ -1,20 +1,19 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design.Enums;
+using iTin.Core.Models.Design.Helpers;
+using iTin.Core.Models.Design.Options;
+
 namespace iTin.Utilities.Xlsx.Design.Styles
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design.Enums;
-    using iTin.Core.Models.Design.Helpers;
-    using iTin.Core.Models.Design.Options;
-
-    
     /// <summary>
     /// Represents a negative number format. Contains the definition of negative number in a numeric data type.
     /// </summary>

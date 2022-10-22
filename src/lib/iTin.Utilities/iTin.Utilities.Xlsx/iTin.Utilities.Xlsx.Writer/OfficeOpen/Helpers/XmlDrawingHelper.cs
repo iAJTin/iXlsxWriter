@@ -1,9 +1,9 @@
 ﻿
+using System.Diagnostics;
+using System.Xml;
+
 namespace OfficeOpenXml.Helpers
 {
-    using System.Diagnostics;
-    using System.Xml;
-
     /// <summary>
     /// A Specialization of <see cref="XmlBaseHelper"/> class.<br/>
     /// Allows manipulate the underliying <b>XML</b> drawing document (pictures, shapes).

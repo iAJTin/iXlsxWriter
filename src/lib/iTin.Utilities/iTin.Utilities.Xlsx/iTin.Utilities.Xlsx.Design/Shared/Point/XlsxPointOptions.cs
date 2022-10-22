@@ -1,13 +1,13 @@
 ﻿
+using System;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Models.Design.Options;
+
 namespace iTin.Utilities.Xlsx.Design.Shared
 {
-    using System;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Models.Design.Options;
-
     /// <summary>
     /// A Specialization of <see cref="BaseOptions"/> class.<br/>
     /// Defines a set of options that we can use to quickly adjust an existing <see cref="XlsxPoint"/> instance.

@@ -1,23 +1,23 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
+
+using OfficeOpenXml.Drawing;
+using OfficeOpenXml.Drawing.Chart;
+
+using iTin.Core;
+using iTin.Core.ComponentModel;
+using iTin.Core.ComponentModel.Results;
+using iTin.Core.Models.Design.Enums;
+
+using iTin.Utilities.Xlsx.Design.Charts;
+using iTin.Utilities.Xlsx.Design.Shared;
+using iTin.Utilities.Xlsx.Writer;
+
 namespace OfficeOpenXml.Helpers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Xml;
-
-    using iTin.Core;
-    using iTin.Core.ComponentModel;
-    using iTin.Core.ComponentModel.Results;
-    using iTin.Core.Models.Design.Enums;
-    
-    using iTin.Utilities.Xlsx.Design.Charts;
-    using iTin.Utilities.Xlsx.Design.Shared;
-    using iTin.Utilities.Xlsx.Writer;
-
-    using Drawing;
-    using Drawing.Chart;
-
     /// <summary>
     /// Allows manipulate an <see cref="ExcelChart"/> instance.
     /// </summary>
@@ -62,7 +62,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (axes == null)
             {
-                return BooleanResult.CreateErroResult("axes can not be null");
+                return BooleanResult.CreateErrorResult("axes can not be null");
             }
 
             var chartAxes = Chart.Axis;
@@ -119,7 +119,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (border == null)
             {
-                return BooleanResult.CreateErroResult("border can not be null");
+                return BooleanResult.CreateErrorResult("border can not be null");
             }
 
             if (border.Show == YesNo.No)
@@ -194,7 +194,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (legend == null)
             {
-                return BooleanResult.CreateErroResult("legend can not be null");
+                return BooleanResult.CreateErrorResult("legend can not be null");
             }
 
             if (legend.Show == YesNo.No)
@@ -238,7 +238,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (range == null)
             {
-                return BooleanResult.CreateErroResult("border can not be null");
+                return BooleanResult.CreateErrorResult("border can not be null");
             }
 
             try
@@ -274,7 +274,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (plots == null)
             {
-                return BooleanResult.CreateErroResult("legend can not be null");
+                return BooleanResult.CreateErrorResult("legend can not be null");
             }
 
             try
@@ -319,7 +319,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (size == null)
             {
-                return BooleanResult.CreateErroResult("size can not be null");
+                return BooleanResult.CreateErrorResult("size can not be null");
             }
 
             try
@@ -354,7 +354,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (effects == null)
             {
-                return BooleanResult.CreateErroResult("size can not be null");
+                return BooleanResult.CreateErrorResult("size can not be null");
             }
 
             try
@@ -392,7 +392,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (title == null)
             {
-                return BooleanResult.CreateErroResult("title can not be null");
+                return BooleanResult.CreateErrorResult("title can not be null");
             }
 
             if (title.Show == YesNo.No)

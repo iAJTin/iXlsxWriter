@@ -1,18 +1,18 @@
 
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core;
+using iTin.Core.Models.Design.Enums;
+
 namespace iTin.Utilities.Xlsx.Design.Styles
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Linq;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core;
-    using iTin.Core.Models.Design.Enums;
-
     /// <summary>
     /// A Specialization of <see cref="NumericDataType"/> class.<br/>
     /// Represents currency format, the currency symbol appears right next to the first digit.

@@ -1,22 +1,21 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
+
+using OfficeOpenXml;
+
+using iTin.Core.Helpers;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.IO;
-    using System.Linq;
-    using System.Xml;
-    using System.Xml.Linq;
-
-    using OfficeOpenXml;
-
-    using iTin.Core.Helpers;
-
-    using Design.Shared;
-
-    using Result.Insert;
-
     /// <summary>
     /// A Specialization of <see cref="InsertLocationBase"/> class.<br/>
     /// Allows insert a <b>XML</b> data file.

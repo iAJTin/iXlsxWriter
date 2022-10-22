@@ -1,11 +1,11 @@
 ﻿
+using System;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 namespace iTin.Utilities.Xlsx.Design.Styles
 {
-    using System;
-
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-
     /// <summary>
     /// Defines known cell border styles.
     /// </summary>

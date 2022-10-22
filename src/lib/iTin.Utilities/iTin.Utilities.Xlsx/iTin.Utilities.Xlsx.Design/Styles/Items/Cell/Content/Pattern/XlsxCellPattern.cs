@@ -1,19 +1,19 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core;
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Helpers;
+
 namespace iTin.Utilities.Xlsx.Design.Styles
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core;
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Helpers;
-
     /// <summary>
     /// A Specialization of <see cref="IPattern"/> interface.<br/>
     /// Defines a generic pattern.

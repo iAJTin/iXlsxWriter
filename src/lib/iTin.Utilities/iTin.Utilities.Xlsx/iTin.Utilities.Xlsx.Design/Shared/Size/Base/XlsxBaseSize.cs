@@ -1,11 +1,11 @@
 ﻿
+using System;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
 namespace iTin.Utilities.Xlsx.Design.Shared
 {
-    using System;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
     /// <summary>
     /// Base class for different sizes.<br/>
     /// Which acts as the base class for different size implementations.

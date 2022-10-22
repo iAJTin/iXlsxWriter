@@ -1,21 +1,21 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core;
+using iTin.Core.Helpers;
+
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Enums;
+using iTin.Core.Models.Design.Helpers;
+
 namespace iTin.Utilities.Xlsx.Design.Charts
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core;
-    using iTin.Core.Helpers;
-
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Enums;
-    using iTin.Core.Models.Design.Helpers;
-
     /// <summary>
     /// Defines a generic chart.
     /// </summary>

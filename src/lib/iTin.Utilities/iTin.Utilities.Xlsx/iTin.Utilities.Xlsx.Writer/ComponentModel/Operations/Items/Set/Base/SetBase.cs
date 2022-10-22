@@ -1,12 +1,12 @@
 ﻿
+using System.IO;
+
+using iTin.Core.Helpers;
+
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Set;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System.IO;
-
-    using iTin.Core.Helpers;
-
-    using Result.Set;
-
     /// <summary>
     /// Specialization of <see cref="ISet"/> interface.<br/>
     /// Acts as base class for set actions

@@ -1,16 +1,14 @@
 ﻿
-using System.Diagnostics;
+using System;
+using System.Drawing;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Models.Design;
 
 namespace iTin.Utilities.Xlsx.Design.Styles
 {
-    using System;
-    using System.Drawing;
-    using System.Xml.Serialization;
-    
-    using Newtonsoft.Json;
-
-    using iTin.Core.Models.Design;
-
     /// <summary>
     /// Defines a generic pattern.
     /// </summary>

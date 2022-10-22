@@ -1,10 +1,10 @@
 ﻿
+using System.IO;
+
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Replace;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System.IO;
-
-    using Result.Replace;
-
     /// <summary>
     /// Defines allowed actions for replacement objects.
     /// </summary>

@@ -1,14 +1,14 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
 namespace iTin.Utilities.Xlsx.Design.Shared
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
     /// <summary>
     /// A Specialization of <see cref="XlsxBaseRange"/> class.<br/>
     /// Represents a Excel cell by row and column values

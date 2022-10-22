@@ -1,12 +1,12 @@
 ﻿
+using System;
+
+using iTin.Core.Models.Design.Enums;
+
+using iTin.Utilities.Xlsx.Design.Styles;
+
 namespace iTin.Utilities.Xlsx.Design.Shared
 {
-    using System;
-
-    using iTin.Core.Models.Design.Enums;
-
-    using Styles;
-
     /// <summary>
     /// Represents a cell header styles to use with data.
     /// </summary>

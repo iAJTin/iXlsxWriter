@@ -1,10 +1,10 @@
 ﻿
+using System;
+
+using iTin.Core.Models.Design;
+
 namespace iTin.Utilities.Xlsx.Design.Charts
 {
-    using System;
-
-    using iTin.Core.Models.Design;
-
     /// <summary>
     /// Defines a generic minichart data point.
     /// </summary>

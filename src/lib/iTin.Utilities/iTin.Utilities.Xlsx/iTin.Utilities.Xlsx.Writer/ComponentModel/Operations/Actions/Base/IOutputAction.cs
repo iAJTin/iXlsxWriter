@@ -1,10 +1,10 @@
 ﻿
+using iTin.Core.ComponentModel;
+
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Output;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Action
 {
-    using iTin.Core.ComponentModel;
-
-    using Output;
-
     /// <summary>
     /// Defines allowed actions for output result.
     /// </summary>

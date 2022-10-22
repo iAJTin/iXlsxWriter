@@ -1,8 +1,8 @@
 ﻿
+using iTin.Utilities.Xlsx.Design.Settings;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using Design.Settings;
-
     /// <summary>
     /// Specialization of <see cref="IXlsxObjectConfig"/> interface.<br/>
     /// Represents configuration information for an object <see cref="XlsxInput"/>.

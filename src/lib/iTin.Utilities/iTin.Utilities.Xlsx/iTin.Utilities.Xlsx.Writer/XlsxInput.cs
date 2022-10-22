@@ -1,28 +1,28 @@
 ﻿
+using System;
+using System.Diagnostics;
+using System.Linq;
+
+using OfficeOpenXml;
+
+using iTin.Core;
+using iTin.Core.ComponentModel;
+using iTin.Core.ComponentModel.Results;
+using iTin.Core.Helpers;
+using iTin.Core.IO;
+
+using iTin.Logging;
+
+using iTin.Utilities.Xlsx.Writer.ComponentModel;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Output;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Replace;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Set;
+
+using NativeIO = System.IO;
+
 namespace iTin.Utilities.Xlsx.Writer
 {
-    using System;
-    using System.Diagnostics;
-    using System.Linq;
-
-    using OfficeOpenXml;
-
-    using iTin.Core;
-    using iTin.Core.ComponentModel;
-    using iTin.Core.ComponentModel.Results;
-    using iTin.Core.Helpers;
-    using iTin.Core.IO;
-
-    using iTin.Logging;
-
-    using ComponentModel;
-    using ComponentModel.Result.Insert;
-    using ComponentModel.Result.Output;
-    using ComponentModel.Result.Replace;
-    using ComponentModel.Result.Set;
-
-    using NativeIO = System.IO;
-
     /// <summary>
     /// Represents a xlsx file.
     /// </summary>

@@ -1,24 +1,22 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Text;
+using System.Linq;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design.Enums;
+using iTin.Core.Models.Design.Helpers;
+using iTin.Core.Models.Design.Options;
+
 namespace iTin.Core.Models.Design
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Drawing.Text;
-    using System.Linq;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-
-    using iTin.Core;
-    using iTin.Core.Helpers;
-
-    using Enums;
-    using Helpers;
-    using Options;
-
     /// <summary>
     /// Represents a font. Defines a particular format for text, including font face, size, and style attributes.
     /// </summary>
@@ -507,14 +505,9 @@ namespace iTin.Core.Models.Design
         /// </returns>
         private static bool IsValidFontName(string fontName)
         {
-            bool hasFamilies;
+            using var ifc = new InstalledFontCollection();
 
-            using (var ifc = new InstalledFontCollection())
-            {
-                hasFamilies = ifc.Families.Any(font => font.Name.Equals(fontName, StringComparison.Ordinal));
-            }
-
-            return hasFamilies;
+            return ifc.Families.Any(font => font.Name.Equals(fontName, StringComparison.Ordinal));
         }
         #endregion
 

@@ -1,10 +1,10 @@
 ﻿
+using System;
+
+using iTin.Core.Models.Design.Enums;
+
 namespace iTin.Utilities.Xlsx.Design.Shared
 {
-    using System;
-
-    using iTin.Core.Models.Design.Enums;
-
     /// <summary>
     /// Represents a qualified <b>xlsx</b> aggregate definition.
     /// </summary>

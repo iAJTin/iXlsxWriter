@@ -1,11 +1,11 @@
 ﻿
+using System;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 namespace iTin.Utilities.Xlsx.Design.Shared
 {
-    using System;
-
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-
     /// <summary>
     /// Defines absoute strategy for <see cref="XlsxPoint"/> instances.
     /// </summary>

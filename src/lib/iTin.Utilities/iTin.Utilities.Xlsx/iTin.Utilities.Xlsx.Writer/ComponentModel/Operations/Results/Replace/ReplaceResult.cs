@@ -1,13 +1,13 @@
 ﻿
+using System.Collections.Generic;
+
+using iTin.Core.ComponentModel;
+
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Set;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Replace
 {
-    using System.Collections.Generic;
-
-    using iTin.Core.ComponentModel;
-
-    using Insert;
-    using Set;
-
     /// <summary>
     /// Specialization of <see cref="ResultBase{ReplaceResultData}"/> interface.<br/>
     /// Represents result after insert an element in <b>xlsx</b> document.

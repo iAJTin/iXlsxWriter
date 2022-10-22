@@ -1,14 +1,14 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing.Imaging;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
 namespace iTin.Utilities.Xlsx.Design.Picture
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing.Imaging;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
     /// <summary>
     /// Base class for different effects compatible with a <see cref="XlsxPicture"/> object.<br/>
     /// Which acts as the base class for different image effects.

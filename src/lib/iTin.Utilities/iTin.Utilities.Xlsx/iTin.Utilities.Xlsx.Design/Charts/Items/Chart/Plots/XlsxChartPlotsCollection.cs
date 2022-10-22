@@ -1,19 +1,19 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Helpers;
+using iTin.Core.Models.Collections;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+
 namespace iTin.Utilities.Xlsx.Design.Charts
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Collections;
-
-    using Shared;
-
     /// <summary>
     /// Defines plots collection settings. Allows to set the chart plot.
     /// </summary>

@@ -1,8 +1,8 @@
 ﻿
+using System;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System;
-
     /// <summary>
     /// Specifies the known input type.
     /// </summary>

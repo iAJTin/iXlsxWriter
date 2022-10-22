@@ -1,12 +1,12 @@
 ﻿
+using System.Diagnostics;
+
+using iTin.Core.Models.Design.Enums;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System.Diagnostics;
-
-    using iTin.Core.Models.Design.Enums;
-
-    using Design.Shared;
-
     /// <summary>
     /// Represents a qualified <b>xlsx</b> aggregate definition.
     /// </summary>

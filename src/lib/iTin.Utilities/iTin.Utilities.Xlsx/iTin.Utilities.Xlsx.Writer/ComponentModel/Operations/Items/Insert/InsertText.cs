@@ -1,20 +1,19 @@
 ﻿
+using System;
+using System.IO;
+using System.Linq;
+
+using OfficeOpenXml;
+
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design.Enums;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+using iTin.Utilities.Xlsx.Design.Styles;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System;
-    using System.IO;
-    using System.Linq;
-
-    using OfficeOpenXml;
-
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design.Enums;
-
-    using Design.Shared;
-    using Design.Styles;
-
-    using Result.Insert;
-
     /// <summary>
     /// A Specialization of <see cref="InsertWithStyleBase"/> class.<br/>
     /// Allows insert a text, number or date with style.

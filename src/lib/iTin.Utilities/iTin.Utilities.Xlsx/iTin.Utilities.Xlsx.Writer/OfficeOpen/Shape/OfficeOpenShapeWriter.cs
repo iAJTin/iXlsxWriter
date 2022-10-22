@@ -1,21 +1,21 @@
 ﻿
+using System;
+
+using iTin.Core;
+using iTin.Core.ComponentModel;
+using iTin.Core.ComponentModel.Results;
+
+using OfficeOpenXml.Drawing;
+
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Enums;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+using iTin.Utilities.Xlsx.Design.Shape;
+using iTin.Utilities.Xlsx.Writer;
+
 namespace OfficeOpenXml.Helpers
 {
-    using System;
-
-    using iTin.Core;
-    using iTin.Core.ComponentModel;
-    using iTin.Core.ComponentModel.Results;
-
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Enums;
-    
-    using iTin.Utilities.Xlsx.Design.Shared;
-    using iTin.Utilities.Xlsx.Design.Shape;
-    using iTin.Utilities.Xlsx.Writer;
-
-    using Drawing;
-
     /// <summary>
     /// Allows manipulate an <see cref="ExcelShape"/> instance.
     /// </summary>
@@ -62,7 +62,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (border == null)
             {
-                return BooleanResult.CreateErroResult("border can not be null");
+                return BooleanResult.CreateErrorResult("border can not be null");
             }
 
             if (border.Show == YesNo.No)
@@ -107,7 +107,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (content == null)
             {
-                return BooleanResult.CreateErroResult("border can not be null");
+                return BooleanResult.CreateErrorResult("border can not be null");
             }
 
             if (content.Show == YesNo.No)
@@ -152,7 +152,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (font == null)
             {
-                return BooleanResult.CreateErroResult("border can not be null");
+                return BooleanResult.CreateErrorResult("border can not be null");
             }
 
             try
@@ -187,7 +187,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (range == null)
             {
-                return BooleanResult.CreateErroResult("border can not be null");
+                return BooleanResult.CreateErrorResult("border can not be null");
             }
 
             try
@@ -223,7 +223,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (size == null)
             {
-                return BooleanResult.CreateErroResult("size can not be null");
+                return BooleanResult.CreateErrorResult("size can not be null");
             }
 
             try
@@ -259,7 +259,7 @@ namespace OfficeOpenXml.Helpers
         {
             if (effects == null)
             {
-                return BooleanResult.CreateErroResult("size can not be null");
+                return BooleanResult.CreateErrorResult("size can not be null");
             }
 
             try

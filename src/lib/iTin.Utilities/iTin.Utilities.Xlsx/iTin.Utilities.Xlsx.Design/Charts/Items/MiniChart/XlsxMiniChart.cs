@@ -1,17 +1,17 @@
 ﻿
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Helpers;
+
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Enums;
+
 namespace iTin.Utilities.Xlsx.Design.Charts
 {
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Helpers;
-
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Enums;
-
     /// <summary>
     /// A Specialization of <see cref="XlsxBaseChart"/> class.<br/>
     /// Represents a user-defined minichart. Very small chart located in a spreadsheet cell that provides a visual representation of data. 

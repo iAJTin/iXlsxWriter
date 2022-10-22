@@ -1,8 +1,8 @@
 ﻿
+using iTin.Utilities.Xlsx.Design.Shared;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using Design.Shared;
-
     /// <summary>
     /// Defines allowed actions for insert objects
     /// </summary>

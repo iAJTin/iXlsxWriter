@@ -1,23 +1,23 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core;
+using iTin.Core.IO;
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Enums;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+
 namespace iTin.Utilities.Xlsx.Design.Picture
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Linq;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core;
-    using iTin.Core.IO;
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Enums;
-
-    using Shared;
-
     /// <summary>
     /// Defines a <b>xlsx</b> picture.
     /// </summary>

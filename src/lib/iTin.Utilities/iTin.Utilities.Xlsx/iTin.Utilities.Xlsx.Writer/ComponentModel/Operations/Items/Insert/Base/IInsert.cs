@@ -1,10 +1,10 @@
 ﻿
+using System.IO;
+
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System.IO;
-
-    using Result.Insert;
-
     /// <summary>
     /// Defines allowed actions for insert objects
     /// </summary>

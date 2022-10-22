@@ -1,23 +1,23 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Globalization;
+using System.Xml;
+
+using OfficeOpenXml.Drawing.Chart;
+using OfficeOpenXml.Helpers;
+
+using iTin.Charting.Models.Design;
+
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Enums;
+
+using iTin.Utilities.Xlsx.Design.Charts;
+using iTin.Utilities.Xlsx.Writer;
+
 namespace OfficeOpenXml.Drawing
 {
-    using System;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Xml;
-
-    using iTin.Charting.Models.Design;
-
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Enums;
-
-    using iTin.Utilities.Xlsx.Design.Charts;
-    using iTin.Utilities.Xlsx.Writer;
-
-    using Chart;
-    using Helpers;
-
     static class OfficeOpenChartXmlExtensions
     {
         #region public static methods

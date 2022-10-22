@@ -1,12 +1,12 @@
 ﻿
+using System;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
 namespace iTin.Utilities.Xlsx.Design.Settings.Document
 {
-    using System;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
     /// <summary>
     /// Defines a <b>xlsx</b> document properties metadata.
     /// </summary>

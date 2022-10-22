@@ -1,15 +1,15 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Xml;
+
+using iTin.Core.Helpers;
+
 namespace OfficeOpenXml.Helpers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Text;
-    using System.Xml;
-
-    using iTin.Core.Helpers;
-
     /// <summary>
     /// A Specialization of <see cref="IXmlHelper"/> interface.<br/>
     /// Allows manipulate a <b>XML</b> document.

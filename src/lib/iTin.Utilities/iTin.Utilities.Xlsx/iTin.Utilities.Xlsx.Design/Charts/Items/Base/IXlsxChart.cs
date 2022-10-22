@@ -1,14 +1,14 @@
 ﻿
+using System.ComponentModel;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Charting;
+
 namespace iTin.Utilities.Xlsx.Design.Charts
 {
-    using System.ComponentModel;
-    using System.Xml.Serialization;
-    
-    using Newtonsoft.Json;
-
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Charting;
-
     /// <summary>
     /// A Specialization of <see cref="IChart"/> interface.<br/>
     /// Defines a generic <b>xlsx</b> chart.

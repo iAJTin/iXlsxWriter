@@ -1,20 +1,19 @@
 ﻿
+using System;
+using System.IO;
+using System.Linq;
+
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design.Enums;
+
+using OfficeOpenXml;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+using iTin.Utilities.Xlsx.Design.Styles;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System;
-    using System.IO;
-    using System.Linq;
-
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design.Enums;
-
-    using OfficeOpenXml;
-
-    using Design.Shared;
-    using Design.Styles;
-
-    using Result.Insert;
-
     /// <summary>
     /// A Specialization of <see cref="InsertLocationBase"/> class.<br/>
     /// Allows insert an aggregate function applied to specified data range in the specified location.

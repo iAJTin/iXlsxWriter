@@ -1,15 +1,15 @@
 ﻿
+using System.IO;
+
+using iTin.Core.ComponentModel;
+using iTin.Core.ComponentModel.Results;
+
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Output;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Set;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System.IO;
-    using iTin.Core.ComponentModel;
-
-    using iTin.Core.ComponentModel.Results;
-
-    using Result.Insert;
-    using Result.Output;
-    using Result.Set;
-
     /// <summary>
     /// Defines a generic input
     /// </summary>

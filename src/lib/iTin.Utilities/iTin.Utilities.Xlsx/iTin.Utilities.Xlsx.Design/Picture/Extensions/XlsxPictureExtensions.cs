@@ -1,13 +1,13 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
+using iTin.Core.Drawing.ComponentModel;
+using iTin.Core.Helpers;
+
 namespace iTin.Utilities.Xlsx.Design.Picture
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-
-    using iTin.Core.Drawing.ComponentModel;
-    using iTin.Core.Helpers;
-
     /// <summary>
     /// Contains common extensions for data model objects.
     /// </summary>

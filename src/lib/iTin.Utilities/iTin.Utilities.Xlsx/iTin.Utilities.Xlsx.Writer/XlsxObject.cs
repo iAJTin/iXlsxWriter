@@ -1,20 +1,20 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+
+using iTin.Core;
+using iTin.Core.Helpers;
+
+using iTin.Logging;
+
+using iTin.Utilities.Xlsx.Writer.ComponentModel;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Output;
+
 namespace iTin.Utilities.Xlsx.Writer
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-
-    using iTin.Core;
-    using iTin.Core.Helpers;
-
-    using ComponentModel;
-    using ComponentModel.Result.Output;
-
-    using Logging;
-
     /// <summary>
     /// Represents a generic xlsx object, this allows add docx files to <see cref="XlsxObject.Items"/> property and specify a user custom configuration.
     /// </summary>

@@ -1,10 +1,10 @@
 ﻿
+using System.Diagnostics;
+
+using iTin.Utilities.Xlsx.Writer.ComponentModel;
+
 namespace iTin.Utilities.Xlsx.Writer
 {
-    using System.Diagnostics;
-
-    using ComponentModel;
-
     /// <summary>
     /// Specialization of <see cref="IXlsxObjectConfig"/> interface.<br/>
     /// Represents configuration information for an object <see cref="XlsxObject"/>.

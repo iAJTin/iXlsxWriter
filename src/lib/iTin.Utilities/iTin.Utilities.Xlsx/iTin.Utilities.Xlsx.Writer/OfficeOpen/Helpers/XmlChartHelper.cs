@@ -1,15 +1,15 @@
 ﻿
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Xml;
+
+using OfficeOpenXml.Drawing.Chart;
+
+using iTin.Core.Helpers;
+
 namespace OfficeOpenXml.Helpers
 {
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Xml;
-
-    using iTin.Core.Helpers;
-
-    using Drawing.Chart;
-
     /// <summary>
     /// A Specialization of <see cref="XmlBaseHelper"/> class.<br/>
     /// Allows manipulate the underliying <b>XML</b> chart document.

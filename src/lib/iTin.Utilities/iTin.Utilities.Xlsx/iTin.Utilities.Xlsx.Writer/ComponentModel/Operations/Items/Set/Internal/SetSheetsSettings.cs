@@ -1,18 +1,17 @@
 ﻿
+using System;
+using System.IO;
+using System.Linq;
+
+using OfficeOpenXml;
+
+using iTin.Utilities.Xlsx.Design.Settings;
+using iTin.Utilities.Xlsx.Design.Settings.Document;
+using iTin.Utilities.Xlsx.Design.Settings.Sheets;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Set;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System;
-    using System.IO;
-    using System.Linq;
-
-    using OfficeOpenXml;
-
-    using Design.Settings;
-    using Design.Settings.Document;
-    using Design.Settings.Sheets;
-
-    using Result.Set;
-
     /// <summary>
     /// A Specialization of <see cref="SetBase"/> class.<br/>
     /// Sets sheets settings. Allows to set the sheet margins, header, footer, default view, size and orientation.

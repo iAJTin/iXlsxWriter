@@ -1,17 +1,16 @@
 ﻿
+using System;
+using System.IO;
+using System.Linq;
+
+using OfficeOpenXml;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+using iTin.Utilities.Xlsx.Design.Styles;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System;
-    using System.IO;
-    using System.Linq;
-
-    using OfficeOpenXml;
-
-    using Design.Shared;
-    using Design.Styles;
-
-    using Result.Insert;
-
     /// <summary>
     /// A Specialization of <see cref="InsertWithStyleBase"/> class.<br/>
     /// Allows to transpose a range of data indicating the destination sheet and the starting point.

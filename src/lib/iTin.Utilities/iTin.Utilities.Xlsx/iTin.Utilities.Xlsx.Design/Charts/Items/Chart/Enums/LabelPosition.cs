@@ -1,11 +1,11 @@
 ﻿
+using System;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 namespace iTin.Utilities.Xlsx.Design.Charts
 {
-    using System;
-
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-
     /// <summary>
     /// Defines the position of labels on the axis.
     /// </summary>

@@ -1,11 +1,11 @@
 ﻿
+using System;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 namespace iTin.Utilities.Xlsx.Design.Charts
 {
-    using System;
-
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-
     /// <summary>
     /// Defines the known chart types.
     /// </summary>

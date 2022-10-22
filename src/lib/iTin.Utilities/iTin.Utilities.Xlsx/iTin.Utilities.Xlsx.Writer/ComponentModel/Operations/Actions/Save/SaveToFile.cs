@@ -1,20 +1,20 @@
 ﻿
+using System;
+using System.Diagnostics;
+
+using iTin.Core;
+using iTin.Core.ComponentModel;
+using iTin.Core.ComponentModel.Results;
+using iTin.Core.IO;
+using iTin.Core.IO.Compression;
+
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Output;
+
+using NativeIO = System.IO;
+using iTinIO = iTin.Core.IO;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Action.Save
 {
-    using System;
-    using System.Diagnostics;
-
-    using iTin.Core;
-    using iTin.Core.ComponentModel;
-    using iTin.Core.ComponentModel.Results;
-    using iTin.Core.IO;
-    using iTin.Core.IO.Compression;
-
-    using Output;
-
-    using NativeIO = System.IO;
-    using iTinIO = iTin.Core.IO;
-
     /// <summary>
     /// Specialization of <see cref="IOutputAction"/> interface.<br/>
     /// Defines allowed actions for output result data
@@ -42,7 +42,6 @@ namespace iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Action.Save
         #region public methods
 
         #region [public] (IResult) Execute(OutputResultData): Execute action for specified output result
-        /// <inheritdoc/>
         /// <summary>
         /// Execute action for specified output result data.
         /// </summary>

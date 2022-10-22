@@ -1,15 +1,15 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Models.Design;
+
 namespace iTin.Utilities.Xlsx.Design.Charts
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Models.Design;
-
     /// <summary>
     /// Represents the visual setting for axes of a chart. Includes information of primary and secondary axes.
     /// </summary>

@@ -1,9 +1,9 @@
 ﻿
+using iTin.Core.Models.Design.Enums;
+using iTin.Core.Models.Design.Styling;
+
 namespace iTin.Utilities.Xlsx.Design.Shape
 {
-    using iTin.Core.Models.Design.Enums;
-    using iTin.Core.Models.Design.Styling;
-
     /// <summary>
     /// A Specialization of <see cref="BaseContentAlignment"/> class.<br/>
     /// Defines a <b>xlsx</b> shape content alignment.

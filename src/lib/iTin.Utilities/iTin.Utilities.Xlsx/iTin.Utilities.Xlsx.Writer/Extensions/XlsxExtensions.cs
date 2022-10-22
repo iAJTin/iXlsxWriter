@@ -1,28 +1,28 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+
+using OfficeOpenXml;
+using OfficeOpenXml.Drawing;
+using OfficeOpenXml.Sparkline;
+
+using iTin.Core;
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design.Enums;
+using iTin.Core.Models.Design.Styling;
+
+using iTin.Utilities.Xlsx.Design.Charts;
+using iTin.Utilities.Xlsx.Design.Settings;
+using iTin.Utilities.Xlsx.Design.Settings.Sheets;
+using iTin.Utilities.Xlsx.Design.Shared;
+using iTin.Utilities.Xlsx.Design.Styles;
+
 namespace iTin.Utilities.Xlsx.Writer
 {
-    using System;
-    using System.ComponentModel;
-    using System.Drawing;
-    using System.Globalization;
-    using System.Linq;
-    using System.Text;
-
-    using OfficeOpenXml;
-    using OfficeOpenXml.Drawing;
-    using OfficeOpenXml.Sparkline;
-
-    using iTin.Core;
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design.Enums;
-    using iTin.Core.Models.Design.Styling;
-
-    using Design.Charts;
-    using Design.Shared;
-    using Design.Settings;
-    using Design.Settings.Sheets;
-    using Design.Styles;
-
     /// <summary>
     /// Contains common extensions for data model objects.
     /// </summary>

@@ -1,10 +1,10 @@
 ﻿
+using System;
+
+using iTin.Core.Helpers;
+
 namespace iTin.Utilities.Xlsx.Design.Picture
 {
-    using System;
-
-    using iTin.Core.Helpers;
-
     /// <summary>
     /// Defines picture effects collection settings.
     /// </summary>

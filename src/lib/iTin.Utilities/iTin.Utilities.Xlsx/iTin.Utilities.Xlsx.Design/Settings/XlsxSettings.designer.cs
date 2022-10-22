@@ -1,13 +1,13 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using iTin.Core.Models;
+
 namespace iTin.Utilities.Xlsx.Design.Settings
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using iTin.Core.Models;
-
     [Serializable]
     [DebuggerStepThrough]
     [DesignerCategory("code")]

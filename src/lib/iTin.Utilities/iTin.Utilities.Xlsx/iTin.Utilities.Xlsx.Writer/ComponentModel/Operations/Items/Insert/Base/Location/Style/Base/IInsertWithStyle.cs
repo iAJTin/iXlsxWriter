@@ -1,8 +1,8 @@
 ﻿
+using iTin.Utilities.Xlsx.Design.Styles;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using Design.Styles;
-
     /// <summary>
     /// Specialization of <see cref="ILocationInsert"/> interface.<br/>
     /// Defines allowed actions for insert objects with style

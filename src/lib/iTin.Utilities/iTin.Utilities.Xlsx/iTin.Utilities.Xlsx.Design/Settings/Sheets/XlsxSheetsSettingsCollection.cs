@@ -1,12 +1,12 @@
 ﻿
+using System;
+using System.Linq;
+
+using iTin.Core.Helpers;
+using iTin.Core.Models.Collections;
+
 namespace iTin.Utilities.Xlsx.Design.Settings.Sheets
 {
-    using System;
-    using System.Linq;
-
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Collections;
-
     /// <summary>
     /// Defines sheets collection settings. Allows to set the document metadata, margins, header, footer, default view, size and orientation.
     /// </summary>

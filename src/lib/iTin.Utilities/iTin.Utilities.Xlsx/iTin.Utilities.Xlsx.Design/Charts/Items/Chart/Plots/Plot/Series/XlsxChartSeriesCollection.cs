@@ -1,11 +1,11 @@
 ﻿
+using System;
+using System.Linq;
+
+using iTin.Core.Helpers;
+
 namespace iTin.Utilities.Xlsx.Design.Charts
 {
-    using System;
-    using System.Linq;
-
-    using iTin.Core.Helpers;
-
     /// <summary>
     /// Defines plots collection settings. Allows to set the chart plot.
     /// </summary>

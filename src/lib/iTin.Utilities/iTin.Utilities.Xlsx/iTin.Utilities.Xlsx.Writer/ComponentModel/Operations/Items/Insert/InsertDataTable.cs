@@ -1,17 +1,16 @@
 ﻿
+using System;
+using System.Data;
+using System.IO;
+using System.Linq;
+
+using OfficeOpenXml;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System;
-    using System.Data;
-    using System.IO;
-    using System.Linq;
-
-    using OfficeOpenXml;
-
-    using Design.Shared;
-
-    using Result.Insert;
-
     /// <summary>
     /// A Specialization of <see cref="InsertLocationBase"/> class.<br/>
     /// Allows insert a <see cref="DataTable"/> reference.

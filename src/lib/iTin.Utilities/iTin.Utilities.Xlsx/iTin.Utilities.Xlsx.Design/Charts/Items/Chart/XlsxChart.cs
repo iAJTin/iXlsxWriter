@@ -1,18 +1,18 @@
 ﻿
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Helpers;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+
 namespace iTin.Utilities.Xlsx.Design.Charts
 {
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Helpers;
-
-    using Shared;
-
     /// <summary>
     /// A Specialization of <see cref="XlsxBaseChart"/> class.<br/>
     /// Defines a <b>xlsx</b> chart.

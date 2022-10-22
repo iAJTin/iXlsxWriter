@@ -1,20 +1,20 @@
 ﻿
+using System;
+using System.Drawing;
+using System.Globalization;
+using System.Xml;
+
+using OfficeOpenXml.Helpers;
+
+using iTin.Core.Drawing.Helpers;
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Enums;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+
 namespace OfficeOpenXml.Drawing
 {
-    using System;
-    using System.Drawing;
-    using System.Globalization;
-    using System.Xml;
-
-    using iTin.Core.Drawing.Helpers;
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Enums;
-
-    using iTin.Utilities.Xlsx.Design.Shared;
-
-    using Helpers;
-
     /// <summary>
     ///   <para>Static class than contains extension methods for objects of type <see cref="XmlNode"/>.</para>
     ///   <para>This class adds new <c>XML</c> functionality using extension methods directly in drawing xml tree of EPPlus library.</para>

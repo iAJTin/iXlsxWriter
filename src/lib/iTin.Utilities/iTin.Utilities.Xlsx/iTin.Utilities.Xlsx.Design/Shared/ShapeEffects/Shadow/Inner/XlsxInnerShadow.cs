@@ -1,11 +1,11 @@
 ﻿
+using System;
+
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Enums;
+
 namespace iTin.Utilities.Xlsx.Design.Shared
 {
-    using System;
-
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Enums;
-
     /// <summary>
     /// A Specialization of <see cref="XlsxBaseShadow"/> class.<br/>
     /// Represents a inner shadow.

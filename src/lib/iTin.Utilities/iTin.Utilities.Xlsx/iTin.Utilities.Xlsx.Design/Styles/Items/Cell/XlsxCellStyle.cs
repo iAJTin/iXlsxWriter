@@ -1,14 +1,14 @@
 ﻿
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Models.Design;
+
 namespace iTin.Utilities.Xlsx.Design.Styles
 {
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Models.Design;
-
     /// <summary>
     /// A Specialization of <see cref="XlsxBaseStyle"/> class.<br/>
     /// Defines a <b>xlsx</b> cell style.

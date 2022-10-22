@@ -1,21 +1,21 @@
 ﻿
+using System;
+using System.ComponentModel;
+
+using OfficeOpenXml.Drawing;
+using OfficeOpenXml.Style;
+
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design.Enums;
+
+using iTin.Utilities.Xlsx.Design.Charts;
+using iTin.Utilities.Xlsx.Design.Shared;
+using iTin.Utilities.Xlsx.Design.Settings.Document;
+using iTin.Utilities.Xlsx.Design.Styles;
+using iTin.Utilities.Xlsx.Writer;
+
 namespace OfficeOpenXml
 {
-    using System;
-    using System.ComponentModel;
-
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design.Enums;
-
-    using iTin.Utilities.Xlsx.Design.Charts;
-    using iTin.Utilities.Xlsx.Design.Shared;
-    using iTin.Utilities.Xlsx.Design.Settings.Document;
-    using iTin.Utilities.Xlsx.Design.Styles;
-    using iTin.Utilities.Xlsx.Writer;
-
-    using Drawing;
-    using Style;
-
     /// <summary>
     /// Static class than contains common extension methods for objects of the namespace <see cref="N:OfficeOpenXml"/>.
     /// </summary>

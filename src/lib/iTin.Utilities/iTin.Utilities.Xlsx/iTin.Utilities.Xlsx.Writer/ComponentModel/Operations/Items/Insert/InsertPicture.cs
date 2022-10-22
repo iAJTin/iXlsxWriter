@@ -1,22 +1,21 @@
 ﻿
+using System;
+using System.IO;
+using System.Linq;
+
+using OfficeOpenXml;
+using OfficeOpenXml.Drawing;
+using OfficeOpenXml.Helpers;
+
+using iTin.Core;
+using iTin.Core.Models.Design.Enums;
+
+using iTin.Utilities.Xlsx.Design.Picture;
+using iTin.Utilities.Xlsx.Design.Shared;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System;
-    using System.IO;
-    using System.Linq;
-
-    using OfficeOpenXml;
-    using OfficeOpenXml.Drawing;
-    using OfficeOpenXml.Helpers;
-
-    using iTin.Core;
-    using iTin.Core.Models.Design.Enums;
-
-    using Design.Picture;
-    using Design.Shared;
-
-    using Result.Insert;
-
     /// <summary>
     /// A Specialization of <see cref="InsertLocationBase"/> class.<br/>
     /// Allows insert a picture in the specified location

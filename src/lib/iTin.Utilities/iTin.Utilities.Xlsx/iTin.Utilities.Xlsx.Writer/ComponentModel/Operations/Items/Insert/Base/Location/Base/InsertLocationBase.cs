@@ -1,14 +1,13 @@
 ﻿
+using System.IO;
+
+using iTin.Core.Helpers;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System.IO;
-
-    using iTin.Core.Helpers;
-
-    using Design.Shared;
-
-    using Result.Insert;
-
     /// <summary>
     /// Specialization of <see cref="ILocationInsert"/> interface.<br/>
     /// Acts as base class for insert actions

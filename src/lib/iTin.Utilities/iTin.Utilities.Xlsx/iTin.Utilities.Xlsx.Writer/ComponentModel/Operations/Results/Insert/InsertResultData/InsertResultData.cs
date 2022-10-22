@@ -1,8 +1,8 @@
 ﻿
+using System.IO;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert
 {
-    using System.IO;
-
     /// <summary>
     /// Represents insert data for an object <see cref="InsertResult"/>.
     /// </summary>

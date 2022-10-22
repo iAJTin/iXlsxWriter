@@ -1,19 +1,19 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core;
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Enums;
+using iTin.Core.Models.Design.Styling;
+
 namespace iTin.Utilities.Xlsx.Design.Shape
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core;
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Enums;
-    using iTin.Core.Models.Design.Styling;
-
     /// <summary>
     /// A Specialization of <see cref="BaseContent"/> class.<br/>
     /// Defines a <b>xlsx</b> shape content.

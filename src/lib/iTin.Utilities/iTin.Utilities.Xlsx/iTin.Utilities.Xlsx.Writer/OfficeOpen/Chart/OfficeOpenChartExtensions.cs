@@ -1,19 +1,19 @@
 ﻿
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Xml;
+
+using OfficeOpenXml.Drawing;
+using OfficeOpenXml.Drawing.Chart;
+
+using iTin.Core;
+using iTin.Core.Helpers;
+
+using iTin.Utilities.Xlsx.Design.Charts;
+
 namespace OfficeOpenXml.Helpers
 {
-    using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
-    using System.Xml;
-
-    using iTin.Core;
-    using iTin.Core.Helpers;
-    
-    using iTin.Utilities.Xlsx.Design.Charts;
-
-    using Drawing;
-    using Drawing.Chart;
-
     /// <summary>
     /// Static class than contains common extension methods for objects of the namespace <see cref="N:OfficeOpenXml.Drawing.Chart"/>.
     /// </summary>

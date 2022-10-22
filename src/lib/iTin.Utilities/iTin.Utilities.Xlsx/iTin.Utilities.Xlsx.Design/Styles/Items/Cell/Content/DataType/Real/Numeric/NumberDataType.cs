@@ -1,16 +1,16 @@
 
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design.Enums;
+
 namespace iTin.Utilities.Xlsx.Design.Styles
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design.Enums;
-
     /// <summary>
     /// A Specialization of <see cref="NumericDataType"/> class.<br/>
     /// You can specify the number of decimal places that you want to use, whether you want to use a thousands separator, and how you want to display negative numbers. 

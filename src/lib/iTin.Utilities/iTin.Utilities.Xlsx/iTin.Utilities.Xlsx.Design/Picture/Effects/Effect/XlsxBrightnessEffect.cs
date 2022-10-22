@@ -1,11 +1,11 @@
 ﻿
+using System.Drawing.Imaging;
+
+using iTin.Core.Drawing.ComponentModel;
+using iTin.Core.Drawing.Helpers;
+
 namespace iTin.Utilities.Xlsx.Design.Picture
 {
-    using System.Drawing.Imaging;
-
-    using iTin.Core.Drawing.ComponentModel;
-    using iTin.Core.Drawing.Helpers;
-
     /// <summary>
     /// A Specialization of <see cref="XlsxBaseEffect"/> class.<br/>
     /// Represents brightness effect.

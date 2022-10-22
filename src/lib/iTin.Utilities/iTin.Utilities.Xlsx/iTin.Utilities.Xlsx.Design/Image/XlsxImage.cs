@@ -1,22 +1,22 @@
 ﻿
+using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Threading;
+
+using iTin.Core;
+using iTin.Core.Drawing;
+using iTin.Core.Drawing.ComponentModel;
+using iTin.Core.Helpers;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+
+using iTinIO = iTin.Core.IO;
+
 namespace iTin.Utilities.Xlsx.Design.Picture
 {
-    using System;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.IO;
-    using System.Net;
-    using System.Threading;
-
-    using iTin.Core;
-    using iTin.Core.Drawing;
-    using iTin.Core.Drawing.ComponentModel;
-    using iTin.Core.Helpers;
-
-    using iTinIO = iTin.Core.IO;
-
-    using Shared;
-
     /// <summary>
     /// Defines a <b>xlsx</b> image object.
     /// </summary>

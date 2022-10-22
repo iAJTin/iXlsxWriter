@@ -13,6 +13,7 @@
     <Company>iTin</Company>
     <Product>iTin.Core.IO.Compression</Product>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\iTin.Core.IO\iTin.Core.IO.csproj" />
     <ProjectReference Include="..\iTin.Core\iTin.Core.csproj" />
+    <ProjectReference Include="..\iTin.Core.IO\iTin.Core.IO.csproj" />
   </ItemGroup>
 
 </Project>

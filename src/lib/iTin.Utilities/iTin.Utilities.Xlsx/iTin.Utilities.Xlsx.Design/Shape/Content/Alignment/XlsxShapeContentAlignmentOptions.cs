@@ -1,14 +1,14 @@
 ﻿
+using System;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Models.Design.Enums;
+using iTin.Core.Models.Design.Options;
+
 namespace iTin.Utilities.Xlsx.Design.Shape
 {
-    using System;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Models.Design.Enums;
-    using iTin.Core.Models.Design.Options;
-
     /// <summary>
     /// A Specialization of <see cref="BaseOptions"/> class.<br/>
     /// <summary>

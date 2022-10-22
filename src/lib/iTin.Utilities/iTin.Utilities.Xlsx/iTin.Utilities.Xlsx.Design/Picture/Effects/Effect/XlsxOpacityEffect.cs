@@ -1,17 +1,17 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing.Imaging;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Drawing.Helpers;
+using iTin.Core.Helpers;
+
 namespace iTin.Utilities.Xlsx.Design.Picture
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing.Imaging;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Drawing.Helpers;
-    using iTin.Core.Helpers;
-
     /// <summary>
     /// A Specialization of <see cref="XlsxBaseEffect"/> class.<br/>
     /// Represents represents opacity effect.

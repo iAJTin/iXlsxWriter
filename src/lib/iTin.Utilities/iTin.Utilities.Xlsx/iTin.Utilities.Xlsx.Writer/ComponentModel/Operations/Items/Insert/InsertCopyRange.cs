@@ -1,16 +1,15 @@
 ﻿
+using System;
+using System.IO;
+using System.Linq;
+
+using OfficeOpenXml;
+
+using iTin.Utilities.Xlsx.Design.Shared;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System;
-    using System.IO;
-    using System.Linq;
-
-    using OfficeOpenXml;
-
-    using Design.Shared;
-
-    using Result.Insert;
-
     /// <summary>
     /// A Specialization of <see cref="InsertBase"/> class.<br/>
     /// Allows copy a source range to destination worksheet and point.

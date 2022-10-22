@@ -1,8 +1,8 @@
 ﻿
+using iTin.Utilities.Xlsx.Design.Styles;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using Design.Styles;
-
     /// <summary>
     /// Specialization of <see cref="InsertLocationBase"/> class.<br/>
     /// Acts as base class for insert actions with style.

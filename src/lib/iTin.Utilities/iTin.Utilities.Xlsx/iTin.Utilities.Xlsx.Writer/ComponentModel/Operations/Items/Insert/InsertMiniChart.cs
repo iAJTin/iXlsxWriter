@@ -1,20 +1,19 @@
 ﻿
+using System;
+using System.IO;
+using System.Linq;
+
+using OfficeOpenXml;
+using OfficeOpenXml.Sparkline;
+
+using iTin.Core.Models.Design.Enums;
+
+using iTin.Utilities.Xlsx.Design.Charts;
+using iTin.Utilities.Xlsx.Design.Shared;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Insert;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System;
-    using System.IO;
-    using System.Linq;
-
-    using OfficeOpenXml;
-    using OfficeOpenXml.Sparkline;
-
-    using iTin.Core.Models.Design.Enums;
-
-    using Design.Charts;
-    using Design.Shared;
-
-    using Result.Insert;
-
     /// <summary>
     /// A Specialization of <see cref="InsertLocationBase"/> class.<br/>
     /// Allows insert a <see cref="XlsxMiniChart"/>.

@@ -1,14 +1,14 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+
+using iTin.Core.Drawing.ComponentModel;
+using iTin.Core.Drawing.Helpers;
+
 namespace iTin.Utilities.Xlsx.Design.Picture
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-
-    using iTin.Core.Drawing.ComponentModel;
-    using iTin.Core.Drawing.Helpers;
-
     /// <summary>
     /// Represents configuration information for an object <see cref="XlsxImage"/>.
     /// </summary>

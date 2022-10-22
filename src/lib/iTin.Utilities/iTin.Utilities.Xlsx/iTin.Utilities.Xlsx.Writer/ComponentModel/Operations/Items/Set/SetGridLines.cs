@@ -1,16 +1,15 @@
 ﻿
+using System;
+using System.IO;
+using System.Linq;
+
+using OfficeOpenXml;
+
+using iTin.Core.Models.Design.Enums;
+using iTin.Utilities.Xlsx.Writer.ComponentModel.Result.Set;
+
 namespace iTin.Utilities.Xlsx.Writer.ComponentModel
 {
-    using System;
-    using System.IO;
-    using System.Linq;
-
-    using OfficeOpenXml;
-
-    using iTin.Core.Models.Design.Enums;
-
-    using Result.Set;
-
     /// <summary>
     /// A Specialization of <see cref="SetBase"/> class.<br/>
     /// Allows to establish the visibility of the grid lines of a spreadsheet.
