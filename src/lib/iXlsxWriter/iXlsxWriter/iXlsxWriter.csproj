@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <Version>1.0.0.3</Version>
+    <Description>Xlsx Writer</Description>
+    <Copyright>Copyright © 2022</Copyright>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageId>iXlsxWriter</PackageId>
+    <Company>iTin</Company>
+    <Product>iXlsxWriter</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>icon.png</PackageIcon>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.4" />
+  </ItemGroup>
+
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties configuration_4schemas_4json_4basexlsxconfigurationschema_1json__JsonSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\iTin\iTin.Charting\iTin.Charting.Models\iTin.Charting.Models.csproj" />
+    <ProjectReference Include="..\..\iTin\iTin.Core\iTin.Core.IO.Compression\iTin.Core.IO.Compression.csproj" />
+    <ProjectReference Include="..\..\iTin\iTin.Logging\iTin.Logging\iTin.Logging.csproj" />
+    <ProjectReference Include="..\..\iTin\iTin.Utilities\iTin.Utilities.Xlsx.Design\iTin.Utilities.Xlsx.Design.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Update="System.Drawing">
+      <SpecificVersion>false</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+
+</Project>
