@@ -11,29 +11,34 @@ namespace OfficeOpenXml.Helpers
     internal class XmlDrawingHelper : XmlBaseHelper
     {
         #region public constants
+
         /// <summary>
-        /// A <see cref="string"/> than represents <b>xdr</b> namespace.
+        /// A <see cref="T:System.String"/> than represents <b>xdr</b> namespace.
         /// </summary>
         public const string XdrNamespace = "http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing";
-        
+
         /// <summary>
-        /// A <see cref="string"/> than represents <b>a</b> namespace.
+        /// A <see cref="T:System.String"/> than represents <b>a</b> namespace.
         /// </summary>
         public const string LetterANamespace = "http://schemas.openxmlformats.org/drawingml/2006/main";
+
         #endregion
 
         #region private members
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private XmlNamespaceManager _manager;
+
         #endregion
 
         #region private new static members
-        private new static readonly XmlDrawingHelper Instance = new XmlDrawingHelper();
+
+        private new static readonly XmlDrawingHelper Instance = new();
+
         #endregion
 
         #region protected override methods
 
-        #region [protected] {override} (void) ResolveNamespaceManager(): Resolves the namespace manager to use for this XML document
         /// <summary>
         /// Resolves the namespace manager to use for this <b>XML</b> document.
         /// </summary>
@@ -45,7 +50,6 @@ namespace OfficeOpenXml.Helpers
 
             NamespaceManager = manager;
         }
-        #endregion
 
         #endregion
     }

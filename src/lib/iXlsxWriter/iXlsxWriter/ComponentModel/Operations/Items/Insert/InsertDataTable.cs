@@ -21,7 +21,6 @@ namespace iXlsxWriter.ComponentModel
     {
         #region constructor/s
 
-        #region [public] InsertDataset(): Initializes a new instance of the class
         /// <summary>
         /// Initializes a new instance of the <see cref="InsertDataTable"/> class.
         /// </summary>
@@ -31,13 +30,11 @@ namespace iXlsxWriter.ComponentModel
             SheetName = string.Empty;
             Location = new XlsxPointRange { Column = 1, Row = 1 };
         }
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (DataTable) Data: Gets or sets a reference to datatable to insert
         /// <summary>
         /// Gets or sets a reference to datatable to insert.
         /// </summary>
@@ -45,13 +42,11 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="DataTable"/> reference to insert.
         /// </value>
         public DataTable Data { get; set; }
-        #endregion
 
         #endregion
 
         #region protected override methods
 
-        #region [protected] {override} (InsertResult) InsertImpl(Stream, IInput): Implementation to execute when insert action
         /// <summary>
         /// Implementation to execute when insert action.
         /// </summary>
@@ -71,7 +66,7 @@ namespace iXlsxWriter.ComponentModel
         {
             if (string.IsNullOrEmpty(SheetName))
             {
-                return InsertResult.CreateErroResult(
+                return InsertResult.CreateErrorResult(
                     "Sheet name can not be null or empty",
                     new InsertResultData
                     {
@@ -103,7 +98,6 @@ namespace iXlsxWriter.ComponentModel
 
             return InsertImpl(context, input, SheetName, Data, Location);
         }
-        #endregion
 
         #endregion
 
@@ -119,7 +113,7 @@ namespace iXlsxWriter.ComponentModel
                 var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
                 if (ws == null)
                 {
-                    return InsertResult.CreateErroResult(
+                    return InsertResult.CreateErrorResult(
                         $"Sheet '{sheetName}' not found",
                         new InsertResultData
                         {

@@ -43,7 +43,6 @@ namespace OfficeOpenXml.Helpers
 
         #region public methods
 
-        #region [public] (IResult) SetAxes(XlsxChartAxes): Try to modify the chart axes settings
         /// <summary>
         /// Try to modify the chart axes settings.
         /// </summary>
@@ -98,9 +97,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetBorder(XlsxSize): Try to modify the chart size settings
         /// <summary>
         /// Try to modify the chart border settings.
         /// </summary>
@@ -143,9 +140,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetContent(XlsxChart): Try to modify the chart content settings
         /// <summary>
         /// Try to modify the chart content settings.
         /// </summary>
@@ -173,9 +168,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetLegend(XlsxChartLegend): Try to modify the chart legend settings
         /// <summary>
         /// Try to modify the chart legend settings.
         /// </summary>
@@ -217,9 +210,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetPosition(XlsxBaseRange): Try to modify the chart location settings
         /// <summary>
         /// Try to modify the chart location settings.
         /// </summary>
@@ -253,9 +244,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetPlotArea(XlsxChartPlotsCollection): Try to modify the chart plots settings
         /// <summary>
         /// Try to modify the chart plots settings.
         /// </summary>
@@ -298,9 +287,7 @@ namespace OfficeOpenXml.Helpers
 
 
         }
-        #endregion
 
-        #region [public] (IResult) SetSize(XlsxSize): Try to modify the chart size settings
         /// <summary>
         /// Try to modify the chart size settings.
         /// </summary>
@@ -333,9 +320,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetShapeEffects(XlsxShapeEffects): Try to modify the chart shape effects settings
         /// <summary>
         /// Try to modify the shape effects settings.
         /// </summary>
@@ -371,9 +356,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetTitle(XlsxChartTitle): Try to modify the chart title settings
         /// <summary>
         /// Try to modify the chart title settings.
         /// </summary>
@@ -417,7 +400,6 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
         #endregion
 
@@ -439,7 +421,7 @@ namespace OfficeOpenXml.Helpers
                     break;
 
                 default:
-                    var areaChartSeriesNode = textNode.ParentNode.ParentNode;
+                    var areaChartSeriesNode = textNode.ParentNode?.ParentNode;
                     areaChartSeriesNode.AddShapePropertiesNode(serie, XmlWriter);
                     break;
             }

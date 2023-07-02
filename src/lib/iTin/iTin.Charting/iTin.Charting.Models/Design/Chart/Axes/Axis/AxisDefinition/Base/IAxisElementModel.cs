@@ -1,10 +1,10 @@
 ﻿
+using System.Drawing;
+
+using iTin.Core.Models.Design.Enums;
+
 namespace iTin.Charting.Models.Design
 {
-    using System.Drawing;
-
-    using iTin.Core.Models.Design.Enums;
-
     /// <summary>
     /// Represents the visual setting the labels of a axis.
     /// </summary>

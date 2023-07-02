@@ -1,29 +1,30 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+using iTin.Core;
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Enums;
+using iTin.Core.Models.Design.Helpers;
+
+using iTin.Charting.Models.Design.Options;
+
 namespace iTin.Charting.Models.Design
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-
-    using iTin.Core;
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Enums;
-    using iTin.Core.Models.Design.Helpers;
-
-    using Options;
-
     /// <summary>
     /// Represents the visual setting of chart legend. Includes visibility, location, border and font.
     /// </summary>
     public partial class LegendModel : ICloneable
     {
         #region private constants
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const YesNo DefaultShow = YesNo.No;
 
@@ -59,7 +60,6 @@ namespace iTin.Charting.Models.Design
 
         #region constructor/s
 
-        #region [public] LegendModel(): Initializes a new instance of this class
         /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the <see cref="T:iTin.Charting.ComponentModel.Models.LegendModel" /> class.
@@ -71,7 +71,6 @@ namespace iTin.Charting.Models.Design
             BackColor = DefaultBackColor;
             Alignment = DefaultAlignment;
         }
-        #endregion
 
         #endregion
 
@@ -79,9 +78,6 @@ namespace iTin.Charting.Models.Design
 
         #region ICloneable
 
-        #region private methods
-
-        #region [private] (object) Clone(): Creates a new object that is a copy of the current instance
         /// <inheritdoc />
         /// <summary>
         /// Creates a new object that is a copy of the current instance.
@@ -90,9 +86,6 @@ namespace iTin.Charting.Models.Design
         /// A new object that is a copy of this instance.
         /// </returns>
         object ICloneable.Clone() => Clone();
-        #endregion
-
-        #endregion
 
         #endregion
 
@@ -100,7 +93,6 @@ namespace iTin.Charting.Models.Design
 
         #region public readonly properties
 
-        #region [public] (bool) BorderSpecified: Gets a value that tells the serializer if the referenced item is to be included
         /// <summary>
         /// Gets a value that tells the serializer if the referenced item is to be included.
         /// </summary>
@@ -111,9 +103,7 @@ namespace iTin.Charting.Models.Design
         [XmlIgnore]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool BorderSpecified => !Border.IsDefault;
-        #endregion
 
-        #region [public] (bool) FontSpecified: Gets a value that tells the serializer if the referenced item is to be included
         /// <summary>
         /// Gets a value that tells the serializer if the referenced item is to be included.
         /// </summary>
@@ -124,13 +114,11 @@ namespace iTin.Charting.Models.Design
         [XmlIgnore]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool FontSpecified => !Font.IsDefault;
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (KnownTextAlignment) Alignment: Gets or sets preferred location for chart legend
         /// <summary>
         /// Gets or sets preferred horizontal alignment for chart legend. The default value is <b>(<see cref="F:iTin.Charting.Models.Design.KnownHorizontalAlignment.Center" />)</b>.
         /// </summary>
@@ -152,9 +140,7 @@ namespace iTin.Charting.Models.Design
                 _alignment = value;
             }
         }
-        #endregion
 
-        #region [public] (string) BackColor: Gets or sets preferred back color for this chart legend
         /// <summary>
         /// Gets or sets preferred back color for this chart legend. The default is <b>(White)</b>.
         /// </summary>
@@ -174,9 +160,7 @@ namespace iTin.Charting.Models.Design
                 _backColor = value;
             }
         }
-        #endregion
 
-        #region [public] (BorderModel) Border: Gets or sets a reference that contains the visual setting of legend border
         /// <summary>
         /// Gets or sets a reference that contains the visual setting of legend border.
         /// </summary>
@@ -185,12 +169,10 @@ namespace iTin.Charting.Models.Design
         /// </value>
         public BorderModel Border
         {
-            get => _border ?? (_border = new BorderModel());
+            get => _border ??= new BorderModel();
             set => _border = value;
         }
-        #endregion
 
-        #region [public] (FontModel) Font: Gets or sets a reference for font model defined for this legend
         /// <summary>
         /// Gets or sets a reference for font model defined for this legend.
         /// </summary>
@@ -199,12 +181,10 @@ namespace iTin.Charting.Models.Design
         /// </value>
         public FontModel Font
         {
-            get => _font ?? (_font = new FontModel());
+            get => _font ??= new FontModel();
             set => _font = value;
         }
-        #endregion
 
-        #region [public] (KnownLegendLocation) Location: Gets or sets preferred location for chart legend
         /// <summary>
         /// Gets or sets preferred location for chart legend. The default value is <b>(<see cref="F:iTin.Charting.Models.Design.KnownLegendLocation.Bottom" />)</b>.
         /// </summary>
@@ -226,9 +206,7 @@ namespace iTin.Charting.Models.Design
                 _location = value;
             }
         }
-        #endregion
 
-        #region [public] (YesNo) Show: Gets or sets a value that determines whether displays the chart legend
         /// <summary>
         /// Gets or sets a value that determines whether displays the chart legend. The default is <b>YesNo.No</b>.
         /// </summary>
@@ -240,13 +218,11 @@ namespace iTin.Charting.Models.Design
         [DefaultValue(DefaultShow)]
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNo Show { get; set; }
-        #endregion
 
         #endregion
 
         #region public override properties
 
-        #region [public] {override} (bool) IsDefault: Gets a value indicating whether this instance is default
         /// <inheritdoc />
         /// <summary>
         /// Gets a value indicating whether this instance is default.
@@ -261,13 +237,11 @@ namespace iTin.Charting.Models.Design
             Alignment.Equals(DefaultAlignment) &&
             Location.Equals(DefaultLocation) &&
             BackColor.Equals(DefaultBackColor);
-        #endregion
 
         #endregion
 
         #region public methods
 
-        #region [public] (void) ApplyOptions(LegendOptions): Apply specified options to this legend
         /// <summary>
         /// Apply specified options to this legend.
         /// </summary>
@@ -327,9 +301,7 @@ namespace iTin.Charting.Models.Design
             }
             #endregion
         }
-        #endregion
 
-        #region [public] (LegendModel) Clone(): Clones this instance
         /// <summary>
         /// Clones this instance.
         /// </summary>
@@ -342,9 +314,7 @@ namespace iTin.Charting.Models.Design
 
             return cloned;
         }
-        #endregion
 
-        #region [public] (Color) GetBackColor(): Gets a reference to the color structure preferred for chart legend backcolor
         /// <summary>
         /// Gets a reference to the <see cref="T:System.Drawing.Color" /> structure preferred for chart legend backcolor
         /// </summary>
@@ -352,13 +322,11 @@ namespace iTin.Charting.Models.Design
         /// <see cref="T:System.Drawing.Color"/> structure that represents a .NET color.
         /// </returns>
         public Color GetBackColor() => ColorHelper.GetColorFromString(BackColor);
-        #endregion
 
         #endregion
 
         #region public override methods
 
-        #region [public] {override} (string) ToString(): Returns a string that represents the current instance
         /// <summary>
         /// Returns a string that represents the current instance.
         /// </summary>
@@ -366,7 +334,6 @@ namespace iTin.Charting.Models.Design
         /// A <see cref="T:System.String"/> that represents the current object.
         /// </returns>
         public override string ToString() => !IsDefault ? "Modified" : "Default";
-        #endregion
 
         #endregion
     }

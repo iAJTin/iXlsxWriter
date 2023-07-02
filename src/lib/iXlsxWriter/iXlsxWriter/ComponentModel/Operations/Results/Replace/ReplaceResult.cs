@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 
 using iTin.Core.ComponentModel;
@@ -14,9 +15,8 @@ namespace iXlsxWriter.ComponentModel.Result.Replace
     /// </summary>
     public class ReplaceResult : ResultBase<ReplaceResultData>
     {
-        #region public static methods 
+        #region public static methods
 
-        #region [public] {new} {static} (ReplaceResult) CreateErroResult(string, string = ""): Returns a new InsertResult with specified detailed error
         /// <summary>
         /// Returns a new <see cref="ReplaceResult"/> with specified detailed error.
         /// </summary>
@@ -25,10 +25,17 @@ namespace iXlsxWriter.ComponentModel.Result.Replace
         /// <returns>
         /// A new invalid <see cref="ReplaceResult"/> with specified detailed error.
         /// </returns>
-        public new static ReplaceResult CreateErroResult(string message, string code = "") => CreateErroResult(new IResultError[] { new ResultError { Code = code, Message = message } });
-        #endregion
+        public new static ReplaceResult CreateErrorResult(string message, string code = "") =>
+            CreateErrorResult(
+                new IResultError[]
+                {
+                    new ResultError
+                    {
+                        Code = code,
+                        Message = message
+                    }
+                });
 
-        #region [public] {new} {static} (ReplaceResult) CreateErroResult(IResultError[]): Returns a new InsertResult with specified detailed errors collection
         /// <summary>
         /// Returns a new <see cref="ReplaceResult"/> with specified detailed errors collection.
         /// </summary>
@@ -36,33 +43,29 @@ namespace iXlsxWriter.ComponentModel.Result.Replace
         /// <returns>
         /// A new invalid <see cref="ReplaceResult"/> with specified detailed errors collection.
         /// </returns>
-        public new static ReplaceResult CreateErroResult(IResultError[] errors) =>
-            new ReplaceResult
+        public new static ReplaceResult CreateErrorResult(IResultError[] errors) =>
+            new()
             {
                 Result = default,
                 Success = false,
                 Errors = (IResultError[])errors.Clone()
             };
-        #endregion
 
-        #region [public] {new} {static} (ReplaceResult) CreateSuccessResult(ReplaceResultData): Returns a new success result
         /// <summary>
         /// Returns a new success result.
         /// </summary>
-        /// <param name="Result">Response Result</param>
+        /// <param name="result">Response Result</param>
         /// <returns>
         /// A new valid <see cref="ReplaceResult"/>.
         /// </returns>
-        public new static ReplaceResult CreateSuccessResult(ReplaceResultData Result) =>
-            new ReplaceResult
+        public new static ReplaceResult CreateSuccessResult(ReplaceResultData result) =>
+            new()
             {
-                Result = Result,
+                Result = result,
                 Success = true,
-                Errors = new List<IResultError>()
+                Errors = Array.Empty<IResultError>()
             };
-        #endregion
 
-        #region [public] {new} {static} (ReplaceResult) FromException(Exception): Creates a new result instance from known exception
         /// <summary>
         /// Creates a new <see cref="ReplaceResult"/> instance from known exception.
         /// </summary>
@@ -70,32 +73,34 @@ namespace iXlsxWriter.ComponentModel.Result.Replace
         /// <returns>
         /// A new <see cref="ReplaceResult"/> instance for specified exception.
         /// </returns>
-        public new static ReplaceResult FromException(System.Exception exception) => FromException(exception, default);
-        #endregion
+        public new static ReplaceResult FromException(Exception exception) => FromException(exception, default);
 
-        #region [public] {new} {static} (ReplaceResult) FromException(Exception, ReplaceResultData): Creates a new result instance from known exception
         /// <summary>
         /// Creates a new <see cref="ReplaceResult"/> instance from known exception.
         /// </summary>
         /// <param name="exception">Target exception.</param>
-        /// <param name="Result">Response Result</param>
+        /// <param name="result">Response Result</param>
         /// <returns>
         /// A new <see cref="ReplaceResult"/> instance for specified exception.
         /// </returns>
-        public new static ReplaceResult FromException(System.Exception exception, ReplaceResultData Result) =>
-            new ReplaceResult
+        public new static ReplaceResult FromException(Exception exception, ReplaceResultData result) =>
+            new()
             {
-                Result = Result,
+                Result = result,
                 Success = false,
-                Errors = new List<IResultError> { new ResultExceptionError { Exception = exception } }
+                Errors = new List<IResultError>
+                {
+                    new ResultExceptionError
+                    {
+                        Exception = exception
+                    }
+                }
             };
-        #endregion
 
         #endregion
 
         #region public methods 
 
-        #region [public] (InsertResult) Insert(IInsert, bool = true): Try to insert an element in this input
         /// <summary>
         /// Try to insert an element in this input.
         /// </summary>
@@ -109,7 +114,7 @@ namespace iXlsxWriter.ComponentModel.Result.Replace
             if (!canInsert)
             {
                 return data == null
-                    ? InsertResult.CreateErroResult("Missing data")
+                    ? InsertResult.CreateErrorResult("Missing data")
                     : InsertResult.CreateSuccessResult(new InsertResultData
                     {
                         Context = Result.Context,
@@ -127,9 +132,7 @@ namespace iXlsxWriter.ComponentModel.Result.Replace
 
             return result;
         }
-        #endregion
 
-        #region [public] (ReplaceResult) Replace(IReplace, bool = true): Try to replace an element in this input
         /// <summary>
         /// Try to replace an element in this input.
         /// </summary>
@@ -143,7 +146,7 @@ namespace iXlsxWriter.ComponentModel.Result.Replace
             if (!canReplace)
             {
                 return data == null
-                    ? CreateErroResult("Missing data")
+                    ? CreateErrorResult("Missing data")
                     : CreateSuccessResult(new ReplaceResultData
                     {
                         Context = Result.Context,
@@ -161,9 +164,7 @@ namespace iXlsxWriter.ComponentModel.Result.Replace
 
             return result;
         }
-        #endregion
 
-        #region [public] (SetResult) Replace(ISet, bool = true): Try to set an element in this input
         /// <summary>
         /// Try to set an element in this input.
         /// </summary>
@@ -177,7 +178,7 @@ namespace iXlsxWriter.ComponentModel.Result.Replace
             if (!canSet)
             {
                 return data == null
-                    ? SetResult.CreateErroResult("Missing data")
+                    ? SetResult.CreateErrorResult("Missing data")
                     : SetResult.CreateSuccessResult(new SetResultData
                     {
                         Context = Result.Context,
@@ -195,20 +196,19 @@ namespace iXlsxWriter.ComponentModel.Result.Replace
 
             return result;
         }
-        #endregion
 
         #endregion
 
         #region private methods
 
         private InsertResult InsertImplStrategy(IInsert data, IInput context)
-            => data == null ? InsertResult.CreateErroResult("Missing data") : data.Apply(Result.OutputStream, context);
+            => data == null ? InsertResult.CreateErrorResult("Missing data") : data.Apply(Result.OutputStream, context);
 
         private ReplaceResult ReplaceImplStrategy(IReplace data, IInput context)
-            => data == null ? ReplaceResult.CreateErroResult("Missing data") : data.Apply(Result.OutputStream, context);
+            => data == null ? ReplaceResult.CreateErrorResult("Missing data") : data.Apply(Result.OutputStream, context);
 
         private SetResult SetImplStrategy(ISet data, IInput context)
-            => data == null ? SetResult.CreateErroResult("Missing data") : data.Apply(Result.OutputStream, context);
+            => data == null ? SetResult.CreateErrorResult("Missing data") : data.Apply(Result.OutputStream, context);
 
         #endregion
     }

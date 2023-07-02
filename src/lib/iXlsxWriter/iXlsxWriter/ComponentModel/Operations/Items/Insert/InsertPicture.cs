@@ -24,7 +24,6 @@ namespace iXlsxWriter.ComponentModel
     {
         #region constructor/s
 
-        #region [public] InsertPicture(): Initializes a new instance of the class
         /// <summary>
         /// Initializes a new instance of the <see cref="InsertPicture"/> class.
         /// </summary>
@@ -33,13 +32,11 @@ namespace iXlsxWriter.ComponentModel
             Location = null;
             SheetName = string.Empty;
         }
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (XlsxPicture) Picture: Gets or sets a reference to picture configuration
         /// <summary>
         /// Gets or sets a reference to picture configuration.
         /// </summary>
@@ -47,13 +44,11 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="XlsxPicture"/> reference to picture configuration.
         /// </value>
         public XlsxPicture Picture { get; set; }
-        #endregion
 
         #endregion
 
         #region protected override methods
 
-        #region [protected] {override} (InsertResult) InsertImpl(Stream, IInput): Implementation to execute when insert action
         /// <summary>
         /// Implementation to execute when insert action.
         /// </summary>
@@ -73,7 +68,7 @@ namespace iXlsxWriter.ComponentModel
         {
             if (string.IsNullOrEmpty(SheetName))
             {
-                return InsertResult.CreateErroResult(
+                return InsertResult.CreateErrorResult(
                     "Sheet name can not be null or empty",
                     new InsertResultData
                     {
@@ -115,7 +110,6 @@ namespace iXlsxWriter.ComponentModel
 
             return InsertImpl(context, input, SheetName, Location, Picture);
         }
-        #endregion
 
         #endregion
 
@@ -127,13 +121,26 @@ namespace iXlsxWriter.ComponentModel
 
             try
             {
-                using (var excel = new ExcelPackage(input))
+                using var excel = new ExcelPackage(input);
+                var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
+                if (ws == null)
                 {
-                    var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
-                    if (ws == null)
+                    return InsertResult.CreateErrorResult(
+                        $"Sheet '{sheetName}' not found",
+                        new InsertResultData
+                        {
+                            Context = context,
+                            InputStream = input,
+                            OutputStream = input
+                        });
+                }
+
+                using (var image = xlsxPicture.GetImage())
+                {
+                    if (image == null)
                     {
-                        return InsertResult.CreateErroResult(
-                            $"Sheet '{sheetName}' not found",
+                        return InsertResult.CreateErrorResult(
+                            "The image could not be loaded, please check that the path is correct",
                             new InsertResultData
                             {
                                 Context = context,
@@ -142,63 +149,48 @@ namespace iXlsxWriter.ComponentModel
                             });
                     }
 
-                    using (var image = xlsxPicture.GetImage())
+                    var pictureName = xlsxPicture.Name.HasValue() ? xlsxPicture.Name : $"picture{ws.Drawings.Count}";
+                    foreach (var item in ws.Drawings)
                     {
-                        if (image == null)
+                        var pic = item as ExcelPicture;
+                        if (pic == null)
                         {
-                            return InsertResult.CreateErroResult(
-                                "The image could not be loaded, please check that the path is correct",
-                                new InsertResultData
-                                {
-                                    Context = context,
-                                    InputStream = input,
-                                    OutputStream = input
-                                });
+                            continue;
                         }
 
-                        var pictureName = xlsxPicture.Name.HasValue() ? xlsxPicture.Name : $"picture{ws.Drawings.Count}";
-                        foreach (var item in ws.Drawings)
+                        var existPicture = pic.Name.Equals(pictureName, StringComparison.OrdinalIgnoreCase);
+                        if (!existPicture)
                         {
-                            var pic = item as ExcelPicture;
-                            if (pic == null)
-                            {
-                                continue;
-                            }
-
-                            var existPicture = pic.Name.Equals(pictureName, StringComparison.OrdinalIgnoreCase);
-                            if (!existPicture)
-                            {
-                                continue;
-                            }
-
-                            return InsertResult.CreateErroResult(
-                                $"There is already an image with the name '{pictureName}' in the collection, please rename the image.",
-                                new InsertResultData
-                                {
-                                    Context = context,
-                                    InputStream = input,
-                                    OutputStream = input
-                                });
+                            continue;
                         }
 
-                        ExcelPicture picture = ws.Drawings.AddPicture(pictureName, image);
-                        var writer = new OfficeOpenPictureWriter(picture, ws);
-                        writer.SetBorder(xlsxPicture.Border);
-                        writer.SetContent(xlsxPicture.Content);
-                        writer.SetPosition(location);
-                        writer.SetSize(xlsxPicture.Size);
-                        writer.SetShapeEffects(xlsxPicture.ShapeEffects, pictureName);
+                        return InsertResult.CreateErrorResult(
+                            $"There is already an image with the name '{pictureName}' in the collection, please rename the image.",
+                            new InsertResultData
+                            {
+                                Context = context,
+                                InputStream = input,
+                                OutputStream = input
+                            });
                     }
 
-                    excel.SaveAs(outputStream);
-
-                    return InsertResult.CreateSuccessResult(new InsertResultData
-                    {
-                        Context = context,
-                        InputStream = input,
-                        OutputStream = outputStream
-                    });
+                    ExcelPicture picture = ws.Drawings.AddPicture(pictureName, image);
+                    var writer = new OfficeOpenPictureWriter(picture, ws);
+                    writer.SetBorder(xlsxPicture.Border);
+                    writer.SetContent(xlsxPicture.Content);
+                    writer.SetPosition(location);
+                    writer.SetSize(xlsxPicture.Size);
+                    writer.SetShapeEffects(xlsxPicture.ShapeEffects, pictureName);
                 }
+
+                excel.SaveAs(outputStream);
+
+                return InsertResult.CreateSuccessResult(new InsertResultData
+                {
+                    Context = context,
+                    InputStream = input,
+                    OutputStream = outputStream
+                });
             }
             catch (Exception ex)
             {

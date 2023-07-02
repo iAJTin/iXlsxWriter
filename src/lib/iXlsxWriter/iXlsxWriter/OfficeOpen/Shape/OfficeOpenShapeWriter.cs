@@ -43,7 +43,6 @@ namespace OfficeOpenXml.Helpers
 
         #region public methods
 
-        #region [public] (IResult) SetBorder(XlsxBorder): Try to modify the shape size settings
         /// <summary>
         /// Try to modify the shape border settings.
         /// </summary>
@@ -86,9 +85,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetContent(XlsxShapeContent): Try to modify the shape content settings
         /// <summary>
         /// Try to modify the shape content settings.
         /// </summary>
@@ -131,9 +128,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetFont(FontModel): Try to modify the shape font settings
         /// <summary>
         /// Try to modify the shape font settings.
         /// </summary>
@@ -166,9 +161,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetPosition(XlsxBaseRange): Try to modify the shape position settings
         /// <summary>
         /// Try to modify the shape position settings.
         /// </summary>
@@ -202,9 +195,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetSize(XlsxBaseSize): Try to modify the shape size settings
         /// <summary>
         /// Try to modify the shape size settings.
         /// </summary>
@@ -237,9 +228,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetShapeEffects(XlsxShapeEffects, string): Try to modify the shape effects settings
         /// <summary>
         /// Try to modify the shape effects settings.
         /// </summary>
@@ -276,9 +265,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetShapeStyle(ShapeType): Try to modify the shape style
         /// <summary>
         /// Try to modify the shape style.
         /// </summary>
@@ -306,9 +293,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetText(string): Try to modify the shape text
         /// <summary>
         /// Try to modify the shape text.
         /// </summary>
@@ -336,7 +321,6 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
         #endregion
 

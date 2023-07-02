@@ -26,7 +26,6 @@ namespace iXlsxWriter.ComponentModel
     {
         #region constructor/s
 
-        #region [public] InsertDataset(): Initializes a new instance of the class
         /// <summary>
         /// Initializes a new instance of the <see cref="InsertDataTable"/> class.
         /// </summary>
@@ -36,13 +35,11 @@ namespace iXlsxWriter.ComponentModel
             SheetName = string.Empty;
             Location = new XlsxPointRange { Column = 1, Row = 1 };
         }
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (Dictionary<string, object>) Data: Gets or sets a reference to dictionary to insert
         /// <summary>
         /// Gets or sets a reference to dictionary to insert.
         /// </summary>
@@ -50,9 +47,7 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="Dictionary{TKey, TValue}"/> reference to insert. TKey is <see cref="string"/>, TValue is <see cref="object"/>.
         /// </value>
         public Dictionary<string, object> Data { get; set; }
-        #endregion
 
-        #region [public] (XlsxPointRange) Location: Gets or sets a reference a XlsxPointRange which represents the insert location
         /// <summary>
         /// Gets or sets a reference a <see cref="XlsxPointRange"/> which represents the insert location.
         /// </summary>
@@ -60,9 +55,7 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="XlsxPointRange"/> object that contains the insert location.
         /// </value>
         public XlsxPointRange Location { get; set; }
-        #endregion
 
-        #region [public] (DictionaryStyles) Styles: Gets or sets a reference containing the cell data and headers styles to use
         /// <summary>
         /// Gets or sets a reference containing the cell data and headers styles to use.
         /// </summary>
@@ -70,13 +63,11 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="DataStyles"/> object that contains the cell styles to use
         /// </value>
         public DictionaryStyles Styles { get; set; }
-        #endregion
 
         #endregion
 
         #region protected override methods
 
-        #region [protected] {override} (InsertResult) InsertImpl(Stream, IInput): Implementation to execute when insert action
         /// <summary>
         /// Implementation to execute when insert action.
         /// </summary>
@@ -96,7 +87,7 @@ namespace iXlsxWriter.ComponentModel
         {
             if (string.IsNullOrEmpty(SheetName))
             {
-                return InsertResult.CreateErroResult(
+                return InsertResult.CreateErrorResult(
                     "Sheet name can not be null or empty",
                     new InsertResultData
                     {
@@ -106,10 +97,7 @@ namespace iXlsxWriter.ComponentModel
                     });
             }
 
-            if (Location == null)
-            {
-                Location = new XlsxPointRange { Column = 1, Row = 1 };
-            }
+            Location ??= new XlsxPointRange { Column = 1, Row = 1 };
 
             if (Data == null)
             {
@@ -131,9 +119,8 @@ namespace iXlsxWriter.ComponentModel
                 });
             }
 
-            return InsertImpl(context, input, SheetName, (XlsxPointRange)Location, Data, Styles);
+            return InsertImpl(context, input, SheetName, Location, Data, Styles);
         }
-        #endregion
 
         #endregion
 
@@ -145,77 +132,75 @@ namespace iXlsxWriter.ComponentModel
 
             try
             {
-                using (var excel = new ExcelPackage(input))
+                using var excel = new ExcelPackage(input);
+                var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
+                if (ws == null)
                 {
-                    var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
-                    if (ws == null)
-                    {
-                        return InsertResult.CreateErroResult(
-                            $"Sheet '{sheetName}' not found",
-                            new InsertResultData
-                            {
-                                Context = context,
-                                InputStream = input,
-                                OutputStream = input
-                            });
-                    }
-
-                    // cell styles > Headers
-                    XlsxCellStyle headerTextTextStyle = excel.CreateStyle(styles.Headers.Text);
-
-                    // cell styles > Values
-                    XlsxCellStyle valueTextTextStyle = excel.CreateStyle(styles.Values.Text);
-                    XlsxCellStyle valueDatetimeCellStyle = excel.CreateStyle(styles.Values.DateTime);
-                    XlsxCellStyle valueDecimalCellStyle = excel.CreateStyle(styles.Values.Decimal);
-
-                    var keys = data.Keys;
-                    foreach (var key in keys)
-                    {
-                        var isOdd = location.Row.IsOdd();
-
-                        var headerCell = ws.Cells[location.Row, location.Column];
-                        headerCell.StyleName = isOdd ? $"{headerTextTextStyle.Name}_Alternate" : headerTextTextStyle.Name ?? XlsxBaseStyle.NameOfDefaultStyle;
-                        headerCell.Value = key;
-
-                        var value = data[key];
-                        var valueCell = ws.Cells[location.Row, location.Column + 1];
-
-                        XlsxCellStyle styleToUse;
-                        switch (value)
+                    return InsertResult.CreateErrorResult(
+                        $"Sheet '{sheetName}' not found",
+                        new InsertResultData
                         {
-                            case string _:
-                                styleToUse = valueTextTextStyle;
-                                break;
+                            Context = context,
+                            InputStream = input,
+                            OutputStream = input
+                        });
+                }
 
-                            case float _:
-                            case double _:
-                                styleToUse = valueDecimalCellStyle;
-                                break;
+                // cell styles > Headers
+                XlsxCellStyle headerTextTextStyle = excel.CreateStyle(styles.Headers.Text);
 
-                            case DateTime _:
-                                styleToUse = valueDatetimeCellStyle;
-                                break;
+                // cell styles > Values
+                XlsxCellStyle valueTextTextStyle = excel.CreateStyle(styles.Values.Text);
+                XlsxCellStyle valueDatetimeCellStyle = excel.CreateStyle(styles.Values.DateTime);
+                XlsxCellStyle valueDecimalCellStyle = excel.CreateStyle(styles.Values.Decimal);
 
-                            default:
-                                styleToUse = valueTextTextStyle;
-                                break;
-                        }
+                var keys = data.Keys;
+                foreach (var key in keys)
+                {
+                    var isOdd = location.Row.IsOdd();
 
-                        valueCell.StyleName = isOdd ? $"{styleToUse.Name}_Alternate" : styleToUse.Name ?? XlsxBaseStyle.NameOfDefaultStyle;
-                        valueCell.Value = styleToUse.Content.DataType.GetFormattedDataValue(value.ToString()).FormattedValue;
+                    var headerCell = ws.Cells[location.Row, location.Column];
+                    headerCell.StyleName = isOdd ? $"{headerTextTextStyle.Name}_Alternate" : headerTextTextStyle.Name ?? XlsxBaseStyle.NameOfDefaultStyle;
+                    headerCell.Value = key;
 
-                        location.Offset(0, 1);
+                    var value = data[key];
+                    var valueCell = ws.Cells[location.Row, location.Column + 1];
+
+                    XlsxCellStyle styleToUse;
+                    switch (value)
+                    {
+                        case string _:
+                            styleToUse = valueTextTextStyle;
+                            break;
+
+                        case float _:
+                        case double _:
+                            styleToUse = valueDecimalCellStyle;
+                            break;
+
+                        case DateTime _:
+                            styleToUse = valueDatetimeCellStyle;
+                            break;
+
+                        default:
+                            styleToUse = valueTextTextStyle;
+                            break;
                     }
 
-                    excel.SaveAs(outputStream);
+                    valueCell.StyleName = isOdd ? $"{styleToUse.Name}_Alternate" : styleToUse.Name ?? XlsxBaseStyle.NameOfDefaultStyle;
+                    valueCell.Value = styleToUse.Content.DataType.GetFormattedDataValue(value.ToString()).FormattedValue;
 
-                    return InsertResult.CreateSuccessResult(new InsertResultData
-                    {
-                        Context = context,
-                        InputStream = input,
-                        OutputStream = outputStream
-                    });
+                    location.Offset(0, 1);
                 }
+
+                excel.SaveAs(outputStream);
+
+                return InsertResult.CreateSuccessResult(new InsertResultData
+                {
+                    Context = context,
+                    InputStream = input,
+                    OutputStream = outputStream
+                });
             }
             catch (Exception ex)
             {

@@ -4,7 +4,7 @@ namespace OfficeOpenXml
     /// <summary>
     /// Contains common extensions for data model objects.
     /// </summary>
-    static class KnownHeaderFooterConstants
+    internal static class KnownHeaderFooterConstants
     {
         /// <summary>
         /// The code for "current page #"

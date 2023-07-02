@@ -30,7 +30,6 @@ namespace iTin.Utilities.Xlsx.Writer
     {
         #region public static methods
 
-        #region [public] {static} (XlsxCellStyle) CreateStyle(this ExcelPackage, XlsxCellStyle): Returns a new excel style from cell style model
         /// <summary>
         /// Returns a new excel style from cell style model.<br/>
         /// If style is null returns a default instance.<br/>
@@ -59,9 +58,6 @@ namespace iTin.Utilities.Xlsx.Writer
             return safeStyle;
         }
 
-        #endregion
-
-        #region [public] {static} (ExcelCellBase) Expand(this XlsxBaseRange, XlsxMiniChartSize): Returns a new ExcelCellBase reference containig the initial range expanded by minichart size
         /// <summary>
         /// Returns a new <see cref="ExcelCellBase"/> reference containing the initial range expanded by minichart size.
         /// </summary>
@@ -80,9 +76,7 @@ namespace iTin.Utilities.Xlsx.Writer
 
             return new ExcelAddressBase(address);
         }
-        #endregion
 
-        #region [public] {static} (Color) GetMiniChartSerieColor(this XlsxMiniChartChartType): Returns mini chart serie color
         /// <summary>
         /// Returns mini chart serie color.
         /// </summary>
@@ -96,23 +90,15 @@ namespace iTin.Utilities.Xlsx.Writer
             SentinelHelper.ArgumentNull(model, nameof(model));
 
             var result = Color.Transparent;
-            switch (model.Active)
+            return model.Active switch
             {
-                case MiniChartType.Column:
-                    return model.Column.Serie.GetColor();
-
-                case MiniChartType.Line:
-                    return model.Line.Serie.GetColor();
-
-                case MiniChartType.WinLoss:
-                    return model.WinLoss.Serie.GetColor();
-            }
-
-            return result;
+                MiniChartType.Column => model.Column.Serie.GetColor(),
+                MiniChartType.Line => model.Line.Serie.GetColor(),
+                MiniChartType.WinLoss => model.WinLoss.Serie.GetColor(),
+                _ => result
+            };
         }
-        #endregion
 
-        #region [public] {static} (ExcelPrinterSettings) SetMarginsFromModel(this ExcelPrinterSettings, XlsxDocumentMargins): Sets the margins of document from model
         /// <summary>
         /// Sets the margins of document from model.
         /// </summary>
@@ -144,9 +130,7 @@ namespace iTin.Utilities.Xlsx.Writer
 
             return settings;
         }
-        #endregion
 
-        #region [public] {static} (ExcelHeaderFooter) SetSheetHeader(this ExcelHeaderFooter, XlsxDocumentHeaderFooter): Updates the sheet header from model
         /// <summary>
         /// Updates the sheet header from model.
         /// </summary>
@@ -174,9 +158,7 @@ namespace iTin.Utilities.Xlsx.Writer
 
             return reference;
         }
-        #endregion
 
-        #region [public] {static} (OfficeProperties) SetSheetFooter(this ExcelHeaderFooter, XlsxDocumentHeaderFooter): Updates the sheet footer from model
         /// <summary>
         /// Updates the sheet footer from model.
         /// </summary>
@@ -204,9 +186,7 @@ namespace iTin.Utilities.Xlsx.Writer
 
             return reference;
         }
-        #endregion
 
-        #region [public] {static} (string) ToEppLabelAlignmentString(this KnownHorizontalAlignment): Converter for KnownHorizontalAlignment enumeration type to string representation
         /// <summary>
         /// Converter for <see cref="KnownHorizontalAlignment"/> enumeration type to string representation.
         /// </summary>
@@ -219,21 +199,14 @@ namespace iTin.Utilities.Xlsx.Writer
         {
             SentinelHelper.IsEnumValid(alignment);
 
-            switch (alignment)
+            return alignment switch
             {
-                case KnownHorizontalAlignment.Left:
-                    return "l";
-
-                case KnownHorizontalAlignment.Right:
-                    return "r";
-
-                default:
-                    return "ctr";
-            }
+                KnownHorizontalAlignment.Left => "l",
+                KnownHorizontalAlignment.Right => "r",
+                _ => "ctr"
+            };
         }
-        #endregion
 
-        #region [public] {static} (string) ToEppDataFormat(this string, BaseDataType): Gets data format from model
         /// <summary>
         /// Gets data format from model.
         /// </summary>
@@ -381,9 +354,7 @@ namespace iTin.Utilities.Xlsx.Writer
                     #endregion
             }
         }
-        #endregion
 
-        #region [public] {static} (eDispBlanksAs) ToEppeDispBlanksAs(this MiniChartEmptyValuesAs): Converter for MiniChartEmptyValuesAs enumeration type to eDispBlanksAs
         /// <summary>
         /// Converter for <see cref="MiniChartEmptyValuesAs"/> enumeration type to <see cref="eDispBlanksAs" />.
         /// </summary>
@@ -396,21 +367,14 @@ namespace iTin.Utilities.Xlsx.Writer
         {
             SentinelHelper.IsEnumValid(reference);
 
-            switch (reference)
+            return reference switch
             {
-                case MiniChartEmptyValuesAs.Connect:
-                    return eDispBlanksAs.Span;
-
-                case MiniChartEmptyValuesAs.Zero:
-                    return eDispBlanksAs.Zero;
-
-                default:
-                    return eDispBlanksAs.Gap;
-            }
+                MiniChartEmptyValuesAs.Connect => eDispBlanksAs.Span,
+                MiniChartEmptyValuesAs.Zero => eDispBlanksAs.Zero,
+                _ => eDispBlanksAs.Gap
+            };
         }
-        #endregion
 
-        #region [public] {static} (ExcelAddressBase) ToEppExcelAddress(thisXlsxBaseRange): Returns range address
         /// <summary>
         /// Returns range address.
         /// </summary>
@@ -466,9 +430,7 @@ namespace iTin.Utilities.Xlsx.Writer
 
             return result;
         }
-        #endregion
 
-        #region [public] {static} (eTextAlignment) ToEppTextHorizontalAlignment(this KnownHorizontalAlignment): Converter for KnownHorizontalAlignment enumeration type to eTextAlignment
         /// <summary>
         /// Converter for <see cref="KnownHorizontalAlignment"/> enumeration type to <see cref="eTextAlignment"/>.
         /// </summary>
@@ -481,24 +443,15 @@ namespace iTin.Utilities.Xlsx.Writer
         {
             SentinelHelper.IsEnumValid(alignment);
 
-            switch (alignment)
+            return alignment switch
             {
-                case KnownHorizontalAlignment.Left:
-                    return eTextAlignment.Left;
-
-                case KnownHorizontalAlignment.Center:
-                    return eTextAlignment.Center;
-
-                case KnownHorizontalAlignment.Right:
-                    return eTextAlignment.Right;
-
-                default:
-                    return eTextAlignment.Left;
-            }
+                KnownHorizontalAlignment.Left => eTextAlignment.Left,
+                KnownHorizontalAlignment.Center => eTextAlignment.Center,
+                KnownHorizontalAlignment.Right => eTextAlignment.Right,
+                _ => eTextAlignment.Left
+            };
         }
-        #endregion
 
-        #region [public] {static} (eLineStyle) ToEppLineStyle(this KnownLineStyle): Converter for KnownLineStyle enumeration type to eLineStyle
         /// <summary>
         /// Converter for <see cref="KnownLineStyle"/> enumeration type to <see cref="eLineStyle"/>.
         /// </summary>
@@ -511,27 +464,16 @@ namespace iTin.Utilities.Xlsx.Writer
         {
             SentinelHelper.IsEnumValid(style);
 
-            switch (style)
+            return style switch
             {
-                case KnownLineStyle.Dash:
-                    return eLineStyle.Dash;
-
-                case KnownLineStyle.DashDot:
-                    return eLineStyle.DashDot;
-
-                case KnownLineStyle.DashDotDot:
-                    return eLineStyle.SystemDashDotDot;
-
-                case KnownLineStyle.Dot:
-                    return eLineStyle.Dot;
-
-                default:
-                    return eLineStyle.Solid;
-            }
+                KnownLineStyle.Dash => eLineStyle.Dash,
+                KnownLineStyle.DashDot => eLineStyle.DashDot,
+                KnownLineStyle.DashDotDot => eLineStyle.SystemDashDotDot,
+                KnownLineStyle.Dot => eLineStyle.Dot,
+                _ => eLineStyle.Solid
+            };
         }
-        #endregion
 
-        #region [public] {static} (eOrientation) ToEppOrientation(this KnownDocumentOrientation): Converter for KnownDocumentOrientation enumeration type to eOrientation.
         /// <summary>
         /// Converter for <see cref="KnownDocumentOrientation"/> enumeration type to <see cref="eOrientation"/>.
         /// </summary>
@@ -546,9 +488,7 @@ namespace iTin.Utilities.Xlsx.Writer
 
             return orientation == KnownDocumentOrientation.Portrait ? eOrientation.Portrait : eOrientation.Landscape;
         }
-        #endregion
 
-        #region [public] {static} (ePaperSize) ToEppPaperSize(this KnownDocumentSize): Converter for KnownDocumentSize enumeration type to ePaperSize.
         /// <summary>
         /// Converter for <see cref="KnownDocumentSize"/> enumeration type to <see cref="ePaperSize"/>.
         /// </summary>
@@ -617,9 +557,7 @@ namespace iTin.Utilities.Xlsx.Writer
 
             return paperSize;
         }
-        #endregion
 
-        #region [public] {static} (ExcelWorksheetView) ToEppSheetView(this ExcelWorksheetView, KnownDocumentView): Sets the appropiate sheet view
         /// <summary>
         /// Sets the appropiate sheet view.
         /// </summary>
@@ -645,9 +583,7 @@ namespace iTin.Utilities.Xlsx.Writer
 
             return reference;
         }
-        #endregion
 
-        #region [public] {static} (eSparklineType) ToEppeSparklineType(this MiniChartType): Converter for MiniChartType enumeration type to eSparklineType
         /// <summary>
         /// Converter for <see cref="MiniChartType" /> enumeration type to <see cref="eSparklineType"/>.
         /// </summary>
@@ -660,26 +596,18 @@ namespace iTin.Utilities.Xlsx.Writer
         {
             SentinelHelper.IsEnumValid(type);
 
-            switch (type)
+            return type switch
             {
-
-                case MiniChartType.Line:
-                    return eSparklineType.Line;
-
-                case MiniChartType.WinLoss:
-                    return eSparklineType.Stacked;
-
-                default:
-                    return eSparklineType.Column;
-            }
+                MiniChartType.Line => eSparklineType.Line,
+                MiniChartType.WinLoss => eSparklineType.Stacked,
+                _ => eSparklineType.Column
+            };
         }
-        #endregion
 
         #endregion
 
         #region private static methods
 
-        #region [private] {static} (ExcelHeaderFooter) SetSheetHeaderSection(this ExcelHeaderFooter, DocumentHeaderFooterModel): Sets the sheet header section from model
         /// <summary>
         /// Sets the sheet header section from model.
         /// </summary>
@@ -723,9 +651,7 @@ namespace iTin.Utilities.Xlsx.Writer
 
             return reference;
         }
-        #endregion
 
-        #region [private] {static} (ExcelHeaderFooter) SetSheetFooterSection(this ExcelHeaderFooter, DocumentHeaderFooterModel): Sets the sheet footer from model
         /// <summary>
         /// Sets the sheet footer from model.
         /// </summary>
@@ -769,7 +695,6 @@ namespace iTin.Utilities.Xlsx.Writer
 
             return reference;
         }
-        #endregion
 
         #endregion
     }

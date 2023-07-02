@@ -1,15 +1,15 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Charting.Models.Design.Options;
+
 namespace iTin.Charting.Models.Design
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using Options;
-
     /// <summary>
     /// Represents the visual setting the values of a axis.
     /// </summary>

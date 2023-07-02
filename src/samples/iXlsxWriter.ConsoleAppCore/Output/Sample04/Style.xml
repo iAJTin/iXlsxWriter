@@ -1,1 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?><XlsxBaseStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:q1="http://schemas.iTin.com/xlsx/style/cell/v1.0" xsi:type="q1:XlsxCellStyle"><Borders xmlns="http://schemas.iTin.com/xlsx/style/v1.0"><Border Color="Red" Show="Yes" Position="Right" /><Border Color="Yellow" Show="Yes" Position="Top" /></Borders><q1:Font Color="Yellow" Bold="Yes" Italic="Yes" /><q1:Content AlternateColor="Transparent"><q1:DateTime Format="FullDatePattern"><q1:Properties><q1:Property Name="p001" Value="v001" /><q1:Property Name="p002" Value="v002" /></q1:Properties><q1:Error Value="MaxValue"><q1:Comment Show="No" Text="dfdfdfdf"><q1:Font Name="Arial" Color="Red" IsScalable="No" Bold="Yes" /></q1:Comment></q1:Error></q1:DateTime><q1:Alignment Horizontal="Right" Vertical="Top" /></q1:Content></XlsxBaseStyle>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XlsxBaseStyle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:q1="http://schemas.iTin.com/xlsx/style/cell/v1.0" xsi:type="q1:XlsxCellStyle">
+  <Borders xmlns="http://schemas.iTin.com/xlsx/style/v1.0">
+    <Border Color="Red" Show="Yes" Position="Right" />
+    <Border Color="Yellow" Show="Yes" Position="Top" />
+  </Borders>
+  <q1:Font Color="Yellow" Bold="Yes" Italic="Yes" />
+  <q1:Content AlternateColor="Transparent">
+    <q1:DateTime Format="FullDatePattern">
+      <q1:Properties>
+        <q1:Property Name="p001" Value="v001" />
+        <q1:Property Name="p002" Value="v002" />
+      </q1:Properties>
+      <q1:Error Value="MaxValue">
+        <q1:Comment Show="No" Text="dfdfdfdf">
+          <q1:Font Name="Arial" Color="Red" IsScalable="No" Bold="Yes" />
+        </q1:Comment>
+      </q1:Error>
+    </q1:DateTime>
+    <q1:Alignment Horizontal="Right" Vertical="Top" />
+  </q1:Content>
+</XlsxBaseStyle>

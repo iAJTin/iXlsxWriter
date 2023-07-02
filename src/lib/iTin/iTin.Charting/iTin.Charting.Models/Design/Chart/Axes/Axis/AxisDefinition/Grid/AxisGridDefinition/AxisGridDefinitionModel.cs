@@ -1,27 +1,28 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+using iTin.Core;
+using iTin.Core.Models.Design.Enums;
+using iTin.Core.Models.Design.Helpers;
+
+using iTin.Charting.Models.Design.Options;
+
 namespace iTin.Charting.Models.Design
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-
-    using iTin.Core;
-    using iTin.Core.Models.Design.Enums;
-    using iTin.Core.Models.Design.Helpers;
-
-    using Options;
-
     /// <summary>
     /// Represents the visual setting the labels of a axis.
     /// </summary>
     public partial class AxisGridDefinitionModel : IAxisElementModel, ICloneable
     {
         #region private constants
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const float DefaultInterval = 0.0f;
 
@@ -36,11 +37,11 @@ namespace iTin.Charting.Models.Design
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const KnownLineStyle DefaultLineDashStyle = KnownLineStyle.Continuous;
+
         #endregion
 
         #region constructor/s
 
-        #region [public] AxisGridDefinitionModel(): Initializes a new instance of this class
         /// <summary>
         /// Initializes a new instance of the <see cref="AxisGridDefinitionModel" /> class.
         /// </summary>
@@ -52,7 +53,6 @@ namespace iTin.Charting.Models.Design
             LineWidth = DefaultLineWidth;
             Show = DefaultShow;
         }
-        #endregion
 
         #endregion
 
@@ -60,9 +60,6 @@ namespace iTin.Charting.Models.Design
 
         #region IAxisElementModel
 
-        #region public properties
-
-        #region [public] (float?) Interval: Gets or sets the interval between the main or secondary grid lines
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets the interval between the main or secondary grid lines. The default value is zero <b>(0)</b>.
@@ -74,9 +71,7 @@ namespace iTin.Charting.Models.Design
         [XmlAttribute]
         [DefaultValue(DefaultInterval)]
         public float? Interval { get; set; }
-        #endregion
 
-        #region [public] (string) LineColor: Gets or sets the line color of grid lines
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets the line color of grid lines. The default value is <b>(Black)</b>.
@@ -88,9 +83,7 @@ namespace iTin.Charting.Models.Design
         [XmlAttribute]
         [DefaultValue(DefaultLineColor)]
         public string LineColor { get; set; }
-        #endregion
 
-        #region [public] (KnownLineStyle) LineDashStyle: Gets or sets the line style of a grid
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets the line style of a grid. The default value is <b>(<see cref="F:iTin.Charting.Models.Design.KnownLineStyle.Continuous"/>)</b>.
@@ -103,9 +96,7 @@ namespace iTin.Charting.Models.Design
         [DefaultValue(DefaultLineDashStyle)]
         [JsonConverter(typeof(StringEnumConverter))]
         public KnownLineStyle LineDashStyle { get; set; }
-        #endregion
 
-        #region [public] (int) LineWidth: Gets or sets the line width of grid lines
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets the line width of grid lines. The default value is one <b>(1)</b>.
@@ -117,9 +108,7 @@ namespace iTin.Charting.Models.Design
         [XmlAttribute]
         [DefaultValue(DefaultLineWidth)]
         public int LineWidth { get; set; }
-        #endregion
 
-        #region [public] (YesNo) Show: Gets or sets a value that determines whether the lines grid are visible.
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets a value that determines whether the lines grid are visible. The default value is <b>YesNo.No</b>.
@@ -132,13 +121,11 @@ namespace iTin.Charting.Models.Design
         [DefaultValue(DefaultShow)]
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNo Show { get; set; }
-        #endregion
 
         #endregion
 
         #region public methods
 
-        #region [public] (Color) GetColor(): Gets a reference to the color structure preferred for this font
         /// <inheritdoc />
         /// <summary>
         /// Gets a reference to the <see cref="T:System.Drawing.Color" /> structure preferred for this font.
@@ -147,7 +134,6 @@ namespace iTin.Charting.Models.Design
         /// <see cref="T:System.Drawing.Color" /> structure that represents a .NET color.
         /// </returns>
         public Color GetColor() => ColorHelper.GetColorFromString(LineColor);
-        #endregion
 
         #endregion
 
@@ -155,9 +141,6 @@ namespace iTin.Charting.Models.Design
 
         #region ICloneable
 
-        #region private methods
-
-        #region [private] (object) Clone(): Creates a new object that is a copy of the current instance
         /// <inheritdoc />
         /// <summary>
         /// Creates a new object that is a copy of the current instance.
@@ -166,17 +149,11 @@ namespace iTin.Charting.Models.Design
         /// A new object that is a copy of this instance.
         /// </returns>
         object ICloneable.Clone() => Clone();
-        #endregion
-
-        #endregion
-
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (AxisGridModel) Parent: Gets the parent element of the element
         /// <summary>
         /// Gets the parent element of the element.
         /// </summary>
@@ -187,13 +164,11 @@ namespace iTin.Charting.Models.Design
         [XmlIgnore]
         [Browsable(false)]
         public AxisGridModel Parent { get; private set; }
-        #endregion
 
         #endregion
 
         #region public override properties
 
-        #region [public] {override} (bool) IsDefault: Gets a value indicating whether this instance is default
         /// <inheritdoc />
         /// <summary>
         /// Gets a value indicating whether this instance is default.
@@ -207,13 +182,11 @@ namespace iTin.Charting.Models.Design
             LineWidth.Equals(DefaultLineWidth) &&
             LineDashStyle.Equals(DefaultLineDashStyle) &&
             Show.Equals(DefaultShow);
-        #endregion
 
         #endregion
 
         #region public methods
 
-        #region [public] (void) ApplyOptions(AxisGridDefinitionOptions): Apply specified options to this axis definition
         /// <summary>
         /// Apply specified options to this axis definition.
         /// </summary>
@@ -274,9 +247,7 @@ namespace iTin.Charting.Models.Design
             }
             #endregion
         }
-        #endregion
 
-        #region [public] (AxisGridDefinitionModel) Clone(): Clones this instance
         /// <summary>
         /// Clones this instance.
         /// </summary>
@@ -288,13 +259,11 @@ namespace iTin.Charting.Models.Design
 
             return cloned;
         }
-        #endregion
 
         #endregion
 
         #region public override methods
 
-        #region [public] {override} (string) ToString(): Returns a string that represents the current instance
         /// <summary>
         /// Returns a string that represents the current instance.
         /// </summary>
@@ -302,13 +271,11 @@ namespace iTin.Charting.Models.Design
         /// A <see cref="T:System.String"/> that represents the current object.
         /// </returns>
         public override string ToString() => !IsDefault ? "Modified" : "Default";
-        #endregion
 
         #endregion
 
         #region internal methods
 
-        #region [internal] (void) SetParent(AxisGridModel): Sets the parent element of the element
         /// <summary>
         /// Sets the parent element of the element.
         /// </summary>
@@ -317,7 +284,6 @@ namespace iTin.Charting.Models.Design
         {
             Parent = reference;
         }
-        #endregion
 
         #endregion
     }

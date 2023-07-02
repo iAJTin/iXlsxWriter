@@ -24,7 +24,6 @@ namespace iXlsxWriter.ComponentModel
     {
         #region constructor/s
 
-        #region [public] InsertEnumerable(): Initializes a new instance of the class
         /// <summary>
         /// Initializes a new instance of the <see cref="InsertEnumerable{Ti}"/> class.
         /// </summary>
@@ -36,13 +35,11 @@ namespace iXlsxWriter.ComponentModel
             Style = XlsxCellStyle.Default;
             Location = new XlsxPointRange { Column = 1, Row = 1 };
         }
-        #endregion
 
         #endregion
 
         #region public new properties
 
-        #region [public] {new} (IEnumerable<Ti>) Data: Gets or sets a reference to enumerable data to insert
         /// <summary>
         /// Gets or sets a reference to enumerable data to insert.
         /// </summary>
@@ -50,13 +47,11 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="IEnumerable{T}"/> object containing information to insert
         /// </value>
         public new IEnumerable<Ti> Data { get; set; }
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (YesNo) ShowHeaders: Gets or sets the preferred option for show headers
         /// <summary>
         /// Gets or sets the preferred option for show headers. The default value is <see cref="YesNo.Yes"/>.
         /// </summary>
@@ -64,13 +59,11 @@ namespace iXlsxWriter.ComponentModel
         /// <see cref="YesNo.Yes"/> for show headers; otherwise <see cref="YesNo.No"/>.
         /// </value>
         public YesNo ShowHeaders { get; set; }
-        #endregion
 
         #endregion
 
         #region protected override methods
 
-        #region [protected] {override} (InsertResult) InsertImpl(Stream, IInput): Implementation to execute when insert action
         /// <summary>
         /// Implementation to execute when insert action.
         /// </summary>
@@ -90,7 +83,7 @@ namespace iXlsxWriter.ComponentModel
         {
             if (string.IsNullOrEmpty(SheetName))
             {
-                return InsertResult.CreateErroResult(
+                return InsertResult.CreateErrorResult(
                     "Sheet name can not be null or empty",
                     new InsertResultData
                     {
@@ -110,10 +103,7 @@ namespace iXlsxWriter.ComponentModel
                 });
             }
 
-            if (Style == null)
-            {
-                Style = XlsxCellStyle.Default;
-            }
+            Style ??= XlsxCellStyle.Default;
 
             if (Data == null)
             {
@@ -127,7 +117,6 @@ namespace iXlsxWriter.ComponentModel
 
             return InsertImpl(context, input, SheetName, Data, Location, ShowHeaders, Style);
         }
-        #endregion
 
         #endregion
 
@@ -143,7 +132,7 @@ namespace iXlsxWriter.ComponentModel
                 var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
                 if (ws == null)
                 {
-                    return InsertResult.CreateErroResult(
+                    return InsertResult.CreateErrorResult(
                         $"Sheet '{sheetName}' not found",
                         new InsertResultData
                         {

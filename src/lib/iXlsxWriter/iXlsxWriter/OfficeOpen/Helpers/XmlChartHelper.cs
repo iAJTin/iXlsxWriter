@@ -17,59 +17,64 @@ namespace OfficeOpenXml.Helpers
     internal class XmlChartHelper : XmlBaseHelper
     {
         #region public constants
+
         /// <summary>
-        /// A <see cref="System.String"/> than represents path to root element of list of charts.
+        /// A <see cref="T:System.String"/> than represents path to root element of list of charts.
         /// </summary>
         public const string ChartSpaceRootNode = "c:chartSpace";
 
         /// <summary>
-        /// A <see cref="System.String"/> than represents path to root element of Chart.
+        /// A <see cref="T:System.String"/> than represents path to root element of Chart.
         /// </summary>
         public const string ChartRootNode = "c:chartSpace/c:chart";
 
         /// <summary>
-        /// A <see cref="System.String"/> than represents path to chart legend element of Chart.
+        /// A <see cref="T:System.String"/> than represents path to chart legend element of Chart.
         /// </summary>
         public const string ChartLegendRootNode = "c:chartSpace/c:chart/c:legend";
 
         /// <summary>
-        /// A <see cref="System.String"/> than represents path to chart title element of Chart.
+        /// A <see cref="T:System.String"/> than represents path to chart title element of Chart.
         /// </summary>
         public const string ChartTitleRootNode = "c:chartSpace/c:chart/c:title";
 
         /// <summary>
-        /// A <see cref="System.String"/> than represents path to plot chart element of Chart.
+        /// A <see cref="T:System.String"/> than represents path to plot chart element of Chart.
         /// </summary>
         public const string ChartPlotAreaRootNode = "c:chartSpace/c:chart/c:plotArea";
 
         /// <summary>
-        /// A <see cref="System.String"/> than represents path to area chart element of Chart.
+        /// A <see cref="T:System.String"/> than represents path to area chart element of Chart.
         /// </summary>
         public const string ChartPlotAreaChartAreaRootNode = "c:chartSpace/c:chart/c:plotArea/c:areaChart";
 
         /// <summary>
-        /// A <see cref="System.String"/> than represents main namespace.
+        /// A <see cref="T:System.String"/> than represents main namespace.
         /// </summary>
         public const string MainDrawingmlNamespace = "http://schemas.openxmlformats.org/drawingml/2006/main";
 
         /// <summary>
-        /// A <see cref="System.String"/> than represents chart namespace.
+        /// A <see cref="T:System.String"/> than represents chart namespace.
         /// </summary>
         public const string ChartDrawingmlNamespace = "http://schemas.openxmlformats.org/drawingml/2006/chart";
+
         #endregion
 
         #region private members
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private XmlNamespaceManager _manager;
+
         #endregion
 
         #region private new static members
-        private new static readonly XmlChartHelper Instance = new XmlChartHelper();
+
+        private new static readonly XmlChartHelper Instance = new();
+
         #endregion
 
         #region protected override methods
 
-        #region [protected] {override} (void) GetNamespaceManager(): Resolves the namespace manager to use for this XML document
         /// <summary>
         /// Resolves the namespace manager to use for this <b>XML</b> document.
         /// </summary>
@@ -81,13 +86,11 @@ namespace OfficeOpenXml.Helpers
 
             NamespaceManager = manager;
         }
-        #endregion
 
         #endregion
 
         #region public methods
 
-        #region [public] (XmlNode) FromKnownChartElement(KnownChartElement): Returns a value than represents a known node
         /// <summary>
         /// Returns a value than represents a known node.
         /// </summary>
@@ -166,7 +169,6 @@ namespace OfficeOpenXml.Helpers
 
             return knownRootNode;
         }
-        #endregion
 
         #endregion
     }

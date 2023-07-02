@@ -25,7 +25,7 @@ namespace iXlsxWriter.ComponentModel
         ByteArray,
 
         /// <summary>
-        /// Input file type as <see cref="Writer.XlsxInput"/>
+        /// Input file type as <see cref="T:iXlsxWriter.XlsxInput"/>
         /// </summary>
         XlsxInput,
 

@@ -24,7 +24,6 @@ namespace iXlsxWriter.ComponentModel
     {
         #region constructor/s
 
-        #region [public] InsertAggregateFunction(): Initializes a new instance of the class
         /// <summary>
         /// Initializes a new instance of the <see cref="InsertAggregateFunction"/> class.
         /// </summary>
@@ -35,13 +34,11 @@ namespace iXlsxWriter.ComponentModel
             Aggegate = new QualifiedAggregateDefinition();
             Location = new XlsxPointRange { Column = 1, Row = 1 };
         }
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (QualifiedAggregateDefinition) Aggegate: Gets or sets a reference to aggregate definition
         /// <summary>
         /// Gets or sets a reference to aggregate definition.
         /// </summary>
@@ -49,9 +46,7 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="QualifiedAggregateDefinition"/> reference to aggregate definition.
         /// </value>
         public QualifiedAggregateDefinition Aggegate { get; set; }
-        #endregion
 
-        #region [public] (XlsxCellStyle) Style: Gets or sets a reference to datatable to insert
         /// <summary>
         /// Gets or sets a reference to datatable to insert.
         /// </summary>
@@ -59,13 +54,11 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="XlsxCellStyle"/> reference to insert.
         /// </value>
         public XlsxCellStyle Style { get; set; }
-        #endregion
 
         #endregion
 
         #region protected override methods
 
-        #region [protected] {override} (InsertResult) InsertImpl(Stream, IInput): Implementation to execute when insert action
         /// <summary>
         /// Implementation to execute when insert action.
         /// </summary>
@@ -85,7 +78,7 @@ namespace iXlsxWriter.ComponentModel
         {
             if (string.IsNullOrEmpty(SheetName))
             {
-                return InsertResult.CreateErroResult(
+                return InsertResult.CreateErrorResult(
                     "Sheet name can not be null or empty",
                     new InsertResultData
                     {
@@ -122,7 +115,6 @@ namespace iXlsxWriter.ComponentModel
 
             return InsertImpl(context, input, SheetName, Location, Aggegate, Style);
         }
-        #endregion
 
         #endregion
 
@@ -138,7 +130,7 @@ namespace iXlsxWriter.ComponentModel
                 var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
                 if (ws == null)
                 {
-                    return InsertResult.CreateErroResult(
+                    return InsertResult.CreateErrorResult(
                         $"Sheet '{sheetName}' not found",
                         new InsertResultData
                         {
@@ -163,7 +155,7 @@ namespace iXlsxWriter.ComponentModel
 
                 if (aggregateWorksheet == null)
                 {
-                    return InsertResult.CreateErroResult(
+                    return InsertResult.CreateErrorResult(
                         $"Aggregate sheet '{aggregateWorksheetName}' not found",
                         new InsertResultData
                         {

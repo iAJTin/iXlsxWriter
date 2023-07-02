@@ -4,7 +4,7 @@ namespace OfficeOpenXml.Drawing.Chart
     /// <summary>
     /// Known axis types.
     /// </summary>
-    enum KnownAxisType
+    internal enum KnownAxisType
     {
         /// <summary>
         /// The primary category axis

@@ -21,7 +21,6 @@ namespace iXlsxWriter.ComponentModel
     {
         #region constructor/s
 
-        #region [public] InsertTransposeRange(): Initializes a new instance of the class
         /// <summary>
         /// Initializes a new instance of the <see cref="InsertTransposeRange"/> class.
         /// </summary>
@@ -33,13 +32,11 @@ namespace iXlsxWriter.ComponentModel
             ValueStyle = XlsxCellStyle.Default;
             HeaderStyle = XlsxCellStyle.Default;
         }
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (QualifiedPointDefinition) Destination: Gets or sets a reference to destination point
         /// <summary>
         /// Gets or sets a reference to destination point.
         /// </summary>
@@ -47,9 +44,7 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="QualifiedPointDefinition"/> reference to destination point.
         /// </value>
         public QualifiedPointDefinition Destination { get; set; }
-        #endregion
 
-        #region [public] (XlsxCellStyle) HeaderStyle: Gets or sets a reference to header style
         /// <summary>
         /// Gets or sets a reference to header style.
         /// </summary>
@@ -57,9 +52,7 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="XlsxCellStyle"/> reference to header style.
         /// </value>
         public XlsxCellStyle HeaderStyle { get; set; }
-        #endregion
 
-        #region [public] (XlsxRange) SourceRange: Gets or sets a reference to source range
         /// <summary>
         /// Gets or sets a reference to source range.
         /// </summary>
@@ -67,9 +60,7 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="XlsxRange"/> reference to source range.
         /// </value>
         public XlsxRange SourceRange { get; set; }
-        #endregion
 
-        #region [public] (XlsxCellStyle) ValueStyle: Gets or sets a reference to values style
         /// <summary>
         ///Gets or sets a reference to values style.
         /// </summary>
@@ -77,13 +68,11 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="XlsxCellStyle"/> reference to values style.
         /// </value>
         public XlsxCellStyle ValueStyle { get; set; }
-        #endregion
 
         #endregion
 
         #region protected override methods
 
-        #region [protected] {override} (InsertResult) InsertImpl(Stream, IInput): Implementation to execute when insert action
         /// <summary>
         /// Implementation to execute when insert action.
         /// </summary>
@@ -103,7 +92,7 @@ namespace iXlsxWriter.ComponentModel
         {
             if (string.IsNullOrEmpty(SheetName))
             {
-                return InsertResult.CreateErroResult(
+                return InsertResult.CreateErrorResult(
                     "Source sheet name can not be null or empty",
                     new InsertResultData
                     {
@@ -125,7 +114,7 @@ namespace iXlsxWriter.ComponentModel
 
             if (string.IsNullOrEmpty(Destination.WorkSheet))
             {
-                return InsertResult.CreateErroResult(
+                return InsertResult.CreateErrorResult(
                     "Destination sheet name can not be null or empty",
                     new InsertResultData
                     {
@@ -145,19 +134,11 @@ namespace iXlsxWriter.ComponentModel
                 });
             }
 
-            if (HeaderStyle == null)
-            {
-                HeaderStyle = XlsxCellStyle.Default;
-            }
-
-            if (ValueStyle == null)
-            {
-                ValueStyle = XlsxCellStyle.Default;
-            }
+            HeaderStyle ??= XlsxCellStyle.Default;
+            ValueStyle ??= XlsxCellStyle.Default;
 
             return InsertImpl(context, input, SheetName, SourceRange, Destination, HeaderStyle, ValueStyle);
         }
-        #endregion
 
         #endregion
 
@@ -174,7 +155,7 @@ namespace iXlsxWriter.ComponentModel
                     var sourceWorksheet = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
                     if (sourceWorksheet == null)
                     {
-                        return InsertResult.CreateErroResult(
+                        return InsertResult.CreateErrorResult(
                             $"source sheet '{sheetName}' not found",
                             new InsertResultData
                             {
@@ -187,7 +168,7 @@ namespace iXlsxWriter.ComponentModel
                     var destinationWorksheet = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(destination.WorkSheet, StringComparison.OrdinalIgnoreCase));
                     if (destinationWorksheet == null)
                     {
-                        return InsertResult.CreateErroResult(
+                        return InsertResult.CreateErrorResult(
                             $"Destination sheet '{sheetName}' not found",
                             new InsertResultData
                             {

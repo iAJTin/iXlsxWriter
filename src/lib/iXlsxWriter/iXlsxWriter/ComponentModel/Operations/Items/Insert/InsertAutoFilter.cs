@@ -20,7 +20,6 @@ namespace iXlsxWriter.ComponentModel
     {
         #region constructor/s
 
-        #region [public] InsertAutoFilter(): Initializes a new instance of the class
         /// <summary>
         /// Initializes a new instance of the <see cref="InsertAutoFilter"/> class.
         /// </summary>
@@ -29,13 +28,11 @@ namespace iXlsxWriter.ComponentModel
             Location = null;
             SheetName = string.Empty;
         }
-        #endregion
 
         #endregion
 
         #region protected override methods
 
-        #region [protected] {override} (InsertResult) InsertImpl(Stream, IInput): Implementation to execute when insert action
         /// <summary>
         /// Implementation to execute when insert action.
         /// </summary>
@@ -55,7 +52,7 @@ namespace iXlsxWriter.ComponentModel
         {
             if (string.IsNullOrEmpty(SheetName))
             {
-                return InsertResult.CreateErroResult(
+                return InsertResult.CreateErrorResult(
                     "Sheet name can not be null or empty",
                     new InsertResultData
                     {
@@ -77,7 +74,6 @@ namespace iXlsxWriter.ComponentModel
 
             return InsertImpl(context, input, SheetName, Location);
         }
-        #endregion
 
         #endregion
 
@@ -89,33 +85,31 @@ namespace iXlsxWriter.ComponentModel
 
             try
             {
-                using (var excel = new ExcelPackage(input))
+                using var excel = new ExcelPackage(input);
+                var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
+                if (ws == null)
                 {
-                    var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
-                    if (ws == null)
-                    {
-                        return InsertResult.CreateErroResult(
-                            $"Sheet '{sheetName}' not found",
-                            new InsertResultData
-                            {
-                                Context = context,
-                                InputStream = input,
-                                OutputStream = input
-                            });
-                    }
-
-                    ExcelAddressBase locationAddress = location.ToEppExcelAddress();
-                    ws.Cells[locationAddress.ToString()].AutoFilter = true;
-
-                    excel.SaveAs(outputStream);
-
-                    return InsertResult.CreateSuccessResult(new InsertResultData
-                    {
-                        Context = context,
-                        InputStream = input,
-                        OutputStream = outputStream
-                    });
+                    return InsertResult.CreateErrorResult(
+                        $"Sheet '{sheetName}' not found",
+                        new InsertResultData
+                        {
+                            Context = context,
+                            InputStream = input,
+                            OutputStream = input
+                        });
                 }
+
+                ExcelAddressBase locationAddress = location.ToEppExcelAddress();
+                ws.Cells[locationAddress.ToString()].AutoFilter = true;
+
+                excel.SaveAs(outputStream);
+
+                return InsertResult.CreateSuccessResult(new InsertResultData
+                {
+                    Context = context,
+                    InputStream = input,
+                    OutputStream = outputStream
+                });
             }
             catch (Exception ex)
             {

@@ -91,8 +91,6 @@ namespace iTin.Charting.Models.Design
 
         #region ITitleModel
 
-        #region public properties
-
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets preferred back color for this chart title. The default is "<b>(White)</b>".
@@ -187,10 +185,6 @@ namespace iTin.Charting.Models.Design
         [DefaultValue(DefaultText)]
         public string Text { get; set; }
 
-        #endregion
-
-        #region public methods
-
         /// <inheritdoc />
         /// <summary>
         /// Gets a reference to the <see cref="T:System.Drawing.Color" /> structure preferred for chart title backcolor
@@ -199,8 +193,6 @@ namespace iTin.Charting.Models.Design
         /// <see cref="T:System.Drawing.Color" /> structure that represents a .NET color.
         /// </returns>
         public Color GetBackColor() => ColorHelper.GetColorFromString(BackColor);
-
-        #endregion
 
         #endregion
 

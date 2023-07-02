@@ -1,12 +1,12 @@
 ﻿
+using System;
+using System.Drawing;
+
+using iTin.Charting.Models.Design;
+
 namespace iTin.Charting.Models.ComponentModel
 {
-    using System;
-    using System.Drawing;
-
-     using Design;
-
-   /// <summary>
+    /// <summary>
     /// Represents the resolution information
     /// </summary>
     [Serializable]

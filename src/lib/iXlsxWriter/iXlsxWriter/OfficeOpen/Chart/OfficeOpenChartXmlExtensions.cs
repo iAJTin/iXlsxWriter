@@ -22,7 +22,6 @@ namespace OfficeOpenXml.Drawing
     {
         #region public static methods
 
-        #region [public] {static} (void) AddAxisGridLinesMode(this XmlNode, GridLine, IXmlHelper): Adds major, minor or both grid lines to the specified axis. Not supported in EPPlus library
         /// <summary>
         /// Adds major, minor or both grid lines to the specified axis. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -42,14 +41,14 @@ namespace OfficeOpenXml.Drawing
             if (existMajorGridLinesNode)
             {
                 var parent = majorGridLinesElement.ParentNode;
-                parent.RemoveChild(majorGridLinesElement);
+                parent?.RemoveChild(majorGridLinesElement);
             }
 
             var existMinorGridLinesNode = documentHelper.TryGetElementFrom(axis, "c:minorGridlines", out var minorGridLinesElement);
             if (existMinorGridLinesNode)
             {
                 var parent = minorGridLinesElement.ParentNode;
-                parent.RemoveChild(minorGridLinesElement);
+                parent?.RemoveChild(minorGridLinesElement);
             }
 
             switch (model)
@@ -71,9 +70,7 @@ namespace OfficeOpenXml.Drawing
                     break;
             }
         }
-        #endregion
 
-        #region [public] {static} (void) AddAxisLabelAlignment(this XmlNode, KnownHorizontalAlignment, IXmlHelper): Adds the label alignment to the specified axis. Not supported in EPPlus library
         /// <summary>
         /// Adds the label alignment to the specified axis. Not supported in <b>EPPlus</b> library.
         /// </summary>
@@ -99,7 +96,7 @@ namespace OfficeOpenXml.Drawing
                     valAttr.Value = model.ToEppLabelAlignmentString();
 
                     var lblAlignXmlNode = documentHelper.CreateOrDefaultAndAppendElementToNode(axis, "c:lblAlgn");
-                    lblAlignXmlNode.Attributes.Append(valAttr);
+                    lblAlignXmlNode.Attributes?.Append(valAttr);
                     break;
 
                 case KnownAxisType.PrimaryValueAxis:
@@ -107,9 +104,7 @@ namespace OfficeOpenXml.Drawing
                     break;
             }
         }
-        #endregion
 
-        #region [public] {static} (void) AddAxisLabelProperties(this XmlNode, AxisDefinitionLabelsModel, IXmlHelper): Adds label properties (orientation, alignment, color and font) to the specified axis. Not supported in EPPlus library
         /// <summary>
         /// Adds label properties (orientation, alignment, color and font) to the specified axis. Not supported in <b>EPPlus</b> library.
         /// </summary> 
@@ -127,9 +122,7 @@ namespace OfficeOpenXml.Drawing
 
             axis.AddTextPropertiesNode(model, documentHelper);
         }
-        #endregion
 
-        #region [public] {static} (void) AddShapePropertiesNode(this XmlNode, ChartSerieModel, IXmlHelper): Adds a spPr node (Shape properties) to the node of type ser (Area Chart Series) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <c>spPr</c> node (Shape properties) to the node of type <c>ser</c> (Area Chart Series) specified. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -150,9 +143,7 @@ namespace OfficeOpenXml.Drawing
             shapePropertiesNode.AddSolidFillNode(model.GetColor(), documentHelper);
 
         }
-        #endregion
 
-        #region [public] {static} (KnownAxisType) ExtractAxisType(this XmlNode, IXmlHelper): Returns the type of axis than represents specified node. Not supported in EPPlus library
         /// <summary>
         /// Returns the type of axis than represents specified node. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -169,27 +160,18 @@ namespace OfficeOpenXml.Drawing
             SentinelHelper.IsFalse(axis.Name.Contains("catAx") || axis.Name.Contains("valAx") || axis.Name.Contains("dateAx"), "Imposible extraer tipo. el nodo no es de tipo eje");
 
             var idElement = documentHelper.GetXmlNode(axis, "c:axId");
-            var valueAttr = idElement.Attributes["val"];
+            var valueAttr = idElement.Attributes?["val"];
 
-            var value = valueAttr.Value;
-            switch (value)
+            var value = valueAttr?.Value;
+            return value switch
             {
-                case "2":
-                    return KnownAxisType.PrimaryValueAxis;
-
-                case "3":
-                    return KnownAxisType.SecondaryCategoryAxis;
-
-                case "4":
-                    return KnownAxisType.SecondaryValueAxis;
-
-                default:
-                    return KnownAxisType.PrimaryCategoryAxis;
-            }
+                "2" => KnownAxisType.PrimaryValueAxis,
+                "3" => KnownAxisType.SecondaryCategoryAxis,
+                "4" => KnownAxisType.SecondaryValueAxis,
+                _ => KnownAxisType.PrimaryCategoryAxis
+            };
         }
-        #endregion
 
-        #region [public] {static} (void) ModifyAxisCrosses(this XmlNode, IXmlHelper): Modifies crosses for the specified axis. Supported in EPPlus library but fails
         /// <summary>
         /// Modifies crosses for the specified axis. Supported in <c>EPPlus</c> library but fails.
         /// </summary>
@@ -212,15 +194,13 @@ namespace OfficeOpenXml.Drawing
             valAttr.Value = "max";
 
             var crossesXmlNode = documentHelper.CreateOrDefaultAndAppendElementToNode(axis, "c:crosses");
-            crossesXmlNode.Attributes.Append(valAttr);
+            crossesXmlNode.Attributes?.Append(valAttr);
         }
-        #endregion
 
         #endregion
 
         #region private static methods
 
-        #region [private] {static} (void) AddTextPropertiesNode(this XmlNode, AxisDefinitionLabelsModel, IXmlHelper): Adds a 'txPr' node (Text properties) to the node of type 'valAx' (Value Axis), 'catAx' (Category Axis Data), 'dateAx' (Date Axis), 'serAx' (Series Axis) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <c>txPr</c> node (Text properties) to the node of type <c>valAx</c> (Value Axis), <c>catAx</c> (Category Axis Data), <c>dateAx</c> (Date Axis), <c>serAx</c> (Series Axis) specified. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -238,9 +218,7 @@ namespace OfficeOpenXml.Drawing
             textPropertiesNode.AddTextListStylesNode(documentHelper);
             textPropertiesNode.AddTextParagraphsNode(model.Font, documentHelper);
         }
-        #endregion
 
-        #region [private] {static} (void) AddBodyPropertiesNode(this XmlNode, KnownLabelOrientation, IXmlHelper): Adds a 'bodyPr' node (Body Properties) to the node of type 'txPr' (Text properties) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <c>bodyPr</c> node (Body Properties) to the node of type <c>txPr</c> (Text properties) specified. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -259,12 +237,10 @@ namespace OfficeOpenXml.Drawing
             vertAttr.Value = orientation == LabelOrientation.Vertical ? "wordArtVert" : "horz";
 
             var bodyPropertiesNode = documentHelper.CreateOrDefaultAndAppendElementToNode(textPropertiesNode, "a", "bodyPr");
-            bodyPropertiesNode.Attributes.Append(rotAttr);
-            bodyPropertiesNode.Attributes.Append(vertAttr);
+            bodyPropertiesNode.Attributes?.Append(rotAttr);
+            bodyPropertiesNode.Attributes?.Append(vertAttr);
         }
-        #endregion
 
-        #region [private] {static} (void) AddTextListStylesNode(this XmlNode, IXmlHelper): Adds a 'lstStyle' node (Text List Styles) to the node of type 'txPr' (Text properties) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <c>lstStyle</c> node (Text List Styles) to the node of type <c>txPr</c> (Text properties) specified. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -277,9 +253,7 @@ namespace OfficeOpenXml.Drawing
         {
             documentHelper.CreateOrDefaultAndAppendElementToNode(textPropertiesNode, "a", "lstStyle");
         }
-        #endregion
 
-        #region [private] {static} (void) AddTextParagraphsNode(this XmlNode, FontModel, IXmlHelper): Adds a 'p' node (Text Paragraphs) to the node of type 'txPr' (Text properties) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <c>p</c> node (Text Paragraphs) to the node of type <c>txPr</c> (Text properties) specified. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -296,9 +270,7 @@ namespace OfficeOpenXml.Drawing
             textParagraphsNode.AddTextParagraphPropertiesNode(model, documentHelper);
             textParagraphsNode.AddEndParagraphRunPropertiesNode(documentHelper);
         }
-        #endregion
 
-        #region [private] {static} (void) AddEndParagraphRunPropertiesNode(this XmlNode, XmlDocument, IXmlHelper): Adds a 'endParaRPr' node (End Paragraph Run Properties) to the node of type 'p' (Text Paragraphs) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <c>endParaRPr</c> node (End Paragraph Run Properties) to the node of type <c>p</c> (Text Paragraphs) specified. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -313,9 +285,8 @@ namespace OfficeOpenXml.Drawing
             langAttr.Value = CultureInfo.CurrentCulture.Name;
 
             var endParagraphRunPropertiesNode = documentHelper.CreateOrDefaultAndAppendElementToNode(textParagraphsNode, "a", "endParaRPr");
-            endParagraphRunPropertiesNode.Attributes.Append(langAttr);
+            endParagraphRunPropertiesNode.Attributes?.Append(langAttr);
         }
-        #endregion
 
         #endregion
     }

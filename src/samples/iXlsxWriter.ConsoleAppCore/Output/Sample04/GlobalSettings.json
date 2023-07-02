@@ -1,1 +1,209 @@
-﻿{"$type":"iTin.Utilities.Xlsx.Design.Settings.XlsxSettings, iTin.Utilities.Xlsx.Design","document":{"$type":"iTin.Utilities.Xlsx.Design.Settings.Document.XlsxDocumentMetadataSettings, iTin.Utilities.Xlsx.Design","author":"iTin","category":"Reports","comments":"Sample Report Sample","company":"iTin","keywords":"Reports, Excel, Summary","manager":"iTin","subject":"Subject","title":"Report Sample From Code","url":"http://www.iTin.es"},"sheets":{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxSheetsSettingsCollection, iTin.Utilities.Xlsx.Design","$values":[{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxSheetSettings, iTin.Utilities.Xlsx.Design","sheet-freeze-panes-point":{"$type":"iTin.Utilities.Xlsx.Design.Shared.XlsxPoint, iTin.Utilities.Xlsx.Design","column":3,"row":3},"sheet-footer":{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooter, iTin.Utilities.Xlsx.Design","sections":{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSections, iTin.Utilities.Xlsx.Design","$values":[{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Left","text":"Sample footer"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Left","text":"Sample footer","type":"Even"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","text":"iTin"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","text":"iTin","type":"Even"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Right","text":"@PageNumber / @NumberOfPages"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Right","text":"@PageNumber / @NumberOfPages","type":"Even"}]}},"sheet-header":{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooter, iTin.Utilities.Xlsx.Design","sections":{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSections, iTin.Utilities.Xlsx.Design","$values":[{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Left","text":"Sample header"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Left","text":"Sample header","type":"Even"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","text":"iTin"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","text":"iTin","type":"Even"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Right","text":"Header text"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Right","text":"Header text","type":"Even"}]}},"sheet-margins":{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentMargins, iTin.Utilities.Xlsx.Design","bottom":25.0,"left":25.0,"right":25.0,"top":25.0},"sheet-orientation":"Landscape","sheet-name":"","sheet-size":"A3","sheet-view":"Design"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxSheetSettings, iTin.Utilities.Xlsx.Design","sheet-footer":{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooter, iTin.Utilities.Xlsx.Design","sections":{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSections, iTin.Utilities.Xlsx.Design","$values":[{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Left","text":"Sample footer"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Left","text":"Sample footer","type":"Even"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","text":"iTin"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","text":"iTin","type":"Even"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Right","text":"@PageNumber / @NumberOfPages"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Right","text":"@PageNumber / @NumberOfPages","type":"Even"}]}},"sheet-header":{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooter, iTin.Utilities.Xlsx.Design","sections":{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSections, iTin.Utilities.Xlsx.Design","$values":[{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Left","text":"Sample header"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Left","text":"Sample header","type":"Even"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","text":"iTin"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","text":"iTin","type":"Even"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Right","text":"@SheetName"},{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design","alignment":"Right","text":"@SheetName","type":"Even"}]}},"sheet-margins":{"$type":"iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentMargins, iTin.Utilities.Xlsx.Design","bottom":25.0,"left":25.0,"right":25.0,"top":25.0},"sheet-orientation":"Landscape","sheet-name":"","sheet-size":"A3","sheet-view":"Design"}]}}
+﻿{
+  "$type": "iTin.Utilities.Xlsx.Design.Settings.XlsxSettings, iTin.Utilities.Xlsx.Design",
+  "document": {
+    "$type": "iTin.Utilities.Xlsx.Design.Settings.Document.XlsxDocumentMetadataSettings, iTin.Utilities.Xlsx.Design",
+    "author": "iTin",
+    "category": "Reports",
+    "comments": "Sample Report Sample",
+    "company": "iTin",
+    "keywords": "Reports, Excel, Summary",
+    "manager": "iTin",
+    "subject": "Subject",
+    "title": "Report Sample From Code",
+    "url": "http://www.iTin.es"
+  },
+  "sheets": {
+    "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxSheetsSettingsCollection, iTin.Utilities.Xlsx.Design",
+    "$values": [
+      {
+        "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxSheetSettings, iTin.Utilities.Xlsx.Design",
+        "sheet-freeze-panes-point": {
+          "$type": "iTin.Utilities.Xlsx.Design.Shared.XlsxPoint, iTin.Utilities.Xlsx.Design",
+          "column": 3,
+          "row": 3
+        },
+        "sheet-footer": {
+          "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooter, iTin.Utilities.Xlsx.Design",
+          "sections": {
+            "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSections, iTin.Utilities.Xlsx.Design",
+            "$values": [
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Left",
+                "text": "Sample footer"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Left",
+                "text": "Sample footer",
+                "type": "Even"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "text": "iTin"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "text": "iTin",
+                "type": "Even"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Right",
+                "text": "@PageNumber / @NumberOfPages"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Right",
+                "text": "@PageNumber / @NumberOfPages",
+                "type": "Even"
+              }
+            ]
+          }
+        },
+        "sheet-header": {
+          "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooter, iTin.Utilities.Xlsx.Design",
+          "sections": {
+            "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSections, iTin.Utilities.Xlsx.Design",
+            "$values": [
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Left",
+                "text": "Sample header"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Left",
+                "text": "Sample header",
+                "type": "Even"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "text": "iTin"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "text": "iTin",
+                "type": "Even"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Right",
+                "text": "Header text"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Right",
+                "text": "Header text",
+                "type": "Even"
+              }
+            ]
+          }
+        },
+        "sheet-margins": {
+          "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentMargins, iTin.Utilities.Xlsx.Design",
+          "bottom": 25.0,
+          "left": 25.0,
+          "right": 25.0,
+          "top": 25.0
+        },
+        "sheet-orientation": "Landscape",
+        "sheet-name": "",
+        "sheet-size": "A3",
+        "sheet-view": "Design"
+      },
+      {
+        "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxSheetSettings, iTin.Utilities.Xlsx.Design",
+        "sheet-footer": {
+          "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooter, iTin.Utilities.Xlsx.Design",
+          "sections": {
+            "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSections, iTin.Utilities.Xlsx.Design",
+            "$values": [
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Left",
+                "text": "Sample footer"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Left",
+                "text": "Sample footer",
+                "type": "Even"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "text": "iTin"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "text": "iTin",
+                "type": "Even"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Right",
+                "text": "@PageNumber / @NumberOfPages"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Right",
+                "text": "@PageNumber / @NumberOfPages",
+                "type": "Even"
+              }
+            ]
+          }
+        },
+        "sheet-header": {
+          "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooter, iTin.Utilities.Xlsx.Design",
+          "sections": {
+            "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSections, iTin.Utilities.Xlsx.Design",
+            "$values": [
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Left",
+                "text": "Sample header"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Left",
+                "text": "Sample header",
+                "type": "Even"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "text": "iTin"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "text": "iTin",
+                "type": "Even"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Right",
+                "text": "@SheetName"
+              },
+              {
+                "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentHeaderFooterSection, iTin.Utilities.Xlsx.Design",
+                "alignment": "Right",
+                "text": "@SheetName",
+                "type": "Even"
+              }
+            ]
+          }
+        },
+        "sheet-margins": {
+          "$type": "iTin.Utilities.Xlsx.Design.Settings.Sheets.XlsxDocumentMargins, iTin.Utilities.Xlsx.Design",
+          "bottom": 25.0,
+          "left": 25.0,
+          "right": 25.0,
+          "top": 25.0
+        },
+        "sheet-orientation": "Landscape",
+        "sheet-name": "",
+        "sheet-size": "A3",
+        "sheet-view": "Design"
+      }
+    ]
+  }
+}

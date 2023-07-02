@@ -19,7 +19,6 @@ namespace iXlsxWriter.ComponentModel
 
         #region constructor/s
 
-        #region [public] XlsxFormulaResolver(QualifiedAggregateDefinition): Initializes a new instance of the class
         /// <summary>
         /// Initializes a new instance of the <see cref="XlsxFormulaResolver"/> class.
         /// </summary>
@@ -31,13 +30,11 @@ namespace iXlsxWriter.ComponentModel
             WorkSheet = string.Empty;
             HasAutoFilter = YesNo.No;
         }
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (YesNo) HasAutofilter: Gets or sets a value indicating whether the auto filter is enabled
         /// <summary>
         /// Gets or sets a value indicating whether the auto filter is enabled. The dafault is <see cref="YesNo.No"/>.
         /// </summary>
@@ -45,9 +42,7 @@ namespace iXlsxWriter.ComponentModel
         /// <see cref="YesNo.Yes"/> if auto filter is enabled; otherwise, <see cref="YesNo.No"/>.
         /// </value>
         public YesNo HasAutoFilter { get; set; }
-        #endregion
 
-        #region [public] (string) WorkSheet: Gets or sets a value containing worksheet name
         /// <summary>
         /// Gets or sets a value containing worksheet name.
         /// </summary>
@@ -55,13 +50,11 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="string"/> containing worksheet name.
         /// </value>
         public string WorkSheet { get; set; }
-        #endregion 
 
         #endregion
 
         #region public methods
 
-        #region [public] (string) Resolve(): Returns string containing aggregate's formula
         /// <summary>
         /// Returns string containing aggregate's formula.
         /// </summary>
@@ -75,36 +68,20 @@ namespace iXlsxWriter.ComponentModel
                 return string.Empty;
             }
 
-            int type;
-            switch (_model.AggregateType)
+            var type = _model.AggregateType switch
             {
-                case KnownAggregateType.Average:
-                    type = HasAutoFilter == YesNo.Yes ? 101 : 1;
-                    break;
-
-                case KnownAggregateType.Count:
-                    type = HasAutoFilter == YesNo.Yes ? 103 : 3;
-                    break;
-
-                case KnownAggregateType.Max:
-                    type = HasAutoFilter == YesNo.Yes ? 104 : 4;
-                    break;
-
-                case KnownAggregateType.Min:
-                    type = HasAutoFilter == YesNo.Yes ? 105 : 5;
-                    break;
-
-                default:
-                case KnownAggregateType.Sum:
-                    type = HasAutoFilter == YesNo.Yes ? 109 : 9;
-                    break;
-            }
+                KnownAggregateType.Average => HasAutoFilter == YesNo.Yes ? 101 : 1,
+                KnownAggregateType.Count => HasAutoFilter == YesNo.Yes ? 103 : 3,
+                KnownAggregateType.Max => HasAutoFilter == YesNo.Yes ? 104 : 4,
+                KnownAggregateType.Min => HasAutoFilter == YesNo.Yes ? 105 : 5,
+                KnownAggregateType.Sum => HasAutoFilter == YesNo.Yes ? 109 : 9,
+                _ => HasAutoFilter == YesNo.Yes ? 109 : 9
+            };
 
             return string.IsNullOrEmpty(WorkSheet)
                 ? $"SUBTOTAL({type}, {_model.Range})"
                 : $"SUBTOTAL({type}, '{WorkSheet}'!{_model.Range})";
         }
-        #endregion
 
         #endregion
     }

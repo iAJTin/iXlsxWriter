@@ -1,6 +1,5 @@
 ﻿
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Xml;
 
@@ -64,20 +63,13 @@ namespace OfficeOpenXml.Helpers
         {
             SentinelHelper.IsEnumValid(type);
 
-            switch (type)
+            return type switch
             {
-                case KnownAxisType.PrimaryValueAxis:
-                    return KnownChartElement.PrimaryValueAxisTitle;
-
-                case KnownAxisType.SecondaryCategoryAxis:
-                    return KnownChartElement.SecondaryCategoryAxisTitle;
-
-                case KnownAxisType.SecondaryValueAxis:
-                    return KnownChartElement.SecondaryValueAxisTitle;
-
-                default:
-                    return KnownChartElement.PrimaryCategoryAxisTitle;
-            }
+                KnownAxisType.PrimaryValueAxis => KnownChartElement.PrimaryValueAxisTitle,
+                KnownAxisType.SecondaryCategoryAxis => KnownChartElement.SecondaryCategoryAxisTitle,
+                KnownAxisType.SecondaryValueAxis => KnownChartElement.SecondaryValueAxisTitle,
+                _ => KnownChartElement.PrimaryCategoryAxisTitle
+            };
         }
 
         /// <summary>
@@ -88,235 +80,87 @@ namespace OfficeOpenXml.Helpers
         /// A <see cref="eChartType"/> value.
         /// </returns>
         /// <exception cref="InvalidEnumArgumentException">The value specified is outside the range of valid values.</exception>
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public static eChartType ToEppChartType(this ChartType chartType)
         {
             SentinelHelper.IsEnumValid(chartType);
 
-            switch (chartType)
+            return chartType switch
             {
-                case ChartType.XYScatter:
-                    return eChartType.XYScatter;
-
-                case ChartType.Radar:
-                    return eChartType.Radar;
-
-                case ChartType.Doughnut:
-                    return eChartType.Doughnut;
-
-                case ChartType.Pie3D:
-                    return eChartType.Pie3D;
-
-                case ChartType.Line3D:
-                    return eChartType.Line3D;
-
-                case ChartType.Column3D:
-                    return eChartType.Column3D;
-
-                case ChartType.Area3D:
-                    return eChartType.Area3D;
-
-                case ChartType.Area:
-                    return eChartType.Area;
-
-                case ChartType.Line:
-                    return eChartType.Line;
-
-                case ChartType.Pie:
-                    return eChartType.Pie;
-
-                case ChartType.Bubble:
-                    return eChartType.Bubble;
-
-                case ChartType.ColumnClustered:
-                    return eChartType.ColumnClustered;
-
-                case ChartType.ColumnStacked:
-                    return eChartType.ColumnStacked;
-
-                case ChartType.ColumnStacked100:
-                    return eChartType.ColumnStacked100;
-
-                case ChartType.ColumnClustered3D:
-                    return eChartType.ColumnClustered3D;
-
-                case ChartType.ColumnStacked3D:
-                    return eChartType.ColumnStacked3D;
-
-                case ChartType.ColumnStacked1003D:
-                    return eChartType.ColumnStacked1003D;
-
-                case ChartType.BarClustered:
-                    return eChartType.BarClustered;
-
-                case ChartType.BarStacked:
-                    return eChartType.BarStacked;
-
-                case ChartType.BarStacked100:
-                    return eChartType.BarStacked100;
-
-                case ChartType.BarClustered3D:
-                    return eChartType.BarClustered3D;
-
-                case ChartType.BarStacked3D:
-                    return eChartType.BarStacked3D;
-
-                case ChartType.BarStacked1003D:
-                    return eChartType.BarStacked1003D;
-
-                case ChartType.LineStacked:
-                    return eChartType.LineStacked;
-
-                case ChartType.LineStacked100:
-                    return eChartType.LineStacked100;
-
-                case ChartType.LineMarkers:
-                    return eChartType.LineMarkers;
-
-                case ChartType.LineMarkersStacked:
-                    return eChartType.LineMarkersStacked;
-
-                case ChartType.LineMarkersStacked100:
-                    return eChartType.LineMarkersStacked100;
-
-                case ChartType.PieOfPie:
-                    return eChartType.PieOfPie;
-
-                case ChartType.PieExploded:
-                    return eChartType.PieExploded;
-
-                case ChartType.PieExploded3D:
-                    return eChartType.PieExploded3D;
-
-                case ChartType.BarOfPie:
-                    return eChartType.BarOfPie;
-
-                case ChartType.XYScatterSmooth:
-                    return eChartType.XYScatterSmooth;
-
-                case ChartType.XYScatterSmoothNoMarkers:
-                    return eChartType.XYScatterSmoothNoMarkers;
-
-                case ChartType.XYScatterLines:
-                    return eChartType.XYScatterSmoothNoMarkers;
-
-                case ChartType.XYScatterLinesNoMarkers:
-                    return eChartType.XYScatterSmoothNoMarkers;
-
-                case ChartType.AreaStacked:
-                    return eChartType.AreaStacked;
-
-                case ChartType.AreaStacked100:
-                    return eChartType.AreaStacked100;
-
-                case ChartType.AreaStacked3D:
-                    return eChartType.AreaStacked3D;
-
-                case ChartType.AreaStacked1003D:
-                    return eChartType.AreaStacked1003D;
-
-                case ChartType.DoughnutExploded:
-                    return eChartType.DoughnutExploded;
-
-                case ChartType.RadarMarkers:
-                    return eChartType.RadarMarkers;
-
-                case ChartType.RadarFilled:
-                    return eChartType.RadarFilled;
-
-                case ChartType.Surface:
-                    return eChartType.Surface;
-
-                case ChartType.SurfaceWireframe:
-                    return eChartType.SurfaceWireframe;
-
-                case ChartType.SurfaceTopView:
-                    return eChartType.SurfaceTopView;
-
-                case ChartType.SurfaceTopViewWireframe:
-                    return eChartType.SurfaceTopViewWireframe;
-
-                case ChartType.Bubble3DEffect:
-                    return eChartType.Bubble3DEffect;
-
-                case ChartType.StockHLC:
-                    return eChartType.StockHLC;
-
-                case ChartType.StockOHLC:
-                    return eChartType.StockOHLC;
-
-                case ChartType.StockVHLC:
-                    return eChartType.StockVHLC;
-
-                case ChartType.StockVOHLC:
-                    return eChartType.StockVOHLC;
-
-                case ChartType.CylinderColClustered:
-                    return eChartType.CylinderColClustered;
-
-                case ChartType.CylinderColStacked:
-                    return eChartType.CylinderColStacked;
-
-                case ChartType.CylinderColStacked100:
-                    return eChartType.CylinderColStacked100;
-
-                case ChartType.CylinderBarClustered:
-                    return eChartType.CylinderBarClustered;
-
-                case ChartType.CylinderBarStacked:
-                    return eChartType.CylinderBarStacked;
-
-                case ChartType.CylinderBarStacked100:
-                    return eChartType.CylinderBarStacked100;
-
-                case ChartType.CylinderCol:
-                    return eChartType.CylinderCol;
-
-                case ChartType.ConeColClustered:
-                    return eChartType.ConeColClustered;
-
-                case ChartType.ConeColStacked:
-                    return eChartType.ConeColStacked;
-
-                case ChartType.ConeColStacked100:
-                    return eChartType.ConeColStacked100;
-
-                case ChartType.ConeBarClustered:
-                    return eChartType.ConeBarClustered;
-
-                case ChartType.ConeBarStacked:
-                    return eChartType.ConeBarStacked;
-
-                case ChartType.ConeBarStacked100:
-                    return eChartType.ConeBarStacked100;
-
-                case ChartType.ConeCol:
-                    return eChartType.ConeCol;
-
-                case ChartType.PyramidColClustered:
-                    return eChartType.PyramidColClustered;
-
-                case ChartType.PyramidColStacked:
-                    return eChartType.PyramidColStacked;
-
-                case ChartType.PyramidColStacked100:
-                    return eChartType.PyramidColStacked100;
-
-                case ChartType.PyramidBarClustered:
-                    return eChartType.PyramidBarClustered;
-
-                case ChartType.PyramidBarStacked:
-                    return eChartType.PyramidBarStacked;
-
-                case ChartType.PyramidBarStacked100:
-                    return eChartType.PyramidBarStacked100;
-
-                case ChartType.PyramidCol:
-                    return eChartType.PyramidCol;
-
-                default:
-                    return eChartType.Line;
-            }
+                ChartType.XYScatter => eChartType.XYScatter,
+                ChartType.Radar => eChartType.Radar,
+                ChartType.Doughnut => eChartType.Doughnut,
+                ChartType.Pie3D => eChartType.Pie3D,
+                ChartType.Line3D => eChartType.Line3D,
+                ChartType.Column3D => eChartType.Column3D,
+                ChartType.Area3D => eChartType.Area3D,
+                ChartType.Area => eChartType.Area,
+                ChartType.Line => eChartType.Line,
+                ChartType.Pie => eChartType.Pie,
+                ChartType.Bubble => eChartType.Bubble,
+                ChartType.ColumnClustered => eChartType.ColumnClustered,
+                ChartType.ColumnStacked => eChartType.ColumnStacked,
+                ChartType.ColumnStacked100 => eChartType.ColumnStacked100,
+                ChartType.ColumnClustered3D => eChartType.ColumnClustered3D,
+                ChartType.ColumnStacked3D => eChartType.ColumnStacked3D,
+                ChartType.ColumnStacked1003D => eChartType.ColumnStacked1003D,
+                ChartType.BarClustered => eChartType.BarClustered,
+                ChartType.BarStacked => eChartType.BarStacked,
+                ChartType.BarStacked100 => eChartType.BarStacked100,
+                ChartType.BarClustered3D => eChartType.BarClustered3D,
+                ChartType.BarStacked3D => eChartType.BarStacked3D,
+                ChartType.BarStacked1003D => eChartType.BarStacked1003D,
+                ChartType.LineStacked => eChartType.LineStacked,
+                ChartType.LineStacked100 => eChartType.LineStacked100,
+                ChartType.LineMarkers => eChartType.LineMarkers,
+                ChartType.LineMarkersStacked => eChartType.LineMarkersStacked,
+                ChartType.LineMarkersStacked100 => eChartType.LineMarkersStacked100,
+                ChartType.PieOfPie => eChartType.PieOfPie,
+                ChartType.PieExploded => eChartType.PieExploded,
+                ChartType.PieExploded3D => eChartType.PieExploded3D,
+                ChartType.BarOfPie => eChartType.BarOfPie,
+                ChartType.XYScatterSmooth => eChartType.XYScatterSmooth,
+                ChartType.XYScatterSmoothNoMarkers => eChartType.XYScatterSmoothNoMarkers,
+                ChartType.XYScatterLines => eChartType.XYScatterSmoothNoMarkers,
+                ChartType.XYScatterLinesNoMarkers => eChartType.XYScatterSmoothNoMarkers,
+                ChartType.AreaStacked => eChartType.AreaStacked,
+                ChartType.AreaStacked100 => eChartType.AreaStacked100,
+                ChartType.AreaStacked3D => eChartType.AreaStacked3D,
+                ChartType.AreaStacked1003D => eChartType.AreaStacked1003D,
+                ChartType.DoughnutExploded => eChartType.DoughnutExploded,
+                ChartType.RadarMarkers => eChartType.RadarMarkers,
+                ChartType.RadarFilled => eChartType.RadarFilled,
+                ChartType.Surface => eChartType.Surface,
+                ChartType.SurfaceWireframe => eChartType.SurfaceWireframe,
+                ChartType.SurfaceTopView => eChartType.SurfaceTopView,
+                ChartType.SurfaceTopViewWireframe => eChartType.SurfaceTopViewWireframe,
+                ChartType.Bubble3DEffect => eChartType.Bubble3DEffect,
+                ChartType.StockHLC => eChartType.StockHLC,
+                ChartType.StockOHLC => eChartType.StockOHLC,
+                ChartType.StockVHLC => eChartType.StockVHLC,
+                ChartType.StockVOHLC => eChartType.StockVOHLC,
+                ChartType.CylinderColClustered => eChartType.CylinderColClustered,
+                ChartType.CylinderColStacked => eChartType.CylinderColStacked,
+                ChartType.CylinderColStacked100 => eChartType.CylinderColStacked100,
+                ChartType.CylinderBarClustered => eChartType.CylinderBarClustered,
+                ChartType.CylinderBarStacked => eChartType.CylinderBarStacked,
+                ChartType.CylinderBarStacked100 => eChartType.CylinderBarStacked100,
+                ChartType.CylinderCol => eChartType.CylinderCol,
+                ChartType.ConeColClustered => eChartType.ConeColClustered,
+                ChartType.ConeColStacked => eChartType.ConeColStacked,
+                ChartType.ConeColStacked100 => eChartType.ConeColStacked100,
+                ChartType.ConeBarClustered => eChartType.ConeBarClustered,
+                ChartType.ConeBarStacked => eChartType.ConeBarStacked,
+                ChartType.ConeBarStacked100 => eChartType.ConeBarStacked100,
+                ChartType.ConeCol => eChartType.ConeCol,
+                ChartType.PyramidColClustered => eChartType.PyramidColClustered,
+                ChartType.PyramidColStacked => eChartType.PyramidColStacked,
+                ChartType.PyramidColStacked100 => eChartType.PyramidColStacked100,
+                ChartType.PyramidBarClustered => eChartType.PyramidBarClustered,
+                ChartType.PyramidBarStacked => eChartType.PyramidBarStacked,
+                ChartType.PyramidBarStacked100 => eChartType.PyramidBarStacked100,
+                ChartType.PyramidCol => eChartType.PyramidCol,
+                _ => eChartType.Line
+            };
         }
     }
 }

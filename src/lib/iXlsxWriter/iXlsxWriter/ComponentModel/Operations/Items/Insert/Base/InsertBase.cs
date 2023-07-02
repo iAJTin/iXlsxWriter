@@ -16,11 +16,6 @@ namespace iXlsxWriter.ComponentModel
     {
         #region interface
 
-        #region IInsert
-
-        #region public properties
-
-        #region [public] (string) SheetName: Gets or sets the name of the sheet where it will be inserted
         /// <summary>
         /// Gets or sets the name of the sheet where it will be inserted.
         /// </summary>
@@ -28,13 +23,7 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="string"/> containing the name of the sheet where it will be inserted.
         /// </value>
         public string SheetName { get; set; }
-        #endregion
 
-        #endregion
-
-        #region public methods
-
-        #region [public] (InsertResult) Apply(string, IInput): Try to execute the insert action 
         /// <summary>
         /// Try to execute the insert action.
         /// </summary>
@@ -51,9 +40,7 @@ namespace iXlsxWriter.ComponentModel
         /// </para>
         /// </returns>
         public InsertResult Apply(string file, IInput context) => Apply(StreamHelper.TextFileToStream(file), context);
-        #endregion
 
-        #region [public] (InsertResult) Apply(Stream, IInput): Try to execute the insert action 
         /// <summary>
         /// Try to execute the insert action.
         /// </summary>
@@ -70,17 +57,11 @@ namespace iXlsxWriter.ComponentModel
         /// </para>
         /// </returns>
         public InsertResult Apply(Stream input, IInput context) => InsertImpl(input, context);
-        #endregion
-
-        #endregion
-
-        #endregion
 
         #endregion
 
         #region protected abtract methods
 
-        #region [public] {abstract} (InsertResult) InsertImpl(Stream, IInput): Implementation to execute when insert action 
         /// <summary>
         /// Implementation to execute when insert action.
         /// </summary>
@@ -97,7 +78,6 @@ namespace iXlsxWriter.ComponentModel
         /// </para>
         /// </returns>
         protected abstract InsertResult InsertImpl(Stream input, IInput context);
-        #endregion
 
         #endregion
     }

@@ -35,7 +35,6 @@ namespace OfficeOpenXml.Drawing
     {
         #region public static methods
 
-        #region [public] {static} (void) AddEffectContainerNode(this XmlNode, XlsxBaseShadow, IXmlHelper): Adds an effectLst node (Effect Container) to the node of type spPr (Shape properties) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds an <b>effectLst</b> node (Effect Container) to the node of type <b>spPr</b> (Shape properties) specified. Not supported in <b>EPPlus</b> library.
         /// </summary>
@@ -52,7 +51,7 @@ namespace OfficeOpenXml.Drawing
             SentinelHelper.ArgumentNull(node, nameof(node));
             SentinelHelper.ArgumentNull(shadow, nameof(shadow));
 
-            var effectContainerNode = documentHelper.CreateOrDefaultAndAppendElementToNode(node, "a", "effectLst");;
+            var effectContainerNode = documentHelper.CreateOrDefaultAndAppendElementToNode(node, "a", "effectLst");
 
             switch (shadow.Type)
             {
@@ -69,9 +68,7 @@ namespace OfficeOpenXml.Drawing
                     break;
             }
         }
-        #endregion
 
-        #region [public] {static} (void) AddEffectContainerNode(this XmlNode, XlsxIlluminationShapeEffect, IXmlHelper): Adds an effectLst node (Effect Container) to the node of type spPr (Shape properties) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds an <b>effectLst</b> node (Effect Container) to the node of type <b>spPr</b> (Shape properties) specified. Not supported in <b>EPPlus</b> library.
         /// </summary>
@@ -88,12 +85,10 @@ namespace OfficeOpenXml.Drawing
             SentinelHelper.ArgumentNull(node, nameof(node));
             SentinelHelper.ArgumentNull(illumination, nameof(illumination));
 
-            var effectContainerNode = documentHelper.CreateOrDefaultAndAppendElementToNode(node, "a", "effectLst"); ;
+            var effectContainerNode = documentHelper.CreateOrDefaultAndAppendElementToNode(node, "a", "effectLst");
             effectContainerNode.AddGlowNode(illumination, documentHelper);
         }
-        #endregion
 
-        #region [public] {static} (void) AddEffectContainerNode(this XmlNode, XlsxReflectionShapeEffect, IXmlHelper): Adds an effectLst node (Effect Container) to the node of type spPr (Shape properties) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds an <b>effectLst</b> node (Effect Container) to the node of type <b>spPr</b> (Shape properties) specified. Not supported in <b>EPPlus</b> library.
         /// </summary>
@@ -110,12 +105,10 @@ namespace OfficeOpenXml.Drawing
             SentinelHelper.ArgumentNull(node, nameof(node));
             SentinelHelper.ArgumentNull(reflection, nameof(reflection));
 
-            var effectContainerNode = documentHelper.CreateOrDefaultAndAppendElementToNode(node, "a", "effectLst"); ;
+            var effectContainerNode = documentHelper.CreateOrDefaultAndAppendElementToNode(node, "a", "effectLst");
             effectContainerNode.AddReflectionNode(reflection, documentHelper);
         }
-        #endregion
 
-        #region [public] {static} (void) AddEffectContainerNode(this XmlNode, XlsxSoftEdgeShapeEffect, IXmlHelper): Adds an effectLst node (Effect Container) to the node of type spPr (Shape properties) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds an <b>effectLst</b> node (Effect Container) to the node of type <b>spPr</b> (Shape properties) specified. Not supported in <b>EPPlus</b> library.
         /// </summary>
@@ -132,12 +125,10 @@ namespace OfficeOpenXml.Drawing
             SentinelHelper.ArgumentNull(node, nameof(node));
             SentinelHelper.ArgumentNull(softEdge, nameof(softEdge));
 
-            var effectContainerNode = documentHelper.CreateOrDefaultAndAppendElementToNode(node, "a", "effectLst"); ;
+            var effectContainerNode = documentHelper.CreateOrDefaultAndAppendElementToNode(node, "a", "effectLst");
             effectContainerNode.AddSoftEdgeNode(softEdge, documentHelper);
         }
-        #endregion
 
-        #region [public] {static} (void) AddSolidFillNode(this XmlNode, Color, IXmlHelper): Adds a 'solidFill' node (Solid Fill Properties) to the node of type 'spPr' (Shape properties) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <c>solidFill</c> node (Solid Fill Properties) to the node of type <c>spPr</c> (Shape properties) specified. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -155,11 +146,9 @@ namespace OfficeOpenXml.Drawing
             valAttr.Value = ColorHelper.ToHex(color).Replace("#", string.Empty);
 
             var srgbClrNode = documentHelper.CreateOrDefaultAndAppendElementToNode(solidFillNode, "a", "srgbClr");
-            srgbClrNode.Attributes.Append(valAttr);
+            srgbClrNode.Attributes?.Append(valAttr);
         }
-        #endregion
 
-        #region [public] {static} (void) AddTextParagraphPropertiesNode(this XmlNode, FontModel, IXmlHelper): Adds a 'pPr' node (Text Paragraph Properties) to the node of type 'p' (Text Paragraphs) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <c>pPr</c> node (Text Paragraph Properties) to the node of type <c>p</c> (Text Paragraphs) specified. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -174,13 +163,11 @@ namespace OfficeOpenXml.Drawing
             var textParagraphPropertiesNode = documentHelper.CreateOrDefaultAndAppendElementToNode(node, "a", "pPr");
             textParagraphPropertiesNode.AddDefaultTextRunPropertiesNode(model, documentHelper);
         }
-        #endregion
 
         #endregion
 
         #region private static methods
 
-        #region [private] {static} (void) AddDefaultTextRunPropertiesNode(this XmlNode, FontModel, IXmlHelper): Adds a 'defRPr' node (Default Text Run Properties) to the node of type 'pPr' (Text Paragraph Properties) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <c>defRPr</c> node (Default Text Run Properties) to the node of type <c>pPr</c> (Text Paragraph Properties) specified. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -205,19 +192,17 @@ namespace OfficeOpenXml.Drawing
             underlineAttr.Value = model.Underline == YesNo.Yes ? "sng" : "none";
 
             var defaultTextRunPropertiesNode = documentHelper.CreateOrDefaultAndAppendElementToNode(node, "a", "defRPr");
-            defaultTextRunPropertiesNode.Attributes.Append(boldAttr);
-            defaultTextRunPropertiesNode.Attributes.Append(sizeAttr);
-            defaultTextRunPropertiesNode.Attributes.Append(italicAttr);
-            defaultTextRunPropertiesNode.Attributes.Append(underlineAttr);
+            defaultTextRunPropertiesNode.Attributes?.Append(boldAttr);
+            defaultTextRunPropertiesNode.Attributes?.Append(sizeAttr);
+            defaultTextRunPropertiesNode.Attributes?.Append(italicAttr);
+            defaultTextRunPropertiesNode.Attributes?.Append(underlineAttr);
 
             defaultTextRunPropertiesNode.AddSolidFillNode(model.GetColor(), documentHelper);
             defaultTextRunPropertiesNode.AddLatinFontNode(model.Name, documentHelper);
             defaultTextRunPropertiesNode.AddEastAsianFontNode(model.Name, documentHelper);
             defaultTextRunPropertiesNode.AddComplexScriptFontNode(model.Name, documentHelper);
         }
-        #endregion
 
-        #region [private] {static} (void) AddComplexScriptFontNode(this XmlNode, string, IXmlHelper): Adds a 'cs' node (Complex Script Font) to the node of type 'defRPr' (Default Text Run Properties) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <c>cs</c> node (Complex Script Font) to the node of type <c>defRPr</c> (Default Text Run Properties) specified. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -233,11 +218,9 @@ namespace OfficeOpenXml.Drawing
             typefaceAttr.Value = fontname;
 
             var complexScriptFontNode = documentHelper.CreateOrDefaultAndAppendElementToNode(node, "a", "cs");
-            complexScriptFontNode.Attributes.Append(typefaceAttr);
+            complexScriptFontNode.Attributes?.Append(typefaceAttr);
         }
-        #endregion
 
-        #region [private] {static} (void) AddLatinFontNode(this XmlNode, string, IXmlHelper): Adds a 'latin' node (Latin Font) to the node of type 'defRPr' (Default Text Run Properties) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <c>latin</c> node (Latin Font) to the node of type <c>defRPr</c> (Default Text Run Properties) specified. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -253,11 +236,9 @@ namespace OfficeOpenXml.Drawing
             typefaceAttr.Value = fontname;
 
             var latinFontNode = documentHelper.CreateOrDefaultAndAppendElementToNode(node, "a", "latin");
-            latinFontNode.Attributes.Append(typefaceAttr);
+            latinFontNode.Attributes?.Append(typefaceAttr);
         }
-        #endregion
 
-        #region [private] {static} (void) AddEastAsianFontNode(this XmlNode, string, IXmlHelper): Adds a 'ea' node (East Asian Font) to the node of type 'defRPr' (Default Text Run Properties) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <c>ea</c> node (East Asian Font) to the node of type <c>defRPr</c> (Default Text Run Properties) specified. Not supported in <c>EPPlus</c> library.
         /// </summary>
@@ -273,11 +254,9 @@ namespace OfficeOpenXml.Drawing
             typefaceAttr.Value = fontname;
 
             var eastAsianFontNode = documentHelper.CreateOrDefaultAndAppendElementToNode(node, "a", "ea");
-            eastAsianFontNode.Attributes.Append(typefaceAttr);
+            eastAsianFontNode.Attributes?.Append(typefaceAttr);
         }
-        #endregion
 
-        #region [private] {static} (void) AddInnerShadowNode(this XmlNode, XlsxBaseShadow, IXmlHelper): Adds a 'outerShdw' node (Outer Shadow) to the node of type 'effectLst' (Effect Container) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <b>innerShdw</b> node (Inner Shadow) to the node of type <b>effectLst</b> (Effect Container) specified. Not supported in <b>EPPlus</b> library.
         /// </summary>
@@ -314,9 +293,7 @@ namespace OfficeOpenXml.Drawing
 
             outerShadowNode.AddRgbColorModelPercentageVariantNode(shadow, documentHelper);
         }
-        #endregion
 
-        #region [private] {static} (void) AddOuterShadowNode(this XmlNode, Shadow, IXmlHelper): Adds a 'outerShdw' node (Outer Shadow) to the node of type 'effectLst' (Effect Container) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <b>outerShdw</b> node (Outer Shadow) to the node of type <b>effectLst</b> (Effect Container) specified. Not supported in <b>EPPlus</b> library.
         /// </summary>
@@ -365,12 +342,9 @@ namespace OfficeOpenXml.Drawing
                 outerShadowNode.Attributes.Append(syAttr);
             }
 
-
             outerShadowNode.AddRgbColorModelPercentageVariantNode(shadow, documentHelper);
         }
-        #endregion
 
-        #region [private] {static} (void) AddPerspectiveShadowNode(this XmlNode, XlsxPerspectiveShadow, IXmlHelper): Adds a 'outerShdw' node (Outer Shadow) to the node of type 'effectLst' (Effect Container) specified. Not supported in EPPlus library
         /// <summary>
         /// Adds a <b>outerShdw</b> node (Outer Shadow) to the node of type <b>effectLst</b> (Effect Container) specified. Not supported in <b>EPPlus</b> library.
         /// </summary>
@@ -467,9 +441,7 @@ namespace OfficeOpenXml.Drawing
 
             outerShadowNode.AddRgbColorModelPercentageVariantNode(shadow, documentHelper);
         }
-        #endregion
 
-        #region [private] {static} (void) AddRgbColorModelPercentageVariantNode(this XmlNode, XlsxBaseShadow, IXmlHelper): Adds a 'scrgbClr' node (Rgb Color Model Percentage Variant) to the node of type 'outerShdw' (Outer Shadow), 'innerShdw' (Inner Shadow) specified
         /// <summary>
         /// Adds a <b>scrgbClr</b> node (Rgb Color Model Percentage Variant) to the nodes of type <b>outerShdw</b> (Outer Shadow), <b>innerShdw</b> (Inner Shadow), specified. Not supported in <b>EPPlus</b> library.
         /// </summary>
@@ -493,9 +465,7 @@ namespace OfficeOpenXml.Drawing
             var alphaNode = documentHelper.CreateOrDefaultAndAppendElementToNode(rgbColorModelPercentageVariantNode, "a", "alpha");
             alphaNode.Attributes?.Append(alphaValueAttr);
         }
-        #endregion
 
-        #region [private] {static} (void) AddGlowNode(this XmlNode, XlsxIlluminationShapeEffect, IXmlHelper): Adds a 'glow' node to the node of type 'effectLst' specified
         /// <summary>
         /// Adds a <b>glow</b> node to the nodes of type <b>effectLst</b> specified. Not supported in <b>EPPlus</b> library.
         /// </summary>
@@ -525,9 +495,7 @@ namespace OfficeOpenXml.Drawing
             var alphaNode = documentHelper.CreateOrDefaultAndAppendElementToNode(rgbColorModelPercentageVariantNode, "a", "alpha");
             alphaNode.Attributes?.Append(alphaValueAttr);
         }
-        #endregion
 
-        #region [private] {static} (void) AddReflectionNode(this XmlNode, XlsxReflectionShapeEffect, IXmlHelper): Adds a 'reflection' node to the node of type 'effectLst' specified
         /// <summary>
         /// Adds a <b>reflection</b> node to the nodes of type <b>effectLst</b> specified. Not supported in <b>EPPlus</b> library.
         /// </summary>
@@ -582,9 +550,7 @@ namespace OfficeOpenXml.Drawing
             reflectionNode.Attributes?.Append(algnAttr);
             reflectionNode.Attributes?.Append(rotWithShapeAttr);
         }
-        #endregion
 
-        #region [private] {static} (void) AddSoftEdgeNode(this XmlNode, XlsxSoftEdgeShapeEffect, IXmlHelper): Adds a 'sofedge' node to the node of type 'effectLst' specified
         /// <summary>
         /// Adds a <b>softEdge</b> node to the nodes of type <b>effectLst</b> specified. Not supported in <b>EPPlus</b> library.
         /// </summary>
@@ -602,7 +568,6 @@ namespace OfficeOpenXml.Drawing
             var reflectionNode = documentHelper.CreateOrDefaultAndAppendElementToNode(effectLstNode, "a", "softEdge");
             reflectionNode.Attributes?.Append(radAttr);
         }
-        #endregion
 
         #endregion
     }

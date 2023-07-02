@@ -18,7 +18,6 @@ namespace OfficeOpenXml.Style
     {
         #region public static methods
 
-        #region [public] {static} (void) CreateFromModel(this Border, BorderModel): Fills a Border object with model data
         /// <summary>
         /// Fills a <see cref="Border"/> object with model data.
         /// </summary>
@@ -54,9 +53,7 @@ namespace OfficeOpenXml.Style
                     break;
             }
         }
-        #endregion
 
-        #region [public] {static} (void) FormatFromModel(this ExcelStyle, StyleModel): Fills a ExcelStyle object with model data
         /// <summary>
         /// Fills a <see cref="ExcelStyle"/> object with model data.
         /// </summary>
@@ -142,13 +139,11 @@ namespace OfficeOpenXml.Style
                 break;
             }
         }
-        #endregion
 
         #endregion
 
         #region private static methods
 
-        #region [private] {static} (ExcelHorizontalAlignment) ToEppHorizontalAlignment(this KnownHorizontalAlignment): Converter for KnownHorizontalAlignment enumeration type to ExcelHorizontalAlignment
         /// <summary>
         /// Converter for <see cref="KnownHorizontalAlignment"/> enumeration type to <see cref="ExcelHorizontalAlignment"/>.
         /// </summary>
@@ -158,21 +153,14 @@ namespace OfficeOpenXml.Style
         /// </returns>
         private static ExcelHorizontalAlignment ToEppHorizontalAlignment(this KnownHorizontalAlignment alignment)
         {
-            switch (alignment)
+            return alignment switch
             {
-                case KnownHorizontalAlignment.Center:
-                    return ExcelHorizontalAlignment.Center;
-
-                case KnownHorizontalAlignment.Right:
-                    return ExcelHorizontalAlignment.Right;
-
-                default:
-                    return ExcelHorizontalAlignment.Left;
-            }
+                KnownHorizontalAlignment.Center => ExcelHorizontalAlignment.Center,
+                KnownHorizontalAlignment.Right => ExcelHorizontalAlignment.Right,
+                _ => ExcelHorizontalAlignment.Left
+            };
         }
-        #endregion
 
-        #region [private] {static} (ExcelFillStyle) ToEppPatternFillStyle(this KnownPatternType): Converter for KnownPatternType enumeration type to ExcelFillStyle
         /// <summary>
         /// Converter for <see cref="KnownPatternType"/> enumeration type to <see cref="ExcelFillStyle"/>.
         /// </summary>
@@ -180,71 +168,30 @@ namespace OfficeOpenXml.Style
         /// <returns>
         /// A <see cref="ExcelFillStyle"/> value.
         /// </returns>
-        private static ExcelFillStyle ToEppPatternFillStyle(this KnownPatternType patternType)
-        {
-            switch (patternType)
+        private static ExcelFillStyle ToEppPatternFillStyle(this KnownPatternType patternType) =>
+            patternType switch
             {
-                case KnownPatternType.Solid:
-                    return ExcelFillStyle.Solid;
+                KnownPatternType.Solid => ExcelFillStyle.Solid,
+                KnownPatternType.Gray75 => ExcelFillStyle.DarkGray,
+                KnownPatternType.Gray50 => ExcelFillStyle.MediumGray,
+                KnownPatternType.Gray25 => ExcelFillStyle.LightGray,
+                KnownPatternType.Gray125 => ExcelFillStyle.Gray125,
+                KnownPatternType.Gray625 => ExcelFillStyle.Gray0625,
+                KnownPatternType.HorzStripe => ExcelFillStyle.DarkHorizontal,
+                KnownPatternType.VertStripe => ExcelFillStyle.DarkVertical,
+                KnownPatternType.ReverseDiagStripe => ExcelFillStyle.DarkDown,
+                KnownPatternType.DiagStripe => ExcelFillStyle.DarkUp,
+                KnownPatternType.DiagCross => ExcelFillStyle.DarkGrid,
+                KnownPatternType.ThickDiagCross => ExcelFillStyle.DarkTrellis,
+                KnownPatternType.ThinDiagCross => ExcelFillStyle.LightTrellis,
+                KnownPatternType.ThinDiagStripe => ExcelFillStyle.LightUp,
+                KnownPatternType.ThinHorzCross => ExcelFillStyle.LightGrid,
+                KnownPatternType.ThinHorzStripe => ExcelFillStyle.LightHorizontal,
+                KnownPatternType.ThinReverseDiagStripe => ExcelFillStyle.LightDown,
+                KnownPatternType.ThinVertStripe => ExcelFillStyle.LightVertical,
+                _ => ExcelFillStyle.None
+            };
 
-                case KnownPatternType.Gray75:
-                    return ExcelFillStyle.DarkGray;
-
-                case KnownPatternType.Gray50:
-                    return ExcelFillStyle.MediumGray;
-
-                case KnownPatternType.Gray25:
-                    return ExcelFillStyle.LightGray;
-
-                case KnownPatternType.Gray125:
-                    return ExcelFillStyle.Gray125;
-
-                case KnownPatternType.Gray625:
-                    return ExcelFillStyle.Gray0625;
-
-                case KnownPatternType.HorzStripe:
-                    return ExcelFillStyle.DarkHorizontal;
-
-                case KnownPatternType.VertStripe:
-                    return ExcelFillStyle.DarkVertical;
-
-                case KnownPatternType.ReverseDiagStripe:
-                    return ExcelFillStyle.DarkDown;
-
-                case KnownPatternType.DiagStripe:
-                    return ExcelFillStyle.DarkUp;
-
-                case KnownPatternType.DiagCross:
-                    return ExcelFillStyle.DarkGrid;
-
-                case KnownPatternType.ThickDiagCross:
-                    return ExcelFillStyle.DarkTrellis;
-
-                case KnownPatternType.ThinDiagCross:
-                    return ExcelFillStyle.LightTrellis;
-
-                case KnownPatternType.ThinDiagStripe:
-                    return ExcelFillStyle.LightUp;
-
-                case KnownPatternType.ThinHorzCross:
-                    return ExcelFillStyle.LightGrid;
-
-                case KnownPatternType.ThinHorzStripe:
-                    return ExcelFillStyle.LightHorizontal;
-
-                case KnownPatternType.ThinReverseDiagStripe:
-                    return ExcelFillStyle.LightDown;
-
-                case KnownPatternType.ThinVertStripe:
-                    return ExcelFillStyle.LightVertical;
-
-                default:
-                    return ExcelFillStyle.None;
-            }
-        }
-        #endregion
-
-        #region [private] {static} (ExcelVerticalAlignment) ToEppVerticalAlignment(this KnownVerticalAlignment): Converter for KnownVerticalAlignment enumeration type to ExcelVerticalAlignment
         /// <summary>
         /// Converter for <see cref="KnownVerticalAlignment"/> enumeration type to <see cref="ExcelVerticalAlignment"/>.
         /// </summary>
@@ -252,21 +199,13 @@ namespace OfficeOpenXml.Style
         /// <returns>
         /// A <see cref="ExcelVerticalAlignment"/> value.
         /// </returns>
-        private static ExcelVerticalAlignment ToEppVerticalAlignment(this KnownVerticalAlignment alignment)
-        {
-            switch (alignment)
+        private static ExcelVerticalAlignment ToEppVerticalAlignment(this KnownVerticalAlignment alignment) =>
+            alignment switch
             {
-                case KnownVerticalAlignment.Bottom:
-                    return ExcelVerticalAlignment.Bottom;
-
-                case KnownVerticalAlignment.Top:
-                    return ExcelVerticalAlignment.Top;
-
-                default:
-                    return ExcelVerticalAlignment.Center;
-            }
-        }
-        #endregion
+                KnownVerticalAlignment.Bottom => ExcelVerticalAlignment.Bottom,
+                KnownVerticalAlignment.Top => ExcelVerticalAlignment.Top,
+                _ => ExcelVerticalAlignment.Center
+            };
 
         #endregion
     }

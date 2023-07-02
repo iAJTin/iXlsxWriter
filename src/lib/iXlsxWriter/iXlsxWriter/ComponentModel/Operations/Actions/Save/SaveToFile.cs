@@ -22,6 +22,7 @@ namespace iXlsxWriter.ComponentModel.Result.Action.Save
     public class SaveToFile : IOutputAction
     {
         #region interna constants
+
         /// <summary>
         /// xlsx file extension.
         /// </summary>
@@ -33,15 +34,13 @@ namespace iXlsxWriter.ComponentModel.Result.Action.Save
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal const string DefaultZipExtension = "zip";
+
         #endregion
 
         #region interfaces
 
         #region IOutputAction
 
-        #region public methods
-
-        #region [public] (IResult) Execute(OutputResultData): Execute action for specified output result
         /// <summary>
         /// Execute action for specified output result data.
         /// </summary>
@@ -54,9 +53,6 @@ namespace iXlsxWriter.ComponentModel.Result.Action.Save
         /// </para>
         /// </returns>
         public IResult Execute(OutputResultData data) => ExecuteImpl(data);
-        #endregion
-
-        #endregion
 
         #endregion
 
@@ -64,7 +60,6 @@ namespace iXlsxWriter.ComponentModel.Result.Action.Save
 
         #region public properties   
 
-        #region [public] (string) OutputPath: Gets or sets the output path   
         /// <summary>
         /// Gets or sets the output path. The use of the <b>~</b> character is allowed to indicate relative paths, and you can also use <b>UNC</b> path.
         /// </summary>
@@ -72,9 +67,7 @@ namespace iXlsxWriter.ComponentModel.Result.Action.Save
         /// The output path.
         /// </value>
         public string OutputPath { get; set; }
-        #endregion
 
-        #region [public] (SaveOptions) SaveOptions: Defines file save options
         /// <summary>
         /// Defines file save options. Allows defining if the directory is created automatically if it does not exist.
         /// </summary>
@@ -82,7 +75,6 @@ namespace iXlsxWriter.ComponentModel.Result.Action.Save
         /// Save options reference.
         /// </value>
         public SaveOptions SaveOptions { get; set; }
-        #endregion
 
         #endregion
 

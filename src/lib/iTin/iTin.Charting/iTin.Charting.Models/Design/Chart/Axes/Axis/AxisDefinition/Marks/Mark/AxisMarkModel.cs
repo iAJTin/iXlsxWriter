@@ -1,27 +1,28 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+using iTin.Core;
+using iTin.Core.Models.Design.Enums;
+using iTin.Core.Models.Design.Helpers;
+
+using iTin.Charting.Models.Design.Options;
+
 namespace iTin.Charting.Models.Design
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-
-    using iTin.Core;
-    using iTin.Core.Models.Design.Enums;
-    using iTin.Core.Models.Design.Helpers;
-
-    using Options;
-
     /// <summary>
     /// Represents the visual setting the marks of a axis.
     /// </summary>
     public partial class AxisMarkModel : IAxisElementModel, ICloneable
     {
         #region private constants
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const float DefaultInterval = 0.0f;
 
@@ -39,11 +40,11 @@ namespace iTin.Charting.Models.Design
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const KnownLineStyle DefaultLineDashStyle = KnownLineStyle.Continuous;
+
         #endregion
 
         #region constructor/s
 
-        #region [public] AxisMarkModel(): Initializes a new instance of this class
         /// <summary>
         /// Initializes a new instance of the <see cref="AxisMarkModel" /> class.
         /// </summary>
@@ -56,7 +57,6 @@ namespace iTin.Charting.Models.Design
             TickStyle = DefaultTickStyle;
             Show = DefaultShow;
         }
-        #endregion
 
         #endregion
 
@@ -64,9 +64,6 @@ namespace iTin.Charting.Models.Design
 
         #region IAxisElementModel
 
-        #region public properties
-
-        #region [public] (float?) Interval: Gets or sets the interval between the main or secondary mark lines
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets the interval between the main or secondary mark lines. The default value is zero <b>(0)</b>.
@@ -78,9 +75,7 @@ namespace iTin.Charting.Models.Design
         [XmlAttribute]
         [DefaultValue(DefaultInterval)]
         public float? Interval { get; set; }
-        #endregion
 
-        #region [public] (string) LineColor: Gets or sets the line color of mark lines
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets the line color of mark lines. The default value is <b>(Black)</b>.
@@ -92,9 +87,7 @@ namespace iTin.Charting.Models.Design
         [XmlAttribute]
         [DefaultValue(DefaultLineColor)]
         public string LineColor { get; set; }
-        #endregion
 
-        #region [public] (KnownLineStyle) LineDashStyle: Gets or sets the line style of a mark
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets the line style of a mark. The default value is one <b>(<see cref="F:iTin.Charting.Models.Design.KnownLineStyle.Continuous"/>)</b>.
@@ -107,9 +100,7 @@ namespace iTin.Charting.Models.Design
         [DefaultValue(DefaultLineDashStyle)]
         [JsonConverter(typeof(StringEnumConverter))]
         public KnownLineStyle LineDashStyle { get; set; }
-        #endregion
 
-        #region [public] (int) LineWidth: Gets or sets the line width of mark lines.
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets the line width of mark lines. The default value is one <b>(1)</b>.
@@ -121,9 +112,7 @@ namespace iTin.Charting.Models.Design
         [XmlAttribute]
         [DefaultValue(DefaultLineWidth)]
         public int LineWidth { get; set; }
-        #endregion
 
-        #region [public] (YesNo) Show: Gets or sets a value that determines whether the marks grid are visible
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets a value that determines whether the marks grid are visible. The default value is <b>YesNo.No</b>.
@@ -136,7 +125,6 @@ namespace iTin.Charting.Models.Design
         [DefaultValue(DefaultShow)]
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNo Show { get; set; }
-        #endregion
 
         #endregion
 
@@ -144,9 +132,6 @@ namespace iTin.Charting.Models.Design
 
         #region ICloneable
 
-        #region private methods
-
-        #region [private] (object) Clone(): Creates a new object that is a copy of the current instance
         /// <inheritdoc />
         /// <summary>
         /// Creates a new object that is a copy of the current instance.
@@ -155,17 +140,11 @@ namespace iTin.Charting.Models.Design
         /// A new object that is a copy of this instance.
         /// </returns>
         object ICloneable.Clone() => Clone();
-        #endregion
-
-        #endregion
-
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (AxisMarksModel) Parent: Gets the parent element of the element
         /// <summary>
         /// Gets the parent element of the element.
         /// </summary>
@@ -175,9 +154,7 @@ namespace iTin.Charting.Models.Design
         [Browsable(false)]
         [JsonIgnore]
         public AxisMarksModel Parent { get; private set; }
-        #endregion
 
-        #region [public] (KnownTickMarkStyle) TickStyle: Gets or sets the style of a mark
         /// <summary>
         /// Gets or sets the style of a mark. The default value is <b>(<see cref="F:iTin.Charting.Models.Design.KnownTickMarkStyle.Cross"/>)</b>.
         /// </summary>
@@ -189,13 +166,11 @@ namespace iTin.Charting.Models.Design
         [DefaultValue(DefaultTickStyle)]
         [JsonConverter(typeof(StringEnumConverter))]
         public KnownTickMarkStyle TickStyle { get; set; }
-        #endregion
 
         #endregion
 
         #region public override properties
 
-        #region [public] {override} (bool) IsDefault: Gets a value indicating whether this instance is default
         /// <inheritdoc />
         /// <summary>
         /// Gets a value indicating whether this instance is default.
@@ -210,13 +185,11 @@ namespace iTin.Charting.Models.Design
             LineWidth.Equals(DefaultLineWidth) &&
             TickStyle.Equals(DefaultTickStyle) &&
             Show.Equals(DefaultShow);
-        #endregion
 
         #endregion
 
         #region public methods
 
-        #region [public] (void) ApplyOptions(AxisMarkOptions): Apply specified options to this axis mark
         /// <summary>
         /// Apply specified options to this axis mark.
         /// </summary>
@@ -286,9 +259,7 @@ namespace iTin.Charting.Models.Design
             }
             #endregion
         }
-        #endregion
 
-        #region [public] (AxisMarkModel) Clone(): Clones this instance
         /// <summary>
         /// Clones this instance.
         /// </summary>
@@ -300,9 +271,7 @@ namespace iTin.Charting.Models.Design
 
             return cloned;
         }
-        #endregion
 
-        #region [public] (Color) GetColor(): Gets a reference to the color structure preferred for this font
         /// <summary>
         /// Gets a reference to the <see cref="T:System.Drawing.Color" /> structure preferred for this font.
         /// </summary>
@@ -310,13 +279,11 @@ namespace iTin.Charting.Models.Design
         /// <see cref="T:System.Drawing.Color"/> structure that represents a .NET color.
         /// </returns>
         public Color GetColor() => ColorHelper.GetColorFromString(LineColor);
-        #endregion
 
         #endregion
 
         #region public override methods
 
-        #region [public] {override} (string) ToString(): Returns a string that represents the current instance
         /// <summary>
         /// Returns a string that represents the current instance.
         /// </summary>
@@ -324,13 +291,11 @@ namespace iTin.Charting.Models.Design
         /// A <see cref="T:System.String"/> that represents the current object.
         /// </returns>
         public override string ToString() => !IsDefault ? "Modified" : "Default";
-        #endregion
 
         #endregion
 
         #region internal methods
 
-        #region [internal] (void) SetParent(AxisMarksModel): Sets the parent element of the element
         /// <summary>
         /// Sets the parent element of the element.
         /// </summary>
@@ -339,7 +304,6 @@ namespace iTin.Charting.Models.Design
         {
             Parent = reference;
         }
-        #endregion
 
         #endregion
     }

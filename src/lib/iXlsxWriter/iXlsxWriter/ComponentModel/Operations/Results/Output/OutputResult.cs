@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 
 using iTin.Core.ComponentModel;
@@ -19,7 +20,16 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         /// <returns>
         /// A new invalid <see cref="OutputResult"/> with specified detailed error.
         /// </returns>
-        public new static OutputResult CreateErrorResult(string message, string code = "") => CreateErrorResult(new IResultError[] { new ResultError { Code = code, Message = message } });
+        public new static OutputResult CreateErrorResult(string message, string code = "") =>
+            CreateErrorResult(
+                new IResultError[]
+                {
+                    new ResultError
+                    {
+                        Code = code,
+                        Message = message
+                    }
+                });
 
         /// <summary>
         /// Returns a new <see cref="OutputResult"/> with specified detailed errors collection.
@@ -29,7 +39,7 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         /// A new invalid <see cref="OutputResult"/> with specified detailed errors collection.
         /// </returns>
         public new static OutputResult CreateErrorResult(IResultError[] errors) =>
-            new OutputResult
+            new()
             {
                 Result = default,
                 Success = false,
@@ -40,25 +50,35 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         /// Returns a new <see cref="OutputResult"/> with specified detailed error.
         /// </summary>
         /// <param name="message">Error message</param>
-        /// <param name="Result">Response Result</param>
+        /// <param name="result">Response Result</param>
         /// <param name="code">Error code</param>
         /// <returns>
         /// A new invalid <see cref="OutputResult"/> with specified detailed errors collection.
         /// </returns>
-        public new static OutputResult CreateErrorResult(string message, OutputResultData Result, string code = "") => CreateErrorResult(new IResultError[] { new ResultError { Code = code, Message = message } }, Result);
+        public new static OutputResult CreateErrorResult(string message, OutputResultData result, string code = "") =>
+            CreateErrorResult(
+                new IResultError[]
+                {
+                    new ResultError
+                    {
+                        Code = code,
+                        Message = message
+                    }
+                },
+                result);
 
         /// <summary>
         /// Returns a new <see cref="OutputResult"/> with specified detailed errors collection.
         /// </summary>
         /// <param name="errors">A errors collection</param>
-        /// <param name="Result">Response Result</param>
+        /// <param name="result">Response Result</param>
         /// <returns>
         /// A new invalid <see cref="OutputResult"/> with specified detailed errors collection.
         /// </returns>
-        public new static OutputResult CreateErrorResult(IResultError[] errors, OutputResultData Result) =>
-            new OutputResult
+        public new static OutputResult CreateErrorResult(IResultError[] errors, OutputResultData result) =>
+            new()
             {
-                Result = Result,
+                Result = result,
                 Success = false,
                 Errors = (IResultError[])errors.Clone()
             };
@@ -66,16 +86,16 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         /// <summary>
         /// Returns a new success result.
         /// </summary>
-        /// <param name="Result">Response Result</param>
+        /// <param name="result">Response Result</param>
         /// <returns>
         /// A new valid <see cref="OutputResult"/>.
         /// </returns>
-        public new static OutputResult CreateSuccessResult(OutputResultData Result) =>
-            new OutputResult
+        public new static OutputResult CreateSuccessResult(OutputResultData result) =>
+            new()
             {
-                Result = Result,
+                Result = result,
                 Success = true,
-                Errors = new List<IResultError>()
+                Errors = Array.Empty<IResultError>()
             };
 
         /// <summary>
@@ -85,22 +105,28 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         /// <returns>
         /// A new <see cref="OutputResult"/> instance for specified exception.
         /// </returns>
-        public new static OutputResult FromException(System.Exception exception) => FromException(exception, default);
+        public new static OutputResult FromException(Exception exception) => FromException(exception, default);
 
         /// <summary>
         /// Creates a new <see cref="OutputResult"/> instance from known exception.
         /// </summary>
         /// <param name="exception">Target exception.</param>
-        /// <param name="Result">Response Result</param>
+        /// <param name="result">Response Result</param>
         /// <returns>
         /// A new <see cref="OutputResult"/> instance for specified exception.
         /// </returns>
-        public new static OutputResult FromException(System.Exception exception, OutputResultData Result) =>
-            new OutputResult
+        public new static OutputResult FromException(Exception exception, OutputResultData result) =>
+            new()
             {
-                Result = Result,
+                Result = result,
                 Success = false,
-                Errors = new List<IResultError> { new ResultExceptionError { Exception = exception } }
+                Errors = new List<IResultError>
+                {
+                    new ResultExceptionError
+                    {
+                        Exception = exception
+                    }
+                }
             };
     }
 }

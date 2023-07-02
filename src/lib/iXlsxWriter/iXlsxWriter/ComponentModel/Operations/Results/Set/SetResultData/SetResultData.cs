@@ -10,7 +10,6 @@ namespace iXlsxWriter.ComponentModel.Result.Set
     {
         #region internal properties
 
-        #region [public] (IInput) Context: Gets or sets a
         /// <summary>
         /// Gets or sets a value containing context owner this action
         /// </summary>
@@ -18,13 +17,11 @@ namespace iXlsxWriter.ComponentModel.Result.Set
         /// <see cref="IInsert"/> reference containing context owner this action.
         /// </value>
         internal IInput Context { get; set; }
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (Stream) InputStream: Gets or sets a value containing input document
         /// <summary>
         /// Gets or sets a value containing input document.
         /// </summary>
@@ -33,9 +30,6 @@ namespace iXlsxWriter.ComponentModel.Result.Set
         /// </value>
         public Stream InputStream { get; set; }
 
-        #endregion
-
-        #region [public] (Stream) OutputStream: Gets or sets a value containing output document
         /// <summary>
         /// Gets or sets a value containing output document.
         /// </summary>
@@ -43,14 +37,11 @@ namespace iXlsxWriter.ComponentModel.Result.Set
         /// Output document.
         /// </value>
         public Stream OutputStream { get; set; }
-    
-        #endregion
-
+        
         #endregion
 
         #region public override methods
 
-        #region [public] {override} (string) ToString(): Returns a string than represents the current object.
         /// <summary>
         /// Returns a string that represents the current data type.
         /// </summary>
@@ -58,7 +49,6 @@ namespace iXlsxWriter.ComponentModel.Result.Set
         /// A <see cref="string"/> than represents the current object.
         /// </returns>
         public override string ToString() => $"{(OutputStream.Length > InputStream.Length ? "Modified" : "Default")}";
-        #endregion
 
         #endregion
     }

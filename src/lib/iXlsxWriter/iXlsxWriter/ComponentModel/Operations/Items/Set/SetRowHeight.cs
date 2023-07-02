@@ -66,7 +66,7 @@ namespace iXlsxWriter.ComponentModel
         {
             if (string.IsNullOrEmpty(SheetName))
             {
-                return SetResult.CreateErroResult(
+                return SetResult.CreateErrorResult(
                     "Sheet name can not be null or empty",
                     new SetResultData
                     {
@@ -106,7 +106,7 @@ namespace iXlsxWriter.ComponentModel
                     var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
                     if (ws == null)
                     {
-                        return SetResult.CreateErroResult(
+                        return SetResult.CreateErrorResult(
                             $"Sheet '{sheetName}' not found",
                             new SetResultData
                             {

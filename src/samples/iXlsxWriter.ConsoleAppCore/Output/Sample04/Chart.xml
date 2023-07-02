@@ -1,1 +1,86 @@
-﻿<?xml version="1.0" encoding="utf-8"?><XlsxBaseChart xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:q1="http://schemas.iTin.com/xlsx/chart/chart/v1.0" xsi:type="q1:XlsxChart" Name="chart1"><q1:Axes><q1:Primary><q1:Values GridLines="Major" /></q1:Primary></q1:Axes><q1:Legend Location="TopRight" Show="Yes"><q1:Border Show="Yes" /><q1:Font Bold="Yes" /></q1:Legend><q1:Plots><q1:Plot Name="plot1"><q1:Series><q1:Serie ChartType="AreaStacked" Color="#285A8F" Name="Europe"><q1:AxisRange xmlns:q2="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q2:XlsxRange"><q2:Start Row="2" /><q2:End Row="13" /></q1:AxisRange><q1:FieldRange xmlns:q3="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q3:XlsxRange"><q3:Start Column="2" Row="2" /><q3:End Column="2" Row="13" /></q1:FieldRange></q1:Serie><q1:Serie ChartType="AreaStacked" Color="#336EA9" Name="AFRICA"><q1:AxisRange xmlns:q4="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q4:XlsxRange"><q4:Start Row="2" /><q4:End Row="13" /></q1:AxisRange><q1:FieldRange xmlns:q5="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q5:XlsxRange"><q5:Start Column="3" Row="2" /><q5:End Column="3" Row="13" /></q1:FieldRange></q1:Serie><q1:Serie ChartType="AreaStacked" Color="#3572B1" Name="ASIA"><q1:AxisRange xmlns:q6="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q6:XlsxRange"><q6:Start Row="2" /><q6:End Row="13" /></q1:AxisRange><q1:FieldRange xmlns:q7="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q7:XlsxRange"><q7:Start Column="4" Row="2" /><q7:End Column="4" Row="13" /></q1:FieldRange></q1:Serie><q1:Serie ChartType="AreaStacked" Color="#628AC5" Name="NORTHAMERICA"><q1:AxisRange xmlns:q8="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q8:XlsxRange"><q8:Start Row="2" /><q8:End Row="13" /></q1:AxisRange><q1:FieldRange xmlns:q9="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q9:XlsxRange"><q9:Start Column="5" Row="2" /><q9:End Column="5" Row="13" /></q1:FieldRange></q1:Serie><q1:Serie ChartType="AreaStacked" Color="#93ADCD" Name="SOUTHAMERICA"><q1:AxisRange xmlns:q10="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q10:XlsxRange"><q10:Start Row="2" /><q10:End Row="13" /></q1:AxisRange><q1:FieldRange xmlns:q11="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q11:XlsxRange"><q11:Start Column="6" Row="2" /><q11:End Column="6" Row="13" /></q1:FieldRange></q1:Serie><q1:Serie ChartType="AreaStacked" Color="#BCCCDE" Name="AUSTRALIA"><q1:AxisRange xmlns:q12="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q12:XlsxRange"><q12:Start Row="2" /><q12:End Row="13" /></q1:AxisRange><q1:FieldRange xmlns:q13="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q13:XlsxRange"><q13:Start Column="7" Row="2" /><q13:End Column="7" Row="13" /></q1:FieldRange></q1:Serie></q1:Series></q1:Plot></q1:Plots><q1:Size><Height xmlns="http://schemas.iTin.com/xlsx/shared/v1.0">600</Height><Width xmlns="http://schemas.iTin.com/xlsx/shared/v1.0">800</Width></q1:Size><q1:Effects><SoftEdge Show="Yes" xmlns="http://schemas.iTin.com/xlsx/shared/v1.0" /></q1:Effects><q1:Title Text="" /></XlsxBaseChart>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XlsxBaseChart xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:q1="http://schemas.iTin.com/xlsx/chart/chart/v1.0" xsi:type="q1:XlsxChart" Name="chart1">
+  <q1:Axes>
+    <q1:Primary>
+      <q1:Values GridLines="Major" />
+    </q1:Primary>
+  </q1:Axes>
+  <q1:Legend Location="TopRight" Show="Yes">
+    <q1:Border Show="Yes" />
+    <q1:Font Bold="Yes" />
+  </q1:Legend>
+  <q1:Plots>
+    <q1:Plot Name="plot1">
+      <q1:Series>
+        <q1:Serie ChartType="AreaStacked" Color="#285A8F" Name="Europe">
+          <q1:AxisRange xmlns:q2="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q2:XlsxRange">
+            <q2:Start Row="2" />
+            <q2:End Row="13" />
+          </q1:AxisRange>
+          <q1:FieldRange xmlns:q3="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q3:XlsxRange">
+            <q3:Start Column="2" Row="2" />
+            <q3:End Column="2" Row="13" />
+          </q1:FieldRange>
+        </q1:Serie>
+        <q1:Serie ChartType="AreaStacked" Color="#336EA9" Name="AFRICA">
+          <q1:AxisRange xmlns:q4="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q4:XlsxRange">
+            <q4:Start Row="2" />
+            <q4:End Row="13" />
+          </q1:AxisRange>
+          <q1:FieldRange xmlns:q5="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q5:XlsxRange">
+            <q5:Start Column="3" Row="2" />
+            <q5:End Column="3" Row="13" />
+          </q1:FieldRange>
+        </q1:Serie>
+        <q1:Serie ChartType="AreaStacked" Color="#3572B1" Name="ASIA">
+          <q1:AxisRange xmlns:q6="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q6:XlsxRange">
+            <q6:Start Row="2" />
+            <q6:End Row="13" />
+          </q1:AxisRange>
+          <q1:FieldRange xmlns:q7="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q7:XlsxRange">
+            <q7:Start Column="4" Row="2" />
+            <q7:End Column="4" Row="13" />
+          </q1:FieldRange>
+        </q1:Serie>
+        <q1:Serie ChartType="AreaStacked" Color="#628AC5" Name="NORTHAMERICA">
+          <q1:AxisRange xmlns:q8="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q8:XlsxRange">
+            <q8:Start Row="2" />
+            <q8:End Row="13" />
+          </q1:AxisRange>
+          <q1:FieldRange xmlns:q9="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q9:XlsxRange">
+            <q9:Start Column="5" Row="2" />
+            <q9:End Column="5" Row="13" />
+          </q1:FieldRange>
+        </q1:Serie>
+        <q1:Serie ChartType="AreaStacked" Color="#93ADCD" Name="SOUTHAMERICA">
+          <q1:AxisRange xmlns:q10="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q10:XlsxRange">
+            <q10:Start Row="2" />
+            <q10:End Row="13" />
+          </q1:AxisRange>
+          <q1:FieldRange xmlns:q11="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q11:XlsxRange">
+            <q11:Start Column="6" Row="2" />
+            <q11:End Column="6" Row="13" />
+          </q1:FieldRange>
+        </q1:Serie>
+        <q1:Serie ChartType="AreaStacked" Color="#BCCCDE" Name="AUSTRALIA">
+          <q1:AxisRange xmlns:q12="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q12:XlsxRange">
+            <q12:Start Row="2" />
+            <q12:End Row="13" />
+          </q1:AxisRange>
+          <q1:FieldRange xmlns:q13="http://schemas.iTin.com/xlsx/shared/v1.0" xsi:type="q13:XlsxRange">
+            <q13:Start Column="7" Row="2" />
+            <q13:End Column="7" Row="13" />
+          </q1:FieldRange>
+        </q1:Serie>
+      </q1:Series>
+    </q1:Plot>
+  </q1:Plots>
+  <q1:Size>
+    <Height xmlns="http://schemas.iTin.com/xlsx/shared/v1.0">600</Height>
+    <Width xmlns="http://schemas.iTin.com/xlsx/shared/v1.0">800</Width>
+  </q1:Size>
+  <q1:Effects>
+    <SoftEdge Show="Yes" xmlns="http://schemas.iTin.com/xlsx/shared/v1.0" />
+  </q1:Effects>
+  <q1:Title Text="" />
+</XlsxBaseChart>

@@ -26,7 +26,6 @@ namespace iXlsxWriter.ComponentModel
     {
         #region constructor/s
 
-        #region [public] InsertXmlData(): Initializes a new instance of the class
         /// <summary>
         /// Initializes a new instance of the <see cref="InsertXmlData"/> class.
         /// </summary>
@@ -36,13 +35,11 @@ namespace iXlsxWriter.ComponentModel
             SheetName = string.Empty;
             Location = new XlsxPointRange {Column = 1, Row = 1};
         }
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (string) File: Gets or sets a reference 
         /// <summary>
         /// Gets or sets a reference to datatable to insert.
         /// </summary>
@@ -50,13 +47,11 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="DataTable"/> reference to insert.
         /// </value>
         public string File { get; set; }
-        #endregion
 
         #endregion
 
         #region protected override methods
 
-        #region [protected] {override} (InsertResult) InsertImpl(Stream, IInput): Implementation to execute when insert action
         /// <summary>
         /// Implementation to execute when insert action.
         /// </summary>
@@ -76,7 +71,7 @@ namespace iXlsxWriter.ComponentModel
         {
             if (string.IsNullOrEmpty(SheetName))
             {
-                return InsertResult.CreateErroResult(
+                return InsertResult.CreateErrorResult(
                     "Sheet name can not be null or empty",
                     new InsertResultData
                     {
@@ -108,7 +103,6 @@ namespace iXlsxWriter.ComponentModel
 
             return InsertImpl(context, input, SheetName, Location, File);
         }
-        #endregion
 
         #endregion
 
@@ -124,7 +118,7 @@ namespace iXlsxWriter.ComponentModel
                 var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
                 if (ws == null)
                 {
-                    return InsertResult.CreateErroResult(
+                    return InsertResult.CreateErrorResult(
                         $"Sheet '{sheetName}' not found",
                         new InsertResultData
                         {
@@ -163,7 +157,6 @@ namespace iXlsxWriter.ComponentModel
 
         #endregion
 
-        #region [protected] {static} (IEnumerable<XElement>) LoadXmlFromFile(string, string): Retrieves Xml content of specified table in a file
         /// <summary>
         /// Retrieves <c>Xml</c> content of specified <paramref name="table" /> in a file.
         /// </summary>
@@ -178,26 +171,23 @@ namespace iXlsxWriter.ComponentModel
             SentinelHelper.IsTrue(string.IsNullOrEmpty(fileName));
 
             IEnumerable<XElement> nodes = null;
-            using (var stream = new FileStream(iTin.Core.IO.Path.PathResolver(fileName), FileMode.OpenOrCreate, FileAccess.Read, FileShare.Read))
+            using var stream = new FileStream(iTin.Core.IO.Path.PathResolver(fileName), FileMode.OpenOrCreate, FileAccess.Read, FileShare.Read);
+            var reader = new XmlTextReader(stream);
+            var document = XDocument.Load(reader);
+            var root = document.Root;
+            if (root != null)
             {
-                var reader = new XmlTextReader(stream);
-                var document = XDocument.Load(reader);
-                var root = document.Root;
-                if (root != null)
-                {
-                    nodes = table == "*"
-                        ? root.Elements()
-                        : root.Elements(table);
-                }
-
-                ////var query = from element in root.Elements()
-                ////            group element.Attributes().FirstOrDefault() by element.Name;
-                ////var qq = from e in query let c = e.Count() where c > 1 select e.GetEnumerator();
-                ////var vvvv = qq.Cast<XAttribute>().ToList();
+                nodes = table == "*"
+                    ? root.Elements()
+                    : root.Elements(table);
             }
+
+            ////var query = from element in root.Elements()
+            ////            group element.Attributes().FirstOrDefault() by element.Name;
+            ////var qq = from e in query let c = e.Count() where c > 1 select e.GetEnumerator();
+            ////var vvvv = qq.Cast<XAttribute>().ToList();
 
             return nodes;
         }
-        #endregion
     }
 }

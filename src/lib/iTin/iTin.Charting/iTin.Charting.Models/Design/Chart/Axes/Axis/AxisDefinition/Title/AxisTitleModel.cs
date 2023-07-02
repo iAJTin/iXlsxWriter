@@ -1,24 +1,22 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+using iTin.Core;
+using iTin.Core.Helpers;
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Enums;
+using iTin.Core.Models.Design.Helpers;
+
+using iTin.Charting.Models.Design.Options;
+
 namespace iTin.Charting.Models.Design
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-
-    using iTin.Core;
-    using iTin.Core.Helpers;
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Helpers;
-
-    using iTin.Core.Models.Design.Enums;
-
-    using Options;
-
     /// <summary>
     /// A Specialization of <see cref="T:iTin.Charting.Models.Design.TitleModel" /> class.
     /// Represents the visual setting of axis title. Includes a text, visibility, orientation, border and font.
@@ -26,6 +24,7 @@ namespace iTin.Charting.Models.Design
     public partial class AxisTitleModel : ITitleModel, ICloneable
     {
         #region private constants
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const string DefaultBackColor = "White";
 
@@ -40,6 +39,7 @@ namespace iTin.Charting.Models.Design
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const KnownTextOrientation DefaultOrientation = KnownTextOrientation.Auto;
+
         #endregion
 
         #region private members
@@ -63,7 +63,6 @@ namespace iTin.Charting.Models.Design
 
         #region constructor/s
 
-        #region [public] AxisTitleModel(): Initializes a new instance of this class
         /// <summary>
         /// Initializes a new instance of the <see cref="T:iTin.Charting.ComponentModel.Models.AxisTitleModel"/> class.
         /// </summary>
@@ -76,7 +75,6 @@ namespace iTin.Charting.Models.Design
             BackColor = DefaultBackColor;
             Orientation = DefaultOrientation;
         }
-        #endregion
 
         #endregion
 
@@ -84,9 +82,6 @@ namespace iTin.Charting.Models.Design
 
         #region ICloneable
 
-        #region private methods
-
-        #region [private] (object) Clone(): Creates a new object that is a copy of the current instance
         /// <inheritdoc />
         /// <summary>
         /// Creates a new object that is a copy of the current instance.
@@ -95,17 +90,11 @@ namespace iTin.Charting.Models.Design
         /// A new object that is a copy of this instance.
         /// </returns>
         object ICloneable.Clone() => Clone();
-        #endregion
-
-        #endregion
 
         #endregion
 
         #region ITitleModel
 
-        #region public properties
-
-        #region [public] (string) BackColor: Gets or sets preferred back color for this chart title
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets preferred back color for this chart title. The default is "<b>(White)</b>".
@@ -126,9 +115,7 @@ namespace iTin.Charting.Models.Design
                 _backColor = value;
             }
         }
-        #endregion
 
-        #region [public] (BorderModel) Border: Gets or sets a reference that contains the visual setting for border of title
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets a reference that contains the visual setting for border of title.
@@ -138,12 +125,10 @@ namespace iTin.Charting.Models.Design
         /// </value>
         public BorderModel Border
         {
-            get => _border ?? (_border = new BorderModel());
+            get => _border ??= new BorderModel();
             set => _border = value;
         }
-        #endregion
 
-        #region [public] (bool) BorderSpecified: Gets a value that tells the serializer if the referenced item is to be included
         /// <summary>
         /// Gets a value that tells the serializer if the referenced item is to be included.
         /// </summary>
@@ -154,9 +139,7 @@ namespace iTin.Charting.Models.Design
         [XmlIgnore]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool BorderSpecified => !Border.IsDefault;
-        #endregion
 
-        #region [public] (FontModel) Font: Gets or sets a reference to the font model defined for this title
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets a reference to the font model defined for this title.
@@ -166,12 +149,10 @@ namespace iTin.Charting.Models.Design
         /// </value>
         public FontModel Font
         {
-            get => _font ?? (_font = new FontModel());
+            get => _font ??= new FontModel();
             set => _font = value;
         }
-        #endregion
 
-        #region [public] (bool) FontSpecified: Gets a value that tells the serializer if the referenced item is to be included
         /// <summary>
         /// Gets a value that tells the serializer if the referenced item is to be included.
         /// </summary>
@@ -182,9 +163,7 @@ namespace iTin.Charting.Models.Design
         [XmlIgnore]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool FontSpecified => !Font.IsDefault;
-        #endregion
 
-        #region [public] (YesNo) Show: Gets or sets a value that determines whether to display the border
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets a value that determines whether displays the title. The default is <b>YesNo.Yes</b>.
@@ -197,9 +176,7 @@ namespace iTin.Charting.Models.Design
         [DefaultValue(DefaultShow)]
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNo Show { get; set; }
-        #endregion
 
-        #region [public] (string) Text: Gets or sets text of title
         /// <inheritdoc />
         /// <summary>
         /// Gets or sets text of title. The default is <b>""</b>.
@@ -211,13 +188,7 @@ namespace iTin.Charting.Models.Design
         [XmlAttribute]
         [DefaultValue(DefaultText)]
         public string Text { get; set; }
-        #endregion
 
-        #endregion
-
-        #region public methods
-
-        #region [public] (Color) GetBackColor(): Gets a reference to the color structure preferred for chart title backcolor
         /// <inheritdoc />
         /// <summary>
         /// Gets a reference to the <see cref="T:System.Drawing.Color" /> structure preferred for chart title backcolor
@@ -226,9 +197,6 @@ namespace iTin.Charting.Models.Design
         /// <see cref="T:System.Drawing.Color" /> structure that represents a .NET color.
         /// </returns>
         public Color GetBackColor() => ColorHelper.GetColorFromString(BackColor);
-        #endregion
-
-        #endregion
 
         #endregion
 
@@ -236,7 +204,6 @@ namespace iTin.Charting.Models.Design
 
         #region public properties
 
-        #region [public] (KnownTextAlignment) Alignment: Gets or sets preferred location for axis title
         /// <summary>
         /// Gets or sets preferred horizontal alignment for axis title. The default value is <b>(<see cref="F:iTin.Charting.Models.Design.KnownHorizontalAlignment.Center" />)</b>.
         /// </summary>
@@ -258,9 +225,7 @@ namespace iTin.Charting.Models.Design
                 _alignment = value;
             }
         }
-        #endregion
 
-        #region [public] (KnownTextOrientation) Orientation: Gets or sets the orientation of the text in the axis title
         /// <summary>
         /// Gets or sets the orientation of the text in the axis title. The default value is <b>(<see cref="F:iTin.Charting.Models.Design.KnownTextOrientation.Auto"/>)</b>.
         /// </summary>
@@ -282,13 +247,11 @@ namespace iTin.Charting.Models.Design
                 _orientation = value;
             }
         }
-        #endregion
 
         #endregion
 
         #region public override properties
 
-        #region [public] {override} (bool) IsDefault: Gets a value indicating whether this instance is default
         /// <inheritdoc />
         /// <summary>
         /// Gets a value indicating whether this instance is default.
@@ -304,13 +267,11 @@ namespace iTin.Charting.Models.Design
             BackColor.Equals(DefaultBackColor) &&
             Orientation.Equals(DefaultOrientation) &&
             Alignment.Equals(DefaultAlignment);
-        #endregion
 
         #endregion
 
         #region public methods
 
-        #region [public] (void) ApplyOptions(AxisTitleOptions): Apply specified options to this axis title
         /// <summary>
         /// Apply specified options to this axis title.
         /// </summary>
@@ -379,9 +340,7 @@ namespace iTin.Charting.Models.Design
             }
             #endregion
         }
-        #endregion
 
-        #region [public] (AxisTitleModel) Clone(): Clones this instance
         /// <summary>
         /// Clones this instance.
         /// </summary>
@@ -394,13 +353,11 @@ namespace iTin.Charting.Models.Design
 
             return cloned;
         }
-        #endregion
 
         #endregion
 
         #region public override methods
 
-        #region [public] {override} (string) ToString(): Returns a string that represents the current instance
         /// <summary>
         /// Returns a string that represents the current instance.
         /// </summary>
@@ -408,7 +365,6 @@ namespace iTin.Charting.Models.Design
         /// A <see cref="T:System.String"/> that represents the current object.
         /// </returns>
         public override string ToString() => !IsDefault ? "Modified" : "Default";
-        #endregion
 
         #endregion
     }

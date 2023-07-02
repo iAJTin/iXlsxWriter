@@ -40,7 +40,6 @@ namespace OfficeOpenXml.Helpers
 
         #region public methods
 
-        #region [public] (IResult) SetBorder(XlsxBorder): Try to modify the chart size settings
         /// <summary>
         /// Try to modify the chart border settings.
         /// </summary>
@@ -83,9 +82,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetContent(XlsxPictureContent): Try to modify the picture content settings
         /// <summary>
         /// Try to modify the picture content settings.
         /// </summary>
@@ -126,9 +123,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetPosition(XlsxBaseRange): Try to modify the picture position settings
         /// <summary>
         /// Try to modify the picture position settings.
         /// </summary>
@@ -162,9 +157,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetSize(XlsxBaseSize): Try to modify the picture size settings
         /// <summary>
         /// Try to modify the picture size settings.
         /// </summary>
@@ -227,9 +220,7 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
-        #region [public] (IResult) SetShapeEffects(XlsxShapeEffects, string): Try to modify the picture shape effects settings
         /// <summary>
         /// Try to modify the picture shape effects settings.
         /// </summary>
@@ -266,7 +257,6 @@ namespace OfficeOpenXml.Helpers
                 return BooleanResult.FromException(e);
             }
         }
-        #endregion
 
         #endregion
 

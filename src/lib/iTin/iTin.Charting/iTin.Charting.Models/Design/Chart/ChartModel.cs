@@ -1,17 +1,17 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Xml.Serialization;
+
+using Newtonsoft.Json;
+
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Helpers;
+
 namespace iTin.Charting.Models.Design
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Xml.Serialization;
-
-    using Newtonsoft.Json;
-
-    using iTin.Core.Models.Design;
-    using iTin.Core.Models.Design.Helpers;
-
     /// <summary>
     /// Root element of <strong>iTin charting</strong> configuration file that contains a user-defined chart definition.
     /// </summary>
@@ -94,11 +94,14 @@ namespace iTin.Charting.Models.Design
     public sealed partial class ChartModel : ICloneable
     {
         #region private constants
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private const string DefaultBackColor = "White";
+
         #endregion
 
         #region private members
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private AxesModel _axes;
 
@@ -122,11 +125,11 @@ namespace iTin.Charting.Models.Design
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private LegendModel _legend;
+
         #endregion
 
         #region constructor/s
 
-        #region [public] ChartModel(): Inicializa un nueva instancia de la clase
         /// <inheritdoc />
         /// <summary>
         /// Inicializa un nueva instancia de la clase <see cref="T:iTin.Charting.ComponentModel.ChartModel" />.
@@ -135,7 +138,6 @@ namespace iTin.Charting.Models.Design
         {
             BackColor = DefaultBackColor;
         }
-        #endregion
 
         #endregion
 
@@ -143,9 +145,6 @@ namespace iTin.Charting.Models.Design
 
         #region ICloneable
 
-        #region private methods
-
-        #region [private] (object) Clone(): Creates a new object that is a copy of the current instance
         /// <inheritdoc />
         /// <summary>
         /// Creates a new object that is a copy of the current instance.
@@ -154,9 +153,6 @@ namespace iTin.Charting.Models.Design
         /// A new object that is a copy of this instance.
         /// </returns>
         object ICloneable.Clone() => Clone();
-        #endregion
-
-        #endregion
 
         #endregion
 
@@ -164,7 +160,6 @@ namespace iTin.Charting.Models.Design
 
         #region public readonly properties
 
-        #region [public] (bool) AxesSpecified: Gets a value that indicates the serializer if the referenced item is to be included
         /// <summary>
         /// Gets a value that indicates the serializer if the referenced item is to be included.
         /// </summary>
@@ -175,9 +170,7 @@ namespace iTin.Charting.Models.Design
         [XmlIgnore]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool AxesSpecified => !Axes.IsDefault;
-        #endregion
 
-        #region [public] (bool) BorderSpecified: Gets a value that indicates the serializer if the referenced item is to be included.
         /// <summary>
         /// Gets a value that indicates the serializer if the referenced item is to be included.
         /// </summary>
@@ -188,9 +181,7 @@ namespace iTin.Charting.Models.Design
         [XmlIgnore]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool BorderSpecified => !Border.IsDefault;
-        #endregion
 
-        #region [public] (bool) FooterTitleSpecified: Gets a value that indicates the serializer if the referenced item is to be included
         /// <summary>
         /// Gets a value that indicates the serializer if the referenced item is to be included.
         /// </summary>
@@ -201,9 +192,7 @@ namespace iTin.Charting.Models.Design
         [XmlIgnore]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool FooterTitleSpecified => !FooterTitle.IsDefault;
-        #endregion
 
-        #region [public] (bool) LegendSpecified: Gets a value that indicates the serializer if the referenced item is to be included
         /// <summary>
         /// Gets a value that indicates the serializer if the referenced item is to be included.
         /// </summary>
@@ -214,9 +203,7 @@ namespace iTin.Charting.Models.Design
         [XmlIgnore]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool LegendSpecified => !Legend.IsDefault;
-        #endregion
 
-        #region [public] (bool) PlotsSpecified: Gets a value that indicates the serializer if the referenced item is to be included
         /// <summary>
         /// Gets a value that indicates the serializer if the referenced item is to be included.
         /// </summary>
@@ -227,9 +214,7 @@ namespace iTin.Charting.Models.Design
         [JsonIgnore]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool PlotsSpecified => !Plots.IsDefault;
-        #endregion
 
-        #region [public] (bool) SizeSpecified: Gets a value that indicates the serializer if the referenced item is to be included
         /// <summary>
         /// Gets a value that indicates the serializer if the referenced item is to be included
         /// </summary>
@@ -240,9 +225,7 @@ namespace iTin.Charting.Models.Design
         [XmlIgnore]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool SizeSpecified => !Size.IsDefault;
-        #endregion
 
-        #region [public] (bool) TitleSpecified: Gets a value that indicates the serializer if the referenced item is to be included
         /// <summary>
         /// Gets a value that indicates the serializer if the referenced item is to be included.
         /// </summary>
@@ -253,9 +236,7 @@ namespace iTin.Charting.Models.Design
         [XmlIgnore]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool TitleSpecified => !Size.IsDefault;
-        #endregion
 
-        #region [public] (bool) QualitySpecified: Gets a value that indicates the serializer if the referenced item is to be included
         /// <summary>
         /// Gets a value that indicates the serializer if the referenced item is to be included
         /// </summary>
@@ -266,13 +247,11 @@ namespace iTin.Charting.Models.Design
         [XmlIgnore]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public bool QualitySpecified => !Quality.IsDefault;
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (AxesModel) Axes: Gets or sets a reference that contains the visual setting of the chart axes
         /// <summary>
         /// Gets or sets a reference that contains the visual setting of the chart axes.
         /// </summary>
@@ -283,20 +262,14 @@ namespace iTin.Charting.Models.Design
         {
             get
             {
-                if (_axes == null)
-                {
-                    _axes = new AxesModel();
-                }
-
+                _axes ??= new AxesModel();
                 _axes.SetParent(this);
 
                 return _axes;
             }
             set => _axes = value;
         }
-        #endregion
 
-        #region [public] (string) BackColor: Gets or sets preferred back color for this chart
         /// <summary>
         /// Gets or sets preferred background color for this chart. The default is "<b>(White)</b>".
         /// </summary>
@@ -307,9 +280,7 @@ namespace iTin.Charting.Models.Design
         [XmlAttribute]
         [DefaultValue(DefaultBackColor)]
         public string BackColor { get; set; }
-        #endregion
 
-        #region [public] (BorderModel) Border: Gets or sets a reference that contains the visual setting of chart border
         /// <summary>
         /// Gets or sets a reference that contains the visual setting of chart border.
         /// </summary>
@@ -318,12 +289,10 @@ namespace iTin.Charting.Models.Design
         /// </value>
         public BorderModel Border
         {
-            get => _border ?? (_border = new BorderModel());
+            get => _border ??= new BorderModel();
             set => _border = value;
         }
-        #endregion
 
-        #region [public] (QualityModel) Quality: Gets or sets preferred chart smoothing quality
         /// <summary>
         /// Gets or sets preferred chart smoothing quality.
         /// </summary>
@@ -332,12 +301,10 @@ namespace iTin.Charting.Models.Design
         /// </value>
         public QualityModel Quality
         {
-            get => _quality ?? (_quality = new QualityModel());
+            get => _quality ??= new QualityModel();
             set => _quality = value;
         }
-        #endregion
 
-        #region [public] (FooterTitleModel) FooterTitle: Gets or sets a reference that contains the visual setting of bottom chart title (footer)
         /// <summary>
         /// Gets or sets a reference that contains the visual setting of bottom chart title (footer).
         /// </summary>
@@ -346,12 +313,10 @@ namespace iTin.Charting.Models.Design
         /// </value>
         public FooterTitleModel FooterTitle
         {
-            get => _footerTitle ?? (_footerTitle = new FooterTitleModel());
+            get => _footerTitle ??= new FooterTitleModel();
             set => _footerTitle = value;
         }
-        #endregion
 
-        #region [public] (LegendModel) Legend: Gets or sets a reference that contains the visual setting of chart legend
         /// <summary>
         /// Gets or sets a reference that contains the visual setting of chart legend.
         /// </summary>
@@ -360,13 +325,10 @@ namespace iTin.Charting.Models.Design
         /// </value>
         public LegendModel Legend
         {
-            get => _legend ?? (_legend = new LegendModel());
+            get => _legend ??= new LegendModel();
             set => _legend = value;
         }
 
-        #endregion
-
-        #region [public] (PlotsModel) Plots: Gets or sets a reference that contains the visual setting of the chart plot areas
         /// <summary>
         /// Gets or sets a reference that contains the visual setting of the chart plot areas.
         /// </summary>
@@ -377,20 +339,14 @@ namespace iTin.Charting.Models.Design
         {
             get
             {
-                if (_plots == null)
-                {
-                    _plots = new PlotsModel();
-                }
-
+                _plots ??= new PlotsModel();
                 _plots.SetParent(this);
 
                 return _plots;
             }
             set => _plots = value;
         }
-        #endregion
 
-        #region [public] (SizeModel) Size: Gets or sets a reference that contains the chart size information
         /// <summary>
         /// Gets or sets a reference that contains the chart size information.
         /// </summary>
@@ -399,12 +355,10 @@ namespace iTin.Charting.Models.Design
         /// </value>
         public SizeModel Size
         {
-            get => _size ?? (_size = new SizeModel());
+            get => _size ??= new SizeModel();
             set => _size = value;
         }
-        #endregion
 
-        #region [public] (TitleModel) Title: Gets or sets a reference that contains the visual setting of chart title
         /// <summary>
         /// Gets or sets a reference that contains the visual setting of chart title.
         /// </summary>
@@ -413,16 +367,14 @@ namespace iTin.Charting.Models.Design
         /// </value>
         public TitleModel Title
         {
-            get => _title ?? (_title = new TitleModel());
+            get => _title ??= new TitleModel();
             set => _title = value;
         }
-        #endregion
     
         #endregion
 
         #region public override properties
 
-        #region [public] {override} (bool) IsDefault: Gets a value indicating whether this instance is default
         /// <inheritdoc />
         /// <summary>
         /// Gets a value indicating whether this instance is default.
@@ -439,13 +391,11 @@ namespace iTin.Charting.Models.Design
             Plots.IsDefault &&
             Quality.IsDefault &&
             Size.IsDefault;
-        #endregion
 
         #endregion
 
         #region public methods
 
-        #region [public] (ChartModel) Clone(): Clones this instance
         /// <summary>
         /// Clones this instance.
         /// </summary>
@@ -467,7 +417,6 @@ namespace iTin.Charting.Models.Design
 
             return clonned;
         }
-        #endregion
 
         #region [public] (Color) GetBackColor(): Gets a reference to the color structure preferred for chart backcolor
         /// <summary>
@@ -483,7 +432,6 @@ namespace iTin.Charting.Models.Design
 
         #region public override methods
 
-        #region [public] {override} (string) ToString(): Returns a string that represents the current instance
         /// <summary>
         /// Returns a string that represents the current instance.
         /// </summary>
@@ -491,7 +439,6 @@ namespace iTin.Charting.Models.Design
         /// A <see cref="T:System.String"/> that represents the current object.
         /// </returns>
         public override string ToString() => !IsDefault ? "Modified" : "Default";
-        #endregion
 
         #endregion
     }

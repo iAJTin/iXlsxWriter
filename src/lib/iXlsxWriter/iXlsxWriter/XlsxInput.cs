@@ -467,13 +467,13 @@ namespace iXlsxWriter
         #region private methods
 
         private InsertResult InsertImplStrategy(IInsert data, XlsxInput context)
-            => data == null ? InsertResult.CreateErroResult("Missing data") : data.Apply(ToStream(), context);
+            => data == null ? InsertResult.CreateErrorResult("Missing data") : data.Apply(ToStream(), context);
 
         private ReplaceResult ReplaceImplStrategy(IReplace data, IInput context)
-            => data == null ? ReplaceResult.CreateErroResult("Missing data") : data.Apply(ToStream(), context);
+            => data == null ? ReplaceResult.CreateErrorResult("Missing data") : data.Apply(ToStream(), context);
 
         private SetResult SetImplStrategy(ISet data, XlsxInput context)
-            => data == null ? SetResult.CreateErroResult("Missing data") : data.Apply(ToStream(), context);
+            => data == null ? SetResult.CreateErrorResult("Missing data") : data.Apply(ToStream(), context);
 
         #endregion
     }

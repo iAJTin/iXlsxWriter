@@ -1,13 +1,13 @@
 ﻿
+using System;
+using System.Collections;
+using System.Reflection;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
 namespace iTin.Charting.Models.ComponentModel
 {
-    using System;
-    using System.Collections;
-    using System.Reflection;
-
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Serialization;
-
     /// <summary>
     /// Please see https://gist.github.com/ejsmith/4d60f03d1f1d756c26a9
     /// </summary>
@@ -24,9 +24,8 @@ namespace iTin.Charting.Models.ComponentModel
 
         private static bool IsEmptyCollection(JsonProperty property, object target)
         {
-            var value = property.ValueProvider.GetValue(target);
-            var collection = value as ICollection;
-            if (collection != null && collection.Count == 0)
+            var value = property.ValueProvider?.GetValue(target);
+            if (value is ICollection { Count: 0 })
             {
                 return true;
             }
@@ -36,7 +35,7 @@ namespace iTin.Charting.Models.ComponentModel
                 return false;
             }
 
-            var countProp = property.PropertyType.GetProperty("Count");
+            var countProp = property.PropertyType?.GetProperty("Count");
             if (countProp == null)
             {
                 return false;

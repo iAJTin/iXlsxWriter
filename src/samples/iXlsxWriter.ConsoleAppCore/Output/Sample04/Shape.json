@@ -1,1 +1,45 @@
-﻿{"$type":"iTin.Utilities.Xlsx.Design.Shape.XlsxShape, iTin.Utilities.Xlsx.Design","border":{"$type":"iTin.Utilities.Xlsx.Design.Shared.XlsxBorder, iTin.Utilities.Xlsx.Design","color":"Yellow","show":"Yes","style":"DashDot","transparency":50,"width":2},"content":{"$type":"iTin.Utilities.Xlsx.Design.Shape.XlsxShapeContent, iTin.Utilities.Xlsx.Design","alignment":{"$type":"iTin.Utilities.Xlsx.Design.Shape.XlsxShapeContentAlignment, iTin.Utilities.Xlsx.Design","horizontal":"Center"},"font":{"$type":"iTin.Core.Models.Design.FontModel, iTin.Core.Models","Color":"Red","Bold":"Yes"},"text":"Text","alternate-color":"Yellow","color":"Yellow"},"name":"shape","size":{"$type":"iTin.Utilities.Xlsx.Design.Shared.XlsxSize, iTin.Utilities.Xlsx.Design","height":300,"width":300},"shape-effects":{"$type":"iTin.Utilities.Xlsx.Design.Shared.XlsxShapeEffects, iTin.Utilities.Xlsx.Design","shadow":{"$type":"iTin.Utilities.Xlsx.Design.Shared.XlsxOuterShadow, iTin.Utilities.Xlsx.Design","color":"Yellow","offset":2,"show":"Yes"},"soft-edge":{"$type":"iTin.Utilities.Xlsx.Design.Shared.XlsxSoftEdgeShapeEffect, iTin.Utilities.Xlsx.Design","show":"Yes"}}}
+﻿{
+  "$type": "iTin.Utilities.Xlsx.Design.Shape.XlsxShape, iTin.Utilities.Xlsx.Design",
+  "border": {
+    "$type": "iTin.Utilities.Xlsx.Design.Shared.XlsxBorder, iTin.Utilities.Xlsx.Design",
+    "color": "Yellow",
+    "show": "Yes",
+    "style": "DashDot",
+    "transparency": 50,
+    "width": 2
+  },
+  "content": {
+    "$type": "iTin.Utilities.Xlsx.Design.Shape.XlsxShapeContent, iTin.Utilities.Xlsx.Design",
+    "alignment": {
+      "$type": "iTin.Utilities.Xlsx.Design.Shape.XlsxShapeContentAlignment, iTin.Utilities.Xlsx.Design",
+      "horizontal": "Center"
+    },
+    "font": {
+      "$type": "iTin.Core.Models.Design.FontModel, iTin.Core.Models",
+      "Color": "Red",
+      "Bold": "Yes"
+    },
+    "text": "Text",
+    "alternate-color": "Yellow",
+    "color": "Yellow"
+  },
+  "name": "shape",
+  "size": {
+    "$type": "iTin.Utilities.Xlsx.Design.Shared.XlsxSize, iTin.Utilities.Xlsx.Design",
+    "height": 300,
+    "width": 300
+  },
+  "shape-effects": {
+    "$type": "iTin.Utilities.Xlsx.Design.Shared.XlsxShapeEffects, iTin.Utilities.Xlsx.Design",
+    "shadow": {
+      "$type": "iTin.Utilities.Xlsx.Design.Shared.XlsxOuterShadow, iTin.Utilities.Xlsx.Design",
+      "color": "Yellow",
+      "offset": 2,
+      "show": "Yes"
+    },
+    "soft-edge": {
+      "$type": "iTin.Utilities.Xlsx.Design.Shared.XlsxSoftEdgeShapeEffect, iTin.Utilities.Xlsx.Design",
+      "show": "Yes"
+    }
+  }
+}

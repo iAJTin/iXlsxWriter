@@ -1,13 +1,12 @@
 
+using System;
+using System.Drawing;
+
+using iTin.Charting.Models.Design;
+using iTin.Core.Helpers;
+
 namespace iTin.Charting.Models.ComponentModel
 {
-    using System;
-    using System.Drawing;
-
-    using Core.Helpers;
-    using Design;
-
-    /// <inheritdoc />
     /// <summary>
     /// Defines the additional information of a graphic resolution.
     /// </summary>
@@ -17,7 +16,6 @@ namespace iTin.Charting.Models.ComponentModel
     {
         #region public static properties
 
-        #region [public] (ResolutionInformation) GetInformationFrom(KnownChartResolution): Returns the information about specified resolution
         /// <summary>
         /// Returns the information about specified resolution
         /// </summary>
@@ -36,8 +34,7 @@ namespace iTin.Charting.Models.ComponentModel
                 return null;
             }
 
-            var attr = GetCustomAttribute(field, typeof(ScreenResolutionAttribute)) as ScreenResolutionAttribute;
-            if (attr != null)
+            if (GetCustomAttribute(field, typeof(ScreenResolutionAttribute)) is ScreenResolutionAttribute attr)
             {
                 return new ResolutionInformation
                 {
@@ -54,13 +51,11 @@ namespace iTin.Charting.Models.ComponentModel
 
             return null;
         }
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (float) AspectRatioValue: Gets aspect ratio of this resolution
         /// <summary>
         /// Gets aspect ratio of this resolution.
         /// </summary>
@@ -71,7 +66,7 @@ namespace iTin.Charting.Models.ComponentModel
         {
             get
             {                
-                string[] values = AspectRatio.Split(new[] {":"}, StringSplitOptions.RemoveEmptyEntries);
+                var values = AspectRatio.Split(new[] {":"}, StringSplitOptions.RemoveEmptyEntries);
                 if (values.Length != 2)
                 {
                     return float.NaN;
@@ -80,67 +75,54 @@ namespace iTin.Charting.Models.ComponentModel
                 return float.Parse(values[0]) / float.Parse(values[1]);
             }
         }
-        #endregion
 
-        #region [public] (Size) Size: Gets size of this resolution
         /// <summary>
-        /// Gets <see cref="T:System.Drawing.Size" /> of this resolution.
+        /// Gets <see cref="System.Drawing.Size" /> of this resolution.
         /// </summary>
         /// <value>
-        /// A <see cref="T:System.Drawing.Size" /> of this resolution.
+        /// A <see cref="System.Drawing.Size" /> of this resolution.
         /// </value>
-        public Size Size => new Size(Width, Height);
-        #endregion
+        public Size Size => new(Width, Height);
 
-        #region [public] (string) Name: Gets the name of this resolution
         /// <summary>
         /// Gets the name of this resolution.
         /// </summary>
         /// <value>
-        /// A <see cref="T:System.String" /> that contains the name of this resolution.
+        /// A <see cref="string" /> that contains the name of this resolution.
         /// </value>
         public string Name { get; set; }
-        #endregion
 
-        #region [public] (int) Height: Gets the height of this resolution
         /// <summary>
         /// Gets a value that contains the height of this resolution.
         /// </summary>
         /// <value>
-        /// A <see cref="T:System.Int32" /> that contains the height of this resolution.
+        /// A <see cref="int" /> that contains the height of this resolution.
         /// </value>
         public int Height { get; set; }
-        #endregion
 
-        #region [public] (float) AspectRatio: Gets aspect ratio of this resolution as textual format
         /// <summary>
         /// Gets aspect ratio of this resolution as textual format.
         /// </summary>
         /// <value>
-        /// A <see cref="T:System.Single" /> that contains the aspect ratio for this resolution as textual format.
+        /// A <see cref="string" /> that contains the aspect ratio for this resolution as textual format.
         /// </value>
         public string AspectRatio { get; set; }
-        #endregion
 
-        #region [public] (string) AspectRatioNormalized: Gets aspect ratio of this resolution as normalized value.
         /// <summary>
         /// Gets aspect ratio of this resolution as normalized value.
         /// </summary>
         /// <value>
-        /// A <see cref="T:System.String" /> that contains the aspect ratio for this resolution as normalized value.
+        /// A <see cref="string" /> that contains the aspect ratio for this resolution as normalized value.
         /// </value>
         public string AspectRatioNormalized { get; set; }
-        #endregion
 
-        #region [public] (int) Width: Gets the name of this resolution
         /// <summary>
         /// Gets a value that contains the width of this resolution.
         /// </summary>
         /// <value>
-        /// A <see cref="T:System.Int32" /> that contains the width of this resolution.
+        /// A <see cref="int" /> that contains the width of this resolution.
         /// </value>
         public int Width { get; set; }
-        #endregion
 
         #endregion
     }

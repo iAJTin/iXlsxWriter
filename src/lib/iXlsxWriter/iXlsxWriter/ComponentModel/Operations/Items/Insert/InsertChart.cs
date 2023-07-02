@@ -23,7 +23,6 @@ namespace iXlsxWriter.ComponentModel
     {
         #region constructor/s
 
-        #region [public] InsertChart(): Initializes a new instance of the class
         /// <summary>
         /// Initializes a new instance of the <see cref="InsertChart"/> class.
         /// </summary>
@@ -32,13 +31,11 @@ namespace iXlsxWriter.ComponentModel
             SheetName = string.Empty;
             Location = new XlsxStringRange { Address = "A1:A1" };
         }
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (XlsxChart) Chart: Gets or sets a reference to chart configuration
         /// <summary>
         /// Gets or sets a reference to chart configuration.
         /// </summary>
@@ -46,13 +43,11 @@ namespace iXlsxWriter.ComponentModel
         /// A <see cref="XlsxChart"/> reference to chart configuration.
         /// </value>
         public XlsxChart Chart { get; set; }
-        #endregion
 
         #endregion
 
         #region protected override methods
 
-        #region [protected] {override} (InsertResult) InsertImpl(Stream, IInput): Implementation to execute when insert action
         /// <summary>
         /// Implementation to execute when insert action.
         /// </summary>
@@ -72,7 +67,7 @@ namespace iXlsxWriter.ComponentModel
         {
             if (string.IsNullOrEmpty(SheetName))
             {
-                return InsertResult.CreateErroResult(
+                return InsertResult.CreateErrorResult(
                     "Sheet name can not be null or empty",
                     new InsertResultData
                     {
@@ -114,7 +109,6 @@ namespace iXlsxWriter.ComponentModel
 
             return InsertImpl(context, input, SheetName, Location, Chart);
         }
-        #endregion
 
         #endregion
 
@@ -126,76 +120,74 @@ namespace iXlsxWriter.ComponentModel
 
             try
             {
-                using (var excel = new ExcelPackage(input))
+                using var excel = new ExcelPackage(input);
+                ExcelWorksheet ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
+                if (ws == null)
                 {
-                    ExcelWorksheet ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
-                    if (ws == null)
-                    {
-                        return InsertResult.CreateErroResult(
-                            $"Sheet '{sheetName}' not found",
-                            new InsertResultData
-                            {
-                                Context = context,
-                                InputStream = input,
-                                OutputStream = input
-                            });
-                    }
-
-                    // Create Chart
-                    ExcelChart mainchart = null;
-                    var plots = chart.Plots;
-                    foreach (var plot in plots)
-                    {
-                        var series = plot.Series;
-                        foreach (var serie in series)
+                    return InsertResult.CreateErrorResult(
+                        $"Sheet '{sheetName}' not found",
+                        new InsertResultData
                         {
-                            // Create chart
-                            ExcelChart workchart;
-                            if (plot.UseSecondaryAxis.Equals(YesNo.No))
-                            {
-                                if (mainchart == null)
-                                {
-                                    mainchart = ws.Drawings.AddChart(serie.Name, serie.ChartType.ToEppChartType());
-                                    mainchart.Name = plot.Name;
-                                }
-
-                                workchart = mainchart;
-                            }
-                            else
-                            {
-                                workchart = mainchart.PlotArea.ChartTypes.Add(serie.ChartType.ToEppChartType());
-                                workchart.UseSecondaryAxis = true;
-                                workchart.XAxis.Deleted = false;
-                            }
-
-                            var sr = workchart.Series.Add(serie.FieldRange.ToString(), serie.AxisRange.ToString());
-                            sr.Header = serie.Name;
-                        }
-                    }
-
-                    if (mainchart != null)
-                    {
-                        var writer = new OfficeOpenChartWriter(mainchart);
-                        writer.SetSize(chart.Size);
-                        writer.SetPosition(location);
-                        writer.SetContent(chart);
-                        writer.SetBorder(chart.Border);
-                        writer.SetTitle(chart.Title);
-                        writer.SetLegend(chart.Legend);
-                        writer.SetAxes(chart.Axes);
-                        writer.SetPlotArea(chart.Plots);
-                        writer.SetShapeEffects(chart.Effects);
-                    }
-
-                    excel.SaveAs(outputStream);
-
-                    return InsertResult.CreateSuccessResult(new InsertResultData
-                    {
-                        Context = context,
-                        InputStream = input,
-                        OutputStream = outputStream
-                    });
+                            Context = context,
+                            InputStream = input,
+                            OutputStream = input
+                        });
                 }
+
+                // Create Chart
+                ExcelChart mainchart = null;
+                var plots = chart.Plots;
+                foreach (var plot in plots)
+                {
+                    var series = plot.Series;
+                    foreach (var serie in series)
+                    {
+                        // Create chart
+                        ExcelChart workchart;
+                        if (plot.UseSecondaryAxis.Equals(YesNo.No))
+                        {
+                            if (mainchart == null)
+                            {
+                                mainchart = ws.Drawings.AddChart(serie.Name, serie.ChartType.ToEppChartType());
+                                mainchart.Name = plot.Name;
+                            }
+
+                            workchart = mainchart;
+                        }
+                        else
+                        {
+                            workchart = mainchart.PlotArea.ChartTypes.Add(serie.ChartType.ToEppChartType());
+                            workchart.UseSecondaryAxis = true;
+                            workchart.XAxis.Deleted = false;
+                        }
+
+                        var sr = workchart.Series.Add(serie.FieldRange.ToString(), serie.AxisRange.ToString());
+                        sr.Header = serie.Name;
+                    }
+                }
+
+                if (mainchart != null)
+                {
+                    var writer = new OfficeOpenChartWriter(mainchart);
+                    writer.SetSize(chart.Size);
+                    writer.SetPosition(location);
+                    writer.SetContent(chart);
+                    writer.SetBorder(chart.Border);
+                    writer.SetTitle(chart.Title);
+                    writer.SetLegend(chart.Legend);
+                    writer.SetAxes(chart.Axes);
+                    writer.SetPlotArea(chart.Plots);
+                    writer.SetShapeEffects(chart.Effects);
+                }
+
+                excel.SaveAs(outputStream);
+
+                return InsertResult.CreateSuccessResult(new InsertResultData
+                {
+                    Context = context,
+                    InputStream = input,
+                    OutputStream = outputStream
+                });
             }
             catch (Exception ex)
             {

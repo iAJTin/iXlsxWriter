@@ -17,7 +17,6 @@ namespace iXlsxWriter.ComponentModel.Result.Output
     {
         #region constructor/s
 
-        #region [public] OutputResultData(): Initializes a new instance of the class
         /// <summary>
         /// Initializes a new instance of the <see cref="OutputResultData" /> class.
         /// </summary>
@@ -25,13 +24,11 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         {
             Zipped = false;
         }
-        #endregion
 
         #endregion
 
         #region public properties
 
-        #region [public] (bool) IsZipped: Gets or sets a value indicating whether output file has been zipped
         /// <summary>
         /// Gets or sets a value indicating whether output file has been zipped.
         /// </summary>
@@ -39,9 +36,7 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         /// <b>true</b> if output file has been zipped; otherwise, <b>false</b>.
         /// </value>
         public bool IsZipped => Zipped;
-        #endregion
 
-        #region [public] (KnownOutputType) OutputType: Gets a value indicating type of output file
         /// <summary>
         /// Gets a value indicating type of output file.
         /// </summary>
@@ -49,13 +44,11 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         /// One of the values of the <see cref="KnownOutputType"/> enumeration.
         /// </value>
         public KnownOutputType OutputType => Zipped ? KnownOutputType.Zip : KnownOutputType.Xlsx;
-        #endregion
 
         #endregion
 
         #region internal properties
 
-        #region [public] (IXlsxObjectConfig) Configuration: Gets or sets the xlsx configuration settings to apply
         /// <summary>
         /// Gets or sets the docx configuration settings to apply
         /// </summary>
@@ -64,9 +57,7 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         /// </value>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal IXlsxObjectConfig Configuration { get; set; }
-        #endregion
 
-        #region [internal] (Stream) OutputStream: Gets a value that contains a reference to the output stream
         /// <summary>
         /// Gets a value that contains a reference to the output stream.
         /// </summary>
@@ -79,9 +70,7 @@ namespace iXlsxWriter.ComponentModel.Result.Output
                 : Zipped
                     ? UncompressOutputStream.AsZipStream()
                     : UncompressOutputStream;
-        #endregion
 
-        #region [internal] (Stream) UncompressedOutputStream: Gets a value that contains a reference to the uncompressed output stream. If OutputType is xlsx this value is equals to OutputStream value property
         /// <summary>
         /// Gets a value that contains a reference to the uncompressed output stream. If <see cref="OutputType"/> is <b>Xlsx</b> this value is equals to <see cref="OutputStream"/> value property.
         /// </summary>
@@ -89,9 +78,7 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         /// A <see cref="Stream"/> that contains a reference to the uncompressed output stream.</value>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal Stream UncompressOutputStream { get; set; }
-        #endregion
 
-        #region [internal] (bool) Zipped: Gets or sets a value indicating whether output file has been zipped
         /// <summary>
         /// Gets or sets a value indicating whether output file has been zipped.
         /// </summary>
@@ -100,13 +87,11 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         /// </value>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal bool Zipped { get; set; }
-        #endregion
 
         #endregion
 
         #region public methods
 
-        #region [public] (IResult) Action(IOutputAction): Executes specified action for this output result instance             
         /// <summary>
         /// Executes specified action for this output result instance.
         /// </summary>
@@ -119,9 +104,7 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         /// </para>
         /// </returns>
         public IResult Action(IOutputAction output) => ActionImplStrategy(output, this);
-        #endregion
 
-        #region [public] (Stream) GetOutputStream(): Returns a reference to the output stream
         /// <summary>
         /// Returns a reference to the output stream.
         /// </summary>
@@ -129,21 +112,17 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         /// A <see cref="Stream"/> that contains a reference to the output stream.
         /// </returns>
         public Stream GetOutputStream() => new MemoryStream(OutputStream.AsByteArray());
-        #endregion
 
-        #region [public] (Stream) GetUnCompressedOutputStream(): Returns a reference to the uncompressed output stream. If OutputType is Xlsx this value is equals to OutputStream value property
         /// <summary>
         /// Returns a reference to the uncompressed output stream. If <see cref="OutputType"/> is <b>Xlsx</b> this value is equals to <see cref="OutputStream"/> value property.
         /// </summary>
         /// <returns>Stream.</returns>
         public Stream GetUnCompressedOutputStream() => new MemoryStream(UncompressOutputStream.AsByteArray());
-        #endregion
 
         #endregion
 
         #region public override methods
 
-        #region [public] {override} (string) ToString(): Returns a string than represents the current object.
         /// <summary>
         /// Returns a string that represents the current data type.
         /// </summary>
@@ -151,7 +130,6 @@ namespace iXlsxWriter.ComponentModel.Result.Output
         /// A <see cref="string"/> than represents the current object.
         /// </returns>
         public override string ToString() => $"IsZipped={IsZipped}, OutputType={OutputType}";
-        #endregion
 
         #endregion
 

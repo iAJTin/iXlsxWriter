@@ -23,7 +23,6 @@ namespace OfficeOpenXml
     {
         #region public static methods
 
-        #region [public] {static} (void) AddErrorComment(this ExcelRangeBase, FieldValueInformation): Writes a error comment for specified cell
         /// <summary>
         /// Writes a error comment for specified cell.
         /// </summary>
@@ -58,9 +57,7 @@ namespace OfficeOpenXml
             cellComment.Font.Italic = font.Italic == YesNo.Yes;
             cellComment.Font.UnderLine = font.Underline == YesNo.Yes;
         }
-        #endregion
 
-        #region [public] {static} (void) CreateFromModel(this ExcelStyles, XlsxCellStyle): Creates list of styles
         /// <summary>
         /// Creates list of styles.
         /// </summary>
@@ -85,9 +82,7 @@ namespace OfficeOpenXml
                 // Already exist.
             }
         }
-        #endregion
 
-        #region [public] {static} (void) CreateFromModel(this ExcelStyles, XlsxStylesCollection): Creates list of styles
         /// <summary>
         /// Creates list of styles.
         /// </summary>
@@ -114,9 +109,7 @@ namespace OfficeOpenXml
                 xlsxStyle.Style.FormatFromModel((XlsxCellStyle)style, true);
             }
         }
-        #endregion
 
-        #region [public] {static} (double) PixelsToColumnWidth(this ExcelWorksheet, int): Returns pixels convert to excel column width
         /// <summary>
         ///  Returns pixels convert to excel column width.
         /// </summary>
@@ -142,9 +135,7 @@ namespace OfficeOpenXml
 
             return Convert.ToDouble(excelColumnWidth);
         }
-        #endregion
 
-        #region [public] {static} (void) SetBorder(this ExcelDrawingBorder, XlsxBorder): Set picture border
         /// <summary>
         /// Set picture border.
         /// </summary>
@@ -166,9 +157,7 @@ namespace OfficeOpenXml
             border.LineStyle = model.Style.ToEppLineStyle();
             border.Width = model.Width;
         }
-        #endregion
 
-        #region [public] {static} (OfficeProperties) SetDocumentMetadata(this OfficeProperties, XlsxDocumentMetadataSettings): Sets the document metadata from model
         /// <summary>
         /// Sets the document metadata from model.
         /// </summary>
@@ -244,9 +233,7 @@ namespace OfficeOpenXml
 
             return properties;
         }
-        #endregion
 
-        #region [public] {static} (float) ToAngle(this TextOrientation): Converter for TextOrientation enumeration type to angle degree.
         /// <summary>
         /// Converter for <see cref="TextOrientation"/> enumeration type to angle degree.
         /// </summary>
@@ -259,24 +246,15 @@ namespace OfficeOpenXml
         {
             SentinelHelper.IsEnumValid(orientation);
 
-            switch (orientation)
+            return orientation switch
             {
-                case TextOrientation.Upward:
-                    return 270;
-
-                case TextOrientation.Horizontal:
-                    return 0;
-
-                case TextOrientation.Vertical:
-                    return 0;
-
-                default:
-                    return 90;
-            }
+                TextOrientation.Upward => 270,
+                TextOrientation.Horizontal => 0,
+                TextOrientation.Vertical => 0,
+                _ => 90
+            };
         }
-        #endregion
 
-        #region [public] {static} (float) ToAngle(this LabelOrientation): Converter for LabelOrientation enumeration type to angle degree.
         /// <summary>
         /// Converter for <see cref="LabelOrientation"/> enumeration type to angle degree.
         /// </summary>
@@ -289,25 +267,15 @@ namespace OfficeOpenXml
         {
             SentinelHelper.IsEnumValid(orientation);
 
-            switch (orientation)
+            return orientation switch
             {
-                case LabelOrientation.Upward:
-                    return -5400000;
-
-                case LabelOrientation.Downward:
-                    return 5400000;
-
-                case LabelOrientation.Vertical:
-                    return 0;
-
-                case LabelOrientation.Horizontal:
-                    return 0;
-
-                default:
-                    return 0;
-            }
+                LabelOrientation.Upward => -5400000,
+                LabelOrientation.Downward => 5400000,
+                LabelOrientation.Vertical => 0,
+                LabelOrientation.Horizontal => 0,
+                _ => 0
+            };
         }
-        #endregion
 
         #endregion
     }
