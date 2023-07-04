@@ -4,38 +4,37 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace iTin.Utilities.Xlsx.Design.Charts
+namespace iTin.Utilities.Xlsx.Design.Charts;
+
+/// <summary>
+/// Defines the orientation of labels on the axis.
+/// </summary>
+[Serializable]
+[JsonConverter(typeof(StringEnumConverter))]
+public enum LabelOrientation
 {
     /// <summary>
-    /// Defines the orientation of labels on the axis.
+    /// The orientation is automatic.
     /// </summary>
-    [Serializable]
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum LabelOrientation
-    {
-        /// <summary>
-        /// The orientation is automatic.
-        /// </summary>
-        Automatic,
+    Automatic,
 
-        /// <summary>
-        /// The orientation is downward.
-        /// </summary>
-        Downward,
+    /// <summary>
+    /// The orientation is downward.
+    /// </summary>
+    Downward,
 
-        /// <summary>
-        /// The orientation is horizontal.
-        /// </summary>
-        Horizontal,
+    /// <summary>
+    /// The orientation is horizontal.
+    /// </summary>
+    Horizontal,
 
-        /// <summary>
-        /// The orientation is upward.
-        /// </summary>
-        Upward,
+    /// <summary>
+    /// The orientation is upward.
+    /// </summary>
+    Upward,
 
-        /// <summary>
-        /// The orientation is vertical.
-        /// </summary>
-        Vertical
-    }
+    /// <summary>
+    /// The orientation is vertical.
+    /// </summary>
+    Vertical
 }

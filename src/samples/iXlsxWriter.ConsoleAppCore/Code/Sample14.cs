@@ -1,4 +1,6 @@
 ﻿
+using iTin.Core.Models.Design;
+
 namespace iXlsxWriter.Samples
 {
     using System;

@@ -1,29 +1,28 @@
 ﻿
-namespace OfficeOpenXml.Drawing.Chart
+namespace OfficeOpenXml.Drawing.Chart;
+
+/// <summary>
+/// Known axis types.
+/// </summary>
+internal enum KnownAxisType
 {
     /// <summary>
-    /// Known axis types.
+    /// The primary category axis
     /// </summary>
-    internal enum KnownAxisType
-    {
-        /// <summary>
-        /// The primary category axis
-        /// </summary>
-        PrimaryCategoryAxis,
+    PrimaryCategoryAxis,
 
-        /// <summary>
-        /// The primary value axis
-        /// </summary>
-        PrimaryValueAxis,
+    /// <summary>
+    /// The primary value axis
+    /// </summary>
+    PrimaryValueAxis,
 
-        /// <summary>
-        /// The secondary category axis
-        /// </summary>
-        SecondaryCategoryAxis,
+    /// <summary>
+    /// The secondary category axis
+    /// </summary>
+    SecondaryCategoryAxis,
 
-        /// <summary>
-        /// The secondary value axis
-        /// </summary>
-        SecondaryValueAxis,
-    }
+    /// <summary>
+    /// The secondary value axis
+    /// </summary>
+    SecondaryValueAxis,
 }

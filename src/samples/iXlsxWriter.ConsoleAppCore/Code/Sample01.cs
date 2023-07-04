@@ -7,6 +7,7 @@ using System.Linq;
 
 using iTin.Core.ComponentModel;
 using iTin.Core.Helpers;
+using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
 
 using iTin.Logging.ComponentModel;
@@ -14,6 +15,7 @@ using iTin.Logging.ComponentModel;
 using iTin.Utilities.Xlsx.Design.Shared;
 using iTin.Utilities.Xlsx.Design.Styles;
 using iTin.Utilities.Xlsx.Writer;
+
 using iXlsxWriter.ComponentModel;
 using iXlsxWriter.ComponentModel.Result.Action.Save;
 using iXlsxWriter;

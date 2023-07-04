@@ -14,142 +14,94 @@ using iTin.Utilities.Xlsx.Writer;
 
 using iXlsxWriter.ComponentModel.Result.Insert;
 
-namespace iXlsxWriter.ComponentModel
+namespace iXlsxWriter.ComponentModel;
+
+/// <summary>
+/// A Specialization of <see cref="InsertWithStyleBase"/> class.<br/>
+/// Allows insert a text, number or date with style.
+/// </summary>
+public class InsertText : InsertWithStyleBase
 {
+    #region constructor/s
+
     /// <summary>
-    /// A Specialization of <see cref="InsertWithStyleBase"/> class.<br/>
-    /// Allows insert a text, number or date with style.
+    /// Initializes a new instance of the <see cref="InsertText"/> class.
     /// </summary>
-    public class InsertText : InsertWithStyleBase
+    public InsertText()
     {
-        #region constructor/s
+        Data = string.Empty;
+        SheetName = string.Empty;
+        Style = XlsxCellStyle.Default;
+        Location = new XlsxPointRange { Column = 1, Row = 1 };
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="InsertText"/> class.
-        /// </summary>
-        public InsertText()
+    #endregion
+
+    #region protected override methods
+
+    /// <summary>
+    /// Implementation to execute when insert action.
+    /// </summary>
+    /// <param name="input">stream input</param>
+    /// <param name="context">Input context</param>
+    /// <returns>
+    /// <para>
+    /// A <see cref="InsertResult"/> reference that contains the result of the operation, to check if the operation is correct, the <b>Success</b>
+    /// property will be <b>true</b> and the <b>Value</b> property will contain the value; Otherwise, the the <b>Success</b> property
+    /// will be false and the <b>Errors</b> property will contain the errors associated with the operation, if they have been filled in.
+    /// </para>
+    /// <para>
+    /// The type of the return value is <see cref="InsertResultData"/>, which contains the operation result
+    /// </para>
+    /// </returns>
+    protected override InsertResult InsertImpl(Stream input, IInput context)
+    {
+        if (string.IsNullOrEmpty(SheetName))
         {
-            Data = string.Empty;
-            SheetName = string.Empty;
-            Style = XlsxCellStyle.Default;
-            Location = new XlsxPointRange { Column = 1, Row = 1 };
-        }
-
-        #endregion
-
-        #region protected override methods
-
-        /// <summary>
-        /// Implementation to execute when insert action.
-        /// </summary>
-        /// <param name="input">stream input</param>
-        /// <param name="context">Input context</param>
-        /// <returns>
-        /// <para>
-        /// A <see cref="InsertResult"/> reference that contains the result of the operation, to check if the operation is correct, the <b>Success</b>
-        /// property will be <b>true</b> and the <b>Value</b> property will contain the value; Otherwise, the the <b>Success</b> property
-        /// will be false and the <b>Errors</b> property will contain the errors associated with the operation, if they have been filled in.
-        /// </para>
-        /// <para>
-        /// The type of the return value is <see cref="InsertResultData"/>, which contains the operation result
-        /// </para>
-        /// </returns>
-        protected override InsertResult InsertImpl(Stream input, IInput context)
-        {
-            if (string.IsNullOrEmpty(SheetName))
-            {
-                return InsertResult.CreateErrorResult(
-                    "Sheet name can not be null or empty",
-                    new InsertResultData
-                    {
-                        Context = context,
-                        InputStream = input,
-                        OutputStream = input
-                    });
-            }
-
-            if (Location == null)
-            {
-                return InsertResult.CreateSuccessResult(new InsertResultData
+            return InsertResult.CreateErrorResult(
+                "Sheet name can not be null or empty",
+                new InsertResultData
                 {
                     Context = context,
                     InputStream = input,
                     OutputStream = input
                 });
-            }
-
-            if (Style == null)
-            {
-                Style = XlsxCellStyle.Default;
-            }
-
-            return InsertImpl(context, input, SheetName, Data, Location, Style);
         }
 
-        #endregion
-
-        #region private static methods
-
-        private static InsertResult InsertImpl(IInput context, Stream input, string sheetName, object data, XlsxBaseRange location, XlsxCellStyle style)
+        if (Location == null)
         {
-            var outputStream = new MemoryStream();
-
-            try
+            return InsertResult.CreateSuccessResult(new InsertResultData
             {
-                using var excel = new ExcelPackage(input);
-                var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
-                if (ws == null)
-                {
-                    return InsertResult.CreateErrorResult(
-                        $"Sheet '{sheetName}' not found",
-                        new InsertResultData
-                        {
-                            Context = context,
-                            InputStream = input,
-                            OutputStream = input
-                        });
-                }
+                Context = context,
+                InputStream = input,
+                OutputStream = input
+            });
+        }
 
-                ExcelAddressBase locationAddress = location.ToEppExcelAddress();
-                XlsxCellStyle safeStyle = excel.CreateStyle(style);
-                XlsxCellMerge merge = safeStyle.Content.Merge;
-                string range = merge.Cells == 1
-                    ? locationAddress.ToString()
-                    : merge.Orientation == KnownMergeOrientation.Horizontal
-                        ? ExcelCellBase.GetAddress(locationAddress.Start.Row, locationAddress.Start.Column, locationAddress.Start.Row, locationAddress.Start.Column + merge.Cells - 1)
-                        : ExcelCellBase.GetAddress(locationAddress.Start.Row, locationAddress.Start.Column, locationAddress.Start.Row + merge.Cells - 1, locationAddress.Start.Column);
+        if (Style == null)
+        {
+            Style = XlsxCellStyle.Default;
+        }
 
-                ExcelRange cell = ws.Cells[range];
-                cell.StyleName = locationAddress.End.Row.IsOdd()
-                    ? $"{safeStyle.Name}_Alternate"
-                    : safeStyle.Name ?? XlsxBaseStyle.NameOfDefaultStyle;
+        return InsertImpl(context, input, SheetName, Data, Location, Style);
+    }
 
-                if (style.Content.Show == YesNo.Yes)
-                {
-                    if (data != null)
-                    {
-                        cell.Value = safeStyle.Content.DataType.GetFormattedDataValue(data.ToString()).FormattedValue;
+    #endregion
 
-                        if (merge.Cells > 1)
-                        {
-                            cell.Merge = true;
-                        }
-                    }
-                }
+    #region private static methods
 
-                excel.SaveAs(outputStream);
+    private static InsertResult InsertImpl(IInput context, Stream input, string sheetName, object data, XlsxBaseRange location, XlsxCellStyle style)
+    {
+        var outputStream = new MemoryStream();
 
-                return InsertResult.CreateSuccessResult(new InsertResultData
-                {
-                    Context = context,
-                    InputStream = input,
-                    OutputStream = outputStream
-                });
-            }
-            catch (Exception ex)
+        try
+        {
+            using var excel = new ExcelPackage(input);
+            var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
+            if (ws == null)
             {
-                return InsertResult.FromException(
-                    ex,
+                return InsertResult.CreateErrorResult(
+                    $"Sheet '{sheetName}' not found",
                     new InsertResultData
                     {
                         Context = context,
@@ -157,8 +109,55 @@ namespace iXlsxWriter.ComponentModel
                         OutputStream = input
                     });
             }
-        }
 
-        #endregion
+            ExcelAddressBase locationAddress = location.ToEppExcelAddress();
+            XlsxCellStyle safeStyle = excel.CreateStyle(style);
+            XlsxCellMerge merge = safeStyle.Content.Merge;
+            string range = merge.Cells == 1
+                ? locationAddress.ToString()
+                : merge.Orientation == KnownMergeOrientation.Horizontal
+                    ? ExcelCellBase.GetAddress(locationAddress.Start.Row, locationAddress.Start.Column, locationAddress.Start.Row, locationAddress.Start.Column + merge.Cells - 1)
+                    : ExcelCellBase.GetAddress(locationAddress.Start.Row, locationAddress.Start.Column, locationAddress.Start.Row + merge.Cells - 1, locationAddress.Start.Column);
+
+            ExcelRange cell = ws.Cells[range];
+            cell.StyleName = locationAddress.End.Row.IsOdd()
+                ? $"{safeStyle.Name}_Alternate"
+                : safeStyle.Name ?? XlsxBaseStyle.NameOfDefaultStyle;
+
+            if (style.Content.Show == YesNo.Yes)
+            {
+                if (data != null)
+                {
+                    cell.Value = safeStyle.Content.DataType.GetFormattedDataValue(data.ToString()).FormattedValue;
+
+                    if (merge.Cells > 1)
+                    {
+                        cell.Merge = true;
+                    }
+                }
+            }
+
+            excel.SaveAs(outputStream);
+
+            return InsertResult.CreateSuccessResult(new InsertResultData
+            {
+                Context = context,
+                InputStream = input,
+                OutputStream = outputStream
+            });
+        }
+        catch (Exception ex)
+        {
+            return InsertResult.FromException(
+                ex,
+                new InsertResultData
+                {
+                    Context = context,
+                    InputStream = input,
+                    OutputStream = input
+                });
+        }
     }
+
+    #endregion
 }

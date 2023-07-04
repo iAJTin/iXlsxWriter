@@ -4,28 +4,27 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace iTin.Utilities.Xlsx.Design.Settings
+namespace iTin.Utilities.Xlsx.Design.Settings;
+
+/// <summary>
+/// Defines the allowed document view modes.
+/// </summary>
+[Serializable]
+[JsonConverter(typeof(StringEnumConverter))]
+public enum KnownDocumentView
 {
     /// <summary>
-    /// Defines the allowed document view modes.
+    /// 
     /// </summary>
-    [Serializable]
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum KnownDocumentView
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        Normal,
+    Normal,
 
-        /// <summary>
-        /// 
-        /// </summary>
-        Design,
+    /// <summary>
+    /// 
+    /// </summary>
+    Design,
 
-        /// <summary>
-        /// 
-        /// </summary>
-        Print,
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    Print,
 }

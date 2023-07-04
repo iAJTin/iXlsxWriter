@@ -14,62 +14,119 @@ using iTin.Utilities.Xlsx.Design.Picture;
 using iTin.Utilities.Xlsx.Design.Shared;
 using iXlsxWriter.ComponentModel.Result.Insert;
 
-namespace iXlsxWriter.ComponentModel
-{
-    /// <summary>
-    /// A Specialization of <see cref="InsertLocationBase"/> class.<br/>
-    /// Allows insert a picture in the specified location
-    /// </summary>
-    public class InsertPicture : InsertLocationBase
-    {
-        #region constructor/s
+namespace iXlsxWriter.ComponentModel;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="InsertPicture"/> class.
-        /// </summary>
-        public InsertPicture()
+/// <summary>
+/// A Specialization of <see cref="InsertLocationBase"/> class.<br/>
+/// Allows insert a picture in the specified location
+/// </summary>
+public class InsertPicture : InsertLocationBase
+{
+    #region constructor/s
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="InsertPicture"/> class.
+    /// </summary>
+    public InsertPicture()
+    {
+        Location = null;
+        SheetName = string.Empty;
+    }
+
+    #endregion
+
+    #region public properties
+
+    /// <summary>
+    /// Gets or sets a reference to picture configuration.
+    /// </summary>
+    /// <value>
+    /// A <see cref="XlsxPicture"/> reference to picture configuration.
+    /// </value>
+    public XlsxPicture Picture { get; set; }
+
+    #endregion
+
+    #region protected override methods
+
+    /// <summary>
+    /// Implementation to execute when insert action.
+    /// </summary>
+    /// <param name="input">stream input</param>
+    /// <param name="context">Input context</param>
+    /// <returns>
+    /// <para>
+    /// A <see cref="InsertResult"/> reference that contains the result of the operation, to check if the operation is correct, the <b>Success</b>
+    /// property will be <b>true</b> and the <b>Value</b> property will contain the value; Otherwise, the the <b>Success</b> property
+    /// will be false and the <b>Errors</b> property will contain the errors associated with the operation, if they have been filled in.
+    /// </para>
+    /// <para>
+    /// The type of the return value is <see cref="InsertResultData"/>, which contains the operation result
+    /// </para>
+    /// </returns>
+    protected override InsertResult InsertImpl(Stream input, IInput context)
+    {
+        if (string.IsNullOrEmpty(SheetName))
         {
-            Location = null;
-            SheetName = string.Empty;
+            return InsertResult.CreateErrorResult(
+                "Sheet name can not be null or empty",
+                new InsertResultData
+                {
+                    Context = context,
+                    InputStream = input,
+                    OutputStream = input
+                });
         }
 
-        #endregion
-
-        #region public properties
-
-        /// <summary>
-        /// Gets or sets a reference to picture configuration.
-        /// </summary>
-        /// <value>
-        /// A <see cref="XlsxPicture"/> reference to picture configuration.
-        /// </value>
-        public XlsxPicture Picture { get; set; }
-
-        #endregion
-
-        #region protected override methods
-
-        /// <summary>
-        /// Implementation to execute when insert action.
-        /// </summary>
-        /// <param name="input">stream input</param>
-        /// <param name="context">Input context</param>
-        /// <returns>
-        /// <para>
-        /// A <see cref="InsertResult"/> reference that contains the result of the operation, to check if the operation is correct, the <b>Success</b>
-        /// property will be <b>true</b> and the <b>Value</b> property will contain the value; Otherwise, the the <b>Success</b> property
-        /// will be false and the <b>Errors</b> property will contain the errors associated with the operation, if they have been filled in.
-        /// </para>
-        /// <para>
-        /// The type of the return value is <see cref="InsertResultData"/>, which contains the operation result
-        /// </para>
-        /// </returns>
-        protected override InsertResult InsertImpl(Stream input, IInput context)
+        if (Location == null)
         {
-            if (string.IsNullOrEmpty(SheetName))
+            return InsertResult.CreateSuccessResult(new InsertResultData
+            {
+                Context = context,
+                InputStream = input,
+                OutputStream = input
+            });
+        }
+
+        if (Picture == null)
+        {
+            return InsertResult.CreateSuccessResult(new InsertResultData
+            {
+                Context = context,
+                InputStream = input,
+                OutputStream = input
+            });
+        }
+
+        if (Picture.Show == YesNo.No)
+        {
+            return InsertResult.CreateSuccessResult(new InsertResultData
+            {
+                Context = context,
+                InputStream = input,
+                OutputStream = input
+            });
+        }
+
+        return InsertImpl(context, input, SheetName, Location, Picture);
+    }
+
+    #endregion
+
+    #region private static methods
+
+    private static InsertResult InsertImpl(IInput context, Stream input, string sheetName, XlsxBaseRange location, XlsxPicture xlsxPicture)
+    {
+        var outputStream = new MemoryStream();
+
+        try
+        {
+            using var excel = new ExcelPackage(input);
+            var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
+            if (ws == null)
             {
                 return InsertResult.CreateErrorResult(
-                    "Sheet name can not be null or empty",
+                    $"Sheet '{sheetName}' not found",
                     new InsertResultData
                     {
                         Context = context,
@@ -78,55 +135,12 @@ namespace iXlsxWriter.ComponentModel
                     });
             }
 
-            if (Location == null)
+            using (var image = xlsxPicture.GetImage())
             {
-                return InsertResult.CreateSuccessResult(new InsertResultData
-                {
-                    Context = context,
-                    InputStream = input,
-                    OutputStream = input
-                });
-            }
-
-            if (Picture == null)
-            {
-                return InsertResult.CreateSuccessResult(new InsertResultData
-                {
-                    Context = context,
-                    InputStream = input,
-                    OutputStream = input
-                });
-            }
-
-            if (Picture.Show == YesNo.No)
-            {
-                return InsertResult.CreateSuccessResult(new InsertResultData
-                {
-                    Context = context,
-                    InputStream = input,
-                    OutputStream = input
-                });
-            }
-
-            return InsertImpl(context, input, SheetName, Location, Picture);
-        }
-
-        #endregion
-
-        #region private static methods
-
-        private static InsertResult InsertImpl(IInput context, Stream input, string sheetName, XlsxBaseRange location, XlsxPicture xlsxPicture)
-        {
-            var outputStream = new MemoryStream();
-
-            try
-            {
-                using var excel = new ExcelPackage(input);
-                var ws = excel.Workbook.Worksheets.FirstOrDefault(worksheet => worksheet.Name.Equals(sheetName, StringComparison.OrdinalIgnoreCase));
-                if (ws == null)
+                if (image == null)
                 {
                     return InsertResult.CreateErrorResult(
-                        $"Sheet '{sheetName}' not found",
+                        "The image could not be loaded, please check that the path is correct",
                         new InsertResultData
                         {
                             Context = context,
@@ -135,76 +149,61 @@ namespace iXlsxWriter.ComponentModel
                         });
                 }
 
-                using (var image = xlsxPicture.GetImage())
+                var pictureName = xlsxPicture.Name.HasValue() ? xlsxPicture.Name : $"picture{ws.Drawings.Count}";
+                foreach (var item in ws.Drawings)
                 {
-                    if (image == null)
+                    var pic = item as ExcelPicture;
+                    if (pic == null)
                     {
-                        return InsertResult.CreateErrorResult(
-                            "The image could not be loaded, please check that the path is correct",
-                            new InsertResultData
-                            {
-                                Context = context,
-                                InputStream = input,
-                                OutputStream = input
-                            });
+                        continue;
                     }
 
-                    var pictureName = xlsxPicture.Name.HasValue() ? xlsxPicture.Name : $"picture{ws.Drawings.Count}";
-                    foreach (var item in ws.Drawings)
+                    var existPicture = pic.Name.Equals(pictureName, StringComparison.OrdinalIgnoreCase);
+                    if (!existPicture)
                     {
-                        var pic = item as ExcelPicture;
-                        if (pic == null)
-                        {
-                            continue;
-                        }
-
-                        var existPicture = pic.Name.Equals(pictureName, StringComparison.OrdinalIgnoreCase);
-                        if (!existPicture)
-                        {
-                            continue;
-                        }
-
-                        return InsertResult.CreateErrorResult(
-                            $"There is already an image with the name '{pictureName}' in the collection, please rename the image.",
-                            new InsertResultData
-                            {
-                                Context = context,
-                                InputStream = input,
-                                OutputStream = input
-                            });
+                        continue;
                     }
 
-                    ExcelPicture picture = ws.Drawings.AddPicture(pictureName, image);
-                    var writer = new OfficeOpenPictureWriter(picture, ws);
-                    writer.SetBorder(xlsxPicture.Border);
-                    writer.SetContent(xlsxPicture.Content);
-                    writer.SetPosition(location);
-                    writer.SetSize(xlsxPicture.Size);
-                    writer.SetShapeEffects(xlsxPicture.ShapeEffects, pictureName);
+                    return InsertResult.CreateErrorResult(
+                        $"There is already an image with the name '{pictureName}' in the collection, please rename the image.",
+                        new InsertResultData
+                        {
+                            Context = context,
+                            InputStream = input,
+                            OutputStream = input
+                        });
                 }
 
-                excel.SaveAs(outputStream);
+                ExcelPicture picture = ws.Drawings.AddPicture(pictureName, image);
+                var writer = new OfficeOpenPictureWriter(picture, ws);
+                writer.SetBorder(xlsxPicture.Border);
+                writer.SetContent(xlsxPicture.Content);
+                writer.SetPosition(location);
+                writer.SetSize(xlsxPicture.Size);
+                writer.SetShapeEffects(xlsxPicture.ShapeEffects, pictureName);
+            }
 
-                return InsertResult.CreateSuccessResult(new InsertResultData
+            excel.SaveAs(outputStream);
+
+            return InsertResult.CreateSuccessResult(new InsertResultData
+            {
+                Context = context,
+                InputStream = input,
+                OutputStream = outputStream
+            });
+        }
+        catch (Exception ex)
+        {
+            return InsertResult.FromException(
+                ex,
+                new InsertResultData
                 {
                     Context = context,
                     InputStream = input,
-                    OutputStream = outputStream
+                    OutputStream = input
                 });
-            }
-            catch (Exception ex)
-            {
-                return InsertResult.FromException(
-                    ex,
-                    new InsertResultData
-                    {
-                        Context = context,
-                        InputStream = input,
-                        OutputStream = input
-                    });
-            }
         }
-
-        #endregion
     }
+
+    #endregion
 }

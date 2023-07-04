@@ -4,28 +4,27 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace iTin.Utilities.Xlsx.Design.Shared
+namespace iTin.Utilities.Xlsx.Design.Shared;
+
+/// <summary>
+///Defines availables size types.
+/// </summary>
+[Serializable]
+[JsonConverter(typeof(StringEnumConverter))]
+public enum KnownSizeType
 {
     /// <summary>
-    ///Defines availables size types.
+    /// Size
     /// </summary>
-    [Serializable]
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum KnownSizeType
-    {
-        /// <summary>
-        /// Size
-        /// </summary>
-        Size,
+    Size,
 
-        /// <summary>
-        /// Nullable size
-        /// </summary>
-        NullableSize,
+    /// <summary>
+    /// Nullable size
+    /// </summary>
+    NullableSize,
 
-        /// <summary>
-        /// Percent
-        /// </summary>
-        Percent,
-    }
+    /// <summary>
+    /// Percent
+    /// </summary>
+    Percent,
 }

@@ -4,43 +4,42 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace iTin.Utilities.Xlsx.Design.Shared
+namespace iTin.Utilities.Xlsx.Design.Shared;
+
+/// <summary>
+/// Defines availables aggregate types.
+/// </summary>
+[Serializable]
+[JsonConverter(typeof(StringEnumConverter))]
+public enum KnownAggregateType
 {
     /// <summary>
-    /// Defines availables aggregate types.
+    /// None aggregate
     /// </summary>
-    [Serializable]
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum KnownAggregateType
-    {
-        /// <summary>
-        /// None aggregate
-        /// </summary>
-        None,
+    None,
 
-        /// <summary>
-        /// Average aggregate
-        /// </summary>        
-        Average,
+    /// <summary>
+    /// Average aggregate
+    /// </summary>        
+    Average,
 
-        /// <summary>
-        /// Count aggregate
-        /// </summary>        
-        Count,
+    /// <summary>
+    /// Count aggregate
+    /// </summary>        
+    Count,
 
-        /// <summary>
-        /// Max aggregate
-        /// </summary>        
-        Max,
+    /// <summary>
+    /// Max aggregate
+    /// </summary>        
+    Max,
 
-        /// <summary>
-        /// Min aggregate
-        /// </summary>        
-        Min,
+    /// <summary>
+    /// Min aggregate
+    /// </summary>        
+    Min,
 
-        /// <summary>
-        /// Sum aggregate
-        /// </summary>
-        Sum
-    }
+    /// <summary>
+    /// Sum aggregate
+    /// </summary>
+    Sum
 }

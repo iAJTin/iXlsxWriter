@@ -1,22 +1,21 @@
 ﻿
 using System;
 
-namespace iXlsxWriter.ComponentModel
+namespace iXlsxWriter.ComponentModel;
+
+/// <summary>
+/// Specifies the known output type.
+/// </summary>
+[Serializable]
+public enum KnownOutputType
 {
     /// <summary>
-    /// Specifies the known output type.
+    /// Output file type as xlsx
     /// </summary>
-    [Serializable]
-    public enum KnownOutputType
-    {
-        /// <summary>
-        /// Output file type as xlsx
-        /// </summary>
-        Xlsx,
+    Xlsx,
 
-        /// <summary>
-        /// Output file type as zip
-        /// </summary>
-        Zip,
-    }
+    /// <summary>
+    /// Output file type as zip
+    /// </summary>
+    Zip,
 }

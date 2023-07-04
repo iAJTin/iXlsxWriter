@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -17,15 +18,17 @@ using iTin.Core.ComponentModel;
 using iTin.Core.ComponentModel.Results;
 using iTin.Core.Helpers;
 using iTin.Core.IO;
-using iTin.Core.Models.ComponentModel;
-using iTin.Core.Models.ComponentModel.Strategies;
-using iTin.Core.Models.ComponentModel.Strategies.Result;
 
 using NativePath = System.IO.Path;
 using iTinPath = iTin.Core.IO.Path;
 
 namespace iTin.Core.Models
 {
+    using ComponentModel;
+    using ComponentModel.Strategies;
+    using ComponentModel.Strategies.Result;
+    using Helpers;
+
     /// <summary>
     /// Base class for model elements.<br/>
     /// Implements functionality to record and read configuration files.
@@ -34,6 +37,12 @@ namespace iTin.Core.Models
     [Serializable]
     public class BaseModel<T>
     {
+        #region private constants
+
+        private const string DefaultClassName = "BuiltInFunctions";
+
+        #endregion
+
         #region private members
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -621,5 +630,120 @@ namespace iTin.Core.Models
         }
 
         #endregion
+
+        /// <summary>
+        /// Gets the static binding value by reflection.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// A <see cref="string"/> that contains property, method or raw value.
+        /// </returns>
+        protected virtual string GetStaticBindingValue(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+
+            var isBinded = RegularExpressionHelper.IsStaticBindingResource(value);
+            if (!isBinded)
+            {
+                return value;
+            }
+
+            var assemblies = new List<Assembly> { GetType().Assembly };
+            //var references = ModelService.Instance.References;
+            //foreach (var reference in references)
+            //{
+            //    var assemblyName = reference.Assembly.ToUpperInvariant();
+            //    var hasExtension = assemblyName.EndsWith(".DLL");
+            //    if (!hasExtension)
+            //    {
+            //        assemblyName = string.Concat(assemblyName, ".DLL");
+            //    }
+
+            //    var assemblyRelativePath = reference.Path;
+            //    var qualifiedAssemblyPath = string.Concat(assemblyRelativePath, assemblyName);
+            //    var qualifiedAssemblyPathParsed = iTin.Core.IO.Path.PathResolver(qualifiedAssemblyPath); //, root);
+            //    var assembly = Assembly.LoadFile(qualifiedAssemblyPathParsed);
+            //    assemblies.Add(assembly);
+            //}
+
+            object returnValue;
+            var targetValue = value.Replace("{", string.Empty).Replace("}", string.Empty).Trim();
+            var bindParts = targetValue.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+            var qualifiedFunctionName = bindParts[1].Trim();
+
+            string className;
+            string functionName;
+            var qualifiedFunctionParts = qualifiedFunctionName.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+            if (qualifiedFunctionParts.Length == 1)
+            {
+                className = DefaultClassName;
+                functionName = qualifiedFunctionParts[0].Trim();
+            }
+            else
+            {
+                className = qualifiedFunctionParts[0].Trim();
+                functionName = qualifiedFunctionParts[1].Trim();
+            }
+
+            var casm = assemblies.Count == 1 ? assemblies.First() : assemblies.Last();
+            var assemblyTypes = casm.GetExportedTypes();
+            var classType = assemblyTypes.FirstOrDefault(cls => cls.Name == className);
+
+            var instanceMethodInfo = classType.GetMethod(functionName, BindingFlags.Public | BindingFlags.Instance);
+            if (instanceMethodInfo != null)
+            {
+                returnValue = instanceMethodInfo.Invoke(this, null);
+            }
+            else
+            {
+                var staticMethodInfo = classType.GetMethod(functionName, BindingFlags.Public | BindingFlags.Static);
+                if (staticMethodInfo != null)
+                {
+                    returnValue = staticMethodInfo.Invoke(null, null);
+                }
+                else
+                {
+                    var instancePropertyInfo = classType.GetProperty(functionName, BindingFlags.Public | BindingFlags.GetProperty | BindingFlags.Instance);
+                    if (instancePropertyInfo != null)
+                    {
+                        var instancePropertyGetMethod = instancePropertyInfo.GetGetMethod(true);
+                        returnValue = instancePropertyGetMethod.Invoke(this, null);
+                    }
+                    else
+                    {
+                        var staticPropertyInfo = classType.GetProperty(functionName, BindingFlags.Public | BindingFlags.GetProperty | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+                        var staticPropertyGetMethod = staticPropertyInfo.GetGetMethod(true);
+                        returnValue = staticPropertyGetMethod.Invoke(null, null);
+                    }
+                }
+            }
+
+            return returnValue.ToString();
+        }
+
+        /// <summary>
+        /// Gets a string containing the attribute value an element <see cref="XmlEnumAttribute"/>.
+        /// </summary>
+        /// <param name="item">Element containing the attribute.</param>
+        /// <returns>
+        /// The attribute value of the element.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="item"/> is <see langword="null"/></exception>
+        [DebuggerStepThrough]
+        protected static string GetXmlEnumAttributeFromItem(Enum item)
+        {
+            SentinelHelper.ArgumentNull(item, nameof(item));
+
+            var itemType = item.GetType();
+            var itemName = Enum.GetName(itemType, item);
+            var mi = itemType.GetMember(itemName);
+            var xmlEnumAttribute = (XmlEnumAttribute)Attribute.GetCustomAttribute(mi[0], typeof(XmlEnumAttribute));
+            var attributeValue = xmlEnumAttribute.Name;
+
+            return attributeValue;
+        }
     }
 }

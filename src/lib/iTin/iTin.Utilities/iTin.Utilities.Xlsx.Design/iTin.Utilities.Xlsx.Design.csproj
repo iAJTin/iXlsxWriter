@@ -16,27 +16,113 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.4" />
-  </ItemGroup>
-
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties configuration_4schemas_4json_4basexlsxconfigurationschema_1json__JsonSchema="" />
     </VisualStudio>
   </ProjectExtensions>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\iTin.Core\iTin.Core.Drawing\iTin.Core.Drawing.csproj" />
-    <ProjectReference Include="..\..\iTin.Core\iTin.Core.Models.Design\iTin.Core.Models.Design.Charting\iTin.Core.Models.Design.Charting.csproj" />
+    <Compile Remove="Styles\Items\Cell\Content\DataType\**" />
+    <EmbeddedResource Remove="Styles\Items\Cell\Content\DataType\**" />
+    <None Remove="Styles\Items\Cell\Content\DataType\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Styles\Items\Cell\Enums\KnownDataType.cs" />
+    <Compile Remove="Styles\Items\Cell\Enums\KnownDateTimeFormat.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.4" />
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Update="System.Drawing">
       <SpecificVersion>false</SpecificVersion>
     </Reference>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\iTin.Core\iTin.Core.Drawing\iTin.Core.Drawing.csproj" />
+    <ProjectReference Include="..\..\iTin.Core\iTin.Core.Models.Design\iTin.Core.Models.Design.Charting\iTin.Core.Models.Design.Charting.csproj" />
+  </ItemGroup>
+
+
+
+  <!-- BaseStyle -->
+  <ItemGroup>
+    <Compile Update="Styles\Items\Base\XlsxBaseStyle.*.cs">
+      <DependentUpon>XlsxBaseStyle.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- XlsxStyleBorders -->
+  <ItemGroup>
+    <Compile Update="Styles\Items\Cell\Borders\XlsxStyleBorders.*.cs">
+      <DependentUpon>XlsxStyleBorders.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- XlsxStyleBorder -->
+  <ItemGroup>
+    <Compile Update="Styles\Items\Cell\Borders\Border\XlsxStyleBorder.*.cs">
+      <DependentUpon>XlsxStyleBorder.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- XlsxCellPattern -->
+  <ItemGroup>
+    <Compile Update="Styles\Items\Cell\Content\Pattern\XlsxCellPattern.*.cs">
+      <DependentUpon>XlsxCellPattern.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Content\Pattern\XlsxCellPatternOptions.*.cs">
+      <DependentUpon>XlsxCellPatternOptions.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- XlsxCellContent -->
+  <ItemGroup>
+    <Compile Update="Styles\Items\Cell\Content\XlsxCellContent.*.cs">
+      <DependentUpon>XlsxCellContent.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Content\XlsxCellContentOptions.*.cs">
+      <DependentUpon>XlsxCellContentOptions.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- XlsxCellMerge -->
+  <ItemGroup>
+    <Compile Update="Styles\Items\Cell\Content\Merge\XlsxCellMerge.*.cs">
+      <DependentUpon>XlsxCellMerge.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Content\Merge\XlsxCellMergeOptions.*.cs">
+      <DependentUpon>XlsxCellMergeOptions.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- XlsxCellContentAlignment -->
+  <ItemGroup>
+    <Compile Update="Styles\Items\Cell\Content\Alignment\XlsxCellContentAlignment.*.cs">
+      <DependentUpon>XlsxCellContentAlignment.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Content\Alignment\XlsxCellContentAlignmentOptions.*.cs">
+      <DependentUpon>XlsxCellContentAlignmentOptions.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+
+  <!-- XlsxCellStyle -->
+  <ItemGroup>
+    <Compile Update="Styles\Items\Cell\XlsxCellStyle.*.cs">
+      <DependentUpon>XlsxCellStyle.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\XlsxCellStyleOptions.*.cs">
+      <DependentUpon>XlsxCellStyleOptions.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 
   <ItemGroup>
     <Compile Update="Picture\Effects\Effect\XlsxGrayScaleGreenEffect.designer.cs">

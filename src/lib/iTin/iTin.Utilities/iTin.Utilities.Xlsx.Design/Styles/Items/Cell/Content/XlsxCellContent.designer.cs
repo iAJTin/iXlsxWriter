@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
 
-using iTin.Core.Models.Design.Styling;
+using iTin.Core.Models.Design;
 
 namespace iTin.Utilities.Xlsx.Design.Styles
 {

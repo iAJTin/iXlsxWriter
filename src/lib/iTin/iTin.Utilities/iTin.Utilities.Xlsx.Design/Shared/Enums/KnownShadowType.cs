@@ -4,28 +4,27 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace iTin.Utilities.Xlsx.Design.Shared
+namespace iTin.Utilities.Xlsx.Design.Shared;
+
+/// <summary>
+///Defines availables shadow types.
+/// </summary>
+[Serializable]
+[JsonConverter(typeof(StringEnumConverter))]
+public enum KnownShadowType
 {
     /// <summary>
-    ///Defines availables shadow types.
+    /// Inner shadow
     /// </summary>
-    [Serializable]
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum KnownShadowType
-    {
-        /// <summary>
-        /// Inner shadow
-        /// </summary>
-        Inner,
+    Inner,
 
-        /// <summary>
-        /// Outer shadow
-        /// </summary>
-        Outer,
+    /// <summary>
+    /// Outer shadow
+    /// </summary>
+    Outer,
 
-        /// <summary>
-        /// Perspective shadow
-        /// </summary>
-        Perspective
-    }
+    /// <summary>
+    /// Perspective shadow
+    /// </summary>
+    Perspective
 }

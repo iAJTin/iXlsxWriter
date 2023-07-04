@@ -1,9 +1,8 @@
 ﻿
 using iXlsxWriter.ComponentModel;
 
-namespace iXlsxWriter
+namespace iXlsxWriter;
+
+public sealed partial class XlsxObjectConfig : IXlsxObjectConfig
 {
-    public sealed partial class XlsxObjectConfig : IXlsxObjectConfig
-    {
-    }
 }

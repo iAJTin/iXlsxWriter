@@ -4,28 +4,27 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace iTin.Utilities.Xlsx.Design.Shared
+namespace iTin.Utilities.Xlsx.Design.Shared;
+
+/// <summary>
+///Defines availables range types.
+/// </summary>
+[Serializable]
+[JsonConverter(typeof(StringEnumConverter))]
+public enum KnownRangeType
 {
     /// <summary>
-    ///Defines availables range types.
+    /// String range
     /// </summary>
-    [Serializable]
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum KnownRangeType
-    {
-        /// <summary>
-        /// String range
-        /// </summary>
-        String,
+    String,
 
-        /// <summary>
-        /// Excel range
-        /// </summary>
-        Range,
+    /// <summary>
+    /// Excel range
+    /// </summary>
+    Range,
 
-        /// <summary>
-        /// Excel cell range
-        /// </summary>
-        Point
-    }
+    /// <summary>
+    /// Excel cell range
+    /// </summary>
+    Point
 }

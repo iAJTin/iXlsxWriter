@@ -7,7 +7,7 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Version>1.0.0.4</Version>
 		<Description>Data Models Base</Description>
-		<Copyright>Copyright © 2022</Copyright>
+		<Copyright>Copyright © 2023</Copyright>
 		<PackageProjectUrl></PackageProjectUrl>
 		<PackageId>iTin.Core.Models</PackageId>
 		<Company>iTin</Company>
@@ -17,13 +17,216 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+	  <Compile Remove="Design\Shared\Alignment\**" />
+	  <Compile Remove="Design\Shared\Content\DataContent\**" />
+	  <Compile Remove="Design\Shared\Styles\Style\Borders\**" />
+	  <Compile Remove="Design\Shared\Styles\Style\Content\**" />
+	  <EmbeddedResource Remove="Design\Shared\Alignment\**" />
+	  <EmbeddedResource Remove="Design\Shared\Content\DataContent\**" />
+	  <EmbeddedResource Remove="Design\Shared\Styles\Style\Borders\**" />
+	  <EmbeddedResource Remove="Design\Shared\Styles\Style\Content\**" />
+	  <None Remove="Design\Shared\Alignment\**" />
+	  <None Remove="Design\Shared\Content\DataContent\**" />
+	  <None Remove="Design\Shared\Styles\Style\Borders\**" />
+	  <None Remove="Design\Shared\Styles\Style\Content\**" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\iTin.Core.IO\iTin.Core.IO.csproj" />
-	  <ProjectReference Include="..\iTin.Core\iTin.Core.csproj" />
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\iTin.Core.Drawing\iTin.Core.Drawing.csproj" />
+    <ProjectReference Include="..\iTin.Core.IO\iTin.Core.IO.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+
+    <!-- Comment -->
+    <Compile Update="Design\Shared\Comment\Comment.*.cs">
+      <DependentUpon>Comment.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Comment\CommentOptions.*.cs">
+      <DependentUpon>CommentOptions.cs</DependentUpon>
+    </Compile>
+
+    <!-- ContentAlignment -->
+    <Compile Update="Design\Shared\Content\ContentAlignment\ContentAlignment.*.cs">
+      <DependentUpon>ContentAlignment.cs</DependentUpon>
+    </Compile>
+
+    <!-- Content -->
+    <Compile Update="Design\Shared\Content\BaseContent.*.cs">
+      <DependentUpon>BaseContent.cs</DependentUpon>
+    </Compile>
+
+    <!-- BaseBasicContent -->
+    <Compile Update="Design\Shared\Content\BaseBasicContent.*.cs">
+      <DependentUpon>BaseBasicContent.cs</DependentUpon>
+    </Compile>
+
+    <!-- DataType -->
+    <Compile Update="Design\Shared\DataType\Base\BaseDataType.*.cs">
+      <DependentUpon>BaseDataType.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\DataType\Real\Base\RealDataType.*.cs">
+      <DependentUpon>RealDataType.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\DataType\Real\Numeric\Base\NumericDataType.*.cs">
+      <DependentUpon>NumericDataType.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\DataType\Real\Numeric\CurrencyDataType.*.cs">
+      <DependentUpon>CurrencyDataType.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\DataType\Real\Numeric\NumberDataType.*.cs">
+      <DependentUpon>NumberDataType.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\DataType\Real\PercentageDataType.*.cs">
+      <DependentUpon>PercentageDataType.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\DataType\Real\ScientificDataType.*.cs">
+      <DependentUpon>ScientificDataType.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\DataType\DateTimeDataType.*.cs">
+      <DependentUpon>DateTimeDataType.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\DataType\TextDataType.*.cs">
+      <DependentUpon>TextDataType.cs</DependentUpon>
+    </Compile>
+
+    <!-- Error -->
+    <Compile Update="Design\Shared\Error\Base\BaseError.*.cs">
+      <DependentUpon>BaseError.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Error\Base\BaseErrorOptions.*.cs">
+      <DependentUpon>BaseErrorOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Error\DateTimeError\DateTimeError.*.cs">
+      <DependentUpon>DateTimeError.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Error\DateTimeError\DateTimeErrorOptions.*.cs">
+      <DependentUpon>DateTimeErrorOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Error\NumericError\NumericError.*.cs">
+      <DependentUpon>NumericError.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Error\NumericError\NumericErrorOptions.*.cs">
+      <DependentUpon>NumericErrorOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Error\NumericError\PercentageError\PercentageError.*.cs">
+      <DependentUpon>PercentageError.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Error\NumericError\PercentageError\PercentageErrorOptions.*.cs">
+      <DependentUpon>PercentageErrorOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Error\NumericError\ScientificError\ScientificError.*.cs">
+      <DependentUpon>ScientificError.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Error\NumericError\ScientificError\ScientificErrorOptions.*.cs">
+      <DependentUpon>ScientificErrorOptions.cs</DependentUpon>
+    </Compile>
+
+    <!-- Flip -->
+    <Compile Update="Design\Shared\Flip\Flip.*.cs">
+      <DependentUpon>Flip.cs</DependentUpon>
+    </Compile>
+
+    <!-- Font -->
+    <Compile Update="Design\Shared\Font\FontModel.*.cs">
+      <DependentUpon>FontModel.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Font\FontOptions.*.cs">
+      <DependentUpon>FontOptions.cs</DependentUpon>
+    </Compile>
+
+    <!-- Location -->
+    <Compile Update="Design\Shared\Location\Location.*.cs">
+      <DependentUpon>Location.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Location\ByAlignment\ByAlignment.*.cs">
+      <DependentUpon>ByAlignment.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Location\ByAlignment\ByAlignmentOptions.*.cs">
+      <DependentUpon>ByAlignmentOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Location\ByCoordenates\ByCoordenates.*.cs">
+      <DependentUpon>ByCoordenates.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Location\ByCoordenates\ByCoordenatesOptions.*.cs">
+      <DependentUpon>ByCoordenatesOptions.cs</DependentUpon>
+    </Compile>
+
+    <!-- Negative -->
+    <Compile Update="Design\Shared\Negative\Negative.*.cs">
+      <DependentUpon>Negative.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Negative\NegativeOptions.*.cs">
+      <DependentUpon>NegativeOptions.cs</DependentUpon>
+    </Compile>
+
+    <!-- Properties -->
+    <Compile Update="Design\Shared\Properties\Property\Property.*.cs">
+      <DependentUpon>Property.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Design\Shared\Properties\Properties.*.cs">
+      <DependentUpon>Properties.cs</DependentUpon>
+    </Compile>
+    
+    <!-- Shadow -->
+    <Compile Update="Design\Shared\Shadow\Shadow.*.cs">
+      <DependentUpon>Shadow.cs</DependentUpon>
+    </Compile>
+
+    <Compile Update="Design\Shared\Shadow\ShadowOptions.*.cs">
+      <DependentUpon>ShadowOptions.cs</DependentUpon>
+    </Compile>
+
+  </ItemGroup>
+
+  <!-- Styles-->
+  <ItemGroup>
+
+    <Compile Update="Design\Shared\Styles\Base\IStyles.*.cs">
+      <DependentUpon>IStyles.cs</DependentUpon>
+    </Compile>
+
+    <Compile Update="Design\Shared\Styles\Style\BaseStyle.*.cs">
+      <DependentUpon>BaseStyle.cs</DependentUpon>
+    </Compile>
+
+    <Compile Update="Design\Shared\Styles\Style\Base\IStyle.*.cs">
+      <DependentUpon>IStyle.cs</DependentUpon>
+    </Compile>
+
+  </ItemGroup>
+
+  <ItemGroup>
+	  <Compile Update="Design\Shared\Borders\BordersCollection.clone.cs">
+	    <DependentUpon>BordersCollection.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Design\Shared\Borders\BordersCollection.combinable.cs">
+	    <DependentUpon>BordersCollection.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Design\Shared\Borders\BordersCollection.designer.cs">
+	    <DependentUpon>BordersCollection.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Design\Shared\Borders\Border\BaseBorder.border.cs">
+	    <DependentUpon>BaseBorder.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Design\Shared\Borders\Border\BaseBorder.clone.cs">
+	    <DependentUpon>BaseBorder.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Design\Shared\Borders\Border\BaseBorder.combinable.cs">
+	    <DependentUpon>BaseBorder.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Design\Shared\Borders\Border\BaseBorder.designer.cs">
+	    <DependentUpon>BaseBorder.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Design\Shared\Borders\Border\BaseBorder.tenant.cs">
+	    <DependentUpon>BaseBorder.cs</DependentUpon>
+	  </Compile>
 	</ItemGroup>
+
 
 </Project>

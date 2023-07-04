@@ -1,36 +1,35 @@
 ﻿
-namespace iTin.Charting.Models.Design
-{
-    using System;
+using System;
 
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace iTin.Charting.Models.Design;
+
+/// <summary>
+/// Specifies width lines.
+/// </summary>
+[Serializable]
+[JsonConverter(typeof(StringEnumConverter))]
+public enum KnownLineWidth
+{
+    /// <summary>
+    /// Hairline.
+    /// </summary>
+    Hairline,
 
     /// <summary>
-    /// Specifies width lines.
+    /// Thin line.
     /// </summary>
-    [Serializable]
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum KnownLineWidth
-    {
-        /// <summary>
-        /// Hairline.
-        /// </summary>
-        Hairline,
+    Thin,
 
-        /// <summary>
-        /// Thin line.
-        /// </summary>
-        Thin,
+    /// <summary>
+    /// Medium line.
+    /// </summary>
+    Medium,
 
-        /// <summary>
-        /// Medium line.
-        /// </summary>
-        Medium,
-
-        /// <summary>
-        /// Thick line.
-        /// </summary>
-        Thick
-    }
+    /// <summary>
+    /// Thick line.
+    /// </summary>
+    Thick
 }

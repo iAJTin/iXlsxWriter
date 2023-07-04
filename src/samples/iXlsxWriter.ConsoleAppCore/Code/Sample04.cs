@@ -1,4 +1,6 @@
 ﻿
+using iTin.Core.Models.Design;
+
 namespace iXlsxWriter.Samples
 {
     using iTin.Core.ComponentModel;
@@ -381,12 +383,12 @@ namespace iXlsxWriter.Samples
                 logger.Info("           > Path: ~/Output/Sample04/Style.json");
             }
 
-            // New style instances from disk
-            logger.Info("         > Try to creates a new instance of json style from disk");
-            var styleFromJson = XlsxCellStyle.LoadFromFile("~/Output/Sample04/Style.json", KnownFileFormat.Json);
-            logger.Info(styleFromJson == null
-                ? "           > Error while loading style from json file"
-                : "           > Style loaded correctly from json '~/Output/Sample04/Style.json' file");
+            //// New style instances from disk
+            //logger.Info("         > Try to creates a new instance of json style from disk");
+            //var styleFromJson = XlsxCellStyle.LoadFromFile("~/Output/Sample04/Style.json", KnownFileFormat.Json);
+            //logger.Info(styleFromJson == null
+            //    ? "           > Error while loading style from json file"
+            //    : "           > Style loaded correctly from json '~/Output/Sample04/Style.json' file");
 
             #endregion
 

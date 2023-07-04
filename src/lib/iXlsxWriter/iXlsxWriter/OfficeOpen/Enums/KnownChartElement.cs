@@ -1,69 +1,68 @@
 ﻿
-namespace OfficeOpenXml.Drawing.Chart
+namespace OfficeOpenXml.Drawing.Chart;
+
+/// <summary>
+/// Known elements for a chart.
+/// </summary>
+internal enum KnownChartElement
 {
     /// <summary>
-    /// Known elements for a chart.
+    /// The chart
     /// </summary>
-    internal enum KnownChartElement
-    {
-        /// <summary>
-        /// The chart
-        /// </summary>
-        Self,
+    Self,
 
-        /// <summary>
-        /// The title
-        /// </summary>
-        Legend,
+    /// <summary>
+    /// The title
+    /// </summary>
+    Legend,
 
-        /// <summary>
-        /// The title
-        /// </summary>
-        PlotArea,
+    /// <summary>
+    /// The title
+    /// </summary>
+    PlotArea,
 
-        /// <summary>
-        /// The title
-        /// </summary>
-        ChartTitle,
+    /// <summary>
+    /// The title
+    /// </summary>
+    ChartTitle,
 
-        /// <summary>
-        /// The primary category axis
-        /// </summary>
-        PrimaryCategoryAxis,
+    /// <summary>
+    /// The primary category axis
+    /// </summary>
+    PrimaryCategoryAxis,
 
-        /// <summary>
-        /// The primary value axis
-        /// </summary>
-        PrimaryValueAxis,
+    /// <summary>
+    /// The primary value axis
+    /// </summary>
+    PrimaryValueAxis,
 
-        /// <summary>
-        /// The secondary category axis
-        /// </summary>
-        SecondaryCategoryAxis,
+    /// <summary>
+    /// The secondary category axis
+    /// </summary>
+    SecondaryCategoryAxis,
 
-        /// <summary>
-        /// The secondary value axis
-        /// </summary>
-        SecondaryValueAxis,
+    /// <summary>
+    /// The secondary value axis
+    /// </summary>
+    SecondaryValueAxis,
 
-        /// <summary>
-        /// The primary category axis title
-        /// </summary>
-        PrimaryCategoryAxisTitle,
+    /// <summary>
+    /// The primary category axis title
+    /// </summary>
+    PrimaryCategoryAxisTitle,
 
-        /// <summary>
-        /// The primary value axis title
-        /// </summary>
-        PrimaryValueAxisTitle,
+    /// <summary>
+    /// The primary value axis title
+    /// </summary>
+    PrimaryValueAxisTitle,
 
-        /// <summary>
-        /// The secondary category axis title
-        /// </summary>
-        SecondaryCategoryAxisTitle,
+    /// <summary>
+    /// The secondary category axis title
+    /// </summary>
+    SecondaryCategoryAxisTitle,
 
-        /// <summary>
-        /// The secondary value axis title
-        /// </summary>
-        SecondaryValueAxisTitle,
-    }
+    /// <summary>
+    /// The secondary value axis title
+    /// </summary>
+    SecondaryValueAxisTitle,
 }

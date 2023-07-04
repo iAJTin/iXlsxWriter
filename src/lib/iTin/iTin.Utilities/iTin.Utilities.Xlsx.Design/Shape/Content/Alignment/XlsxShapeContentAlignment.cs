@@ -1,94 +1,87 @@
 ﻿
+using iTin.Core.Models.Design.Content;
 using iTin.Core.Models.Design.Enums;
-using iTin.Core.Models.Design.Styling;
 
-namespace iTin.Utilities.Xlsx.Design.Shape
+namespace iTin.Utilities.Xlsx.Design.Shape;
+
+/// <summary>
+/// A Specialization of <see cref="ContentAlignment"/> class.<br/>
+/// Defines a <b>xlsx</b> shape content alignment.
+/// </summary>
+public partial class XlsxShapeContentAlignment
 {
+    #region public new static properties
+
     /// <summary>
-    /// A Specialization of <see cref="BaseContentAlignment"/> class.<br/>
-    /// Defines a <b>xlsx</b> shape content alignment.
+    /// Returns a new instance containing default shape content alignment style settings.
     /// </summary>
-    public partial class XlsxShapeContentAlignment
+    /// <value>
+    /// A <see cref="XlsxShapeContentAlignment"/> reference containing the default shape content alignment settings.
+    /// </value>
+    public new static XlsxShapeContentAlignment Default => new();
+
+    #endregion
+
+    #region public new methods
+
+    /// <summary>
+    /// Clones this instance.
+    /// </summary>
+    /// <returns>
+    /// A new object that is a copy of this instance.
+    /// </returns>
+    public new XlsxShapeContentAlignment Clone()
     {
-        #region public new static properties
+        var cloned = (XlsxShapeContentAlignment)MemberwiseClone();
+        cloned.Properties = Properties.Clone();
 
-        #region [public] {new} {static} (XlsxShapeContentAlignment) Default: Returns a new instance containing default shape content alignment style settings
-        /// <summary>
-        /// Returns a new instance containing default shape content alignment style settings.
-        /// </summary>
-        /// <value>
-        /// A <see cref="XlsxShapeContentAlignment"/> reference containing the default shape content alignment settings.
-        /// </value>
-        public new static XlsxShapeContentAlignment Default => new XlsxShapeContentAlignment();
-        #endregion
+        return cloned;
+    }
 
-        #endregion
+    #endregion
 
-        #region public new methods
+    #region public virtual methods
 
-        #region [public] {new} (XlsxShapeContentAlignment) Clone(): Clones this instance
-        /// <summary>
-        /// Clones this instance.
-        /// </summary>
-        /// <returns>
-        /// A new object that is a copy of this instance.
-        /// </returns>
-        public new XlsxShapeContentAlignment Clone()
+    /// <summary>
+    /// Apply specified options to this content.
+    /// </summary>
+    public virtual void ApplyOptions(XlsxShapeContentAlignmentOptions options)
+    {
+        if (options == null)
         {
-            var cloned = (XlsxShapeContentAlignment)MemberwiseClone();
-            cloned.Properties = Properties.Clone();
-
-            return cloned;
+            return;
         }
-        #endregion
 
-        #endregion
-
-        #region public virtual methods
-
-        #region [public] {virtual} (void) ApplyOptions(XlsxShapeContentAlignmentOptions): Apply specified options to this content
-        /// <summary>
-        /// Apply specified options to this content.
-        /// </summary>
-        public virtual void ApplyOptions(XlsxShapeContentAlignmentOptions options)
+        if (options.IsDefault)
         {
-            if (options == null)
-            {
-                return;
-            }
-
-            if (options.IsDefault)
-            {
-                return;
-            }
-
-            #region Horizontal
-            KnownHorizontalAlignment? horizontalOption = options.Horizontal;
-            bool horizontalHasValue = horizontalOption.HasValue;
-            if (horizontalHasValue)
-            {
-                Horizontal = horizontalOption.Value;
-            }
-            #endregion
+            return;
         }
-        #endregion
 
-        #region [public] {virtual} (void) Combine(XlsxShapeContentAlignment): Combines this instance with reference parameter
-        /// <summary>
-        /// Combines this instance with reference parameter.
-        /// </summary>
-        /// <param name="reference">Reference style</param>
-        public virtual void Combine(XlsxShapeContentAlignment reference)
+        #region Horizontal
+        KnownHorizontalAlignment? horizontalOption = options.Horizontal;
+        bool horizontalHasValue = horizontalOption.HasValue;
+        if (horizontalHasValue)
         {
-            if (reference == null)
-            {
-                return;
-            }
-
-            base.Combine(reference);
+            Horizontal = horizontalOption.Value;
         }
-        #endregion
-
         #endregion
     }
+    #endregion
+
+    #region [public] {virtual} (void) Combine(XlsxShapeContentAlignment): Combines this instance with reference parameter
+    /// <summary>
+    /// Combines this instance with reference parameter.
+    /// </summary>
+    /// <param name="reference">Reference style</param>
+    public virtual void Combine(XlsxShapeContentAlignment reference)
+    {
+        if (reference == null)
+        {
+            return;
+        }
+
+        base.Combine(reference);
+    }
+
+    #endregion
 }

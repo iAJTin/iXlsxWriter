@@ -4,20 +4,19 @@ using System.Drawing.Imaging;
 using iTin.Core.Drawing.ComponentModel;
 using iTin.Core.Drawing.Helpers;
 
-namespace iTin.Utilities.Xlsx.Design.Picture
+namespace iTin.Utilities.Xlsx.Design.Picture;
+
+/// <summary>
+/// A Specialization of <see cref="XlsxBaseEffect"/> class.<br/>
+/// Represents gray-scale effect.
+/// </summary>
+public partial class XlsxGrayScaleEffect
 {
     /// <summary>
-    /// A Specialization of <see cref="XlsxBaseEffect"/> class.<br/>
-    /// Represents gray-scale effect.
+    /// Returns the manipulation of the colors in an image to an effect.
     /// </summary>
-    public partial class XlsxGrayScaleEffect
-    {
-        /// <summary>
-        /// Returns the manipulation of the colors in an image to an effect.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="ImageAttributes"/> object that contains the information about how bitmap colors are manipulated. 
-        /// </returns>
-        public override ImageAttributes Apply() => ImageHelper.GetImageAttributesFromEffect(EffectType.GrayScale);
-    }
+    /// <returns>
+    /// A <see cref="ImageAttributes"/> object that contains the information about how bitmap colors are manipulated. 
+    /// </returns>
+    public override ImageAttributes Apply() => ImageHelper.GetImageAttributesFromEffect(EffectType.GrayScale);
 }

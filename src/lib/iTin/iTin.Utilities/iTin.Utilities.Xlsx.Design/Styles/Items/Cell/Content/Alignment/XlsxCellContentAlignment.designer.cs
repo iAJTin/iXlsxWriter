@@ -1,18 +1,18 @@
 ﻿
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml.Serialization;
+
+using iTin.Core.Models.Design.Content;
+
 namespace iTin.Utilities.Xlsx.Design.Styles
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Xml.Serialization;
-
-    using iTin.Core.Models.Design.Styling;
-
     [Serializable]
     [DebuggerStepThrough]
     [DesignerCategory("code")]
     [XmlType(Namespace = "http://schemas.iTin.com/xlsx/style/cell/v1.0")]
-    public partial class XlsxCellContentAlignment : BaseContentAlignment
+    public partial class XlsxCellContentAlignment : ContentAlignment
     {
     }
 }

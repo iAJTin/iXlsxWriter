@@ -4,28 +4,27 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace iTin.Utilities.Xlsx.Design.Charts
+namespace iTin.Utilities.Xlsx.Design.Charts;
+
+/// <summary>
+/// Specifies mini-chart empty values
+/// </summary>
+[Serializable]
+[JsonConverter(typeof(StringEnumConverter))]
+public enum MiniChartEmptyValuesAs
 {
     /// <summary>
-    /// Specifies mini-chart empty values
+    /// Gap
     /// </summary>
-    [Serializable]
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum MiniChartEmptyValuesAs
-    {
-        /// <summary>
-        /// Gap
-        /// </summary>
-        Gap,
+    Gap,
 
-        /// <summary>
-        /// Zero
-        /// </summary>
-        Zero,
+    /// <summary>
+    /// Zero
+    /// </summary>
+    Zero,
 
-        /// <summary>
-        /// Connect
-        /// </summary>
-        Connect
-    }
+    /// <summary>
+    /// Connect
+    /// </summary>
+    Connect
 }
