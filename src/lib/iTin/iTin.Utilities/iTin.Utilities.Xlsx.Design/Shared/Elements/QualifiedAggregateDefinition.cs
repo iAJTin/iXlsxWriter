@@ -1,6 +1,4 @@
 ﻿
-using System;
-
 using iTin.Core.Models.Design.Enums;
 
 namespace iTin.Utilities.Xlsx.Design.Shared;
@@ -8,10 +6,8 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// <summary>
 /// Represents a qualified <b>xlsx</b> aggregate definition.
 /// </summary>
-public class QualifiedAggregateDefinition : ICloneable
+public partial class QualifiedAggregateDefinition
 {
-    #region constructor/s
-
     /// <summary>
     /// Initializes a new instance of the <see cref="QualifiedAggregateDefinition"/> class.
     /// </summary>
@@ -23,26 +19,6 @@ public class QualifiedAggregateDefinition : ICloneable
         AggregateType = KnownAggregateType.Sum;
     }
 
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #endregion
-
-    #region public properties
 
     /// <summary>
     /// Gets or sets the preferred aggregate function to apply. The default is <see cref="KnownAggregateType.Sum"/>.
@@ -75,36 +51,4 @@ public class QualifiedAggregateDefinition : ICloneable
     /// A <see cref="XlsxBaseRange"/> containing the data range.
     /// </value>
     public XlsxBaseRange Range { get; set; }
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public QualifiedAggregateDefinition Clone()
-    {
-        var cloned = (QualifiedAggregateDefinition)MemberwiseClone();
-        cloned.Range = Range.Clone();
-
-        return cloned;
-    }
-
-    #endregion
-
-    #region public override methods
-
-    /// <summary>
-    /// Returns a string that represents the current data type.
-    /// </summary>
-    /// <returns>
-    /// A <see cref="string"/> than represents the current object.
-    /// </returns>
-    public override string ToString() => $"WorkSheet=\"{WorkSheet}\", Range=\"{Range}\", AggregateType={AggregateType}";
-
-    #endregion
 }

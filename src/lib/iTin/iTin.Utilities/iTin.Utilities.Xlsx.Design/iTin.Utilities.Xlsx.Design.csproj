@@ -50,6 +50,49 @@
   </ItemGroup>
 
 
+  <!-- DataStyles -->
+  <ItemGroup>
+    <Compile Update="Shared\Elements\DataStyles.*.cs">
+      <DependentUpon>DataStyles.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- DictionaryStyles -->
+  <ItemGroup>
+    <Compile Update="Shared\Elements\DictionaryStyles.*.cs">
+      <DependentUpon>DictionaryStyles.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- HeaderStyles -->
+  <ItemGroup>
+    <Compile Update="Shared\Elements\HeaderStyles.*.cs">
+      <DependentUpon>HeaderStyles.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- QualifiedAggregateDefinition -->
+  <ItemGroup>
+    <Compile Update="Shared\Elements\QualifiedAggregateDefinition.*.cs">
+      <DependentUpon>QualifiedAggregateDefinition.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- QualifiedPointDefinition -->
+  <ItemGroup>
+    <Compile Update="Shared\Elements\QualifiedPointDefinition.*.cs">
+      <DependentUpon>QualifiedPointDefinition.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- QualifiedRangeDefinition -->
+  <ItemGroup>
+    <Compile Update="Shared\Elements\QualifiedRangeDefinition.*.cs">
+      <DependentUpon>QualifiedRangeDefinition.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+
 
   <!-- BaseStyle -->
   <ItemGroup>

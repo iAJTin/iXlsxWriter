@@ -1,12 +1,10 @@
 ﻿
-using System;
-
 namespace iTin.Utilities.Xlsx.Design.Shared;
 
 /// <summary>
 /// Represents a cell styles to use with data.
 /// </summary>
-public class DictionaryStyles : ICloneable
+public partial class DictionaryStyles
 {
     #region constructor/s
 
@@ -18,23 +16,6 @@ public class DictionaryStyles : ICloneable
         Headers = new DataStyles();
         Values = new DataStyles();
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
 
     #endregion
 
@@ -55,25 +36,6 @@ public class DictionaryStyles : ICloneable
     /// Preferred cell values styles.
     /// </value>
     public DataStyles Values { get; set; }
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public DictionaryStyles Clone()
-    {
-        var cloned = (DictionaryStyles)MemberwiseClone();
-        cloned.Headers = Headers.Clone();
-        cloned.Values = Values.Clone();
-
-        return cloned;
-    }
 
     #endregion
 }

@@ -1,6 +1,4 @@
 ﻿
-using System;
-
 using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
 
@@ -11,7 +9,7 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// <summary>
 /// Represents a cell header styles to use with data.
 /// </summary>
-public class HeaderStyles : ICloneable
+public partial class HeaderStyles
 {
     #region constructor/s
 
@@ -56,23 +54,6 @@ public class HeaderStyles : ICloneable
 
     #endregion
 
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #endregion
-
     #region public properties
 
     /// <summary>
@@ -114,28 +95,6 @@ public class HeaderStyles : ICloneable
     /// Preferred text cell style.
     /// </value>
     public XlsxCellStyle Text { get; set; }
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public HeaderStyles Clone()
-    {
-        var cloned = (HeaderStyles)MemberwiseClone();
-        cloned.Text = Text.Clone();
-        cloned.Decimal = Text.Clone();
-        cloned.Numeric = Text.Clone();
-        cloned.DateTime = Text.Clone();
-        cloned.Currency = Currency.Clone();
-
-        return cloned;
-    }
 
     #endregion
 }
