@@ -45,4 +45,27 @@
     </Reference>
   </ItemGroup>
 
+
+  <!-- XlsxInput -->
+  <ItemGroup>
+    <Compile Update="XlsxInput.*.cs">
+      <DependentUpon>XlsxInput.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- XlsxObject -->
+  <ItemGroup>
+    <Compile Update="XlsxObject.*.cs">
+      <DependentUpon>XlsxObject.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- XlsxObjectConfig -->
+  <ItemGroup>
+    <Compile Update="XlsxObjectConfig.*.cs">
+      <DependentUpon>XlsxObjectConfig.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+
 </Project>

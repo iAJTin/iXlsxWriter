@@ -6,8 +6,6 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// </summary>
 public partial class DictionaryStyles
 {
-    #region constructor/s
-
     /// <summary>
     /// Initializes a new instance of the <see cref="DictionaryStyles"/> class.
     /// </summary>
@@ -17,9 +15,6 @@ public partial class DictionaryStyles
         Values = new DataStyles();
     }
 
-    #endregion
-
-    #region public properties
 
     /// <summary>
     /// Gets or sets the preferred cell headers styles.
@@ -36,6 +31,4 @@ public partial class DictionaryStyles
     /// Preferred cell values styles.
     /// </value>
     public DataStyles Values { get; set; }
-
-    #endregion
 }

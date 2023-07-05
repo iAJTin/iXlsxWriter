@@ -11,8 +11,6 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// </summary>
 public partial class HeaderStyles
 {
-    #region constructor/s
-
     /// <summary>
     /// Initializes a new instance of the <see cref="DataStyles"/> class.
     /// </summary>
@@ -52,9 +50,6 @@ public partial class HeaderStyles
         };
     }
 
-    #endregion
-
-    #region public properties
 
     /// <summary>
     /// Gets or sets the preferred currency cell style
@@ -95,6 +90,4 @@ public partial class HeaderStyles
     /// Preferred text cell style.
     /// </value>
     public XlsxCellStyle Text { get; set; }
-
-    #endregion
 }
