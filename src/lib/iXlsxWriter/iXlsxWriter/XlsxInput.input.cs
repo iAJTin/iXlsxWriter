@@ -7,8 +7,6 @@ using iTin.Core.ComponentModel.Results;
 using iTin.Core.Helpers;
 using iTin.Core.IO;
 
-using iTin.Logging;
-
 using iXlsxWriter.ComponentModel;
 using iXlsxWriter.ComponentModel.Result.Insert;
 using iXlsxWriter.ComponentModel.Result.Output;
@@ -98,11 +96,11 @@ public partial class XlsxInput : IInput
     /// </returns>
     public OutputResult CreateResult(OutputResultConfig config = null)
     {
-        OutputResultConfig configToApply = OutputResultConfig.Default;
+        var safeConfig = OutputResultConfig.Default;
         if (config != null)
         {
-            configToApply = config;
-            configToApply.Filename = NativeIO.Path.ChangeExtension(
+            safeConfig = config;
+            safeConfig.Filename = NativeIO.Path.ChangeExtension(
                 string.IsNullOrEmpty(config.Filename)
                     ? File.GetUniqueTempRandomFile().Segments.LastOrDefault()
                     : config.Filename,
@@ -111,27 +109,27 @@ public partial class XlsxInput : IInput
 
         try
         {
-            if (configToApply.AutoFitColumns)
+            if (safeConfig.AutoFitColumns)
             {
                 Set( new SetAutoFitColumns());
             }
 
-            Set(new SetSheetsSettings { Settings = configToApply.GlobalSettings.SheetsSettings });
-            Set(new SetDocumentSettings { Settings = configToApply.GlobalSettings.DocumentSettings });
+            Set(new SetSheetsSettings { Settings = safeConfig.GlobalSettings.SheetsSettings });
+            Set(new SetDocumentSettings { Settings = safeConfig.GlobalSettings.DocumentSettings });
 
-            if (!configToApply.Zipped)
+            if (!safeConfig.Zipped)
             {
                 return OutputResult.CreateSuccessResult(
                     new OutputResultData
                     {
                         Zipped = false,
-                        Configuration = configToApply,
+                        Configuration = safeConfig,
                         UncompressOutputStream = Clone().ToStream()
                     });
             }
 
-            OutputResult zippedOutputResult = OutputResult.CreateSuccessResult(null); // new[] { Clone() }.CreateJoinResult(new[] { configToApply.Filename });
-            //zippedOutputResult.Result.Configuration = configToApply;
+            OutputResult zippedOutputResult = OutputResult.CreateSuccessResult(null); // new[] { Clone() }.CreateJoinResult(new[] { safeConfig.Filename });
+            //zippedOutputResult.Result.Configuration = safeConfig;
 
             return zippedOutputResult;
         }
@@ -157,14 +155,12 @@ public partial class XlsxInput : IInput
     /// </returns>
     public InsertResult Insert(IInsert data)
     {
-        InsertResult result = InsertImplStrategy(data, this);
+        var result = InsertImplStrategy(data, this);
 
         if (AutoUpdateChanges)
         {
             Input = result.Result.OutputStream;
         }
-
-        Logger.Instance.Debug($" > Output: Inserted = {result.Success}");
 
         return result;
     }
@@ -185,14 +181,12 @@ public partial class XlsxInput : IInput
     /// </returns>
     public ReplaceResult Replace(IReplace data)
     {
-        ReplaceResult result = ReplaceImplStrategy(data, this);
+        var result = ReplaceImplStrategy(data, this);
 
         if (AutoUpdateChanges)
         {
             Input = result.Result.OutputStream;
         }
-
-        Logger.Instance.Debug($" > Output: Replacement = {result.Success}");
 
         return result;
     }
@@ -213,14 +207,12 @@ public partial class XlsxInput : IInput
     /// </returns>
     public SetResult Set(ISet data)
     {
-        SetResult result = SetImplStrategy(data, this);
+        var result = SetImplStrategy(data, this);
 
         if (AutoUpdateChanges)
         {
             Input = result.Result.OutputStream;
         }
-
-        Logger.Instance.Debug($" > Output: Setted = {result.Success}");
 
         return result;
     }

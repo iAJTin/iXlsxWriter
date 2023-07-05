@@ -108,10 +108,7 @@ public class InsertAggregateFunction : InsertLocationBase
             });
         }
 
-        if (Style == null)
-        {
-            Style = XlsxCellStyle.Default;
-        }
+        Style ??= XlsxCellStyle.Default;
 
         return InsertImpl(context, input, SheetName, Location, Aggegate, Style);
     }
