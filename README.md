@@ -230,7 +230,7 @@ My email address is
 [nuget]: ./assets/nuget.png "nuget"
 
 [sample02.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample02.cs
-[Sample02.image]: ./assets/samples/sample-02/sample-02.png "sample-02"
+[Sample02.image]: ./assets/samples/sample-02/Sample-02.png "sample-02"
 
 [sample01.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample01.cs
-[Sample01.image]: ./assets/samples/sample-01/sample-01.png "sample-01"
+[Sample01.image]: ./assets/samples/sample-01/Sample-01.png "sample-01"
