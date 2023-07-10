@@ -15,7 +15,7 @@ using iXlsxWriter.Operations.Insert;
 namespace iXlsxWriter.Samples;
 
 /// <summary>
-/// Hello world!
+/// Hello world! with styles
 /// </summary>
 internal class Sample02
 {
