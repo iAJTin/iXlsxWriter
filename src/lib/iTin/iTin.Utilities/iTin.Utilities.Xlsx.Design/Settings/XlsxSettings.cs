@@ -124,7 +124,10 @@ public partial class XlsxSettings : ICloneable
     /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
     /// </value>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public override bool IsDefault => base.IsDefault && DocumentSettings.IsDefault && SheetsSettings.IsDefault;
+    public override bool IsDefault =>
+        base.IsDefault &&
+        DocumentSettings.IsDefault &&
+        SheetsSettings.IsDefault;
 
     #endregion
 

@@ -9,5 +9,6 @@ public sealed partial class XlsxObjectConfig
     /// <returns>
     /// A <see cref="string"/> than represents the current object.
     /// </returns>
-    public override string ToString() => $"UseIndex={UseIndex}, DeletePhysicalFilesAfterMerge={DeletePhysicalFilesAfterMerge}";
+    public override string ToString() => 
+        $"UseIndex={UseIndex}, DeletePhysicalFilesAfterMerge={DeletePhysicalFilesAfterMerge}";
 }

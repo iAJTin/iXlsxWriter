@@ -1,22 +1,34 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
-using iTin.Core;
-using iTin.Core.Helpers;
-
-using iXlsxWriter.ComponentModel;
-using iXlsxWriter.ComponentModel.Result.Output;
+using iXlsxWriter.Abstractions.Writer;
 
 namespace iXlsxWriter;
 
 /// <summary>
 /// Represents a generic xlsx object, this allows add docx files to <see cref="XlsxObject.Items"/> property and specify a user custom configuration.
 /// </summary>
-public partial class XlsxObject
+public class XlsxObject : IDisposable
+
+#if NETCOREAPP3_1 || NETSTANDARD2_1 || NET5_0_OR_GREATER
+
+, IAsyncDisposable
+
+#endif
+
 {
+    #region private field members
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private bool _isDisposed;
+
+    #endregion
+
     #region constructor/s
 
     /// <inheritdoc />
@@ -51,6 +63,51 @@ public partial class XlsxObject
 
     #endregion
 
+    #region interfaces
+
+    #region IDisposable
+
+    #region public methods
+
+    /// <summary>
+    /// Clean managed resources
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+
+        GC.SuppressFinalize(this);
+    }
+
+    #endregion
+
+    #endregion
+
+#if NETCOREAPP3_1 || NETSTANDARD2_1 || NET5_0_OR_GREATER
+
+    #region IAsyncDisposable
+
+    #region public async methods
+
+    /// <summary>
+    /// Clean managed resources
+    /// </summary>
+    public async ValueTask DisposeAsync()
+    {
+        await DisposeAsync(true);
+
+        GC.SuppressFinalize(this);
+    }
+
+    #endregion
+
+    #endregion
+
+#endif
+
+
+    #endregion
+
     #region public properties
 
     /// <summary>
@@ -70,71 +127,130 @@ public partial class XlsxObject
     public XlsxObjectConfig Configuration { get; }
 
     #endregion
-
-    #region public methods
+    
+    #region public override methods
 
     /// <summary>
-    /// Merges all <see cref="XlsxInput"/> entries.
+    /// Returns a string that represents the current data type.
     /// </summary>
     /// <returns>
-    /// <para>
-    /// A <see cref="OutputResult"/> reference that contains the result of the operation, to check if the operation is correct, the <b>Success</b>
-    /// property will be <b>true</b> and the <b>Value</b> property will contain the value; Otherwise, the the <b>Success</b> property
-    /// will be false and the <b>Errors</b> property will contain the errors associated with the operation, if they have been filled in.
-    /// </para>
-    /// <para>
-    /// The type of the return value is <see cref="OutputResultData"/>, which contains the operation result
-    /// </para>
+    /// A <see cref="string"/> than represents the current object.
     /// </returns>
-    public OutputResult TryMergeInputs()
+    public override string ToString() =>
+        $"Count={Items.Count()}";
+
+    #endregion
+
+    #region protected virtual methods
+
+    /// <summary>
+    /// Cleans managed and unmanaged resources.
+    /// </summary>
+    /// <param name="disposing">
+    /// If it is <b>true</b>, the method is invoked directly or indirectly from the user code.
+    /// If it is <b>false</b>, the method is called the finalizer and only unmanaged resources are finalized.
+    /// </param>
+    protected virtual void Dispose(bool disposing)
     {
-        var items = Items.ToList();
-
-        //if (Configuration.UseIndex)
-        //{
-        //    items = items.OrderBy(i => i.Index).ToList();
-        //}
-
-        try
+        if (_isDisposed)
         {
-            MemoryStream outStream = new MemoryStream(); //MergeFiles(items.Select(item => item.ToStream()));
+            return;
+        }
 
-            if (Configuration.DeletePhysicalFilesAfterMerge)
+        // free managed resources
+        if (disposing)
+        {
+            foreach (var item in Items)
             {
-                foreach (var item in items)
+                switch (item.InputType)
                 {
-                    var inputType = item.InputType;
-                    if (inputType != KnownInputType.Filename)
-                    {
-                        continue;
-                    }
+                    case KnownInputType.Stream:
+                        ((Stream)item.Input)?.Dispose();
+                        break;
 
-                    if (item.DeletePhysicalFilesAfterMerge)
-                    {
-                        File.Delete(TypeHelper.ToType<string>(item.Input));
-                    }
+                    case KnownInputType.ByteArray:
+                        item.Input = null;
+                        break;
+
+                    case KnownInputType.Filename:
+                        item.Input = null;
+                        break;
+
+                    case KnownInputType.NotSupported:
+                        // nothing to do
+                        break;
                 }
             }
 
-            var safeOutAsByteArray = outStream.GetBuffer();
-            var outputInMegaBytes = (float)safeOutAsByteArray.Length / XlsxObjectConfig.OneMegaByte;
-            var generateOutputAsZip = outputInMegaBytes > Configuration.CompressionThreshold;
-            var zipped = Configuration.AllowCompression && generateOutputAsZip;
-
-            return
-                OutputResult.CreateSuccessResult(
-                    new OutputResultData
-                    {
-                        Zipped = zipped,
-                        Configuration = Configuration,
-                        UncompressOutputStream = safeOutAsByteArray.ToMemoryStream()
-                    });
-        }    
-        catch (Exception ex)
-        {
-            return OutputResult.FromException(ex);
+            Items = null;
         }
+
+        // free native resources
+
+        // avoid seconds calls 
+        _isDisposed = true;
     }
 
     #endregion
+
+#if NETCOREAPP3_1 || NETSTANDARD2_1 || NET5_0_OR_GREATER
+
+    #region protected virtual async methods
+
+    /// <summary>
+    /// Cleans managed and unmanaged resources.
+    /// </summary>
+    /// <param name="disposing">
+    /// If it is <b>true</b>, the method is invoked directly or indirectly from the user code.
+    /// If it is <b>false</b>, the method is called the finalizer and only unmanaged resources are finalized.
+    /// </param>
+    protected virtual async ValueTask DisposeAsync(bool disposing)
+    {
+        if (_isDisposed)
+        {
+            return;
+        }
+
+        // free managed resources
+        if (disposing)
+        {
+            foreach (var item in Items)
+            {
+                switch (item.InputType)
+                {
+                    case KnownInputType.Stream:
+
+                        var inputAsStream = (Stream)item.Input;
+                        if (inputAsStream != null)
+                        {
+                            await inputAsStream.DisposeAsync();
+                        }
+                        break;
+
+                    case KnownInputType.ByteArray:
+                        item.Input = null;
+                        break;
+
+                    case KnownInputType.Filename:
+                        item.Input = null;
+                        break;
+
+                    case KnownInputType.NotSupported:
+                        // nothing to do
+                        break;
+                }
+            }
+
+            Items = null;
+        }
+
+        // free native resources
+
+        // avoid seconds calls 
+        _isDisposed = true;
+    }
+
+    #endregion
+
+#endif
 }
