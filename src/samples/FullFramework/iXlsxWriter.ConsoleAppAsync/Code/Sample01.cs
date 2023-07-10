@@ -43,7 +43,7 @@ internal class Sample01
 
         #endregion
 
-        #region Create output result
+        #region Create async output result
 
         var result = await doc.CreateResultAsync(cancellationToken: cancellationToken);
         if (!result.Success)
@@ -56,7 +56,7 @@ internal class Sample01
 
         #endregion
 
-        #region Saves output result
+        #region Saves async output result
 
         var saveResult = await result.Result.Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-01/Sample-01" }, cancellationToken);
         var ts = sw.Elapsed;

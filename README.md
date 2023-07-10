@@ -91,14 +91,14 @@ Basic steps, for more details please see [sample01.cs] file.
 
      **async mode**
      ```csharp   
-     var result = await doc.CreateResultAsync();
+     var result = await doc.CreateResultAsync(cancellationToken: cancellationToken);
      if (!result.Success)
      {
          // Handle errors                 
      }
      ```
 
-4. Save pdf file result
+4. Save xlsx file result
  
     **sync mode**
     ```csharp   
@@ -111,7 +111,7 @@ Basic steps, for more details please see [sample01.cs] file.
 
     **async mode**
     ```csharp   
-    var saveResult = await result.Result.Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-01/Sample-01" });
+    var saveResult = await result.Result.Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-01/Sample-01" }, cancellationToken);
     if (!saveResult.Success)
     {
          // Handle errors                 
@@ -180,14 +180,14 @@ Basic steps, for more details please see [sample02.cs] file.
 
      **async mode**
      ```csharp   
-     var result = await doc.CreateResultAsync();
+     var result = await doc.CreateResultAsync(cancellationToken: cancellationToken);
      if (!result.Success)
      {
          // Handle errors                 
      }
      ```
 
-5. Save pdf file result
+5. Save xlsx file result
  
     **sync mode**
     ```csharp   
@@ -200,7 +200,7 @@ Basic steps, for more details please see [sample02.cs] file.
 
     **async mode**
     ```csharp   
-    var saveResult = await result.Result.Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-02/Sample-02" });
+    var saveResult = await result.Result.Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-02/Sample-02" }, cancellationToken);
     if (!saveResult.Success)
     {
          // Handle errors                 
