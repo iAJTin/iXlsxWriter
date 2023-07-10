@@ -191,7 +191,7 @@ Basic steps, for more details please see [sample02.cs] file.
  
     **sync mode**
     ```csharp   
-    var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-01/Sample-01" });
+    var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-02/Sample-02" });
     if (!saveResult.Success)
     {
          // Handle errors                 
@@ -200,7 +200,7 @@ Basic steps, for more details please see [sample02.cs] file.
 
     **async mode**
     ```csharp   
-    var saveResult = await result.Result.Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-01/Sample-01" });
+    var saveResult = await result.Result.Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-02/Sample-02" });
     if (!saveResult.Success)
     {
          // Handle errors                 
