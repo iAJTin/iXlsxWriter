@@ -47,9 +47,9 @@ public class SetRowHeight : SetBase
     /// Implementation to execute when insert action.
     /// </summary>
     /// <param name="context">Input context</param>
-    /// <param name="input"></param>
-    /// <param name="package"></param>
-    /// <param name="worksheet"></param>
+    /// <param name="input">Input stream</param>
+    /// <param name="package">Package reference</param>
+    /// <param name="worksheet">Worksheet reference</param>
     /// <returns>
     /// <para>
     /// A <see cref="ActionResult"/> reference that contains the result of the operation, to check if the operation is correct, the <b>Success</b>

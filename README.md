@@ -91,7 +91,7 @@ Basic steps, for more details please see [sample01.cs] file.
 
      **async mode**
      ```csharp   
-     var result = await doc.CreateResultAsync(cancellationToken: cancellationToken);
+     var result = await doc.CreateResultAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
      if (!result.Success)
      {
          // Handle errors                 
@@ -111,8 +111,11 @@ Basic steps, for more details please see [sample01.cs] file.
 
     **async mode**
     ```csharp   
-    var saveResult = await result.Result.Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-01/Sample-01" }, cancellationToken);
-    if (!saveResult.Success)
+    var saveResult = await result.Result
+        .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-01/Sample-01" }, cancellationToken);
+        .ConfigureAwait(false);
+
+   if (!saveResult.Success)
     {
          // Handle errors                 
     }
@@ -180,7 +183,7 @@ Basic steps, for more details please see [sample02.cs] file.
 
      **async mode**
      ```csharp   
-     var result = await doc.CreateResultAsync(cancellationToken: cancellationToken);
+     var result = await doc.CreateResultAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
      if (!result.Success)
      {
          // Handle errors                 
@@ -192,7 +195,7 @@ Basic steps, for more details please see [sample02.cs] file.
     **sync mode**
     ```csharp   
     var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-02/Sample-02" });
-    if (!saveResult.Success)
+   if (!saveResult.Success)
     {
          // Handle errors                 
     }
@@ -200,7 +203,10 @@ Basic steps, for more details please see [sample02.cs] file.
 
     **async mode**
     ```csharp   
-    var saveResult = await result.Result.Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-02/Sample-02" }, cancellationToken);
+    var saveResult = await result.Result
+        .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-02/Sample-02" }, cancellationToken);
+        .ConfigureAwait(false);
+
     if (!saveResult.Success)
     {
          // Handle errors                 

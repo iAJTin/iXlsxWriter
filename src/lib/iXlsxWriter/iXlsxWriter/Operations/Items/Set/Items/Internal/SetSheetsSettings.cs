@@ -52,9 +52,9 @@ internal class SetSheetsSettings : SetBase
     /// Implementation to execute when insert action.
     /// </summary>
     /// <param name="context">Input context</param>
-    /// <param name="input"></param>
-    /// <param name="package"></param>
-    /// <param name="worksheet"></param>
+    /// <param name="input">Input stream</param>
+    /// <param name="package">Package reference</param>
+    /// <param name="worksheet">Worksheet reference</param>
     /// <returns>
     /// <para>
     /// A <see cref="ActionResult"/> reference that contains the result of the operation, to check if the operation is correct, the <b>Success</b>
@@ -93,11 +93,12 @@ internal class SetSheetsSettings : SetBase
             var settingsSheetsNames = settings.Select(sheet => sheet.SheetName).ToList();
             var settingsSheetsCount = settingsSheetsNames.Count;
 
-            int i = 0;
+            var i = 0;
             var sheets = package.Workbook.Worksheets;
             foreach (var sheet in sheets)
             {
                 #region Select appropiate sheet settings
+
                 var sheetMatch = settingsSheetsNames.Contains(sheet.Name);
                 var sheetSettings = XlsxSheetSettings.Default;
                 if (i <= settingsSheetsCount - 1)
@@ -109,9 +110,11 @@ internal class SetSheetsSettings : SetBase
                 {
                     continue;
                 }
+
                 #endregion
 
                 #region Updates sheet view
+
                 sheet.View.ToEppSheetView(sheetSettings.View);
 
                 if (sheetSettings.View == KnownDocumentView.Normal)
@@ -121,14 +124,19 @@ internal class SetSheetsSettings : SetBase
                         sheet.View.FreezePanes(sheetSettings.FreezePanesPoint.Row, sheetSettings.FreezePanesPoint.Column);
                     }
                 }
+
                 #endregion
 
                 #region Updates sheet header
+
                 sheet.HeaderFooter.SetSheetHeader(sheetSettings.Header);
+
                 #endregion
 
                 #region Updates sheet footer
+
                 sheet.HeaderFooter.SetSheetFooter(sheetSettings.Footer);
+
                 #endregion
 
                 #region Updates page orientation, margins and size
@@ -143,7 +151,7 @@ internal class SetSheetsSettings : SetBase
                     continue;
                 }
 
-                ExcelRange printAreaRange = sheet.Cells[sheet.Dimension.Address];
+                var printAreaRange = sheet.Cells[sheet.Dimension.Address];
                 sheet.PrinterSettings.PrintArea = printAreaRange;
                 //sheet.PrinterSettings.RepeatRows = sheetSettings.Cells[repeatRowsRange];
 

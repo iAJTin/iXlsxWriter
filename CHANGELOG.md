@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file.
     | iTin.Charting.Models | **1.0.0.1** | Base library containing various extensions, helpers, common constants for charting |
     | iTin.Core | **2.0.0.7** | Base library containing various extensions, helpers, common constants |
     | iTin.Core.Drawing | **1.0.0.3** | Drawing objects, extension, helpers, common constants |
-    | iTin.Core.IO | **1.0.0.2** | Common I/O calls |
+    | iTin.Core.IO | **1.0.0.3** | Common I/O calls |
     | iTin.Core.IO.Compression | **1.0.0.1** | Compression library |
     | iTin.Core.Models | **1.0.0.3** | Data models base |
     | iTin.Core.Models.Design.Charting | **1.0.0.3** | Base charting models |

@@ -43,7 +43,7 @@ internal class Sample01
 
         #region Create async output result
 
-        var result = await doc.CreateResultAsync(cancellationToken: cancellationToken);
+        var result = await doc.CreateResultAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
         if (!result.Success)
         {
             logger.Info("   > Error creating output result");
@@ -56,7 +56,10 @@ internal class Sample01
 
         #region Saves async output result
 
-        var saveResult = await result.Result.Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-01/Sample-01" }, cancellationToken);
+        var saveResult = await result.Result
+            .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-01/Sample-01" }, cancellationToken)
+            .ConfigureAwait(false);
+
         var ts = sw.Elapsed;
         sw.Stop();
 

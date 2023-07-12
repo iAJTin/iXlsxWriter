@@ -1,10 +1,9 @@
 ﻿
-namespace iXlsxWriter.ComponentModel
-{
-    public class Person
-    {
-        public string Name { get; set; }
+namespace iXlsxWriter.ComponentModel;
 
-        public string Surname { get; set; }
-    }
+public class Person
+{
+    public string Name { get; set; }
+
+    public string Surname { get; set; }
 }

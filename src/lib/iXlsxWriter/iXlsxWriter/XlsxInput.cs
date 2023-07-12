@@ -28,6 +28,7 @@ using iXlsxWriter.Operations.Replace;
 using iXlsxWriter.Operations.Set;
 
 using NativeIO = System.IO;
+using iTin.Core.IO.Compression;
 
 namespace iXlsxWriter;
 
@@ -209,11 +210,16 @@ public class XlsxInput : IXlsxInput, ICloneable
                 Set(new SetAutoFitColumns());
             }
 
-            var concreteSettings = ((XlsxOutputResultConfig)safeConfig).GlobalSettings;
-            Set(new SetSheetsSettings { Settings = concreteSettings.SheetsSettings });
-            Set(new SetDocumentSettings { Settings = concreteSettings.DocumentSettings });
+            var concreteSettings = (XlsxOutputResultConfig)safeConfig;
+            var globalSetting = concreteSettings.GlobalSettings;
+            Set(new SetSheetsSettings { Settings = globalSetting.SheetsSettings });
+            Set(new SetDocumentSettings { Settings = globalSetting.DocumentSettings });
 
-            ProcessInput();
+            var processResult = ProcessInput();
+            if (!processResult.Success)
+            {
+                return OutputResult.CreateErrorResult(processResult.Errors.ToArray());
+            }
 
             if (!safeConfig.Zipped)
             {
@@ -226,10 +232,7 @@ public class XlsxInput : IXlsxInput, ICloneable
                     });
             }
 
-            OutputResult zippedOutputResult = OutputResult.CreateSuccessResult(null); // new[] { Clone() }.CreateJoinResult(new[] { safeConfig.Filename });
-            //zippedOutputResult.Result.Configuration = safeConfig;
-
-            return zippedOutputResult;
+            return CreateZippedResult(this, safeConfig.Filename);
         }
         catch (Exception e)
         {
@@ -362,13 +365,11 @@ public class XlsxInput : IXlsxInput, ICloneable
     /// </returns>
     public async Task<OutputResult> CreateResultAsync(IOutputResultConfig config = null, CancellationToken cancellationToken = default)
     {
-        await ProcessInputAsync(cancellationToken);
-
-        IOutputResultConfig configToApply = XlsxOutputResultConfig.Default;
+        IOutputResultConfig safeConfig = XlsxOutputResultConfig.Default;
         if (config != null)
         {
-            configToApply = config;
-            configToApply.Filename = NativeIO.Path.ChangeExtension(
+            safeConfig = config;
+            safeConfig.Filename = NativeIO.Path.ChangeExtension(
                 string.IsNullOrEmpty(config.Filename)
                     ? File.GetUniqueTempRandomFile().Segments.LastOrDefault()
                     : config.Filename,
@@ -377,21 +378,34 @@ public class XlsxInput : IXlsxInput, ICloneable
 
         try
         {
-            if (!configToApply.Zipped)
+            if (safeConfig.AutoFitColumns)
+            {
+                Set(new SetAutoFitColumns());
+            }
+
+            var concreteSettings = (XlsxOutputResultConfig)safeConfig;
+            var globalSetting = concreteSettings.GlobalSettings;
+            Set(new SetSheetsSettings { Settings = globalSetting.SheetsSettings });
+            Set(new SetDocumentSettings { Settings = globalSetting.DocumentSettings });
+
+            var processResult = await ProcessInputAsync(cancellationToken).ConfigureAwait(false);
+            if (!processResult.Success)
+            {
+                return OutputResult.CreateErrorResult(processResult.Errors.ToArray());
+            }
+
+            if (!safeConfig.Zipped)
             {
                 return OutputResult.CreateSuccessResult(
                     new XlsxOutputResultData
                     {
                         Zipped = false,
-                        Configuration = (IXlsxObjectConfig)configToApply,
-                        UncompressOutputStream = await (await CloneAsync(cancellationToken)).ToStreamAsync(cancellationToken)
+                        Configuration = (IXlsxObjectConfig)safeConfig,
+                        UncompressOutputStream = await (await CloneAsync(cancellationToken).ConfigureAwait(false)).ToStreamAsync(cancellationToken).ConfigureAwait(false)
                     });
             }
 
-            OutputResult zippedOutputResult = OutputResult.CreateSuccessResult(null); // new[] { Clone() }.CreateJoinResult(new[] { safeConfig.Filename });
-            //zippedOutputResult.Result.Configuration = safeConfig;
-
-            return zippedOutputResult;
+            return await CreateZippedResultAsync(this, safeConfig.Filename, cancellationToken).ConfigureAwait(false);
         }
         catch (Exception e)
         {
@@ -419,7 +433,10 @@ public class XlsxInput : IXlsxInput, ICloneable
     {
         try
         {
-            return await (await ToStreamAsync(cancellationToken)).SaveToFileAsync(Path.PathResolver(outputPath), options ?? SaveOptions.Default, cancellationToken);
+            return await 
+                (await ToStreamAsync(cancellationToken).ConfigureAwait(false))
+                .SaveToFileAsync(Path.PathResolver(outputPath), options ?? SaveOptions.Default, cancellationToken)
+                .ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -441,26 +458,26 @@ public class XlsxInput : IXlsxInput, ICloneable
             case KnownInputType.Filename:
 #if NETSTANDARD2_1 || NET5_0_OR_GREATER
 
-                return new NativeIO.MemoryStream(await NativeIO.File.ReadAllBytesAsync(Path.PathResolver(TypeHelper.ToType<string>(Input)), cancellationToken));
+                return new NativeIO.MemoryStream(await NativeIO.File.ReadAllBytesAsync(Path.PathResolver(TypeHelper.ToType<string>(Input)), cancellationToken).ConfigureAwait(false));
 #elif NETCOREAPP3_1
-                    return new NativeIO.MemoryStream(await NativeIO.File.ReadAllBytesAsync(Path.PathResolver(TypeHelper.ToType<string>(Input)), cancellationToken));
+                    return new NativeIO.MemoryStream(await NativeIO.File.ReadAllBytesAsync(Path.PathResolver(TypeHelper.ToType<string>(Input)), cancellationToken).ConfigureAwait(false));
 #else
-                    return await Task.FromResult(new NativeIO.MemoryStream(NativeIO.File.ReadAllBytes(Path.PathResolver(TypeHelper.ToType<string>(Input)))));
+                return await Task.FromResult(new NativeIO.MemoryStream(NativeIO.File.ReadAllBytes(Path.PathResolver(TypeHelper.ToType<string>(Input))))).ConfigureAwait(false);
 #endif
             case KnownInputType.ByteArray:
-                return await Task.FromResult(new NativeIO.MemoryStream(TypeHelper.ToType<byte[]>(Input)));
+                return await Task.FromResult(new NativeIO.MemoryStream(TypeHelper.ToType<byte[]>(Input))).ConfigureAwait(false);
 
             case KnownInputType.XlsxInput:
-                return ((XlsxOutputResultData)(await TypeHelper.ToType<XlsxInput>(Input).CreateResultAsync(cancellationToken: cancellationToken)).Result).UncompressOutputStream;
+                return ((XlsxOutputResultData)(await TypeHelper.ToType<XlsxInput>(Input).CreateResultAsync(cancellationToken: cancellationToken).ConfigureAwait(false)).Result).UncompressOutputStream;
 
             case KnownInputType.Stream:
                 var stream = TypeHelper.ToType<NativeIO.Stream>(Input);
                 stream.Position = 0;
-                return await Task.FromResult(stream);
+                return await Task.FromResult(stream).ConfigureAwait(false);
 
             default:
             case KnownInputType.NotSupported:
-                return await Task.FromResult((NativeIO.Stream)null);
+                return await Task.FromResult((NativeIO.Stream)null).ConfigureAwait(false);
         }
     }
 
@@ -610,6 +627,40 @@ public class XlsxInput : IXlsxInput, ICloneable
 
     #endregion
 
+    #region internal static methods
+
+    /// <summary>
+    /// Returns a new <see cref="OutputResult"/> reference thats represents a one <b>unique zip stream</b> that contains the same entries in <param ref="items"/> 
+    /// but compressed individually using the name in <param ref="filenames"/>.         
+    /// </summary>
+    /// <param name="input">Items</param>
+    /// <param name="filename">Item filenames.</param>
+    /// <returns>
+    /// A <see cref="OutputResult"/> reference that contains action result.
+    /// </returns>
+    internal static OutputResult CreateZippedResult(XlsxInput input, string filename)
+    {
+        try
+        {
+            var zippedStream = input.ToStream().AsZipStream(filename);
+            zippedStream.Position = 0;
+            return
+                OutputResult.CreateSuccessResult(
+                    new XlsxOutputResultData
+                    {
+                        Zipped = true,
+                        Configuration = null,
+                        UncompressOutputStream = zippedStream
+                    });
+        }
+        catch (Exception e)
+        {
+            return OutputResult.FromException(e);
+        }
+    }
+
+    #endregion
+
     #region internal methods
 
     internal ActionResult ProcessInput()
@@ -622,6 +673,11 @@ public class XlsxInput : IXlsxInput, ICloneable
         {
             result = XlsxInputRender.Render<ISet>(this);
             Input = result.Result.OutputStream;
+
+            if (!result.Success)
+            {
+                return result;
+            }
         }
 
         // Replacements
@@ -630,6 +686,11 @@ public class XlsxInput : IXlsxInput, ICloneable
         {
             result = XlsxInputRender.Render<IReplace>(this);
             Input = result.Result.OutputStream;
+
+            if (!result.Success)
+            {
+                return result;
+            }
         }
 
         // Inserts
@@ -657,13 +718,54 @@ public class XlsxInput : IXlsxInput, ICloneable
 
     #endregion
 
+    #region internal static async methods
+
+    /// <summary>
+    /// Returns a new <see cref="OutputResult"/> reference thats represents a one <b>unique zip stream</b> that contains the same entries in <param ref="items"/> 
+    /// but compressed individually using the name in <param ref="filenames"/>.         
+    /// </summary>
+    /// <param name="input">Items</param>
+    /// <param name="filename">Item filenames.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>
+    /// A <see cref="OutputResult"/> reference that contains action result.
+    /// </returns>
+    internal static async Task<OutputResult> CreateZippedResultAsync(XlsxInput input, string filename, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var stream = await input
+                .ToStreamAsync(cancellationToken)
+                .ConfigureAwait(false);
+
+            var zippedStream = await stream
+                .AsZipStreamAsync(filename, cancellationToken)
+                .ConfigureAwait(false);
+
+            zippedStream.Position = 0;
+            return
+                OutputResult.CreateSuccessResult(
+                    new XlsxOutputResultData
+                    {
+                        Zipped = true,
+                        Configuration = null,
+                        UncompressOutputStream = zippedStream
+                    });
+        }
+        catch (Exception e)
+        {
+            return OutputResult.FromException(e);
+        }
+    }
+    #endregion
+
     #region internal async methods
 
     internal async Task<XlsxInput> CloneAsync(CancellationToken cancellationToken = default)
     {
         var clonned = (XlsxInput)MemberwiseClone();
 
-        var innerStream = await (await ToStreamAsync(cancellationToken)).CloneAsync(cancellationToken);
+        var innerStream = await (await ToStreamAsync(cancellationToken).ConfigureAwait(false)).CloneAsync(cancellationToken).ConfigureAwait(false);
         clonned.Input = innerStream;
 
         return clonned;
@@ -693,7 +795,7 @@ public class XlsxInput : IXlsxInput, ICloneable
         var hasInsertItems = XlsxInputCache.Cache.AnyInserts(this);
         if (!hasInsertItems)
         {
-            var stream = await ToStreamAsync(cancellationToken);
+            var stream = await ToStreamAsync(cancellationToken).ConfigureAwait(false);
 
             result = ActionResult.CreateSuccessResult(
                 new ActionResultData

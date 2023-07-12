@@ -31,7 +31,7 @@ public partial class SaveToFileAsync : IOutputActionAsync
     /// </para>
     /// </returns>
     public async Task<IResult> ExecuteAsync(IOutputResultData context, CancellationToken cancellationToken = default) => 
-        await ExecuteImplAsync(context, cancellationToken);
+        await ExecuteImplAsync(context, cancellationToken).ConfigureAwait(false);
 
 
     private async Task<IResult> ExecuteImplAsync(IOutputResultData data, CancellationToken cancellationToken = default)
@@ -61,15 +61,15 @@ public partial class SaveToFileAsync : IOutputActionAsync
                 var streamIsZipped = ((XlsxObjectConfig)xlsxOutputResultData.Configuration).AllowCompression;
                 actionResult.Success = xlsxOutputResultData.Zipped
                     ? streamIsZipped
-                        ? (await xlsxOutputResultData.UncompressOutputStream.TrySaveAsZipAsync(XlsxExtension, outPath, cancellationToken)).Success
-                        : (await xlsxOutputResultData.UncompressOutputStream.SaveToFileAsync(outPath, safeOptions, cancellationToken)).Success
-                    : (await xlsxOutputResultData.OutputStream.SaveToFileAsync(outPath, safeOptions, cancellationToken)).Success;
+                        ? (await xlsxOutputResultData.UncompressOutputStream.TrySaveAsZipAsync(XlsxExtension, outPath, cancellationToken).ConfigureAwait(false)).Success
+                        : (await xlsxOutputResultData.UncompressOutputStream.SaveToFileAsync(outPath, safeOptions, cancellationToken).ConfigureAwait(false)).Success
+                    : (await xlsxOutputResultData.OutputStream.SaveToFileAsync(outPath, safeOptions, cancellationToken).ConfigureAwait(false)).Success;
             }
             else
             {
                 actionResult.Success = xlsxOutputResultData.Zipped
-                    ? (await xlsxOutputResultData.UncompressOutputStream.SaveToFileAsync(outPath, safeOptions, cancellationToken)).Success
-                    : (await xlsxOutputResultData.OutputStream.SaveToFileAsync(outPath, safeOptions, cancellationToken)).Success;
+                    ? (await xlsxOutputResultData.UncompressOutputStream.SaveToFileAsync(outPath, safeOptions, cancellationToken).ConfigureAwait(false)).Success
+                    : (await xlsxOutputResultData.OutputStream.SaveToFileAsync(outPath, safeOptions, cancellationToken).ConfigureAwait(false)).Success;
             }
 
             return actionResult;

@@ -94,7 +94,7 @@ public class XlsxObject : IDisposable
     /// </summary>
     public async ValueTask DisposeAsync()
     {
-        await DisposeAsync(true);
+        await DisposeAsync(true).ConfigureAwait(false);
 
         GC.SuppressFinalize(this);
     }
@@ -223,7 +223,7 @@ public class XlsxObject : IDisposable
                         var inputAsStream = (Stream)item.Input;
                         if (inputAsStream != null)
                         {
-                            await inputAsStream.DisposeAsync();
+                            await inputAsStream.DisposeAsync().ConfigureAwait(false);
                         }
                         break;
 

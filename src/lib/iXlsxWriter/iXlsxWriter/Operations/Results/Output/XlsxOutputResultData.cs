@@ -96,8 +96,8 @@ public partial class XlsxOutputResultData
 
     private static async Task<IResult> ActionImplStrategyAsync(IOutputActionAsync output, IOutputResultData result, CancellationToken cancellationToken) =>
         output == null
-            ? await Task.FromResult(OutputResult.NullResult)
-            : await output.ExecuteAsync(result, cancellationToken);
+            ? await Task.FromResult(OutputResult.NullResult).ConfigureAwait(false)
+            : await output.ExecuteAsync(result, cancellationToken).ConfigureAwait(false);
 
     #endregion
 }

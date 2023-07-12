@@ -87,7 +87,7 @@ public partial class XlsxOutputResultData : IXlsxOutputResultData
     /// </para>
     /// </returns>
     public async Task<IResult> Action(IOutputActionAsync output, CancellationToken cancellationToken = default) =>
-        await ActionImplStrategyAsync(output, this, cancellationToken);
+        await ActionImplStrategyAsync(output, this, cancellationToken).ConfigureAwait(false);
 
     /// <summary>
     /// Returns a reference to the output stream asynchronously.
@@ -97,7 +97,7 @@ public partial class XlsxOutputResultData : IXlsxOutputResultData
     /// A <see cref="Stream"/> that contains a reference to the output stream.
     /// </returns>
     public async Task<Stream> GetOutputStreamAsync(CancellationToken cancellationToken = default) =>
-        new MemoryStream(await OutputStream.AsByteArrayAsync(cancellationToken));
+        new MemoryStream(await OutputStream.AsByteArrayAsync(cancellationToken).ConfigureAwait(false));
 
     /// <summary>
     /// Returns a reference to the uncompressed output stream. If <see cref="OutputType"/> is <b>Pdf</b> this value is equals to <see cref="OutputStream"/> value property asynchronously.
@@ -107,5 +107,5 @@ public partial class XlsxOutputResultData : IXlsxOutputResultData
     /// A <see cref="Stream"/> that contains the original outupt uncrompressed.
     /// </returns>
     public async Task<Stream> GetUnCompressedOutputStreamAsync(CancellationToken cancellationToken = default) =>
-        new MemoryStream(await UncompressOutputStream.AsByteArrayAsync(cancellationToken));
+        new MemoryStream(await UncompressOutputStream.AsByteArrayAsync(cancellationToken).ConfigureAwait(false));
 }

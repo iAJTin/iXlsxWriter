@@ -115,7 +115,7 @@ public partial class XlsxSettings : ICloneable
 
     #endregion
 
-    #region public override properties
+    #region public override readonly properties
 
     /// <summary>
     /// Gets a value indicating whether this instance is default.
@@ -142,9 +142,9 @@ public partial class XlsxSettings : ICloneable
     public XlsxSettings Clone()
     {
         var cloned = (XlsxSettings)MemberwiseClone();
-        cloned.DocumentSettings = DocumentSettings.Clone();
-        cloned.SheetsSettings = SheetsSettings.Clone();
-        cloned.Properties = Properties.Clone();
+        cloned.DocumentSettings = DocumentSettings?.Clone();
+        cloned.SheetsSettings = SheetsSettings?.Clone();
+        cloned.Properties = Properties?.Clone();
 
         return cloned;
     }

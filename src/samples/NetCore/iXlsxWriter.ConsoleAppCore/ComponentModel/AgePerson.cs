@@ -1,8 +1,7 @@
 ﻿
-namespace iXlsxWriter.ComponentModel
+namespace iXlsxWriter.ComponentModel;
+
+public class AgePerson : Person
 {
-    public class AgePerson : Person
-    {
-        public int Age { get; set; }
-    }
+    public int Age { get; set; }
 }

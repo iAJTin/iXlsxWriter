@@ -11,7 +11,6 @@ using OfficeOpenXml.Drawing;
 using OfficeOpenXml.Sparkline;
 
 using iTin.Core;
-using iTin.Core.Helpers;
 using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
 using iTin.Core.Models.Design.Styles;
@@ -69,8 +68,8 @@ internal static class XlsxExtensions
     /// </returns>
     public static ExcelCellBase Expand(this XlsxBaseRange range, XlsxMiniChartSize size)
     {
-        int offsetY = size.VerticalCells == 1 ? 0 : size.VerticalCells - 1;
-        int offsetX = size.HorizontalCells == 1 ? 0 : size.HorizontalCells - 1;
+        var offsetY = size.VerticalCells == 1 ? 0 : size.VerticalCells - 1;
+        var offsetX = size.HorizontalCells == 1 ? 0 : size.HorizontalCells - 1;
 
         var targetAddress = range.ToEppExcelAddress();
         var address = ExcelCellBase.GetAddress(targetAddress.Start.Row, targetAddress.Start.Column, targetAddress.End.Row + offsetY, targetAddress.End.Column + offsetX);
@@ -88,8 +87,6 @@ internal static class XlsxExtensions
     /// <exception cref="ArgumentNullException">The value specified is <c>null</c>.</exception>
     public static Color GetMiniChartSerieColor(this XlsxMiniChartChartType model)
     {
-        SentinelHelper.ArgumentNull(model, nameof(model));
-
         var result = Color.Transparent;
         return model.Active switch
         {
@@ -110,9 +107,6 @@ internal static class XlsxExtensions
     /// </returns>
     public static ExcelPrinterSettings SetMarginsFromModel(this ExcelPrinterSettings settings, XlsxDocumentMargins margins)
     {
-        SentinelHelper.ArgumentNull(settings, nameof(settings));
-        SentinelHelper.ArgumentNull(margins, nameof(margins));
-
         var units = margins.Units;
         if (units == KnownUnit.Millimeters)
         {
@@ -142,10 +136,7 @@ internal static class XlsxExtensions
     /// </returns>
     public static ExcelHeaderFooter SetSheetHeader(this ExcelHeaderFooter reference, XlsxDocumentHeaderFooter header)
     {
-        SentinelHelper.ArgumentNull(reference, nameof(reference));
-        SentinelHelper.ArgumentNull(header, nameof(header));
-
-        bool hasSections = header.Sections.Any();
+        var hasSections = header.Sections.Any();
         if (!hasSections)
         {
             return reference;
@@ -170,9 +161,6 @@ internal static class XlsxExtensions
     /// </returns>
     public static ExcelHeaderFooter SetSheetFooter(this ExcelHeaderFooter reference, XlsxDocumentHeaderFooter footer)
     {
-        SentinelHelper.ArgumentNull(reference, nameof(reference));
-        SentinelHelper.ArgumentNull(footer, nameof(footer));
-
         bool hasSections = footer.Sections.Any();
         if (!hasSections)
         {
@@ -196,17 +184,13 @@ internal static class XlsxExtensions
     /// Alignment as string.
     /// </returns>
     /// <exception cref="InvalidEnumArgumentException">The value specified is outside the range of valid values.</exception>
-    public static string ToEppLabelAlignmentString(this KnownHorizontalAlignment alignment)
-    {
-        SentinelHelper.IsEnumValid(alignment);
-
-        return alignment switch
+    public static string ToEppLabelAlignmentString(this KnownHorizontalAlignment alignment) =>
+        alignment switch
         {
             KnownHorizontalAlignment.Left => "l",
             KnownHorizontalAlignment.Right => "r",
             _ => "ctr"
         };
-    }
 
     /// <summary>
     /// Gets data format from model.
@@ -218,8 +202,6 @@ internal static class XlsxExtensions
     /// </returns>
     public static string ToEppDataFormat(this string format, BaseDataType modelDataType)
     {
-        SentinelHelper.ArgumentNull(modelDataType, nameof(modelDataType));
-
         var formatBuilder = new StringBuilder();
         var culture = CultureInfo.CurrentCulture;
         var formatPatternsArray = format.Split(';');
@@ -364,17 +346,13 @@ internal static class XlsxExtensions
     /// A <see cref="eDispBlanksAs"/> value.
     /// </returns>
     /// <exception cref="InvalidEnumArgumentException">The value specified is outside the range of valid values.</exception>
-    public static eDispBlanksAs ToEppeDisplayBlanksAs(this MiniChartEmptyValuesAs reference)
-    {
-        SentinelHelper.IsEnumValid(reference);
-
-        return reference switch
+    public static eDispBlanksAs ToEppeDisplayBlanksAs(this MiniChartEmptyValuesAs reference) =>
+        reference switch
         {
             MiniChartEmptyValuesAs.Connect => eDispBlanksAs.Span,
             MiniChartEmptyValuesAs.Zero => eDispBlanksAs.Zero,
             _ => eDispBlanksAs.Gap
         };
-    }
 
     /// <summary>
     /// Returns range address.
@@ -387,7 +365,7 @@ internal static class XlsxExtensions
     {
         ExcelAddressBase result = null;
 
-        KnownRangeType rangeType = range.Type;
+        var rangeType = range.Type;
         switch (rangeType)
         {
             case KnownRangeType.String:
@@ -399,7 +377,7 @@ internal static class XlsxExtensions
                     result = new ExcelAddressBase(target.Address);
                 }
             }
-                break;
+            break;
 
             case KnownRangeType.Range:
             {
@@ -412,7 +390,7 @@ internal static class XlsxExtensions
                     target.Start.AbsoluteStrategy == AbsoluteStrategy.Both && target.End.AbsoluteStrategy == AbsoluteStrategy.Both);
                 result = new ExcelAddressBase(address);
             }
-                break;
+            break;
 
             case KnownRangeType.Point:
             {
@@ -426,7 +404,7 @@ internal static class XlsxExtensions
 
                 result = new ExcelAddressBase(address);
             }
-                break;
+            break;
         }
 
         return result;
@@ -440,18 +418,14 @@ internal static class XlsxExtensions
     /// A <see cref="eTextAlignment"/> value.
     /// </returns>
     /// <exception cref="InvalidEnumArgumentException">The value specified is outside the range of valid values.</exception>
-    public static eTextAlignment ToEppTextHorizontalAlignment(this KnownHorizontalAlignment alignment)
-    {
-        SentinelHelper.IsEnumValid(alignment);
-
-        return alignment switch
+    public static eTextAlignment ToEppTextHorizontalAlignment(this KnownHorizontalAlignment alignment) =>
+        alignment switch
         {
             KnownHorizontalAlignment.Left => eTextAlignment.Left,
             KnownHorizontalAlignment.Center => eTextAlignment.Center,
             KnownHorizontalAlignment.Right => eTextAlignment.Right,
             _ => eTextAlignment.Left
         };
-    }
 
     /// <summary>
     /// Converter for <see cref="KnownLineStyle"/> enumeration type to <see cref="eLineStyle"/>.
@@ -461,11 +435,8 @@ internal static class XlsxExtensions
     /// A <see cref="eLineStyle"/> value.
     /// </returns>
     /// <exception cref="InvalidEnumArgumentException">The value specified is outside the range of valid values.</exception>
-    public static eLineStyle ToEppLineStyle(this KnownLineStyle style)
-    {
-        SentinelHelper.IsEnumValid(style);
-
-        return style switch
+    public static eLineStyle ToEppLineStyle(this KnownLineStyle style) =>
+        style switch
         {
             KnownLineStyle.Dash => eLineStyle.Dash,
             KnownLineStyle.DashDot => eLineStyle.DashDot,
@@ -473,7 +444,6 @@ internal static class XlsxExtensions
             KnownLineStyle.Dot => eLineStyle.Dot,
             _ => eLineStyle.Solid
         };
-    }
 
     /// <summary>
     /// Converter for <see cref="KnownDocumentOrientation"/> enumeration type to <see cref="eOrientation"/>.
@@ -483,12 +453,8 @@ internal static class XlsxExtensions
     /// A <see cref="eOrientation" /> value.
     /// </returns>
     /// <exception cref="InvalidEnumArgumentException">The value specified is outside the range of valid values.</exception>
-    public static eOrientation ToEppOrientation(this KnownDocumentOrientation orientation)
-    {
-        SentinelHelper.IsEnumValid(orientation);
-
-        return orientation == KnownDocumentOrientation.Portrait ? eOrientation.Portrait : eOrientation.Landscape;
-    }
+    public static eOrientation ToEppOrientation(this KnownDocumentOrientation orientation) => 
+        orientation == KnownDocumentOrientation.Portrait ? eOrientation.Portrait : eOrientation.Landscape;
 
     /// <summary>
     /// Converter for <see cref="KnownDocumentSize"/> enumeration type to <see cref="ePaperSize"/>.
@@ -500,8 +466,6 @@ internal static class XlsxExtensions
     /// <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">The value specified is outside the range of valid values.</exception>
     public static ePaperSize ToEppPaperSize(this KnownDocumentSize paper)
     {
-        SentinelHelper.IsEnumValid(paper);
-
         var paperSize = ePaperSize.A4;
         switch (paper)
         {
@@ -569,8 +533,6 @@ internal static class XlsxExtensions
     /// </returns>
     public static ExcelWorksheetView ToEppSheetView(this ExcelWorksheetView reference, KnownDocumentView view)
     {
-        SentinelHelper.ArgumentNull(reference, nameof(reference));
-
         switch (view)
         {
             case KnownDocumentView.Design:
@@ -593,17 +555,13 @@ internal static class XlsxExtensions
     /// A <see cref="eSparklineType" /> value.
     /// </returns>
     /// <exception cref="InvalidEnumArgumentException">The value specified is outside the range of valid values.</exception>
-    public static eSparklineType ToEppeSparklineType(this MiniChartType type)
-    {
-        SentinelHelper.IsEnumValid(type);
-
-        return type switch
+    public static eSparklineType ToEppeSparklineType(this MiniChartType type) =>
+        type switch
         {
             MiniChartType.Line => eSparklineType.Line,
             MiniChartType.WinLoss => eSparklineType.Stacked,
             _ => eSparklineType.Column
         };
-    }
 
     #endregion
 
@@ -619,9 +577,6 @@ internal static class XlsxExtensions
     /// </returns>
     private static ExcelHeaderFooter SetSheetHeaderSection(this ExcelHeaderFooter reference, XlsxDocumentHeaderFooterSection section)
     {
-        SentinelHelper.ArgumentNull(reference, nameof(reference));
-        SentinelHelper.ArgumentNull(section, nameof(section));
-
         if (string.IsNullOrEmpty(section.Text))
         {
             return reference;
@@ -663,9 +618,6 @@ internal static class XlsxExtensions
     /// </returns>
     private static ExcelHeaderFooter SetSheetFooterSection(this ExcelHeaderFooter reference, XlsxDocumentHeaderFooterSection section)
     {
-        SentinelHelper.ArgumentNull(reference, nameof(reference));
-        SentinelHelper.ArgumentNull(section, nameof(section));
-
         if (string.IsNullOrEmpty(section.Text))
         {
             return reference;

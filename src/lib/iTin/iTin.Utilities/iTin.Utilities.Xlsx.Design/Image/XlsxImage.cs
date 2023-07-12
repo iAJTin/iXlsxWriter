@@ -528,7 +528,7 @@ public class XlsxImage : IEquatable<XlsxImage>, IDisposable
 
         XlsxImage result = Null;
 
-        var uriIsAccesibleResult = await imageUri.IsAccessibleAsync();
+        var uriIsAccesibleResult = await imageUri.IsAccessibleAsync().ConfigureAwait(false);
         if (!uriIsAccesibleResult.Success)
         {
             return result;
@@ -536,19 +536,19 @@ public class XlsxImage : IEquatable<XlsxImage>, IDisposable
 
         try
         {
-            using var response = await GetResponseAsync(imageUri, timeout);
+            using var response = await GetResponseAsync(imageUri, timeout).ConfigureAwait(false);
 
             var xlsxImage = FromStream(response.GetResponseStream(), configuration);
             if (xlsxImage.Equals(Null))
             {
-                await Task.Delay(300);
+                await Task.Delay(300).ConfigureAwait(false);
 
-                using var responseAlternative = await GetResponseAsync(imageUri, timeout);
+                using var responseAlternative = await GetResponseAsync(imageUri, timeout).ConfigureAwait(false);
                 xlsxImage = FromStream(responseAlternative.GetResponseStream(), configuration);
                 if (xlsxImage.Equals(Null))
                 {
-                    await Task.Delay(500);
-                    xlsxImage = await GetXlsxImageByWebClientAsync(imageUri);
+                    await Task.Delay(500).ConfigureAwait(false);
+                    xlsxImage = await GetXlsxImageByWebClientAsync(imageUri).ConfigureAwait(false);
                 }
             }
 
@@ -682,7 +682,7 @@ public class XlsxImage : IEquatable<XlsxImage>, IDisposable
         request.Timeout = timeout;
         request.ReadWriteTimeout = timeout;
 
-        return (HttpWebResponse)await request.GetResponseAsync();
+        return (HttpWebResponse)await request.GetResponseAsync().ConfigureAwait(false);
     }
 
     private static async Task<XlsxImage> GetXlsxImageByWebClientAsync(Uri imageUri)
@@ -692,7 +692,7 @@ public class XlsxImage : IEquatable<XlsxImage>, IDisposable
         try
         {
             using var webClient = new WebClient();
-            using var ms = new MemoryStream(await webClient.DownloadDataTaskAsync(imageUri));
+            using var ms = new MemoryStream(await webClient.DownloadDataTaskAsync(imageUri).ConfigureAwait(false));
             var bmp = Image.FromStream(ms);
 
             return FromImage(bmp);

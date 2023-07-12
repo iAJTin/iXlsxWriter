@@ -44,9 +44,9 @@ public class InsertText : InsertWithStyleBase
     /// Implementation to execute when insert action.
     /// </summary>
     /// <param name="context">Input context</param>
-    /// <param name="input"></param>
-    /// <param name="package"></param>
-    /// <param name="worksheet"></param>
+    /// <param name="input">Input stream</param>
+    /// <param name="package">Package reference</param>
+    /// <param name="worksheet">Worksheet reference</param>
     /// <returns>
     /// <para>
     /// A <see cref="ActionResult"/> reference that contains the result of the operation, to check if the operation is correct, the <b>Success</b>
@@ -96,16 +96,16 @@ public class InsertText : InsertWithStyleBase
 
         try
         {
-            ExcelAddressBase locationAddress = location.ToEppExcelAddress();
-            XlsxCellStyle safeStyle = package.CreateStyle(style);
-            XlsxCellMerge merge = safeStyle.Content.Merge;
-            string range = merge.Cells == 1
+            var locationAddress = location.ToEppExcelAddress();
+            var safeStyle = package.CreateStyle(style);
+            var merge = safeStyle.Content.Merge;
+            var range = merge.Cells == 1
                 ? locationAddress.ToString()
                 : merge.Orientation == KnownMergeOrientation.Horizontal
                     ? ExcelCellBase.GetAddress(locationAddress.Start.Row, locationAddress.Start.Column, locationAddress.Start.Row, locationAddress.Start.Column + merge.Cells - 1)
                     : ExcelCellBase.GetAddress(locationAddress.Start.Row, locationAddress.Start.Column, locationAddress.Start.Row + merge.Cells - 1, locationAddress.Start.Column);
 
-            ExcelRange cell = worksheet.Cells[range];
+            var cell = worksheet.Cells[range];
             cell.StyleName = locationAddress.End.Row.IsOdd()
                 ? $"{safeStyle.Name}_Alternate"
                 : safeStyle.Name ?? XlsxBaseStyle.NameOfDefaultStyle;

@@ -15,14 +15,17 @@ public class XlsxOutputResultConfig : IXlsxObjectConfig, IOutputResultConfig
     #region public static members
 
     /// <summary>
-    /// Defaults configuration. Defaults no zipped output.
+    /// Defaults configuration. Defaults no zipped output and allowed to try to continue if an error occurs.
     /// </summary>
-    public static readonly XlsxOutputResultConfig Default = new() { Zipped = false, AutoFitColumns = true, GlobalSettings = XlsxSettings.Default };
+    public static readonly XlsxOutputResultConfig Default = new();
 
     /// <summary>
     /// Zipped output configuration. This output has been zipped.
+    /// <para>
+    /// If no value is specified for the <paramref name="filename"/> parameter, a <b>random name</b> will be used as the name of the xlsx file.
+    /// </para>
     /// </summary>
-    public static readonly XlsxOutputResultConfig ZippedResult = new() { Zipped = true, AutoFitColumns = true, GlobalSettings = XlsxSettings.Default };
+    public static XlsxOutputResultConfig ZippedResult(string filename = null) => new() { Zipped = true, Filename = filename };
 
     #endregion
 
@@ -98,7 +101,7 @@ public class XlsxOutputResultConfig : IXlsxObjectConfig, IOutputResultConfig
     /// </returns>
     public override string ToString()
         => Zipped
-            ? $"Zipped={Zipped}, Filename=\"{Filename}\", AutoFitColumns={AutoFitColumns}"
+            ? $"Zipped={Zipped}, Filename=\"{(string.IsNullOrEmpty(Filename) ? "(calculated)" : Filename )}\", AutoFitColumns={AutoFitColumns}"
             : $"Zipped={Zipped}, AutoFitColumns={AutoFitColumns}";
 
     #endregion
