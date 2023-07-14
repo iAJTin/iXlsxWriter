@@ -205,15 +205,15 @@ public class XlsxInput : IXlsxInput, ICloneable
 
         try
         {
-            if (safeConfig.AutoFitColumns)
-            {
-                Set(new SetAutoFitColumns());
-            }
-
             var concreteSettings = (XlsxOutputResultConfig)safeConfig;
             var globalSetting = concreteSettings.GlobalSettings;
             Set(new SetSheetsSettings { Settings = globalSetting.SheetsSettings });
             Set(new SetDocumentSettings { Settings = globalSetting.DocumentSettings });
+
+            if (safeConfig.AutoFitColumns)
+            {
+                Set(new SetAutoFitColumns());
+            }
 
             var processResult = ProcessInput();
             if (!processResult.Success)
@@ -378,15 +378,15 @@ public class XlsxInput : IXlsxInput, ICloneable
 
         try
         {
-            if (safeConfig.AutoFitColumns)
-            {
-                Set(new SetAutoFitColumns());
-            }
-
             var concreteSettings = (XlsxOutputResultConfig)safeConfig;
             var globalSetting = concreteSettings.GlobalSettings;
             Set(new SetSheetsSettings { Settings = globalSetting.SheetsSettings });
             Set(new SetDocumentSettings { Settings = globalSetting.DocumentSettings });
+
+            if (safeConfig.AutoFitColumns)
+            {
+                Set(new SetAutoFitColumns());
+            }
 
             var processResult = await ProcessInputAsync(cancellationToken).ConfigureAwait(false);
             if (!processResult.Success)
@@ -667,35 +667,37 @@ public class XlsxInput : IXlsxInput, ICloneable
     {
         ActionResult result;
 
-        // Sets
-        var hasSetItems = XlsxInputCache.Cache.AnySets(this);
-        if (hasSetItems)
-        {
-            result = XlsxInputRender.Render<ISet>(this);
-            Input = result.Result.OutputStream;
-
-            if (!result.Success)
-            {
-                return result;
-            }
-        }
-
         // Replacements
         var hasReplacementsItems = XlsxInputCache.Cache.AnyReplacements(this);
         if (hasReplacementsItems)
         {
             result = XlsxInputRender.Render<IReplace>(this);
-            Input = result.Result.OutputStream;
-
             if (!result.Success)
             {
                 return result;
             }
+
+            Input = result.Result.OutputStream;
+
         }
 
         // Inserts
         var hasInsertItems = XlsxInputCache.Cache.AnyInserts(this);
-        if (!hasInsertItems)
+        if (hasInsertItems)
+        {
+            result = XlsxInputRender.Render<IInsert>(this);
+            if (!result.Success)
+            {
+                return result;
+            }
+
+            Input = result.Result.OutputStream;
+
+        }
+
+        // Sets
+        var hasSetItems = XlsxInputCache.Cache.AnySets(this);
+        if (hasSetItems)
         {
             var stream = ToStream();
 
@@ -709,7 +711,7 @@ public class XlsxInput : IXlsxInput, ICloneable
         }
         else
         {
-            result = XlsxInputRender.Render<IInsert>(this);
+            result = XlsxInputRender.Render<ISet>(this);
             Input = result.Result.OutputStream;
         }
 
@@ -775,27 +777,37 @@ public class XlsxInput : IXlsxInput, ICloneable
     {
         ActionResult result;
 
-        // Sets
-        var hasSetItems = XlsxInputCache.Cache.AnySets(this);
-        if (hasSetItems)
-        {
-            result = XlsxInputRender.Render<ISet>(this);
-            Input = result.Result.OutputStream;
-        }
-
         // Replacements
         var hasReplacementsItems = XlsxInputCache.Cache.AnyReplacements(this);
         if (hasReplacementsItems)
         {
             result = XlsxInputRender.Render<IReplace>(this);
             Input = result.Result.OutputStream;
+
+            if (!result.Success)
+            {
+                return result;
+            }
         }
 
         // Inserts
         var hasInsertItems = XlsxInputCache.Cache.AnyInserts(this);
-        if (!hasInsertItems)
+        if (hasInsertItems)
         {
-            var stream = await ToStreamAsync(cancellationToken).ConfigureAwait(false);
+            result = XlsxInputRender.Render<IInsert>(this);
+            Input = result.Result.OutputStream;
+
+            if (!result.Success)
+            {
+                return result;
+            }
+        }
+
+        // Sets
+        var hasSetItems = XlsxInputCache.Cache.AnySets(this);
+        if (hasSetItems)
+        {
+            var stream = await ToStreamAsync(cancellationToken);
 
             result = ActionResult.CreateSuccessResult(
                 new ActionResultData
@@ -807,7 +819,7 @@ public class XlsxInput : IXlsxInput, ICloneable
         }
         else
         {
-            result = XlsxInputRender.Render<IInsert>(this);
+            result = XlsxInputRender.Render<ISet>(this);
             Input = result.Result.OutputStream;
         }
 

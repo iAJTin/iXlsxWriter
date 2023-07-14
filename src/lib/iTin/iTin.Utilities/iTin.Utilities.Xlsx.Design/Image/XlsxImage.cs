@@ -437,7 +437,7 @@ public class XlsxImage : IEquatable<XlsxImage>, IDisposable
     /// <returns>
     /// A new <see cref="XlsxImage"/> reference represents image.
     /// </returns>
-    public static XlsxImage FromFile(string imagePath, XlsxImageConfig configuration = null) => new XlsxImage(imagePath, configuration);
+    public static XlsxImage FromFile(string imagePath, XlsxImageConfig configuration = null) => new(imagePath, configuration);
 
     /// <summary>
     /// Creates a new <see cref="XlsxImage"/> object from specified image and optional image effect collection.
@@ -447,7 +447,7 @@ public class XlsxImage : IEquatable<XlsxImage>, IDisposable
     /// <returns>
     /// A new <see cref="XlsxImage"/> reference represents image.
     /// </returns>
-    public static XlsxImage FromImage(Image image, XlsxImageConfig configuration = null) => new XlsxImage(image, configuration);
+    public static XlsxImage FromImage(Image image, XlsxImageConfig configuration = null) => new(image, configuration);
 
     /// <summary>
     /// Creates a new <see cref="XlsxImage"/> object from specified stream, format and optional image effect collection.

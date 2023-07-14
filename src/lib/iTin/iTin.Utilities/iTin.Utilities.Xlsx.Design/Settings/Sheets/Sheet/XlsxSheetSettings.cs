@@ -1,5 +1,4 @@
 ﻿
-using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
@@ -15,7 +14,7 @@ namespace iTin.Utilities.Xlsx.Design.Settings.Sheets;
 /// <summary>
 /// Defines sheet settings. Allows to set the sheet margins, header, footer, default view, size and orientation.
 /// </summary>
-public partial class XlsxSheetSettings : ICloneable
+public partial class XlsxSheetSettings
 {
     #region private constants
 
@@ -68,23 +67,6 @@ public partial class XlsxSheetSettings : ICloneable
         Orientation = DefaultOrientation;
         FreezePanesPoint = XlsxPoint.Default;
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc/>
-    /// <summary>
-    /// Create a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new <see cref="object"/> that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
 
     #endregion
 
@@ -303,85 +285,6 @@ public partial class XlsxSheetSettings : ICloneable
 
             _view = value;
         }
-    }
-
-    #endregion
-
-    #region public override properties
-
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public override bool IsDefault =>
-        base.IsDefault &&
-        Footer.IsDefault &&
-        Header.IsDefault &&
-        Margins.IsDefault &&
-        View.Equals(DefaultView) &&
-        Size.Equals(DefaultSize) &&
-        string.IsNullOrEmpty(SheetName) &&
-        Orientation.Equals(DefaultOrientation);
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxSheetSettings Clone()
-    {
-        var cloned = (XlsxSheetSettings) MemberwiseClone();
-        cloned.Header = Header.Clone();
-        cloned.Footer = Footer.Clone();
-        cloned.Margins = Margins.Clone();
-        cloned.Properties = Properties.Clone();
-        cloned.FreezePanesPoint = FreezePanesPoint.Clone();
-
-        return cloned;
-    }
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">The reference.</param>
-    public virtual void Combine(XlsxSheetSettings reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        if (Orientation.Equals(DefaultOrientation))
-        {
-            Orientation = reference.Orientation;
-        }
-
-        if (Size.Equals(DefaultSize))
-        {
-            Size = reference.Size;
-        }
-
-        if (View.Equals(DefaultView))
-        {
-            View = reference.View;
-        }
-
-        reference.Footer.Combine(reference.Footer);
-        reference.Header.Combine(reference.Header);
-        reference.Margins.Combine(reference.Margins);
-        reference.FreezePanesPoint.Combine(reference.FreezePanesPoint);
     }
 
     #endregion

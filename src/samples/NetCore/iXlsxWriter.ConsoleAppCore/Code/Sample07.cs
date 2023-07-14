@@ -4,7 +4,9 @@ using System.Diagnostics;
 
 using iTin.Core;
 using iTin.Core.ComponentModel;
+
 using iTin.Logging.ComponentModel;
+
 using iTin.Utilities.Xlsx.Design.Shared;
 
 using iXlsxWriter.ComponentModel;
@@ -37,46 +39,45 @@ internal class Sample07
         #region Insert datatable and generic collections
 
         doc.Insert(new InsertText
+        {
+            SheetName = "Sheet1",
+            Location = new XlsxPointRange { Column = 2, Row = 1 },
+            Data = "Custom text"
+        }).Insert(new InsertEnumerable<Person>
+        {
+            SheetName = "Sheet1",
+            Location = new XlsxPointRange { Column = 2, Row = 3 },
+            Data = new Collection<Person>
             {
-                SheetName = "Sheet1",
-                Location = new XlsxPointRange { Column = 2, Row = 1 },
-                Data = "Custom text"
-            })
-            .Insert(new InsertEnumerable<Person>
+                new() { Name = "Name-01", Surname = "Surname-01" },
+                new() { Name = "Name-02", Surname = "Surname-02" },
+                new() { Name = "Name-03", Surname = "Surname-03" },
+                new() { Name = "Name-04", Surname = "Surname-04" },
+                new() { Name = "Name-05", Surname = "Surname-05" },
+                new() { Name = "Name-06", Surname = "Surname-06" },
+                new() { Name = "Name-07", Surname = "Surname-07" },
+                new() { Name = "Name-08", Surname = "Surname-08" },
+                new() { Name = "Name-09", Surname = "Surname-09" },
+                new() { Name = "Name-10", Surname = "Surname-10" }
+            }
+        }).Insert(new InsertDataTable
+        {
+            SheetName = "Sheet1",
+            Location = new XlsxPointRange { Column = 10, Row = 3 },
+            Data = new Collection<Person>
             {
-                SheetName = "Sheet1",
-                Location = new XlsxPointRange { Column = 2, Row = 3 },
-                Data = new Collection<Person>
-                {
-                    new() { Name = "Name-01", Surname = "Surname-01" },
-                    new() { Name = "Name-02", Surname = "Surname-02" },
-                    new() { Name = "Name-03", Surname = "Surname-03" },
-                    new() { Name = "Name-04", Surname = "Surname-04" },
-                    new() { Name = "Name-05", Surname = "Surname-05" },
-                    new() { Name = "Name-06", Surname = "Surname-06" },
-                    new() { Name = "Name-07", Surname = "Surname-07" },
-                    new() { Name = "Name-08", Surname = "Surname-08" },
-                    new() { Name = "Name-09", Surname = "Surname-09" },
-                    new() { Name = "Name-10", Surname = "Surname-10" }
-                }
-            }).Insert(new InsertDataTable
-            {
-                SheetName = "Sheet1",
-                Location = new XlsxPointRange { Column = 10, Row = 3 },
-                Data = new Collection<Person>
-                {
-                    new() { Name = "Name-01", Surname = "Surname-01" },
-                    new() { Name = "Name-02", Surname = "Surname-02" },
-                    new() { Name = "Name-03", Surname = "Surname-03" },
-                    new() { Name = "Name-04", Surname = "Surname-04" },
-                    new() { Name = "Name-05", Surname = "Surname-05" },
-                    new() { Name = "Name-06", Surname = "Surname-06" },
-                    new() { Name = "Name-07", Surname = "Surname-07" },
-                    new() { Name = "Name-08", Surname = "Surname-08" },
-                    new() { Name = "Name-09", Surname = "Surname-09" },
-                    new() { Name = "Name-10", Surname = "Surname-10" }
-                }.ToDataTable<Person>("Person")
-            });
+                new() { Name = "Name-01", Surname = "Surname-01" },
+                new() { Name = "Name-02", Surname = "Surname-02" },
+                new() { Name = "Name-03", Surname = "Surname-03" },
+                new() { Name = "Name-04", Surname = "Surname-04" },
+                new() { Name = "Name-05", Surname = "Surname-05" },
+                new() { Name = "Name-06", Surname = "Surname-06" },
+                new() { Name = "Name-07", Surname = "Surname-07" },
+                new() { Name = "Name-08", Surname = "Surname-08" },
+                new() { Name = "Name-09", Surname = "Surname-09" },
+                new() { Name = "Name-10", Surname = "Surname-10" }
+            }.ToDataTable<Person>("Person")
+        });
 
         #endregion
 

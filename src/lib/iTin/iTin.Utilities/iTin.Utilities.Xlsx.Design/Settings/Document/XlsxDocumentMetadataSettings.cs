@@ -1,5 +1,4 @@
 ﻿
-using System;
 using System.Diagnostics;
 using System.Xml.Serialization;
 
@@ -10,25 +9,8 @@ namespace iTin.Utilities.Xlsx.Design.Settings.Document;
 /// <summary>
 /// Defines a <b>xlsx</b> document properties metadata.
 /// </summary>
-public partial class XlsxDocumentMetadataSettings : ICloneable
+public partial class XlsxDocumentMetadataSettings
 {
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc/>
-    /// <summary>
-    /// Create a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new <see cref="object"/> that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #endregion
-
     #region public readonly static properties
 
     /// <summary>
@@ -155,50 +137,6 @@ public partial class XlsxDocumentMetadataSettings : ICloneable
         string.IsNullOrEmpty(Keywords) &&
         string.IsNullOrEmpty(Comments) &&
         string.IsNullOrEmpty(Url);
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxDocumentMetadataSettings Clone()
-    {
-        var cloned = (XlsxDocumentMetadataSettings) MemberwiseClone();
-        cloned.Properties = Properties.Clone();
-            
-        return cloned;
-    }
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">The reference.</param>
-    public virtual void Combine(XlsxDocumentMetadataSettings reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        Author = reference.Author;
-        Category = reference.Category;
-        Comments = reference.Comments;
-        Company = reference.Company;
-        Keywords = reference.Keywords;
-        Manager = reference.Manager;
-        Subject = reference.Subject;
-        Title = reference.Title;
-        Url = reference.Url;
-    }
 
     #endregion
 }

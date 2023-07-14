@@ -1,5 +1,4 @@
 ﻿
-using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
@@ -13,7 +12,7 @@ namespace iTin.Utilities.Xlsx.Design.Settings.Sheets;
 /// <summary>
 /// Defines a <b>Xlsx</b> section settings.
 /// </summary>
-public partial class XlsxDocumentHeaderFooterSection : ICloneable
+public partial class XlsxDocumentHeaderFooterSection
 {
     #region private constants
 
@@ -49,23 +48,6 @@ public partial class XlsxDocumentHeaderFooterSection : ICloneable
         Type = DefaultType;
         Alignment = DefaultAlignment;
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc/>
-    /// <summary>
-    /// Create a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new <see cref="object"/> that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
 
     #endregion
 
@@ -157,66 +139,6 @@ public partial class XlsxDocumentHeaderFooterSection : ICloneable
             SentinelHelper.IsEnumValid(value);
 
             _type = value;
-        }
-    }
-
-    #endregion
-
-    #region public override properties
-
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public override bool IsDefault =>
-        base.IsDefault &&
-        Text.Equals(DefaultText) &&
-        Type.Equals(DefaultType) &&
-        Alignment.Equals(DefaultAlignment);
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxDocumentHeaderFooterSection Clone() => (XlsxDocumentHeaderFooterSection) MemberwiseClone();
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">The reference.</param>
-    public virtual void Combine(XlsxDocumentHeaderFooterSection reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        if (Alignment.Equals(DefaultAlignment))
-        {
-            Alignment = reference.Alignment;
-        }
-
-        if (Text.Equals(DefaultText))
-        {
-            Text = reference.Text;
-        }
-
-        if (Type.Equals(DefaultType))
-        {
-            Type = reference.Type;
         }
     }
 

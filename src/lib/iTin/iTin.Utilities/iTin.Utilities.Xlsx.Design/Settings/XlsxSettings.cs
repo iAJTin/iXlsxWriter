@@ -1,5 +1,4 @@
 ﻿
-using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
@@ -14,7 +13,7 @@ namespace iTin.Utilities.Xlsx.Design.Settings;
 /// <summary>
 /// Defines sheets collection settings. Allows to set the document metadata, margins, header, footer, default view, size and orientation.
 /// </summary>
-public partial class XlsxSettings : ICloneable
+public partial class XlsxSettings
 {
     #region private field members
 
@@ -23,23 +22,6 @@ public partial class XlsxSettings : ICloneable
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     private XlsxDocumentMetadataSettings _document;
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc/>
-    /// <summary>
-    /// Create a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new <see cref="object"/> that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
 
     #endregion
 
@@ -111,61 +93,6 @@ public partial class XlsxSettings : ICloneable
     {
         get => _sheets ??= new XlsxSheetsSettingsCollection(this);
         set => _sheets = value;
-    }
-
-    #endregion
-
-    #region public override readonly properties
-
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public override bool IsDefault =>
-        base.IsDefault &&
-        DocumentSettings.IsDefault &&
-        SheetsSettings.IsDefault;
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxSettings Clone()
-    {
-        var cloned = (XlsxSettings)MemberwiseClone();
-        cloned.DocumentSettings = DocumentSettings?.Clone();
-        cloned.SheetsSettings = SheetsSettings?.Clone();
-        cloned.Properties = Properties?.Clone();
-
-        return cloned;
-    }
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">The reference.</param>
-    public virtual void Combine(XlsxSettings reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        reference.SheetsSettings.Combine(reference.SheetsSettings);
-        reference.DocumentSettings.Combine(reference.DocumentSettings);
     }
 
     #endregion

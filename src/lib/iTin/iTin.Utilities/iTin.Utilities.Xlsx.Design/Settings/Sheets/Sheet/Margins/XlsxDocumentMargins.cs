@@ -14,7 +14,7 @@ namespace iTin.Utilities.Xlsx.Design.Settings.Sheets;
 /// <summary>
 /// Defines <b>xlsx</b> sheet margins.
 /// </summary>
-public partial class XlsxDocumentMargins : ICloneable
+public partial class XlsxDocumentMargins
 {
     #region private constants
 
@@ -67,23 +67,6 @@ public partial class XlsxDocumentMargins : ICloneable
         Bottom = DefaultBottom;
         Units = DefaultUnits;
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc/>
-    /// <summary>
-    /// Create a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new <see cref="object"/> that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
 
     #endregion
 
@@ -202,84 +185,6 @@ public partial class XlsxDocumentMargins : ICloneable
             SentinelHelper.IsEnumValid(value);
 
             _unit = value;
-        }
-    }
-
-    #endregion
-
-    #region public override properties
-
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public override bool IsDefault =>
-        base.IsDefault &&
-        Top.Equals(DefaultTop) &&
-        Right.Equals(DefaultRight) &&
-        Left.Equals(DefaultLeft) &&
-        Bottom.Equals(DefaultBottom) &&
-        Units.Equals(DefaultUnits);
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxDocumentMargins Clone()
-    {
-        var cloned = (XlsxDocumentMargins) MemberwiseClone();
-        cloned.Properties = Properties.Clone();
-
-        return cloned;
-    }
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">The reference.</param>
-    public virtual void Combine(XlsxDocumentMargins reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        if (Bottom.Equals(DefaultBottom))
-        {
-            Bottom = reference.Bottom;
-        }
-
-        if (Left.Equals(DefaultLeft))
-        {
-            Left = reference.Left;
-        }
-
-        if (Right.Equals(DefaultRight))
-        {
-            Right = reference.Right;
-        }
-
-        if (Top.Equals(DefaultTop))
-        {
-            Top = reference.Top;
-        }
-
-        if (Units.Equals(DefaultUnits))
-        {
-            Units = reference.Units;
         }
     }
 

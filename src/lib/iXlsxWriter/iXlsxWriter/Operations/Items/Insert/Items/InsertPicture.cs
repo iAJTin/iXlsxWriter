@@ -113,7 +113,6 @@ public class InsertPicture : InsertLocationBase
         }
 
         return ExecuteImpl(context, input, package, worksheet, Location, Picture);
-
     }
 
     #endregion

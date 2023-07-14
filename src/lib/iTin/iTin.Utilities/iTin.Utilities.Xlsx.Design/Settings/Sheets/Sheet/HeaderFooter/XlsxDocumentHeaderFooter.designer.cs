@@ -14,5 +14,13 @@ namespace iTin.Utilities.Xlsx.Design.Settings.Sheets
     [XmlType(Namespace = "http://schemas.iTin.com/xlsx/settings/worksheets/v1.0")]
     public partial class XlsxDocumentHeaderFooter : BaseModel<XlsxDocumentHeaderFooter>
     {
+        /// <summary>
+        /// Gets a value indicating whether this instance is default.
+        /// </summary>
+        /// <value>
+        /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
+        /// </value>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public override bool IsDefault => base.IsDefault && Sections.IsDefault;
     }
 }

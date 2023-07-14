@@ -1,5 +1,4 @@
 ﻿
-using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
@@ -11,7 +10,7 @@ namespace iTin.Utilities.Xlsx.Design.Settings.Sheets;
 /// <summary>
 /// Defines header and footer document configuration, it allow define margin and data.
 /// </summary>
-public partial class XlsxDocumentHeaderFooter : ICloneable
+public partial class XlsxDocumentHeaderFooter
 {
     #region private field members
 
@@ -28,23 +27,6 @@ public partial class XlsxDocumentHeaderFooter : ICloneable
     public XlsxDocumentHeaderFooter()
     {
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc/>
-    /// <summary>
-    /// Create a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new <see cref="object"/> that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
 
     #endregion
 
@@ -101,56 +83,6 @@ public partial class XlsxDocumentHeaderFooter : ICloneable
     {
         get => _sections ??= new XlsxDocumentHeaderFooterSections(this);
         set => _sections = value;
-    }
-
-    #endregion
-
-    #region public override properties
-
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public override bool IsDefault => base.IsDefault && Sections.IsDefault;
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxDocumentHeaderFooter Clone()
-    {
-        var cloned = (XlsxDocumentHeaderFooter) MemberwiseClone();
-        cloned.Sections = Sections.Clone();
-        cloned.Properties = Properties.Clone();
-            
-        return cloned;
-    }
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">The reference.</param>
-    public virtual void Combine(XlsxDocumentHeaderFooter reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        Sections.Combine(reference.Sections);
     }
 
     #endregion

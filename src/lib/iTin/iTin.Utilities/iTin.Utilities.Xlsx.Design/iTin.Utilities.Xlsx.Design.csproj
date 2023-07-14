@@ -50,6 +50,69 @@
   </ItemGroup>
 
 
+  <!-- XlsxPicture -->
+  <ItemGroup>
+    <Compile Update="Picture\XlsxPicture.*.cs">
+      <DependentUpon>XlsxPicture.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- XlsxEffectsCollection -->
+  <ItemGroup>
+    <Compile Update="Picture\Effects\XlsxEffectsCollection.*.cs">
+      <DependentUpon>XlsxEffectsCollection.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- XlsxSettings -->
+  <ItemGroup>
+    <Compile Update="Settings\XlsxSettings.*.cs">
+      <DependentUpon>XlsxSettings.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- XlsxDocumentMetadataSettings -->
+  <ItemGroup>
+    <Compile Update="Settings\Document\XlsxDocumentMetadataSettings.*.cs">
+      <DependentUpon>XlsxDocumentMetadataSettings.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- XlsxSheetsSettingsCollection -->
+  <ItemGroup>
+    <Compile Update="Settings\Sheets\XlsxSheetsSettingsCollection.*.cs">
+      <DependentUpon>XlsxSheetsSettingsCollection.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- XlsxSheetSettings -->
+  <ItemGroup>
+    <Compile Update="Settings\Sheets\Sheet\XlsxSheetSettings.*.cs">
+      <DependentUpon>XlsxSheetSettings.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- XlsxDocumentHeaderFooter -->
+  <ItemGroup>
+    <Compile Update="Settings\Sheets\Sheet\HeaderFooter\XlsxDocumentHeaderFooter.*.cs">
+      <DependentUpon>XlsxDocumentHeaderFooter.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- XlsxDocumentMargins -->
+  <ItemGroup>
+    <Compile Update="Settings\Sheets\Sheet\Margins\XlsxDocumentMargins.*.cs">
+      <DependentUpon>XlsxDocumentMargins.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- XlsxDocumentHeaderFooterSection -->
+  <ItemGroup>
+    <Compile Update="Settings\Sheets\Sheet\HeaderFooter\HeaderFooterSections\HeaderFooterSection\XlsxDocumentHeaderFooterSection.*.cs">
+      <DependentUpon>XlsxDocumentHeaderFooterSection.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- XlsxDocumentHeaderFooterSections -->
+  <ItemGroup>
+    <Compile Update="Settings\Sheets\Sheet\HeaderFooter\HeaderFooterSections\XlsxDocumentHeaderFooterSections.*.cs">
+      <DependentUpon>XlsxDocumentHeaderFooterSections.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+
   <!-- DataStyles -->
   <ItemGroup>
     <Compile Update="Shared\Elements\DataStyles.*.cs">

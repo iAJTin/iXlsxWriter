@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 using iTin.Core;
 using iTin.Core.IO;
 using iTin.Core.Helpers;
-using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
 
 using iTin.Utilities.Xlsx.Design.Shared;
@@ -21,7 +20,7 @@ namespace iTin.Utilities.Xlsx.Design.Picture;
 /// <summary>
 /// Defines a <b>xlsx</b> picture.
 /// </summary>
-public partial class XlsxPicture : ICombinable<XlsxPicture>, ICloneable
+public partial class XlsxPicture
 {
     #region private constants
 
@@ -59,33 +58,6 @@ public partial class XlsxPicture : ICombinable<XlsxPicture>, ICloneable
         Show = DefaultShow;
         UnderliyingImage = XlsxImage.Null;
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #region ICombinable
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">Reference to combine with this instance</param>
-    void ICombinable<XlsxPicture>.Combine(XlsxPicture reference) => Combine(reference);
-
-    #endregion
 
     #endregion
 
@@ -295,26 +267,6 @@ public partial class XlsxPicture : ICombinable<XlsxPicture>, ICloneable
         
     #endregion
 
-    #region public override properties
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise <b>false</b>.
-    /// </value>
-    public override bool IsDefault =>
-        Size.IsDefault &&
-        Border.IsDefault &&
-        Effects.IsDefault &&
-        Content.IsDefault &&
-        ShapeEffects.IsDefault &&
-        string.IsNullOrEmpty(Name) &&
-        Show.Equals(DefaultShow);
-
-    #endregion
-
     #region internal properties
 
     /// <summary>
@@ -332,29 +284,6 @@ public partial class XlsxPicture : ICombinable<XlsxPicture>, ICloneable
     #region public methods
 
     /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxPicture Clone()
-    {
-        var cloned = (XlsxPicture)MemberwiseClone();
-        cloned.Border = Border.Clone();
-        cloned.Content = Content.Clone();
-        cloned.Effects = Effects.Clone();
-        cloned.ShapeEffects = ShapeEffects.Clone();
-        cloned.Properties = Properties.Clone();
-
-        if (Size != null)
-        {
-            cloned.Size = Size.Clone();
-        }
-
-        return cloned;
-    }
-
-    /// <summary>
     /// Returns an processed image instance.
     /// </summary>
     /// <returns>
@@ -370,35 +299,6 @@ public partial class XlsxPicture : ICombinable<XlsxPicture>, ICloneable
         }
 
         return UnderliyingImage == XlsxImage.Null ? null : UnderliyingImage.ProcessedImage;
-    }
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">The reference.</param>
-    public virtual void Combine(XlsxPicture reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        if (Show.Equals(DefaultShow))
-        {
-            Show = reference.Show;
-        }
-
-        Name ??= reference.Name;
-
-        Border.Combine(reference.Border);
-        Content.Combine(reference.Content);
-        ShapeEffects.Combine(reference.ShapeEffects);
-        //Size.Combine(reference.Size);
-        //Effects.Combine(reference.Effects);
     }
 
     #endregion
