@@ -699,6 +699,11 @@ public class XlsxInput : IXlsxInput, ICloneable
         var hasSetItems = XlsxInputCache.Cache.AnySets(this);
         if (hasSetItems)
         {
+            result = XlsxInputRender.Render<ISet>(this);
+            Input = result.Result.OutputStream;
+        }
+        else
+        {
             var stream = ToStream();
 
             result = ActionResult.CreateSuccessResult(
@@ -708,11 +713,6 @@ public class XlsxInput : IXlsxInput, ICloneable
                     InputStream = stream,
                     OutputStream = stream
                 });
-        }
-        else
-        {
-            result = XlsxInputRender.Render<ISet>(this);
-            Input = result.Result.OutputStream;
         }
 
         return result;

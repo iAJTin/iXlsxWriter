@@ -63,7 +63,7 @@ internal static class XlsxInputRender
                 var worksheet = context.Package.Workbook.Worksheets.FirstOrDefault(wk => wk.Name.Equals(item.SheetName, StringComparison.OrdinalIgnoreCase));
                 if (worksheet == null)
                 {
-                    if (rendertType != typeof(ISet))
+                    if (item.CheckSheetName)
                     {
                         return ActionResult.CreateErrorResult(
                             $"Sheet '{item.SheetName}' not found",

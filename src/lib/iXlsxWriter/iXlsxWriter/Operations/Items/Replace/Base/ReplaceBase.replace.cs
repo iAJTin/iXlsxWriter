@@ -11,6 +11,14 @@ namespace iXlsxWriter.Operations.Replace;
 public abstract partial class ReplaceBase : IReplace
 {
     /// <summary>
+    /// Gets a value indicating whether to check that the name is not null or empty.
+    /// </summary>
+    /// <value>
+    /// <b>true</b> if check name; otherwise, <b>false</b>.
+    /// </value>
+    public virtual bool CheckSheetName => true;
+
+    /// <summary>
     /// Gets or sets the name of the sheet where it will be inserted.
     /// </summary>
     /// <value>

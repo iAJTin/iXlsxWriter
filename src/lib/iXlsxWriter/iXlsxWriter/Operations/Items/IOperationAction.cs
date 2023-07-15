@@ -23,6 +23,14 @@ public interface IOperationAction
 
 
     /// <summary>
+    /// Gets a value indicating whether to check that the name is not null or empty.
+    /// </summary>
+    /// <value>
+    /// <b>true</b> if check name; otherwise, <b>false</b>.
+    /// </value>
+    bool CheckSheetName { get; }
+
+    /// <summary>
     /// 
     /// </summary>
     /// <returns>

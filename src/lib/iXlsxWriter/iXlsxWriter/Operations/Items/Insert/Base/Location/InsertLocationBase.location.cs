@@ -12,4 +12,12 @@ public abstract partial class InsertLocationBase : ILocationInsert
     /// A <see cref="XlsxBaseRange"/> object that contains the insert location.
     /// </value>
     public XlsxBaseRange Location { get; set; }
+
+    /// <summary>
+    /// Gets a value indicating whether to check that the name is not null or empty.
+    /// </summary>
+    /// <value>
+    /// <b>true</b> if check name; otherwise, <b>false</b>.
+    /// </value>
+    public virtual bool CheckSheetName => true;
 }
