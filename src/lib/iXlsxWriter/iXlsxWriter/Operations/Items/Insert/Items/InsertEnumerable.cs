@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 using iTin.Core.Models.Design.Enums;
 
@@ -136,9 +137,10 @@ public class InsertEnumerable<Ti> : InsertWithStyleBase
             var locationAddress = location.ToEppExcelAddress();
             worksheet.Cells[locationAddress.ToString()].LoadFromCollection(safeData, showHeaders == YesNo.Yes);
 
-            var styleToUse = package.CreateStyle(style);
+            var styleToUse = package.CreateEmptyNamedStyle(style);
             var range = worksheet.Cells[locationAddress.Start.Row, locationAddress.Start.Column, locationAddress.End.Row + safeData.Count - 1, locationAddress.End.Column];
-            range.StyleName = styleToUse.Name;
+            range.StyleID = package.Workbook.Styles.GetNamedStyleId(styleToUse.Name);
+            range.Style.FormatFromModel(styleToUse);
 
             package.SaveAs(outputStream);
 

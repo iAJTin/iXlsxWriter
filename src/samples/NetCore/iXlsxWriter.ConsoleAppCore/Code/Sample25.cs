@@ -33,7 +33,7 @@ internal class Sample25
 
         #region Creates xlsx file reference
 
-        XlsxInput doc = XlsxInput.Create(new[] { "Stacked area chart", "Sheet2" });
+        var doc = XlsxInput.Create(new[] { "Stacked area chart" });
 
         #endregion
 

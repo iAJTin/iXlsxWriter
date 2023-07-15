@@ -32,7 +32,7 @@ internal class Sample11
 
         #region Creates xlsx file reference
 
-        XlsxInput doc = XlsxInput.Create(new[] { "Shadows", "Illumination", "Reflection", "Soft Edge" });
+        var doc = XlsxInput.Create(new[] { "Shadows", "Illumination", "Reflection", "Soft Edge" });
 
         #endregion
 

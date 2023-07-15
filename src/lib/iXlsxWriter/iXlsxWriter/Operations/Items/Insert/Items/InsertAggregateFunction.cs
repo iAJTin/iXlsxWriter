@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 using iTin.Core.Helpers;
 using iTin.Core.Models.Design.Enums;
@@ -128,14 +129,14 @@ public class InsertAggregateFunction : InsertLocationBase
 
         try
         {
-            string aggregateWorksheetName = aggregate.WorkSheet;
+            var aggregateWorksheetName = aggregate.WorkSheet;
             if (string.IsNullOrEmpty(aggregate.WorkSheet))
             {
                 aggregateWorksheetName = sheetName;
             }
 
             var aggregateWorksheet = worksheet;
-            bool sameSheetName = aggregateWorksheetName.Equals(sheetName, StringComparison.OrdinalIgnoreCase);
+            var sameSheetName = aggregateWorksheetName.Equals(sheetName, StringComparison.OrdinalIgnoreCase);
             if (!sameSheetName)
             {
                 aggregateWorksheet = package.Workbook.Worksheets.FirstOrDefault(wk => wk.Name.Equals(aggregateWorksheetName, StringComparison.OrdinalIgnoreCase));
@@ -153,19 +154,22 @@ public class InsertAggregateFunction : InsertLocationBase
                     });
             }
 
-            ExcelAddressBase locationAddress = location.ToEppExcelAddress();
-            XlsxCellStyle safeStyle = package.CreateStyle(style);
-            XlsxCellMerge merge = safeStyle.Content.Merge;
-            string range = merge.Cells == 1
+            var locationAddress = location.ToEppExcelAddress();
+            var safeStyle = package.CreateEmptyNamedStyle(style);
+            var merge = safeStyle.Content.Merge;
+            var range = merge.Cells == 1
                 ? locationAddress.ToString()
                 : merge.Orientation == KnownMergeOrientation.Horizontal
                     ? ExcelCellBase.GetAddress(locationAddress.Start.Row, locationAddress.Start.Column, locationAddress.Start.Row, locationAddress.Start.Column + merge.Cells - 1)
                     : ExcelCellBase.GetAddress(locationAddress.Start.Row, locationAddress.Start.Column, locationAddress.Start.Row + merge.Cells - 1, locationAddress.Start.Column);
 
-            ExcelRange cell = aggregateWorksheet.Cells[range];
-            cell.StyleName = cell.StyleName = locationAddress.End.Row.IsOdd()
+            var styleName = locationAddress.End.Row.IsOdd()
                 ? $"{safeStyle.Name}_Alternate"
                 : safeStyle.Name ?? XlsxBaseStyle.NameOfDefaultStyle;
+
+            var cell = aggregateWorksheet.Cells[range];
+            cell.StyleID = package.Workbook.Styles.GetNamedStyleId(styleName);
+            cell.Style.FormatFromModel(safeStyle);
 
             if (style.Content.Show == YesNo.Yes)
             {

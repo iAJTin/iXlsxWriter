@@ -14,6 +14,7 @@ using iTin.Utilities.Xlsx.Writer;
 using iXlsxWriter.Abstractions.Writer.Operations.Results;
 using iXlsxWriter.Input;
 using iXlsxWriter.Operations.Result.Action;
+using OfficeOpenXml.Style;
 
 namespace iXlsxWriter.Operations.Insert;
 
@@ -136,25 +137,27 @@ public class InsertDictionary : InsertBase
         try
         {
             // cell styles > Headers
-            var headerTextTextStyle = package.CreateStyle(styles.Headers.Text);
+            var headerTextTextStyle = package.CreateEmptyNamedStyle(styles.Headers.Text);
 
             // cell styles > Values
-            var valueTextTextStyle = package.CreateStyle(styles.Values.Text);
-            var valueDatetimeCellStyle = package.CreateStyle(styles.Values.DateTime);
-            var valueDecimalCellStyle = package.CreateStyle(styles.Values.Decimal);
+            var valueTextTextStyle = package.CreateEmptyNamedStyle(styles.Values.Text);
+            var valueDatetimeCellStyle = package.CreateEmptyNamedStyle(styles.Values.DateTime);
+            var valueDecimalCellStyle = package.CreateEmptyNamedStyle(styles.Values.Decimal);
 
             var keys = data.Keys;
             foreach (var key in keys)
             {
                 var isOdd = location.Row.IsOdd();
 
+                var styleName = isOdd
+                    ? $"{headerTextTextStyle.Name}_Alternate"
+                    : headerTextTextStyle.Name ?? XlsxBaseStyle.NameOfDefaultStyle;
+
                 var headerCell = worksheet.Cells[location.Row, location.Column];
-                headerCell.StyleName = isOdd ? $"{headerTextTextStyle.Name}_Alternate" : headerTextTextStyle.Name ?? XlsxBaseStyle.NameOfDefaultStyle;
-                headerCell.Value = key;
+                headerCell.StyleID = package.Workbook.Styles.GetNamedStyleId(styleName);
+                headerCell.Style.FormatFromModel(headerTextTextStyle);
 
                 var value = data[key];
-                var valueCell = worksheet.Cells[location.Row, location.Column + 1];
-
                 var styleToUse = value switch
                 {
                     string => valueTextTextStyle,
@@ -164,8 +167,14 @@ public class InsertDictionary : InsertBase
                     _ => valueTextTextStyle
                 };
 
-                valueCell.StyleName = isOdd ? $"{styleToUse.Name}_Alternate" : styleToUse.Name ?? XlsxBaseStyle.NameOfDefaultStyle;
-                valueCell.Value = styleToUse.Content.DataType.GetFormattedDataValue(value.ToString()).FormattedValue;
+                var valueStyleName = isOdd
+                    ? $"{styleToUse.Name}_Alternate"
+                    : styleToUse.Name ?? XlsxBaseStyle.NameOfDefaultStyle;
+
+                var valueCell = worksheet.Cells[location.Row, location.Column + 1];
+                valueCell.StyleID = package.Workbook.Styles.GetNamedStyleId(valueStyleName);
+                valueCell.Style.FormatFromModel(styleToUse);
+                valueCell.Value = value;
 
                 location.Offset(0, 1);
             }

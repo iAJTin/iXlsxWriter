@@ -40,7 +40,7 @@ internal static class XlsxExtensions
     /// <returns>
     /// A new <see cref="XlsxCellStyle"/> reference.
     /// </returns>
-    public static XlsxCellStyle CreateStyle(this ExcelPackage excel, XlsxCellStyle style)
+    public static XlsxCellStyle CreateEmptyNamedStyle(this ExcelPackage excel, XlsxCellStyle style)
     {
         var safeStyle = style;
         if (style == null)
@@ -53,7 +53,11 @@ internal static class XlsxExtensions
             safeStyle.Name = string.IsNullOrEmpty(style.Name) ? BaseStyle.GenerateRandomStyleName() : style.Name;
         }
 
-        excel.Workbook.Styles.CreateFromModel(safeStyle);
+        var eppstyle = excel.Workbook.Styles.NamedStyles.FirstOrDefault(s => s.Name == safeStyle.Name);
+        if (eppstyle == null)
+        {
+            excel.Workbook.Styles.CreateEmptyStyleFromModel(safeStyle.Name);
+        }
 
         return safeStyle;
     }

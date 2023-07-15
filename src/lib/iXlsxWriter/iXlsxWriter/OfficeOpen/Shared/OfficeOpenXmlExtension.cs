@@ -1,11 +1,11 @@
 ﻿
 using System;
 using System.ComponentModel;
+using System.Linq;
 
 using OfficeOpenXml.Drawing;
 using OfficeOpenXml.Style;
 
-using iTin.Core.Helpers;
 using iTin.Core.Models.Design.ComponentModel;
 using iTin.Core.Models.Design.Enums;
 
@@ -14,6 +14,7 @@ using iTin.Utilities.Xlsx.Design.Shared;
 using iTin.Utilities.Xlsx.Design.Settings.Document;
 using iTin.Utilities.Xlsx.Design.Styles;
 using iTin.Utilities.Xlsx.Writer;
+using System.IO.Packaging;
 
 namespace OfficeOpenXml;
 
@@ -31,9 +32,6 @@ internal static class OfficeOpenXmlExtension
     /// <param name="value">Reference to value information.</param>
     public static void AddErrorComment(this ExcelRangeBase cell, FieldValueInformation value)
     {
-        SentinelHelper.ArgumentNull(cell, nameof(cell));
-        SentinelHelper.ArgumentNull(value, nameof(value));
-
         var comment = value.Comment;
         if (comment == null)
         {
@@ -63,20 +61,15 @@ internal static class OfficeOpenXmlExtension
     /// Creates list of styles.
     /// </summary>
     /// <param name="styles">The styles.</param>
-    /// <param name="model">The model.</param>
-    public static void CreateFromModel(this ExcelStyles styles, XlsxCellStyle model)
+    /// <param name="styleName">The style name.</param>
+    public static void CreateEmptyStyleFromModel(this ExcelStyles styles, string styleName)
     {
-        SentinelHelper.ArgumentNull(styles, nameof(styles));
-        SentinelHelper.ArgumentNull(model, nameof(model));
-
         try
         {
-            var xlsxStyle = styles.CreateNamedStyle(model.Name);
-            xlsxStyle.Style.FormatFromModel(model);
+            styles.CreateNamedStyle(styleName);
 
-            var alternateStyleName = $"{model.Name}_Alternate";
-            xlsxStyle = styles.CreateNamedStyle(alternateStyleName);
-            xlsxStyle.Style.FormatFromModel(model, true);
+            var alternateStyleName = $"{styleName}_Alternate";
+            styles.CreateNamedStyle(alternateStyleName);
         }
         catch
         {
@@ -91,16 +84,12 @@ internal static class OfficeOpenXmlExtension
     /// <param name="model">The model.</param>
     public static void CreateFromModel(this ExcelStyles styles, XlsxStylesCollection model)
     {
-        SentinelHelper.ArgumentNull(styles, nameof(styles));
-        SentinelHelper.ArgumentNull(model, nameof(model));
-
         var defaultStyle = XlsxCellStyle.Default;
 
         var xlsxStyle = styles.CreateNamedStyle(defaultStyle.Name);
         xlsxStyle.Style.FormatFromModel(defaultStyle);
 
-        var modelStyles = model;
-        foreach (var style in modelStyles)
+        foreach (var style in model)
         {
             xlsxStyle = styles.CreateNamedStyle(style.Name);
             xlsxStyle.Style.FormatFromModel((XlsxCellStyle)style);
@@ -110,6 +99,18 @@ internal static class OfficeOpenXmlExtension
             xlsxStyle.Style.FormatFromModel((XlsxCellStyle)style, true);
         }
     }
+
+    /// <summary>
+    /// Returns the index of specified style name into the styles collection.
+    /// </summary>
+    /// <param name="styles">Target styles collection.</param>
+    /// <param name="styleName">The style name.</param>
+    /// <returns>
+    /// Index of specified style name into the styles collection.
+    /// </returns>
+    /// <exception cref="InvalidEnumArgumentException">The value specified is outside the range of valid values.</exception>
+    public static int GetNamedStyleId(this ExcelStyles styles, string styleName) =>
+        styles.NamedStyles.TakeWhile(namedStyle => namedStyle.Name != styleName).Count();
 
     /// <summary>
     ///  Returns pixels convert to excel column width.
@@ -144,9 +145,6 @@ internal static class OfficeOpenXmlExtension
     /// <param name="model">Border to draw.</param>
     public static void SetBorder(this ExcelDrawingBorder border, XlsxBorder model)
     {
-        SentinelHelper.ArgumentNull(border, nameof(border));
-        SentinelHelper.ArgumentNull(model, nameof(model));
-
         if (model.Show == YesNo.No)
         {
             return;
@@ -169,9 +167,6 @@ internal static class OfficeOpenXmlExtension
     /// </returns>
     public static OfficeProperties SetDocumentMetadata(this OfficeProperties properties, XlsxDocumentMetadataSettings metadata)
     {
-        SentinelHelper.ArgumentNull(properties, nameof(properties));
-        SentinelHelper.ArgumentNull(metadata, nameof(metadata));
-
         // Core properties
         properties.Created = DateTime.Now;
         properties.Modified = DateTime.Now;
@@ -243,18 +238,14 @@ internal static class OfficeOpenXmlExtension
     /// Orientation as angle in degrees.
     /// </returns>
     /// <exception cref="InvalidEnumArgumentException">The value specified is outside the range of valid values.</exception>
-    public static float ToAngle(this TextOrientation orientation)
-    {
-        SentinelHelper.IsEnumValid(orientation);
-
-        return orientation switch
+    public static float ToAngle(this TextOrientation orientation) =>
+        orientation switch
         {
             TextOrientation.Upward => 270,
             TextOrientation.Horizontal => 0,
             TextOrientation.Vertical => 0,
             _ => 90
         };
-    }
 
     /// <summary>
     /// Converter for <see cref="LabelOrientation"/> enumeration type to angle degree.
@@ -264,11 +255,8 @@ internal static class OfficeOpenXmlExtension
     /// Orientation as angle in degrees.
     /// </returns>
     /// <exception cref="InvalidEnumArgumentException">The value specified is outside the range of valid values.</exception>
-    public static float ToAngle(this LabelOrientation orientation)
-    {
-        SentinelHelper.IsEnumValid(orientation);
-
-        return orientation switch
+    public static float ToAngle(this LabelOrientation orientation) =>
+        orientation switch
         {
             LabelOrientation.Upward => -5400000,
             LabelOrientation.Downward => 5400000,
@@ -276,7 +264,6 @@ internal static class OfficeOpenXmlExtension
             LabelOrientation.Horizontal => 0,
             _ => 0
         };
-    }
 
     #endregion
 }

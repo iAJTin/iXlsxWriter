@@ -83,7 +83,7 @@ internal static class StyleExtensions
                 style.Font.SetFromFont(cellStyle.Font.ToFont());
                 style.Font.Color.SetColor(cellStyle.Font.GetColor());
 
-                XlsxCellContent cellContent = cellStyle.Content;
+                var cellContent = cellStyle.Content;
                 style.VerticalAlignment = cellContent.Alignment.Vertical.ToEppVerticalAlignment();
                 style.HorizontalAlignment = cellContent.Alignment.Horizontal.ToEppHorizontalAlignment();
                 style.Numberformat.Format = cellContent.DataType.GetDataFormat().ToEppDataFormat(cellContent.DataType);

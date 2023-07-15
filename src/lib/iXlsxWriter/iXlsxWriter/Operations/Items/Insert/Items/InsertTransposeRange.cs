@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 using iTin.Utilities.Xlsx.Design.Shared;
 using iTin.Utilities.Xlsx.Design.Styles;
@@ -183,13 +184,15 @@ public class InsertTransposeRange : InsertLocationBase
                 destination.Point.Offset(0, 1);
             }
 
-            var headerStyleToUse = package.CreateStyle(headerStyle);
+            var headerStyleToUse = package.CreateEmptyNamedStyle(headerStyle);
             var headerRange = destinationWorksheet.Cells[startDestination.Row, startDestination.Column, startDestination.Row, destination.Point.Column];
-            headerRange.StyleName = headerStyleToUse.Name;
-
-            var valueStyleToUse = package.CreateStyle(valueStyle);
+            headerRange.StyleID = package.Workbook.Styles.GetNamedStyleId(headerStyleToUse.Name);
+            headerRange.Style.FormatFromModel(headerStyleToUse);
+            
+            var valueStyleToUse = package.CreateEmptyNamedStyle(valueStyle);
             var valueRange = destinationWorksheet.Cells[startDestination.Row + 1, startDestination.Column, destination.Point.Row - 1, destination.Point.Column];
-            valueRange.StyleName = valueStyleToUse.Name;
+            valueRange.StyleID = package.Workbook.Styles.GetNamedStyleId(valueStyleToUse.Name);
+            valueRange.Style.FormatFromModel(valueStyleToUse);
 
             package.SaveAs(outputStream);
 

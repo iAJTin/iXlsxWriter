@@ -34,7 +34,7 @@ internal class Sample26
 
         #region Creates xlsx file reference
 
-        XlsxInput doc = XlsxInput.Create(new[] { "Chart And Secondary Axis" });
+        var doc = XlsxInput.Create(new[] { "Chart And Secondary Axis" });
 
         #endregion
 
@@ -46,6 +46,7 @@ internal class Sample26
                 "FieldHeader",
                 new XlsxCellStyle
                 {
+                    Name = "HeaderStyle",
                     Borders =
                     {
                         new XlsxStyleBorder
@@ -77,6 +78,7 @@ internal class Sample26
                 "NumericStyle",
                 new XlsxCellStyle
                 {
+                    Name = "NumberStyle",
                     Borders =
                     {
                         new XlsxStyleBorder
@@ -114,6 +116,7 @@ internal class Sample26
                 "TextStyle",
                 new XlsxCellStyle
                 {
+                    Name = "TextStyle",
                     Borders =
                     {
                         new XlsxStyleBorder
@@ -145,6 +148,7 @@ internal class Sample26
                 "DecimalStyle",
                 new XlsxCellStyle
                 {
+                    Name = "DecimalStyle",
                     Borders =
                     {
                         new XlsxStyleBorder
@@ -182,6 +186,7 @@ internal class Sample26
                 "AggregateNumericStyle",
                 new XlsxCellStyle
                 {
+                    Name = "AggregateNumericStyle",
                     Borders =
                     {
                         new XlsxStyleBorder
@@ -218,6 +223,7 @@ internal class Sample26
                 "AggregateDecimalStyle",
                 new XlsxCellStyle
                 {
+                    Name = "AggregateDecimalStyle",
                     Borders =
                     {
                         new XlsxStyleBorder
@@ -256,7 +262,7 @@ internal class Sample26
 
         #region Sheet 1
 
-        #region Sheet 1 > Hides the grid lines
+        #region Hides the grid lines
 
         doc.Set(new SetGridLines
         {
@@ -266,7 +272,7 @@ internal class Sample26
 
         #endregion
 
-        #region Sheet 1 > Insert Data
+        #region Insert Data
 
         #region ID
 
@@ -278,31 +284,31 @@ internal class Sample26
             Location = new XlsxPointRange { Column = 1, Row = 1 }
         }).Insert(new InsertText
         {
-            Data = "12001",
+            Data = 12001,
             SheetName = "Chart And Secondary Axis",
             Style = cellStylesTable["NumericStyle"],
             Location = new XlsxPointRange { Column = 1, Row = 2 }
         }).Insert(new InsertText
         {
-            Data = "12002",
+            Data = 12002,
             SheetName = "Chart And Secondary Axis",
             Style = cellStylesTable["NumericStyle"],
             Location = new XlsxPointRange { Column = 1, Row = 3 },
         }).Insert(new InsertText
         {
-            Data = "12003",
+            Data = 12003,
             SheetName = "Chart And Secondary Axis",
             Style = cellStylesTable["NumericStyle"],
             Location = new XlsxPointRange { Column = 1, Row = 4 }
         }).Insert(new InsertText
         {
-            Data = "12010",
+            Data = 12010,
             SheetName = "Chart And Secondary Axis",
             Style = cellStylesTable["NumericStyle"],
             Location = new XlsxPointRange { Column = 1, Row = 5 }
         }).Insert(new InsertText
         {
-            Data = "12011",
+            Data = 12011,
             SheetName = "Chart And Secondary Axis",
             Style = cellStylesTable["NumericStyle"],
             Location = new XlsxPointRange { Column = 1, Row = 6 }
@@ -594,7 +600,7 @@ internal class Sample26
 
         #endregion
 
-        #region Sheet 1 > Insert Autofilter
+        #region Insert Autofilter
 
         doc.Insert(new InsertAutoFilter
         {
@@ -604,7 +610,23 @@ internal class Sample26
 
         #endregion
 
-        #region Sheet 1 > Insert Chart(s)
+        #region Define plot axis
+
+        var axisRangePlot1 = new XlsxRange
+        {
+            Start = { Column = 2, Row = 2 },
+            End = { Column = 2, Row = 6 }
+        };
+
+        var axisRangePlot2 = new XlsxRange
+        {
+            Start = { Column = 1, Row = 2 },
+            End = { Column = 1, Row = 6 }
+        };
+
+        #endregion
+
+        #region Insert Chart(s)
 
         doc.Insert(new InsertChart
         {
@@ -654,7 +676,7 @@ internal class Sample26
                                 Name = "Purchase Price",
                                 Color = "#336EA9",
                                 ChartType = ChartType.ColumnStacked,
-                                AxisRange = new XlsxRange { Start = { Column = 2, Row = 2 }, End = { Column = 2, Row = 6 } },
+                                AxisRange = axisRangePlot1,
                                 FieldRange = new XlsxRange { Start = { Column = 4, Row = 2 }, End = { Column = 4, Row = 6 } }
                             },
                             new XlsxChartSerie
@@ -662,7 +684,7 @@ internal class Sample26
                                 Name = "Profit",
                                 Color = "#ED7D31",
                                 ChartType = ChartType.ColumnStacked,
-                                AxisRange = new XlsxRange { Start = { Column = 2, Row = 2 }, End = { Column = 2, Row = 6 } },
+                                AxisRange = axisRangePlot1,
                                 FieldRange = new XlsxRange { Start = { Column = 6, Row = 2 }, End = { Column = 6, Row = 6 } }
                             },
                         }
@@ -678,7 +700,7 @@ internal class Sample26
                                 Name = "Items in Stock",
                                 Color = "Gray",
                                 ChartType = ChartType.Line,
-                                AxisRange = new XlsxRange { Start = { Column = 1, Row = 2 }, End = { Column = 1, Row = 6 } },
+                                AxisRange = axisRangePlot2,
                                 FieldRange = new XlsxRange { Start = { Column = 3, Row = 2 }, End = { Column = 3, Row = 6 } }
                             }
                         }

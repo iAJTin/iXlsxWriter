@@ -3,6 +3,7 @@ using System;
 using System.IO;
 
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 using iTin.Core.Helpers;
 using iTin.Core.Models.Design.Enums;
@@ -97,7 +98,7 @@ public class InsertText : InsertWithStyleBase
         try
         {
             var locationAddress = location.ToEppExcelAddress();
-            var safeStyle = package.CreateStyle(style);
+            var safeStyle = package.CreateEmptyNamedStyle(style);
             var merge = safeStyle.Content.Merge;
             var range = merge.Cells == 1
                 ? locationAddress.ToString()
@@ -105,16 +106,19 @@ public class InsertText : InsertWithStyleBase
                     ? ExcelCellBase.GetAddress(locationAddress.Start.Row, locationAddress.Start.Column, locationAddress.Start.Row, locationAddress.Start.Column + merge.Cells - 1)
                     : ExcelCellBase.GetAddress(locationAddress.Start.Row, locationAddress.Start.Column, locationAddress.Start.Row + merge.Cells - 1, locationAddress.Start.Column);
 
-            var cell = worksheet.Cells[range];
-            cell.StyleName = locationAddress.End.Row.IsOdd()
+            var styleName= locationAddress.End.Row.IsOdd()
                 ? $"{safeStyle.Name}_Alternate"
                 : safeStyle.Name ?? XlsxBaseStyle.NameOfDefaultStyle;
+
+            var cell = worksheet.Cells[range];
+            cell.StyleID = package.Workbook.Styles.GetNamedStyleId(styleName);
+            cell.Style.FormatFromModel(safeStyle);
 
             if (style.Content.Show == YesNo.Yes)
             {
                 if (data != null)
                 {
-                    cell.Value = safeStyle.Content.DataType.GetFormattedDataValue(data.ToString()).FormattedValue;
+                    cell.Value = data;
 
                     if (merge.Cells > 1)
                     {

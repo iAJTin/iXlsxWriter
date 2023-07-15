@@ -23,6 +23,7 @@ public class FieldValueInformation
         IsNegative = false,
         IsErrorValue = false,
         Value = string.Empty,
+        Format = "@",
         NegativeColor = Color.Empty,
         FormattedValue = string.Empty,
     };
@@ -37,7 +38,15 @@ public class FieldValueInformation
     /// <value>
     /// The data.
     /// </value>
-    public string FormattedValue { get; set; }
+    public object FormattedValue { get; set; }
+
+    /// <summary>
+    /// Gets or sets the format.
+    /// </summary>
+    /// <value>
+    /// The data.
+    /// </value>
+    public string Format { get; set; }
 
     /// <summary>
     /// Gets or sets the data.
@@ -113,7 +122,7 @@ public class FieldValueInformation
     /// <returns>
     /// A <see cref="string"/> that represents this instance.
     /// </returns>
-    public override string ToString() => $"Value=\"{Value}\", FormattedValue=\"{FormattedValue}\"";
+    public override string ToString() => $"Value=\"{Value}\", Format=\"{Format}\"";
 
     #endregion
 }
