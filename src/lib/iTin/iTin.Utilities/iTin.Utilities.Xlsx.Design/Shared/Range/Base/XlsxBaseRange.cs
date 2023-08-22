@@ -1,5 +1,4 @@
 ﻿
-using System;
 using System.Xml.Serialization;
 
 using Newtonsoft.Json;
@@ -31,25 +30,8 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 ///     </item>
 ///   </list>
 /// </remarks>
-public partial class XlsxBaseRange : ICloneable
+public partial class XlsxBaseRange
 {
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #endregion
-
     #region public readonly properties
 
     /// <summary>
@@ -68,36 +50,12 @@ public partial class XlsxBaseRange : ICloneable
 
             return addressType switch
             {
-                "XlsxPointRange" => KnownRangeType.Point,
-                "XlsxStringRange" => KnownRangeType.String,
-                "XlsxRange" => KnownRangeType.Range,
+                nameof(XlsxPointRange) => KnownRangeType.Point,
+                nameof(XlsxStringRange) => KnownRangeType.String,
+                nameof(XlsxRange) => KnownRangeType.Range,
                 _ => KnownRangeType.Point
             };
         }
-    }
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxBaseRange Clone() => (XlsxBaseRange) MemberwiseClone();
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">Reference content</param>
-    public virtual void Combine(XlsxBaseRange reference)
-    {
     }
 
     #endregion
@@ -120,7 +78,7 @@ public partial class XlsxBaseRange : ICloneable
             return "#REF!";
         }
 
-        string str = string.Empty;
+        var str = string.Empty;
 
         do
         {

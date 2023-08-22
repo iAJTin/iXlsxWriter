@@ -7,7 +7,6 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 using iTin.Core.Helpers;
-using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
 
 namespace iTin.Utilities.Xlsx.Design.Shared;
@@ -15,7 +14,7 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// <summary>
 /// Represents a <b>xlsx</b> reflection shape effect.
 /// </summary>
-public partial class XlsxReflectionShapeEffect : ICombinable<XlsxReflectionShapeEffect>, ICloneable
+public partial class XlsxReflectionShapeEffect
 {
     #region private constants
 
@@ -68,33 +67,6 @@ public partial class XlsxReflectionShapeEffect : ICombinable<XlsxReflectionShape
         Offset = DefaultOffset;
         Transparency = DefaultTransparency;
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #region ICombinable
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">Reference pattern</param>
-    void ICombinable<XlsxReflectionShapeEffect>.Combine(XlsxReflectionShapeEffect reference) => Combine(reference);
-
-    #endregion
 
     #endregion
 
@@ -285,144 +257,6 @@ public partial class XlsxReflectionShapeEffect : ICombinable<XlsxReflectionShape
             SentinelHelper.ArgumentOutOfRange(nameof(Transparency), value, 0, 100);
 
             _transparency = value;
-        }
-    }
-
-    #endregion
-
-    #region public override properties
-
-    /// <inheritdoc/>
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    public override bool IsDefault => 
-        base.IsDefault && 
-        Blur.Equals(DefaultBlur) && 
-        Size.Equals(DefaultSize) && 
-        Offset.Equals(DefaultOffset) &&
-        Show.Equals(DefaultShow) && 
-        Transparency.Equals(DefaultTransparency);
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxReflectionShapeEffect Clone()
-    {
-        var cloned = (XlsxReflectionShapeEffect)MemberwiseClone();
-        cloned.Properties = Properties.Clone();
-
-        return cloned;
-    }
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Apply specified options to this shadow.
-    /// </summary>
-    public virtual void ApplyOptions(XlsxReflectionShapeEffectOptions options)
-    {
-        if (options == null)
-        {
-            return;
-        }
-
-        if (options.IsDefault)
-        {
-            return;
-        }
-
-        #region Blur
-        float? blurOption = options.Blur;
-        bool blurHasValue = blurOption.HasValue;
-        if (blurHasValue)
-        {
-            Blur = blurOption.Value;
-        }
-        #endregion
-
-        #region Offset
-        float? offsetOption = options.Offset;
-        bool offsetHasValue = offsetOption.HasValue;
-        if (offsetHasValue)
-        {
-            Offset = offsetOption.Value;
-        }
-        #endregion
-
-        #region Size
-        float? sizeOption = options.Size;
-        bool sizeHasValue = sizeOption.HasValue;
-        if (sizeHasValue)
-        {
-            Size = sizeOption.Value;
-        }
-        #endregion
-
-        #region Show
-        YesNo? showOption = options.Show;
-        bool showHasValue = showOption.HasValue;
-        if (showHasValue)
-        {
-            Show = showOption.Value;
-        }
-        #endregion
-
-        #region Transparency
-        int? transparencyOption = options.Transparency;
-        bool transparencyHasValue = transparencyOption.HasValue;
-        if (transparencyHasValue)
-        {
-            Transparency = transparencyOption.Value;
-        }
-        #endregion
-    }
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    public virtual void Combine(XlsxReflectionShapeEffect reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        if (Blur.Equals(DefaultBlur))
-        {
-            Blur = reference.Blur;
-        }
-
-        if (Size.Equals(DefaultSize))
-        {
-            Size = reference.Size;
-        }
-
-        if (Offset.Equals(DefaultOffset))
-        {
-            Offset = reference.Offset;
-        }
-
-        if (Show.Equals(DefaultShow))
-        {
-            Show = reference.Show;
-        }
-
-        if (Transparency.Equals(DefaultTransparency))
-        {
-            Transparency = reference.Transparency;
         }
     }
 

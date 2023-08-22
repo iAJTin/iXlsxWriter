@@ -3,7 +3,6 @@ using System;
 
 using iTin.Core.Helpers;
 
-using iTin.Core.Models.Collections;
 using iTin.Core.Models.Design;
 
 namespace iTin.Utilities.Xlsx.Design.Styles;
@@ -15,7 +14,6 @@ public partial class XlsxStylesCollection : IXlsxStyles
 {
     #region constructor/s
 
-    /// <inheritdoc/>
     /// <summary>
     /// Initializes a new instance of the <see cref="XlsxStylesCollection"/> class.
     /// </summary>
@@ -23,7 +21,6 @@ public partial class XlsxStylesCollection : IXlsxStyles
     {
     }
 
-    /// <inheritdoc/>
     /// <summary>
     /// Initializes a new instance of the <see cref="XlsxStylesCollection"/> class.
     /// </summary>
@@ -38,7 +35,6 @@ public partial class XlsxStylesCollection : IXlsxStyles
 
     #region ICloneable
 
-    /// <inheritdoc />
     /// <summary>
     /// Creates a new object that is a copy of the current instance.
     /// </summary>
@@ -74,42 +70,6 @@ public partial class XlsxStylesCollection : IXlsxStyles
     IXlsxStyle IXlsxStyles.GetBy(string value) => GetBy(value);
 
     #endregion
-
-    #endregion
-
-    #region protected override methods
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Returns the element specified.
-    /// </summary>
-    /// <param name="value">The object to locate in the <see cref="BaseComplexModelCollection{TItem,TParent,TSearch}"/>.</param>
-    /// <returns>
-    /// Returns the specified element.
-    /// </returns>
-    public override XlsxBaseStyle GetBy(string value) 
-    {
-        if (string.IsNullOrEmpty(value))
-        {
-            return XlsxBaseStyle.Default;
-        }
-
-        var style = Find(s => s.Name.Equals(value));
-
-        return style ?? XlsxBaseStyle.Default;
-    }
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Sets this collection as the owner of the specified item.
-    /// </summary>
-    /// <param name="item">Target item to set owner.</param>
-    protected override void SetOwner(XlsxBaseStyle item)
-    {
-        SentinelHelper.ArgumentNull(item, nameof(item));
-
-        item.SetOwner(this);
-    }
 
     #endregion
 

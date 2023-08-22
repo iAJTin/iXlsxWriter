@@ -15,7 +15,7 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// Defines a set of options that we can use to quickly adjust an existing <see cref="XlsxShapeEffects"/> instance.
 /// </summary>
 [Serializable]
-public class XlsxShapeEffectsOptions : BaseOptions, ICloneable
+public partial class XlsxShapeEffectsOptions
 {
     #region constructor/s
 
@@ -29,23 +29,6 @@ public class XlsxShapeEffectsOptions : BaseOptions, ICloneable
         Shadow = null;
         SoftEdge = null;
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
 
     #endregion
 
@@ -113,24 +96,6 @@ public class XlsxShapeEffectsOptions : BaseOptions, ICloneable
 
     #endregion
 
-    #region public override readonly properties
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    public override bool IsDefault =>
-        base.IsDefault &&
-        Illumination == null &&
-        Reflection == null &&
-        Shadow == null &&
-        SoftEdge == null;
-
-    #endregion
-
     #region public properties
 
     /// <summary>
@@ -172,27 +137,6 @@ public class XlsxShapeEffectsOptions : BaseOptions, ICloneable
     [XmlElement]
     [JsonProperty("soft-edge")]
     public XlsxSoftEdgeShapeEffectOptions SoftEdge { get; set; }
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxShapeEffectsOptions Clone()
-    {
-        var cloned = (XlsxShapeEffectsOptions) MemberwiseClone();
-        cloned.Illumination = Illumination.Clone();
-        cloned.Reflection = Reflection.Clone();
-        cloned.Shadow = Shadow.Clone();
-        cloned.SoftEdge = SoftEdge.Clone();
-
-        return cloned;
-    }
 
     #endregion
 }

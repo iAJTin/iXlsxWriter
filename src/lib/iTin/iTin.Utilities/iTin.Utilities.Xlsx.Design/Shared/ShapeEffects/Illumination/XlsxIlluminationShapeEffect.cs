@@ -7,9 +7,7 @@ using System.Xml.Serialization;
 
 using Newtonsoft.Json;
 
-using iTin.Core;
 using iTin.Core.Helpers;
-using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
 using iTin.Core.Models.Design.Helpers;
 
@@ -18,7 +16,7 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// <summary>
 /// Represents a <b>xlsx</b> illumination shape effect.
 /// </summary>
-public partial class XlsxIlluminationShapeEffect : ICombinable<XlsxIlluminationShapeEffect>, ICloneable
+public partial class XlsxIlluminationShapeEffect 
 {
     #region private constants
 
@@ -64,33 +62,6 @@ public partial class XlsxIlluminationShapeEffect : ICombinable<XlsxIlluminationS
         Color = DefaultColor;
         Transparency = DefaultTransparency;
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #region ICombinable
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">Reference pattern</param>
-    void ICombinable<XlsxIlluminationShapeEffect>.Combine(XlsxIlluminationShapeEffect reference) => Combine(reference);
-
-    #endregion
 
     #endregion
 
@@ -385,39 +356,7 @@ public partial class XlsxIlluminationShapeEffect : ICombinable<XlsxIlluminationS
 
     #endregion
 
-    #region public override readonly properties
-
-    /// <inheritdoc/>
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    public override bool IsDefault => 
-        base.IsDefault && 
-        Size.Equals(DefaultSize) &&
-        Color.Equals(DefaultColor) && 
-        Show.Equals(DefaultShow) && 
-        Transparency.Equals(DefaultTransparency);
-
-    #endregion
-
     #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxIlluminationShapeEffect Clone()
-    {
-        var cloned = (XlsxIlluminationShapeEffect)MemberwiseClone();
-        cloned.Properties = Properties.Clone();
-
-        return cloned;
-    }
 
     /// <summary>
     /// Gets a reference to the <see cref="System.Drawing.Color"/> structure preferred for shadow color.
@@ -426,93 +365,6 @@ public partial class XlsxIlluminationShapeEffect : ICombinable<XlsxIlluminationS
     /// <see cref="System.Drawing.Color"/> structure that represents a .NET color.
     /// </returns>
     public Color GetColor() => ColorHelper.GetColorFromString(Color);
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Apply specified options to this shadow.
-    /// </summary>
-    public virtual void ApplyOptions(XlsxIlluminationShapeEffectOptions options)
-    {
-        if (options == null)
-        {
-            return;
-        }
-
-        if (options.IsDefault)
-        {
-            return;
-        }
-
-        #region Color
-        string colorOption = options.Color;
-        bool colorHasValue = !colorOption.IsNullValue();
-        if (colorHasValue)
-        {
-            Color = colorOption;
-        }
-        #endregion
-
-        #region Size
-        int? sizeOption = options.Size;
-        bool sizeHasValue = sizeOption.HasValue;
-        if (sizeHasValue)
-        {
-            Size = sizeOption.Value;
-        }
-        #endregion
-
-        #region Show
-        YesNo? showOption = options.Show;
-        bool showHasValue = showOption.HasValue;
-        if (showHasValue)
-        {
-            Show = showOption.Value;
-        }
-        #endregion
-
-        #region Transparency
-        int? transparencyOption = options.Transparency;
-        bool transparencyHasValue = transparencyOption.HasValue;
-        if (transparencyHasValue)
-        {
-            Transparency = transparencyOption.Value;
-        }
-        #endregion
-    }
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    public virtual void Combine(XlsxIlluminationShapeEffect reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        if (Color.Equals(DefaultColor))
-        {
-            Color = reference.Color;
-        }
-
-        if (Size.Equals(DefaultSize))
-        {
-            Size = reference.Size;
-        }
-
-        if (Show.Equals(DefaultShow))
-        {
-            Show = reference.Show;
-        }
-
-        if (Transparency.Equals(DefaultTransparency))
-        {
-            Transparency = reference.Transparency;
-        }
-    }
 
     #endregion
 }

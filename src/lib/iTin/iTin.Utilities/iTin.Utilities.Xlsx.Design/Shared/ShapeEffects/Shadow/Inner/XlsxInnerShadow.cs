@@ -1,7 +1,4 @@
 ﻿
-using System;
-
-using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
 
 namespace iTin.Utilities.Xlsx.Design.Shared;
@@ -10,37 +7,8 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// A Specialization of <see cref="XlsxBaseShadow"/> class.<br/>
 /// Represents a inner shadow.
 /// </summary>
-public partial class XlsxInnerShadow : ICombinable<XlsxInnerShadow>, ICloneable
+public partial class XlsxInnerShadow
 {
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #region ICombinable
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">Reference pattern</param>
-    void ICombinable<XlsxInnerShadow>.Combine(XlsxInnerShadow reference) => Combine(reference);
-
-    #endregion
-
-    #endregion
-
-    #region public readonly static properties
-
     /// <summary>
     /// Returns a new instance containig the shadow.
     /// </summary>
@@ -120,59 +88,4 @@ public partial class XlsxInnerShadow : ICombinable<XlsxInnerShadow>, ICloneable
     /// A <see cref="XlsxInnerShadow"/> reference containing the shadow.
     /// </value>
     public static XlsxInnerShadow DownRight => new() {Show = YesNo.Yes, Blur = 5, Offset = 4, Transparency = 50};
-
-    #endregion
-
-    #region public new methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public new XlsxInnerShadow Clone()
-    {
-        var cloned = (XlsxInnerShadow)MemberwiseClone();
-        cloned.Properties = Properties.Clone();
-
-        return cloned;
-    }
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Apply specified options to this instance.
-    /// </summary>
-    public virtual void ApplyOptions(XlsxInnerShadowOptions options)
-    {
-        if (options == null)
-        {
-            return;
-        }
-
-        if (options.IsDefault)
-        {
-            return;
-        }
-
-        base.ApplyOptions(options);
-    }
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    public virtual void Combine(XlsxInnerShadow reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        base.Combine(reference);
-    }
-
-    #endregion
 }

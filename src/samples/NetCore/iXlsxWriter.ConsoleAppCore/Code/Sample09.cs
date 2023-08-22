@@ -2,14 +2,13 @@
 using System.Diagnostics;
 
 using iTin.Core.ComponentModel;
-using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
 
 using iTin.Logging.ComponentModel;
 
+using iTin.Utilities.Xlsx.Design;
 using iTin.Utilities.Xlsx.Design.Picture;
 using iTin.Utilities.Xlsx.Design.Shared;
-using iTin.Utilities.Xlsx.Design.Styles;
 
 using iXlsxWriter.Operations.Actions;
 using iXlsxWriter.Operations.Insert;

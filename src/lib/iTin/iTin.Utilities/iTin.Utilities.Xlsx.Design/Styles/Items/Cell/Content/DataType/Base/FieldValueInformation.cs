@@ -1,4 +1,7 @@
 ﻿
+using iTin.Core.Models.Design;
+using iTin.Core.Models.Design.Styles;
+
 namespace iTin.Utilities.Xlsx.Design.Styles
 {
     using System.Drawing;

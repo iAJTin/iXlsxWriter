@@ -5,7 +5,7 @@ using iTin.Core.ComponentModel;
 using iTin.Core.Models.Design.Enums;
 
 using iTin.Logging.ComponentModel;
-
+using iTin.Utilities.Xlsx.Design;
 using iTin.Utilities.Xlsx.Design.Settings;
 using iTin.Utilities.Xlsx.Design.Settings.Sheets;
 using iTin.Utilities.Xlsx.Design.Shared;

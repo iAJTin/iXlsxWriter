@@ -8,11 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\lib\iXlsxWriter\iXlsxWriter\iXlsxWriter.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Output\" />
+	  <ProjectReference Include="..\..\..\lib\iXlsxWriter\iXlsxWriter.csproj" />
 	</ItemGroup>
 
 </Project>

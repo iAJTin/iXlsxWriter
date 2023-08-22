@@ -13,7 +13,7 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// A Specialization of <see cref="XlsxBaseRange"/> class.<br/>
 /// Represents a Excel cell by row and column values
 /// </summary>
-public partial class XlsxPointRange : ICloneable
+public partial class XlsxPointRange
 {
     #region private constants
 
@@ -49,23 +49,6 @@ public partial class XlsxPointRange : ICloneable
             AbsoluteStrategy = DefaultAbsolute,
         };
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
 
     #endregion
 
@@ -121,23 +104,6 @@ public partial class XlsxPointRange : ICloneable
 
     #endregion
 
-    #region public override properties
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise <b>false</b>.
-    /// </value>
-    public override bool IsDefault =>
-        base.IsDefault &&
-        Row.Equals(DefaultRow) &&
-        Column.Equals(DefaultColumn) &&
-        AbsoluteStrategy.Equals(DefaultAbsolute);
-
-    #endregion
-
     #region public methods
 
     /// <summary>
@@ -168,105 +134,38 @@ public partial class XlsxPointRange : ICloneable
     }
 
     #endregion
-
-    #region public new methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public new XlsxPointRange Clone()
-    {
-        var cloned = (XlsxPointRange)MemberwiseClone();
-        cloned.Properties = Properties.Clone();
-
-        return cloned;
-    }
-
-    #endregion
-
-    #region public virtual methods
-
-    ///// <summary>
-    ///// Apply specified options to this alignment.
-    ///// </summary>
-    //public virtual void ApplyOptions(XlsxExcelRangeOptions options)
-    //{
-    //    if (options == null)
-    //    {
-    //        return;
-    //    }
-
-    //    if (options.IsDefault)
-    //    {
-    //        return;
-    //    }
-
-    //    #region HorizontalCells
-    //    int? horizontalCellsOption = options.HorizontalCells;
-    //    bool horizontalCellsHasValue = horizontalCellsOption.HasValue;
-    //    if (horizontalCellsHasValue)
-    //    {
-    //        HorizontalCells = horizontalCellsOption.Value;
-    //    }
-    //    #endregion
-
-    //    #region VerticalCells
-    //    int? verticalCellsOption = options.HorizontalCells;
-    //    bool verticalCellsHasValue = verticalCellsOption.HasValue;
-    //    if (verticalCellsHasValue)
-    //    {
-    //        VerticalCells = verticalCellsOption.Value;
-    //    }
-    //    #endregion
-    //}
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">The reference.</param>
-    public virtual void Combine(XlsxPointRange reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        if (AbsoluteStrategy.Equals(DefaultAbsolute))
-        {
-            AbsoluteStrategy = reference.AbsoluteStrategy;
-        }
-
-        if (Column.Equals(DefaultColumn))
-        {
-            Column = reference.Column;
-        }
-
-        if (Row.Equals(DefaultRow))
-        {
-            Row = reference.Row;
-        }
-    }
-
-    #endregion
-
-    #region public override methods
-
-    /// <summary>
-    /// Returns a string that represents the current object.
-    /// </summary>
-    /// <returns>
-    /// A <see cref="string"/> that represents the current object.
-    /// </returns>
-    public override string ToString()
-    {
-        var rowNumber = AbsoluteStrategy is AbsoluteStrategy.Both or AbsoluteStrategy.Row ? $"${Row}" : $"{Row}";
-        var columnLetter = GetColumnLetter(Column, AbsoluteStrategy is AbsoluteStrategy.Column or AbsoluteStrategy.Both);
-
-        return $"{columnLetter}{rowNumber}";
-    }
-
-    #endregion
 }
+
+///// <summary>
+///// Apply specified options to this alignment.
+///// </summary>
+//public virtual void ApplyOptions(XlsxExcelRangeOptions options)
+//{
+//    if (options == null)
+//    {
+//        return;
+//    }
+
+//    if (options.IsDefault)
+//    {
+//        return;
+//    }
+
+//    #region HorizontalCells
+//    int? horizontalCellsOption = options.HorizontalCells;
+//    bool horizontalCellsHasValue = horizontalCellsOption.HasValue;
+//    if (horizontalCellsHasValue)
+//    {
+//        HorizontalCells = horizontalCellsOption.Value;
+//    }
+//    #endregion
+
+//    #region VerticalCells
+//    int? verticalCellsOption = options.HorizontalCells;
+//    bool verticalCellsHasValue = verticalCellsOption.HasValue;
+//    if (verticalCellsHasValue)
+//    {
+//        VerticalCells = verticalCellsOption.Value;
+//    }
+//    #endregion
+//}

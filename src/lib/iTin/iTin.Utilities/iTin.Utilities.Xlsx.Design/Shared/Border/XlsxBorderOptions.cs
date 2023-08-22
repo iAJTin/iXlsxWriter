@@ -14,7 +14,7 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// Defines a set of options that we can use to quickly adjust an existing <see cref="XlsxBorder"/> instance.
 /// </summary>
 [Serializable]
-public class XlsxBorderOptions : BaseOptions, ICloneable
+public partial class XlsxBorderOptions
 {
     #region constructor/s
 
@@ -29,23 +29,6 @@ public class XlsxBorderOptions : BaseOptions, ICloneable
         Style = null;
         Transparency = null;
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
 
     #endregion
 
@@ -112,36 +95,6 @@ public class XlsxBorderOptions : BaseOptions, ICloneable
     [XmlAttribute]
     [JsonProperty("width")]
     public int? Width { get; set; }
-
-    #endregion
-
-    #region public override readonly properties
-
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    public override bool IsDefault =>
-        base.IsDefault &&
-        Show == null &&
-        Color == null &&
-        Width == null &&
-        Style == null &&
-        Transparency == null;
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxBorderOptions Clone() => (XlsxBorderOptions) MemberwiseClone();
 
     #endregion
 }

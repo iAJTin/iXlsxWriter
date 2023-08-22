@@ -14,7 +14,7 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// Defines a set of options that we can use to quickly adjust an existing <see cref="XlsxReflectionShapeEffect"/> instance.
 /// </summary>
 [Serializable]
-public class XlsxReflectionShapeEffectOptions : BaseOptions, ICloneable
+public partial class XlsxReflectionShapeEffectOptions
 {
     #region constructor/s
 
@@ -32,23 +32,6 @@ public class XlsxReflectionShapeEffectOptions : BaseOptions, ICloneable
 
     #endregion
 
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #endregion
-
     #region public static properties
 
     /// <summary>
@@ -58,25 +41,6 @@ public class XlsxReflectionShapeEffectOptions : BaseOptions, ICloneable
     /// Set of default options.
     /// </value>
     public static XlsxReflectionShapeEffectOptions Default => new();
-
-    #endregion
-
-    #region public override readonly properties
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    public override bool IsDefault =>
-        base.IsDefault &&
-        Blur == null &&
-        Offset == null &&
-        Size == null &&
-        Show == null &&
-        Transparency == null;
 
     #endregion
 
@@ -131,18 +95,6 @@ public class XlsxReflectionShapeEffectOptions : BaseOptions, ICloneable
     [XmlAttribute]
     [JsonProperty("transparency")]
     public int? Transparency { get; set; }
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxReflectionShapeEffectOptions Clone() => (XlsxReflectionShapeEffectOptions)MemberwiseClone();
 
     #endregion
 }

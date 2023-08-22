@@ -14,7 +14,7 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// Defines a set of options that we can use to quickly adjust an existing <see cref="XlsxSoftEdgeShapeEffect"/> instance.
 /// </summary>
 [Serializable]
-public class XlsxSoftEdgeShapeEffectOptions : BaseOptions, ICloneable
+public partial class XlsxSoftEdgeShapeEffectOptions
 {
     #region constructor/s
 
@@ -29,23 +29,6 @@ public class XlsxSoftEdgeShapeEffectOptions : BaseOptions, ICloneable
 
     #endregion
 
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #endregion
-
     #region public static properties
 
     /// <summary>
@@ -55,18 +38,6 @@ public class XlsxSoftEdgeShapeEffectOptions : BaseOptions, ICloneable
     /// Set of default options.
     /// </value>
     public static XlsxSoftEdgeShapeEffectOptions Default => new();
-
-    #endregion
-
-    #region public override readonly properties
-
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    public override bool IsDefault => base.IsDefault && Size == null && Show == null;
 
     #endregion
 
@@ -91,18 +62,6 @@ public class XlsxSoftEdgeShapeEffectOptions : BaseOptions, ICloneable
     [XmlAttribute]
     [JsonProperty("show")]
     public YesNo? Show { get; set; }
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxSoftEdgeShapeEffectOptions Clone() => (XlsxSoftEdgeShapeEffectOptions)MemberwiseClone();
 
     #endregion
 }

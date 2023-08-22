@@ -7,9 +7,7 @@ using System.Xml.Serialization;
 
 using Newtonsoft.Json;
 
-using iTin.Core;
 using iTin.Core.Helpers;
-using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
 using iTin.Core.Models.Design.Helpers;
 
@@ -18,7 +16,7 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// <summary>
 /// Represents a <b>xlsx</b> generic border.
 /// </summary>
-public partial class XlsxBorder : ICombinable<XlsxBorder>, ICloneable
+public partial class XlsxBorder
 {
     #region private constants
 
@@ -71,33 +69,6 @@ public partial class XlsxBorder : ICombinable<XlsxBorder>, ICloneable
         Style = DefaultLineStyle;
         Transparency = DefaultTransparency;
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #region ICombinable
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">Reference to combine with this instance</param>
-    void ICombinable<XlsxBorder>.Combine(XlsxBorder reference) => Combine(reference);
-
-    #endregion
 
     #endregion
 
@@ -218,39 +189,7 @@ public partial class XlsxBorder : ICombinable<XlsxBorder>, ICloneable
 
     #endregion
 
-    #region public override properties
-
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise <b>false</b>.
-    /// </value>
-    public override bool IsDefault =>
-        base.IsDefault &&
-        Color.Equals(DefaultColor) &&
-        Show.Equals(DefaultShow) &&
-        Width.Equals(DefaultWidth) &&
-        Style.Equals(DefaultLineStyle) &&
-        Transparency.Equals(DefaultTransparency);
-
-    #endregion
-
     #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxBorder Clone()
-    {
-        var cloned = (XlsxBorder) MemberwiseClone();
-        cloned.Properties = Properties.Clone();
-
-        return cloned;
-    }
 
     /// <summary>
     /// Gets a reference to the <see cref="System.Drawing.Color"/> structure preferred for border color.
@@ -259,108 +198,6 @@ public partial class XlsxBorder : ICombinable<XlsxBorder>, ICloneable
     /// <see cref="System.Drawing.Color"/> structure that represents a .NET color.
     /// </returns>
     public Color GetColor() => ColorHelper.GetColorFromString(Color);
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Apply specified options to this alignment.
-    /// </summary>
-    public virtual void ApplyOptions(XlsxBorderOptions options)
-    {
-        if (options == null)
-        {
-            return;
-        }
-
-        if (options.IsDefault)
-        {
-            return;
-        }
-
-        #region Color
-        string colorOption = options.Color;
-        bool colorHasValue = !colorOption.IsNullValue();
-        if (colorHasValue)
-        {
-            Color = colorOption;
-        }
-        #endregion
-
-        #region Show
-        YesNo? showOption = options.Show;
-        bool showHasValue = showOption.HasValue;
-        if (showHasValue)
-        {
-            Show = showOption.Value;
-        }
-        #endregion
-
-        #region Style
-        KnownLineStyle? styleOption = options.Style;
-        bool styleHasValue = styleOption.HasValue;
-        if (styleHasValue)
-        {
-            Style = styleOption.Value;
-        }
-        #endregion
-
-        #region Transparency
-        int? transparencyOption = options.Transparency;
-        bool transparencyHasValue = transparencyOption.HasValue;
-        if (transparencyHasValue)
-        {
-            Transparency = transparencyOption.Value;
-        }
-        #endregion
-
-        #region Width
-        int? widthOption = options.Width;
-        bool widthHasValue = widthOption.HasValue;
-        if (widthHasValue)
-        {
-            Width = widthOption.Value;
-        }
-        #endregion
-   }
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">The reference.</param>
-    public virtual void Combine(XlsxBorder reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        if (Color.Equals(DefaultColor))
-        {
-            Color = reference.Color;
-        }
-
-        if (Show.Equals(DefaultShow))
-        {
-            Show = reference.Show;
-        }
-
-        if (Style.Equals(DefaultLineStyle))
-        {
-            Style = reference.Style;
-        }
-
-        if (Transparency.Equals(DefaultTransparency))
-        {
-            Transparency = reference.Transparency;
-        }
-
-        if (Width.Equals(DefaultWidth))
-        {
-            Width = reference.Width;
-        }
-    }
 
     #endregion
 }

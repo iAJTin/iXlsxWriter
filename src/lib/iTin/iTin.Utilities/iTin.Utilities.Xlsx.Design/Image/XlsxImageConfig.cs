@@ -7,7 +7,7 @@ using System.Drawing;
 using iTin.Core.Drawing.ComponentModel;
 using iTin.Core.Drawing.Helpers;
 
-namespace iTin.Utilities.Xlsx.Design.Picture;
+namespace iTin.Utilities.Xlsx.Design.Image;
 
 /// <summary>
 /// Represents configuration information for an object <see cref="XlsxImage"/>.
@@ -107,7 +107,7 @@ public sealed class XlsxImageConfig : ICloneable
     /// <value>
     /// An <see cref="Image"/> reference.
     /// </value>
-    private Image ImageReference { get; set; }
+    private System.Drawing.Image ImageReference { get; set; }
 
     #endregion
 
@@ -155,7 +155,7 @@ public sealed class XlsxImageConfig : ICloneable
     /// Sets the reference to parent <see cref="Image"/>.
     /// </summary>
     /// <param name="parent">An <see cref="Image"/> reference</param>
-    internal void SetParentImage(Image parent)
+    internal void SetParentImage(System.Drawing.Image parent)
     {
         ImageReference = parent;
     }

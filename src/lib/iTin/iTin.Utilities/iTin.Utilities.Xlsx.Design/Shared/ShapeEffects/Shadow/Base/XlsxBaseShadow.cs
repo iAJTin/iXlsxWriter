@@ -7,9 +7,7 @@ using System.Xml.Serialization;
 
 using Newtonsoft.Json;
 
-using iTin.Core;
 using iTin.Core.Helpers;
-using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
 using iTin.Core.Models.Design.Helpers;
 
@@ -40,7 +38,7 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 ///     </item>
 ///   </list>
 /// </remarks>
-public abstract partial class XlsxBaseShadow : ICombinable<XlsxBaseShadow>, ICloneable
+public abstract partial class XlsxBaseShadow
 {
     #region private constants
 
@@ -103,33 +101,6 @@ public abstract partial class XlsxBaseShadow : ICombinable<XlsxBaseShadow>, IClo
 
     #endregion
 
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #region ICombinable
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">Reference pattern</param>
-    void ICombinable<XlsxBaseShadow>.Combine(XlsxBaseShadow reference) => Combine(reference);
-
-    #endregion
-
-    #endregion
-
     #region public readonly properties
 
     /// <summary>
@@ -147,9 +118,9 @@ public abstract partial class XlsxBaseShadow : ICombinable<XlsxBaseShadow>, IClo
             var shadowType = GetType().Name;
             return shadowType switch
             {
-                "XlsxInnerShadow" => KnownShadowType.Inner,
-                "XlsxPerspectiveShadow" => KnownShadowType.Perspective,
-                "XlsxOuterShadow" => KnownShadowType.Outer,
+                nameof(XlsxInnerShadow) => KnownShadowType.Inner,
+                nameof(XlsxPerspectiveShadow) => KnownShadowType.Perspective,
+                nameof(XlsxOuterShadow) => KnownShadowType.Outer,
                 _ => KnownShadowType.Outer
             };
         }
@@ -286,41 +257,7 @@ public abstract partial class XlsxBaseShadow : ICombinable<XlsxBaseShadow>, IClo
 
     #endregion
 
-    #region public override readonly properties
-
-    /// <inheritdoc/>
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    public override bool IsDefault => 
-        base.IsDefault && 
-        Angle.Equals(DefaultAngle) &&
-        Blur.Equals(DefaultBlur) && 
-        Offset.Equals(DefaultOffset) &&
-        Color.Equals(DefaultColor) && 
-        Show.Equals(DefaultShow) && 
-        Transparency.Equals(DefaultTransparency);
-
-    #endregion
-
     #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxBaseShadow Clone()
-    {
-        var cloned = (XlsxBaseShadow)MemberwiseClone();
-        cloned.Properties = Properties.Clone();
-
-        return cloned;
-    }
 
     /// <summary>
     /// Gets a reference to the <see cref="System.Drawing.Color"/> structure preferred for shadow color.
@@ -329,121 +266,6 @@ public abstract partial class XlsxBaseShadow : ICombinable<XlsxBaseShadow>, IClo
     /// <see cref="System.Drawing.Color"/> structure that represents a .NET color.
     /// </returns>
     public Color GetColor() => ColorHelper.GetColorFromString(Color);
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Apply specified options to this shadow.
-    /// </summary>
-    public virtual void ApplyOptions(XlsxBaseShadowOptions options)
-    {
-        if (options == null)
-        {
-            return;
-        }
-
-        if (options.IsDefault)
-        {
-            return;
-        }
-
-        #region Angle
-        int? angleOption = options.Angle;
-        bool angleHasValue = angleOption.HasValue;
-        if (angleHasValue)
-        {
-            Angle = angleOption.Value;
-        }
-        #endregion
-
-        #region Blur
-        int? blurOption = options.Blur;
-        bool blurHasValue = blurOption.HasValue;
-        if (blurHasValue)
-        {
-            Blur = blurOption.Value;
-        }
-        #endregion
-
-        #region Color
-        string colorOption = options.Color;
-        bool colorHasValue = !colorOption.IsNullValue();
-        if (colorHasValue)
-        {
-            Color = colorOption;
-        }
-        #endregion
-
-        #region Offset
-        int? offsetOption = options.Offset;
-        bool offsetHasValue = offsetOption.HasValue;
-        if (offsetHasValue)
-        {
-            Offset = offsetOption.Value;
-        }
-        #endregion
-
-        #region Show
-        YesNo? showOption = options.Show;
-        bool showHasValue = showOption.HasValue;
-        if (showHasValue)
-        {
-            Show = showOption.Value;
-        }
-        #endregion
-
-        #region Transparency
-        int? transparencyOption = options.Transparency;
-        bool transparencyHasValue = transparencyOption.HasValue;
-        if (transparencyHasValue)
-        {
-            Transparency = transparencyOption.Value;
-        }
-        #endregion
-    }
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    public virtual void Combine(XlsxBaseShadow reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        if (Angle.Equals(DefaultAngle))
-        {
-            Angle = reference.Angle;
-        }
-
-        if (Blur.Equals(DefaultBlur))
-        {
-            Blur = reference.Blur;
-        }
-
-        if (Color.Equals(DefaultColor))
-        {
-            Color = reference.Color;
-        }
-
-        if (Offset.Equals(DefaultOffset))
-        {
-            Offset = reference.Offset;
-        }
-
-        if (Show.Equals(DefaultShow))
-        {
-            Show = reference.Show;
-        }
-
-        if (Transparency.Equals(DefaultTransparency))
-        {
-            Transparency = reference.Transparency;
-        }
-    }
 
     #endregion
 }

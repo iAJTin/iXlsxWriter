@@ -5,12 +5,14 @@ What is iXlsxWriter?
 iXlsxWriter is a lightweight implementation that allows creates a xlsx document totally or partially
 
 
-Changes in this version v1.0.2
-==============================
+Changes in this version (v1.0.3)
+================================
 
 · Added
   -----
     
+    - Multiple Repository is used
+
     - Add support for netstandard2.1
  
         - Add SplitEnumerator ref struct.
@@ -22,34 +24,22 @@ Changes in this version v1.0.2
 · Changed
   -------
 
-    - Library versions for this version
+    - Library dependencies for this version
 
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
     | Library                               Version     Description                                                                        |
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Charting.Models                  1.0.0.1     Base library containing various extensions, helpers, common constants for charting |
+    | iTin.Core.Drawing                     1.0.0.4     Drawing objects, extension, helpers, common constants                              |
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Core                             2.0.0.7     Base library containing various extensions, helpers, common constants              |
+    | iTin.Core.IO.Compression              1.0.0.3     Compression library                                                                |
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Core.Drawing                     1.0.0.3     Drawing objects, extension, helpers, common constants                              |
+    | iTin.Core.Models.Design.Charting      1.0.0.4     Base charting models                                                               |
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Core.IO                          1.0.0.2     Common I/O calls                                                                   |
+    | iTin.Utilities.Xlsx.Design            1.0.0.3     Xlsx Design Elements                                                               |
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Core.IO.Compression              1.0.0.1     Compression library                                                                |
+    | iTin.Utilities.Xlsx.Writer            1.0.0.3     Xlsx Writer                                                                        |
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Core.Models                      1.0.0.3     Data models base                                                                   |
-    •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Core.Models.Design.Charting      1.0.0.3     Base charting models                                                               |
-    •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Core.Models.Design.Styling       1.0.0.3     Base styling models                                                                |
-    •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Logging                          1.0.0.3     Logging library                                                                    |
-    •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Registry.Windows                 1.0.0.3     Common classes for model definitions                                               |
-    •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Utilities.Xlsx.Design            1.0.0.2     Xlsx Design Elements                                                               |
-    •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-    | iTin.Utilities.Xlsx.Writer            1.0.0.2     Xlsx Writer                                                                        |
+    | iXlsxWriter.Abstractions.Writer       1.0.0.0     Common Writer Abstractions                                                         |
     •——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
 
 v1.0.1

@@ -1,0 +1,137 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <Version>1.0.0.3</Version>
+    <Description>Xlsx Writer</Description>
+    <Copyright>Copyright © 2022</Copyright>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageId>iXlsxWriter</PackageId>
+    <Company>iTin</Company>
+    <Product>iXlsxWriter</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>icon.png</PackageIcon>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.4" />
+  </ItemGroup>
+
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties configuration_4schemas_4json_4basexlsxconfigurationschema_1json__JsonSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\iTin\iTin.Core\iTin.Core.IO.Compression\src\iTin.Core.IO.Compression.csproj" />
+    <ProjectReference Include="..\..\..\..\iXlsxWriter.Abstractions\src\iXlsxWriter.Abstractions.Writer.csproj" />
+    <ProjectReference Include="..\iTin\iTin.Utilities\iTin.Utilities.Xlsx.Design\iTin.Utilities.Xlsx.Design.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Update="System.Drawing">
+      <SpecificVersion>false</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+
+
+  <!-- XlsxOutputResultConfig -->
+  <ItemGroup>
+    <Compile Update="Config\XlsxOutputResultConfig.*.cs">
+      <DependentUpon>XlsxOutputResultConfig.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- XlsxInput -->
+  <ItemGroup>
+    <Compile Update="XlsxInput.*.cs">
+      <DependentUpon>XlsxInput.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- XlsxObject -->
+  <ItemGroup>
+    <Compile Update="XlsxObject.*.cs">
+      <DependentUpon>XlsxObject.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- XlsxObjectConfig -->
+  <ItemGroup>
+    <Compile Update="XlsxObjectConfig.*.cs">
+      <DependentUpon>XlsxObjectConfig.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- ReplaceBase -->
+  <ItemGroup>
+    <Compile Update="Operations\Items\Replace\Base\ReplaceBase.*.cs">
+      <DependentUpon>ReplaceBase.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- InsertBase -->
+  <ItemGroup>
+    <Compile Update="Operations\Items\Insert\Base\InsertBase.*.cs">
+      <DependentUpon>InsertBase.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- InsertLocationBase -->
+  <ItemGroup>
+    <Compile Update="Operations\Items\Insert\Base\Location\InsertLocationBase.*.cs">
+      <DependentUpon>InsertLocationBase.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Operations\Items\Insert\Base\Location\InsertLocationBase.location.*.cs">
+      <DependentUpon>InsertLocationBase.location.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- XlsxOutputResultData -->
+  <ItemGroup>
+    <Compile Update="Operations\Results\Output\XlsxOutputResultData.*.cs">
+      <DependentUpon>XlsxOutputResultData.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- SaveToFile -->
+  <ItemGroup>
+    <Compile Update="Operations\Actions\Save\SaveToFile.*.cs">
+      <DependentUpon>SaveToFile.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- SaveToFileAsync -->
+  <ItemGroup>
+    <Compile Update="Operations\Actions\Save\SaveToFileAsync.*.cs">
+      <DependentUpon>SaveToFileAsync.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- ActionResultData -->
+  <ItemGroup>
+    <Compile Update="Operations\Results\Action\ActionResultData.*.cs">
+      <DependentUpon>ActionResultData.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- SetResultData -->
+  <ItemGroup>
+    <Compile Update="Operations\Items\Set\Base\SetBase.*.cs">
+      <DependentUpon>SetBase.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

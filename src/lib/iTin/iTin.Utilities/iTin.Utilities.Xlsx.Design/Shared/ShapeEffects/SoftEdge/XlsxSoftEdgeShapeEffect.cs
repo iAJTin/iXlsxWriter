@@ -7,7 +7,6 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 using iTin.Core.Helpers;
-using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
 
 namespace iTin.Utilities.Xlsx.Design.Shared;
@@ -15,7 +14,7 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// <summary>
 /// Represents a <b>xlsx</b> soft edge shape effect.
 /// </summary>
-public partial class XlsxSoftEdgeShapeEffect : ICombinable<XlsxSoftEdgeShapeEffect>, ICloneable
+public partial class XlsxSoftEdgeShapeEffect
 {
     #region private constants
 
@@ -46,33 +45,6 @@ public partial class XlsxSoftEdgeShapeEffect : ICombinable<XlsxSoftEdgeShapeEffe
     {
         Size = DefaultSize;
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #region ICombinable
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">Reference pattern</param>
-    void ICombinable<XlsxSoftEdgeShapeEffect>.Combine(XlsxSoftEdgeShapeEffect reference) => Combine(reference);
-
-    #endregion
 
     #endregion
 
@@ -168,93 +140,6 @@ public partial class XlsxSoftEdgeShapeEffect : ICombinable<XlsxSoftEdgeShapeEffe
         {
             SentinelHelper.IsEnumValid(value);
             _show = value;
-        }
-    }
-
-    #endregion
-
-    #region public override readonly properties
-
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    public override bool IsDefault =>
-        base.IsDefault &&
-        Size.Equals(DefaultSize) &&
-        Show.Equals(DefaultShow);
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxSoftEdgeShapeEffect Clone()
-    {
-        var cloned = (XlsxSoftEdgeShapeEffect)MemberwiseClone();
-        cloned.Properties = Properties.Clone();
-
-        return cloned;
-    }
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Apply specified options to this shadow.
-    /// </summary>
-    public virtual void ApplyOptions(XlsxSoftEdgeShapeEffectOptions options)
-    {
-        if (options == null)
-        {
-            return;
-        }
-
-        if (options.IsDefault)
-        {
-            return;
-        }
-
-        #region Size
-        float? sizeOption = options.Size;
-        bool sizeHasValue = sizeOption.HasValue;
-        if (sizeHasValue)
-        {
-            Size = sizeOption.Value;
-        }
-        #endregion
-
-        #region Show
-        YesNo? showOption = options.Show;
-        bool showHasValue = showOption.HasValue;
-        if (showHasValue)
-        {
-            Show = showOption.Value;
-        }
-        #endregion
-    }
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    public virtual void Combine(XlsxSoftEdgeShapeEffect reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        if (Size.Equals(DefaultSize))
-        {
-            Size = reference.Size;
         }
     }
 

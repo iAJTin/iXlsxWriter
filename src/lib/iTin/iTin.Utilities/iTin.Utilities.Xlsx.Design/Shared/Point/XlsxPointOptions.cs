@@ -13,7 +13,7 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// Defines a set of options that we can use to quickly adjust an existing <see cref="XlsxPoint"/> instance.
 /// </summary>
 [Serializable]
-public class XlsxPointOptions : BaseOptions, ICloneable
+public partial class XlsxPointOptions 
 {
     #region constructor/s
 
@@ -26,23 +26,6 @@ public class XlsxPointOptions : BaseOptions, ICloneable
         Column = null;
         AbsoluteStrategy = null;
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
 
     #endregion
 
@@ -89,35 +72,6 @@ public class XlsxPointOptions : BaseOptions, ICloneable
     [XmlAttribute]
     [JsonProperty("row")]
     public int? Row { get; set; }
-
-    #endregion
-
-    #region public override readonly properties
-
-    /// <inheritdoc/>
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise, <b>false</b>.
-    /// </value>
-    public override bool IsDefault =>
-        base.IsDefault &&
-        Row == null &&
-        Column == null &&
-        AbsoluteStrategy == null;
-
-    #endregion
-
-    #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxPointOptions Clone() => (XlsxPointOptions) MemberwiseClone();
 
     #endregion
 }

@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace iTin.Utilities.Xlsx.Design.Picture;
+namespace iTin.Utilities.Xlsx.Design.Image;
 
 /// <summary>
 /// Specifies the known scale strategy.

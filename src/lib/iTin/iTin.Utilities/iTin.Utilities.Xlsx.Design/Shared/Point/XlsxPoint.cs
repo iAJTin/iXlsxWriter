@@ -14,7 +14,7 @@ namespace iTin.Utilities.Xlsx.Design.Shared;
 /// <summary>
 /// Represents a <b>xlsx</b> point.
 /// </summary>
-public partial class XlsxPoint : IEquatable<XlsxPoint>, ICloneable
+public partial class XlsxPoint
 {
     #region private constants
 
@@ -53,42 +53,6 @@ public partial class XlsxPoint : IEquatable<XlsxPoint>, ICloneable
         Column = DefaultColumn;
         AbsoluteStrategy = DefaultAbsolute;
     }
-
-    #endregion
-
-    #region interfaces
-
-    #region ICloneable
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Creates a new object that is a copy of the current instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    object ICloneable.Clone() => Clone();
-
-    #endregion
-
-    #region IEquatable
-
-    #region public methods
-
-    #region [public] (bool) Equals(XlsxPoint): Indicates whether the current object is equal to another object of the same type
-    /// <summary>
-    /// Indicates whether the current object is equal to another object of the same type.
-    /// </summary>
-    /// <param name="other">An object to compare with this object.</param>
-    /// <returns>
-    /// <b>true</b> if the current object is equal to the <paramref name="other"/> parameter; otherwise, <b>false</b>.
-    /// </returns>
-    public bool Equals(XlsxPoint other) => other != null && other.Equals((object)this);
-    #endregion
-
-    #endregion
-
-    #endregion
 
     #endregion
 
@@ -168,38 +132,7 @@ public partial class XlsxPoint : IEquatable<XlsxPoint>, ICloneable
 
     #endregion
 
-    #region public override properties
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Gets a value indicating whether this instance is default.
-    /// </summary>
-    /// <value>
-    /// <b>true</b> if this instance contains the default; otherwise <b>false</b>.
-    /// </value>
-    public override bool IsDefault =>
-        base.IsDefault &&
-        Row.Equals(DefaultRow) && 
-        Column.Equals(DefaultColumn) &&
-        AbsoluteStrategy.Equals(DefaultAbsolute);
-
-    #endregion
-
     #region public methods
-
-    /// <summary>
-    /// Clones this instance.
-    /// </summary>
-    /// <returns>
-    /// A new object that is a copy of this instance.
-    /// </returns>
-    public XlsxPoint Clone()
-    {
-        var cloned = (XlsxPoint) MemberwiseClone();
-        cloned.Properties = Properties.Clone();
-
-        return cloned;
-    }
 
     /// <summary>
     /// Translates this <see cref='XlsxPointRange'/> by the specified amount.
@@ -220,111 +153,6 @@ public partial class XlsxPoint : IEquatable<XlsxPoint>, ICloneable
         {
             Column += dx;
             Row += dy;
-        }
-    }
-
-    #endregion
-
-    #region public override methods
-
-    /// <summary>
-    /// Returns a value that represents the hash code for this class.
-    /// </summary>
-    /// <returns>
-    /// Hash code for this class.
-    /// </returns>
-    public override int GetHashCode() => Column.GetHashCode() ^ Row.GetHashCode() ^ AbsoluteStrategy.GetHashCode();
-
-    /// <summary>
-    /// Returns a value that indicates whether this class is equal to another
-    /// </summary>
-    /// <param name="obj">Class with which to compare.</param>
-    /// <returns>
-    /// Results equality comparison.
-    /// </returns>
-    public override bool Equals(object obj)
-    {
-        if (obj is not XlsxPoint other)
-        {
-            return false;
-        }
-
-        return 
-            other.Column == Column &&
-            other.Row == Row;
-    }
-
-    #endregion
-
-    #region public virtual methods
-
-    /// <summary>
-    /// Apply specified options to this alignment.
-    /// </summary>
-    public virtual void ApplyOptions(XlsxPointOptions options)
-    {
-        if (options == null)
-        {
-            return;
-        }
-
-        if (options.IsDefault)
-        {
-            return;
-        }
-
-        #region AbsoluteStrategy
-        AbsoluteStrategy? absoluteOption = options.AbsoluteStrategy;
-        bool absoluteHasValue = absoluteOption.HasValue;
-        if (absoluteHasValue)
-        {
-            AbsoluteStrategy = absoluteOption.Value;
-        }
-        #endregion
-
-        #region Column
-        int? columnOption = options.Column;
-        bool columnHasValue = columnOption.HasValue;
-        if (columnHasValue)
-        {
-            Column = columnOption.Value;
-        }
-        #endregion
-
-        #region Row
-        int? rowOption = options.Row;
-        bool rowHasValue = rowOption.HasValue;
-        if (rowHasValue)
-        {
-            Row = rowOption.Value;
-        }
-        #endregion
-    }
-
-    /// <summary>
-    /// Combines this instance with reference parameter.
-    /// </summary>
-    /// <param name="reference">The reference.</param>
-    public virtual void Combine(XlsxPoint reference)
-    {
-        if (reference == null)
-        {
-            return;
-        }
-
-        if (AbsoluteStrategy.Equals(DefaultAbsolute))
-        {
-            AbsoluteStrategy = reference.AbsoluteStrategy;
-        }
-
-        if (Column.Equals(DefaultColumn))
-        {
-            Column = reference.Column;
-        }
-
-        if (Row.Equals(DefaultRow))
-        {
-            Row = reference.Row;
         }
     }
 
