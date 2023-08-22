@@ -55,8 +55,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\README.txt" target="." />
     <file src=".\README.md" target="." />
+    <file src="..\README.txt" target="." />
     <file src=".\iXlsxWriter.png" target="." />
     <file src="..\src\lib\iXlsxWriter\bin\Debug\**" target="lib" exclude="**\*.deps.json;**\*.pdb;" />
   </files>
