@@ -688,7 +688,7 @@ Basic steps, for more details please see [sample04.cs] file.
 
     ![Sample04.image][Sample04.image] 
 
-### Sample 6 - Insert datatable and generic collections.
+### Sample 6 - Insert datatable and generic collections
 
 Basic steps, for more details please see [sample06.cs] file.
 
@@ -806,6 +806,124 @@ Basic steps, for more details please see [sample06.cs] file.
 
     ![Sample06.image][Sample06.image] 
 
+### Sample 7 - Save a xlsx input as zip file
+
+Basic steps, for more details please see [sample07.cs] file.
+
+1. Creates xlsx input
+
+    ```csharp   
+    var doc = XlsxInput.Create(new[] { "Sheet1", "Sheet2" });
+    ```
+        
+2. Define data model
+    
+   For more details please see [Person.cs] file.          
+
+    ```csharp  
+    public class Person
+    {     
+        public string Name { get; set; }
+        public string Surname { get; set; }
+    }
+    ```
+
+3. Insert actions
+
+    ```csharp   
+    doc.Insert(new InsertText
+    {
+        SheetName = "Sheet1",
+        Location = new XlsxPointRange { Column = 2, Row = 1 },
+        Data = "Custom text"
+    }).Insert(new InsertEnumerable<Person>
+    {
+        SheetName = "Sheet1",
+        Location = new XlsxPointRange { Column = 2, Row = 3 },
+        Data = new Collection<Person>
+        {
+            new() { Name = "Name-01", Surname = "Surname-01" },
+            new() { Name = "Name-02", Surname = "Surname-02" },
+            new() { Name = "Name-03", Surname = "Surname-03" },
+            new() { Name = "Name-04", Surname = "Surname-04" },
+            new() { Name = "Name-05", Surname = "Surname-05" },
+            new() { Name = "Name-06", Surname = "Surname-06" },
+            new() { Name = "Name-07", Surname = "Surname-07" },
+            new() { Name = "Name-08", Surname = "Surname-08" },
+            new() { Name = "Name-09", Surname = "Surname-09" },
+            new() { Name = "Name-10", Surname = "Surname-10" }
+        }
+    }).Insert(new InsertDataTable
+    {
+        SheetName = "Sheet1",
+        Location = new XlsxPointRange { Column = 10, Row = 3 },
+        Data = new Collection<Person>
+        {
+            new() { Name = "Name-01", Surname = "Surname-01" },
+            new() { Name = "Name-02", Surname = "Surname-02" },
+            new() { Name = "Name-03", Surname = "Surname-03" },
+            new() { Name = "Name-04", Surname = "Surname-04" },
+            new() { Name = "Name-05", Surname = "Surname-05" },
+            new() { Name = "Name-06", Surname = "Surname-06" },
+            new() { Name = "Name-07", Surname = "Surname-07" },
+            new() { Name = "Name-08", Surname = "Surname-08" },
+            new() { Name = "Name-09", Surname = "Surname-09" },
+            new() { Name = "Name-10", Surname = "Surname-10" }
+        }.ToDataTable<Person>("Person")
+    });
+    ```
+
+4. Try to create xlsx output result
+
+     **sync mode**
+     ```csharp   
+     var result = doc.CreateResult(XlsxOutputResultConfig.ZippedResult("custom_zipfile_name"));
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+     **async mode**
+     ```csharp   
+        var result = await doc
+         .CreateResultAsync(XlsxOutputResultConfig.ZippedResult("custom_zipfile_name"), cancellationToken: cancellationToken)
+         .ConfigureAwait(false);
+         
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+5. Save xlsx file result
+ 
+    **sync mode**
+    ```csharp   
+    var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-07/Sample-07" });
+   if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+
+    **async mode**
+    ```csharp   
+    var saveResult = await result.Result
+        .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-07/Sample-07" }, cancellationToken);
+        .ConfigureAwait(false);
+
+    if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+6. Output
+
+   ###### Below is an image showing the result
+
+    ![Sample07.image][Sample07.image] 
+
 # Documentation
 
  - For **Writer** code documentation, please see next link documentation.
@@ -822,6 +940,9 @@ My email address is
 [email]: ./assets/email.png "email"
 [documentation]: ./documentation/iXlsxWriterr.md
 [nuget]: ./assets/nuget.png "nuget"
+
+[sample07.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample07.cs
+[Sample07.image]: ./assets/samples/sample-07/Sample-07.png "sample-07"
 
 [sample06.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample06.cs
 [Sample06.image]: ./assets/samples/sample-06/Sample-06.png "sample-06"
