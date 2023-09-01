@@ -2417,11 +2417,6 @@ Basic steps, for more details please see [sample20.cs] file.
          // Handle errors                 
     }
      ```
-5. Output
-
-   ###### Below is an image showing the result
-
-    ![Sample20.image][Sample20.image] 
 
 ### Sample 21 - Transpose ranges
 
@@ -2540,11 +2535,6 @@ Basic steps, for more details please see [sample21.cs] file.
          // Handle errors                 
     }
      ```
-5. Output
-
-   ###### Below is an image showing the result
-
-    ![Sample21.image][Sample21.image] 
 
 ### Sample 22 - Use aggregate functions with a data range
 
