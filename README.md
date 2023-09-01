@@ -124,7 +124,7 @@ Basic steps, for more details please see [sample01.cs] file.
 
    ###### Below is an image showing the result after inserting the text
 
-![Sample01.image][Sample01.image] 
+    ![Sample01.image][Sample01.image] 
 
 ### Sample 2 - Hello world! (With styles)
 
@@ -216,7 +216,138 @@ Basic steps, for more details please see [sample02.cs] file.
 
    ###### Below is an image showing the result after inserting the text
 
-![Sample02.image][Sample02.image] 
+    ![Sample02.image][Sample02.image] 
+
+### Sample 3 - Add custom document properties
+
+Basic steps, for more details please see [sample03.cs] file.
+
+1. Creates xlsx input
+
+    ```csharp   
+    var doc = XlsxInput.Create("Sheet1");
+    ```
+        
+2. Define cell styles to use
+              
+    ```csharp  
+    var cellStyles = new Dictionary<string, XlsxCellStyle>
+    {
+        {
+            "Title",
+            new XlsxCellStyle 
+            {
+                Font =
+                {
+                    Name = "Arial",
+                    Size = 28.0f,
+                    Bold = YesNo.Yes,
+                    Color = "Blue"
+                }
+            }
+        }
+    };
+    ```
+
+3. Insert text
+
+    ```csharp   
+    doc.Insert(
+        new InsertText
+        {
+            SheetName = "Sheet1",
+            Style = cellStyles["Title"],
+            Location = new XlsxPointRange { Column = 2, Row = 1 },
+            Data = "Hello world! from iXlsxWriter"
+        });
+    ```
+
+4. Try to create xlsx output result
+
+     **sync mode**
+     ```csharp   
+     var result = doc.CreateResult(new XlsxOutputResultConfig
+     {
+         GlobalSettings = new XlsxSettings
+         {
+             DocumentSettings =
+             {
+                 Author = "iTin",
+                 Company = "iTin",
+                 Manager = "Filled from iXlsxWriter",
+                 Category = "Filled from iXlsxWriter",
+                 Subject = "Filled from iXlsxWriter",
+                 Url = "http://www.url-test.com",
+                 Title = "Filled from iXlsxWriter",
+                 Keywords = "Reports, Excel, Summary",
+                 Comments = "Filled from iXlsxWriter"
+             }
+         }
+     });
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+     **async mode**
+     ```csharp   
+     var result = await doc
+         .CreateResultAsync(
+             new XlsxOutputResultConfig
+             {
+                 GlobalSettings = new XlsxSettings
+                 {
+                     DocumentSettings =
+                     {
+                         Author = "iTin",
+                         Company = "iTin",
+                         Manager = "Filled from iXlsxWriter",
+                         Category = "Filled from iXlsxWriter",
+                         Subject = "Filled from iXlsxWriter",
+                         Url = "http://www.url-test.com",
+                         Title = "Filled from iXlsxWriter",
+                         Keywords = "Reports, Excel, Summary",
+                         Comments = "Filled from iXlsxWriter"
+                     }
+                 }
+             },
+             cancellationToken)
+         .ConfigureAwait(false);
+
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+5. Save xlsx file result
+ 
+    **sync mode**
+    ```csharp   
+    var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-03/Sample-03" });
+   if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+
+    **async mode**
+    ```csharp   
+    var saveResult = await result.Result
+        .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-03/Sample-03" }, cancellationToken);
+        .ConfigureAwait(false);
+
+    if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+6. Output
+
+   ###### Below is an image showing the result when viewing the document properties
+
+    ![Sample03.image][Sample03.image] 
 
 # Documentation
 
@@ -234,6 +365,9 @@ My email address is
 [email]: ./assets/email.png "email"
 [documentation]: ./documentation/iXlsxWriterr.md
 [nuget]: ./assets/nuget.png "nuget"
+
+[sample03.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample03.cs
+[Sample03.image]: ./assets/samples/sample-03/Sample-03.png "sample-03"
 
 [sample02.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample02.cs
 [Sample02.image]: ./assets/samples/sample-02/Sample-02.png "sample-02"

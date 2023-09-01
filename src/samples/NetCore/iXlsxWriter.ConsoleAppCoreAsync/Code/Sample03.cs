@@ -72,7 +72,8 @@ internal class Sample03
         #region Create async output result
 
         var result = await doc
-            .CreateResultAsync(new XlsxOutputResultConfig
+            .CreateResultAsync(
+                new XlsxOutputResultConfig
                 {
                     GlobalSettings = new XlsxSettings
                     {
