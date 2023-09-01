@@ -1288,6 +1288,191 @@ Basic steps, for more details please see [sample11.cs] file.
 
     ![Sample11.image][Sample11.image] 
 
+### Sample 12 - Insert a table with styles
+
+Basic steps, for more details please see [sample12.cs] file.
+
+1. Creates xlsx input
+
+    ```csharp   
+    var doc = XlsxInput.Create(new[] { "Sheet1" });
+    ```
+        
+2. Insert actions
+    
+    ```csharp  
+    doc.Insert(new InsertTable
+    {
+        SheetName = "Sheet1",
+        Data = new XmlInput(new Uri(iTinIO.Path.PathResolver("~/Resources/Sample-12/input.xml"))),
+        Location = new XlsxPointRange { Column = 1, Row = 2 },
+        Table =
+        {
+            Name = "Rates",
+            Alias = "Rates",
+            ShowColumnHeaders = YesNo.Yes,
+            ShowDataValues = YesNo.Yes,
+            Resources =
+            {
+                Styles = new XlsxStylesCollection
+                {
+                    new XlsxCellStyle
+                    {
+                        Name = "HeaderStyle",
+                        Font = { Name = "Calibri", Size = 11.0f, Color = "White", Bold = YesNo.Yes },
+                        Content =
+                        {
+                            Alignment = { Horizontal = KnownHorizontalAlignment.Right },
+                            Color = "#ED7D31",
+                            DataType = new TextDataType()
+                        }
+                    },
+                    new XlsxCellStyle
+                    {
+                        Name = "DateHeaderStyle",
+                        Font = { Name = "Calibri", Size = 11.0f, Color = "White", Bold = YesNo.Yes },
+                        Content =
+                        {
+                            Alignment = { Horizontal = KnownHorizontalAlignment.Left },
+                            Color = "#ED7D31",
+                            DataType = new TextDataType()
+                        }
+                    },
+                    new XlsxCellStyle
+                    {
+                        Name = "DateValueStyle",
+                        Font = { Name = "Calibri" },
+                        Borders =
+                        {
+                            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Left, Style = KnownBorderStyle.Thick, Color = "#ED7D31" },
+                            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
+                        },
+                        Content =
+                        {
+                            Color = "#FCE4D6",
+                            DataType = new DateTimeDataType{ Format = KnownDateTimeFormat.ShortDatePattern }
+                        }
+                    },
+                    new XlsxCellStyle
+                    {
+                        Name = "DecimalValueStyle",
+                        Font = { Name = "Calibri", Size = 11.0f },
+                        Borders =
+                        {
+                            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
+                        },
+                        Content =
+                        {
+                            Alignment = { Horizontal = KnownHorizontalAlignment.Right },
+                            DataType = new NumberDataType { Decimals = 5, Separator = YesNo.Yes },
+                        }
+                    },
+                    new XlsxCellStyle
+                    {
+                        Name = "LastFieldDecimalValueStyle",
+                        Font = { Name = "Calibri", Size = 11.0f },
+                        Borders =
+                        {
+                            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Right, Style = KnownBorderStyle.Thick, Color = "#ED7D31" },
+                            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
+                        },
+                        Content =
+                        {
+                            Alignment = { Horizontal = KnownHorizontalAlignment.Right },
+                            DataType = new NumberDataType { Decimals = 5, Separator = YesNo.Yes },
+                        }
+                    },
+                    new XlsxCellStyle
+                    {
+                        Name = "SekValueStyle",
+                        Font = { Name = "Calibri", Size = 11.0f },
+                        Borders =
+                        {
+                            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
+                        },
+                        Content =
+                        {
+                            Alignment = { Horizontal = KnownHorizontalAlignment.Right },
+                            DataType = new NumberDataType { Decimals = 0 }
+                        }
+                    }
+                }
+            },
+            Fields =
+            {
+                new DataField { Name = "DATE", Alias = "Date", Header = { Style = "DateHeaderStyle", Show = YesNo.Yes }, Value = { Style = "DateValueStyle" } },
+                new DataField { Name = "AUD", Alias = "AUD", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "CAD", Alias = "CAD", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "CHF", Alias = "CHF", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "DKK", Alias = "DKK", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "EUR", Alias = "EUR", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "GBP", Alias = "GBP", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "HKD", Alias = "HKD", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "JPY", Alias = "JPY", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "MYR", Alias = "MYR", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "NOK", Alias = "NOK", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "NZD", Alias = "NZD", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "RUB", Alias = "RUB", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "SEK", Alias = "SEK", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "SekValueStyle" } },
+                new DataField { Name = "THB", Alias = "THB", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "TRY", Alias = "TRY", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalValueStyle" } },
+                new DataField { Name = "USD", Alias = "USD", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "LastFieldDecimalValueStyle" } }
+            }
+        }
+    });
+    ```
+
+3. Try to create xlsx output result
+
+     **sync mode**
+     ```csharp   
+     var result = doc.CreateResult();
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+     **async mode**
+     ```csharp   
+        var result = await doc
+         .CreateResultAsync(cancellationToken: cancellationToken)
+         .ConfigureAwait(false);
+         
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+4. Save xlsx file result
+ 
+    **sync mode**
+    ```csharp   
+    var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-12/Sample-12" });
+   if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+
+    **async mode**
+    ```csharp   
+    var saveResult = await result.Result
+        .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-12/Sample-12" }, cancellationToken);
+        .ConfigureAwait(false);
+
+    if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+5. Output
+
+   ###### Below is an image showing the result
+
+    ![Sample12.image][Sample12.image] 
+
 # Documentation
 
  - For **Writer** code documentation, please see next link documentation.
