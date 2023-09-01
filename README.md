@@ -1991,6 +1991,129 @@ Basic steps, for more details please see [sample16.cs] file.
 
     ![Sample16.image][Sample16.image] 
 
+### Sample 17 - Insert a table with styles and fixed fields
+
+Basic steps, for more details please see [sample17.cs] file.
+
+1. Creates xlsx input
+
+    ```csharp   
+    var doc = XlsxInput.Create(new[] { "Sheet1" });
+    ```
+        
+2. Insert actions
+    
+    ```csharp  
+    doc.Insert(new InsertTable
+    {
+        SheetName = "Sheet1",
+        Data = new XmlInput(new Uri(iTinPath.PathResolver("~/Resources/Sample-17/As400Packet.xml"))),
+        Location = new XlsxPointRange { Column = 1, Row = 2 },
+        Table =
+        {
+            Name = "R740D01",
+            Alias = "AS400 - Ayers Rock",
+            Resources =
+            {
+                Styles = new XlsxStylesCollection
+                {
+                    // Add styles here!!
+                },
+                Fixed =
+                {
+                    new Fixed
+                    {
+                        Name = "Pieces",
+                        Reference = "SFLDTA",
+                        Pieces =
+                        {
+                            new Piece { Name = "DCALL", From = 0, Lenght = 2, Trim = YesNo.Yes, TrimMode = KnownTrimMode.All },
+                            new Piece { Name = "NOCOL", From = 2, Lenght = 14 },
+                            new Piece { Name = "SHOP", From = 16, Lenght = 5 },
+                            new Piece { Name = "SIT", From = 21, Lenght = 5 },
+                            new Piece { Name = "PIK", From = 27, Lenght = 5 },
+                            new Piece { Name = "PKG", From = 32, Lenght = 5 },
+                            new Piece { Name = "DG", From = 37, Lenght = 5 },
+                            new Piece { Name = "REM", From = 37, Lenght = 5 },
+                            new Piece { Name = "SPR", From = 42, Lenght = 9 },
+                            new Piece { Name = "DATESHOP", From = 56, Lenght = 11 }
+                        }
+                    }
+                }
+            },
+            Fields =
+            {
+                new DataField { Name = "##LINE", Alias = "Line", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "LineValue" } },
+                new DataField { Name = "*PERCENT", Alias = "%", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "PercentValue" } },
+                new DataField { Name = "SFORDDATE", Alias = "Date", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "DateValue" } },
+                new DataField { Name = "CMCUST", Alias = "Account", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "AccountValue" } },
+                new DataField { Name = "CMNAME", Alias = "Name", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "NameValue" } },
+                new FixedField { Pieces = "Pieces", Piece = "DCALL", Alias = "D/Call", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "FixedValue" } },
+                new FixedField { Pieces = "Pieces", Piece = "NOCOL", Alias = "No/Col", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "FixedValue" } },
+                new FixedField { Pieces = "Pieces", Piece = "SHOP", Alias = "Shop", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "FixedValue" } },
+                new FixedField { Pieces = "Pieces", Piece = "SIT", Alias = "SIT", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "FixedValue" } },
+                new FixedField { Pieces = "Pieces", Piece = "PIK", Alias = "Pik", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "FixedValue" } },
+                new FixedField { Pieces = "Pieces", Piece = "PKG", Alias = "PKG", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "FixedValue" } },
+                new FixedField { Pieces = "Pieces", Piece = "DG", Alias = "D&G", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "FixedValue" } },
+                new FixedField { Pieces = "Pieces", Piece = "REM", Alias = "Rem", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "FixedValue" } },
+                new FixedField { Pieces = "Pieces", Piece = "SPR", Alias = "SPR 2013", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "FixedValue" } },
+                new FixedField { Pieces = "Pieces", Piece = "DATESHOP", Alias = "Date in Shop", Header = { Style = "CommonHeader", Show = YesNo.Yes }, Value = { Style = "FixedValue" } },
+            }
+        }
+    });
+    ```
+
+3. Try to create xlsx output result
+
+     **sync mode**
+     ```csharp   
+     var result = doc.CreateResult();
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+     **async mode**
+     ```csharp   
+        var result = await doc
+         .CreateResultAsync(cancellationToken: cancellationToken)
+         .ConfigureAwait(false);
+         
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+4. Save xlsx file result
+ 
+    **sync mode**
+    ```csharp   
+    var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-17/Sample-17" });
+   if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+
+    **async mode**
+    ```csharp   
+    var saveResult = await result.Result
+        .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-17/Sample-17" }, cancellationToken);
+        .ConfigureAwait(false);
+
+    if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+5. Output
+
+   ###### Below is an image showing the result
+
+    ![Sample17.image][Sample17.image] 
+
 # Documentation
 
  - For **Writer** code documentation, please see next link documentation.
@@ -2006,6 +2129,9 @@ My email address is
 [email]: ./assets/email.png "email"
 [documentation]: ./documentation/iXlsxWriterr.md
 [nuget]: ./assets/nuget.png "nuget"
+
+[sample17.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample17.cs
+[Sample17.image]: ./assets/samples/sample-17/Sample-17.png "sample-17"
 
 [sample16.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample16.cs
 [Sample16.image]: ./assets/samples/sample-16/Sample-16.png "sample-16"
