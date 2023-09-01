@@ -6,23 +6,18 @@ using System.Xml.Serialization;
 
 using iTin.Core.Models.Design;
 
-namespace iTin.Utilities.Xlsx.Design
+namespace iTin.Utilities.Xlsx.Design;
+
+[Serializable]
+[DebuggerStepThrough]
+[DesignerCategory("code")]
+[XmlType(Namespace = "http://schemas.itin.com/models/core/v1.0")]
+[XmlRoot(Namespace = "http://schemas.itin.com/models/core/v1.0", IsNullable = false)]
+public partial class XlsxTable : TableDefinition
 {
-    [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
-    [XmlType(Namespace = "http://schemas.iTin.com/xlsx/shape/v1.0")]
-    public partial class XlsxTable : TableDefinition
-    {
-        /// <summary>
-        /// Gets a value indicating whether this instance is default.
-        /// </summary>
-        /// <value>
-        /// <b>true</b> if this instance contains the default; otherwise <b>false</b>.
-        /// </value>
-        public override bool IsDefault =>
-            base.IsDefault &&
-            Show.Equals(DefaultShow) &&
-            AutoFitColumns.Equals(DefaultAutoFitColumns);
-    }
+    /// <inheritdoc/>
+    [Browsable(false)]
+    public override bool IsDefault =>
+        base.IsDefault &&
+        AutoFitColumns.Equals(DefaultAutoFitColumns);
 }

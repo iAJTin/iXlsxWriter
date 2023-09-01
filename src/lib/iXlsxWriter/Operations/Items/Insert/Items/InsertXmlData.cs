@@ -25,6 +25,7 @@ using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
 using OfficeOpenXml.FormulaParsing.Utilities;
 using System.Web.Services.Description;
+using iTin.Core.Models.Design.Table;
 using iTin.Utilities.Xlsx.Design.Styles;
 using iXlsxWriter.ComponentModel;
 using OfficeOpenXml.Style;
@@ -145,13 +146,14 @@ public class InsertXmlData : InsertLocationBase
 
         try
         {
-            var styles = (XlsxStylesCollection)table.Styles;
+            var resources = (Resources)table.Resources;
+            var styles = (XlsxStylesCollection)resources.Styles;
             var fields = table.Fields;
             var filter = table.Filter;
             var locationAddress = location.ToEppExcelAddress();
             
             var allRows = LoadXmlFromFile(file, table.Name).ToList();
-            XElement[] rows = (XElement[])allRows.ToArray().Clone();
+            var rows = (XElement[])allRows.ToArray().Clone();
 
             var hasDataFilter = !filter.IsEmpty;
             if (hasDataFilter && filter.Active == YesNo.Yes )

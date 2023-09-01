@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Xml;
-using System.Xml.Linq;
 
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
 using iTin.Core.Helpers;
+using iTin.Core.Models.Data.Input;
 using iTin.Core.Models.Design.Enums;
+using iTin.Core.Models.Design.Table;
 using iTin.Core.Models.Design.Table.Fields;
 
 using iTin.Utilities.Xlsx.Design;
@@ -23,7 +23,6 @@ using iTin.Utilities.Xlsx.Writer;
 using iXlsxWriter.Abstractions.Writer.Operations.Results;
 using iXlsxWriter.Input;
 using iXlsxWriter.Operations.Result.Action;
-using System.Security.Cryptography.X509Certificates;
 
 namespace iXlsxWriter.Operations.Insert;
 
@@ -41,8 +40,8 @@ public class InsertTable : InsertLocationBase
     public InsertTable()
     {
         Data = null;
-        SheetName = string.Empty;
         Table = new XlsxTable();
+        SheetName = string.Empty;
         Location = new XlsxPointRange {Column = 1, Row = 1};
     }
 
@@ -56,7 +55,7 @@ public class InsertTable : InsertLocationBase
     /// <value>
     /// A <see cref="DataTable"/> reference to insert.
     /// </value>
-    public string Data { get; set; }
+    public IDataInput Data { get; set; }
 
     /// <summary>
     /// 
@@ -108,7 +107,7 @@ public class InsertTable : InsertLocationBase
             });
         }
 
-        if (string.IsNullOrEmpty(Data))
+        if (Data == null)
         {
             return ActionResult.CreateSuccessResult(new ActionResultData
             {
@@ -135,33 +134,34 @@ public class InsertTable : InsertLocationBase
 
     #region private static methods
 
-    private static ActionResult ExecuteImpl(IXlsxInput context, Stream input, ExcelPackage package, ExcelWorksheet worksheet, XlsxBaseRange location, string file, XlsxTable table)
+    private static ActionResult ExecuteImpl(IXlsxInput context, Stream input, ExcelPackage package, ExcelWorksheet worksheet, XlsxBaseRange location, IDataInput dataInput, XlsxTable table)
     {
         var outputStream = new MemoryStream();
 
         try
         {
-            var styles = (XlsxStylesCollection)table.Styles;
+            #region create model service
+
+            var inputModel = new InputDataModel { Model = table, DataInput = dataInput, References = table.References, CurrentFilter = table.Filter};
+            var service = inputModel.CreateService();
+            
+            #endregion
+
+            #region initialize
+
             var fields = table.Fields;
-            var filter = table.Filter;
+            var resources = (Resources)table.Resources;
             var locationAddress = location.ToEppExcelAddress();
             var x = locationAddress.Start.Column;
             var y = locationAddress.Start.Row;
-            
-            var allRows = LoadXmlFromFile(file, table.Name).ToList();
-            var rows = (XElement[])allRows.ToArray().Clone();
 
-            var hasDataFilter = !filter.IsEmpty;
-            if (hasDataFilter && filter.Active == YesNo.Yes )
-            {
-                var expression = filter.BuildFilterExpression();
-                rows = (XElement[])allRows.ToList().FindAll(item => expression.IsSatisfiedBy(item)).ToArray().Clone();
-            }
+            #endregion
 
-            foreach (var style in styles)
-            {
-                package.CreateEmptyNamedStyle((XlsxCellStyle)style);
-            }
+            #region get target data
+
+            var rows = service.RawDataFiltered;
+
+            #endregion
 
             #region sets fields's width
 
@@ -182,6 +182,16 @@ public class InsertTable : InsertLocationBase
                         column.Width = width;
                     }
                 }
+            }
+
+            #endregion
+
+            #region add styles
+
+            var styles = (XlsxStylesCollection)resources.Styles;
+            foreach (var style in styles)
+            {
+                package.CreateEmptyNamedStyle((XlsxCellStyle)style);
             }
 
             #endregion
@@ -325,55 +335,29 @@ public class InsertTable : InsertLocationBase
                 {
                     var rowData = rows[row];
 
-                    var currentRow = row; //Service.SetCurrentRow(row);
+                    service.SetCurrentRow(row);
                     for (var col = 0; col < fields.Count; col++)
                     {
-                        var currentCol = col; //Service.SetCurrentCol(col);
+                        service.SetCurrentCol(col);
 
                         var field = fields[col];
                         field.DataSource = rowData;
 
-                        var currentField = field; // Service.SetCurrentField(field);
-
-                        var value = field.Value; //.GetValue(Provider.SpecialChars);
-                        //var valueLenght = value.FormattedValue.Length;
+                        service.SetCurrentField(field);
+                        var valueStyle = (XlsxCellStyle)styles.GetBy(field.Value.Style);
+                        var cellValue = field.Value.GetValue(service.CurrentProvider.SpecialChars);
+                        var valueInformation = valueStyle.Content.DataType.GetFormattedDataValue(cellValue);
 
                         var cell = worksheet.Cells[y + row, x + col];
-                        cell.Value = "ss"; //value.Value;
-                                           //cell.AddErrorComment(value);
-                                           //cell.Style.WrapText = field.FieldType == KnownFieldType.Group;
+                        cell.Value = valueInformation.Value;
+                        cell.AddErrorComment(valueInformation);
+                        cell.Style.WrapText = field.FieldType == KnownFieldType.Group;
 
-                       var styleName = row.IsOdd()
-                           ? $"{value.Style}_Alternate"
-                            : value.Style ?? XlsxBaseStyle.NameOfDefaultStyle;
+                        var styleName = row.IsOdd()
+                            ? $"{field.Value.Style}_Alternate"
+                            : field.Value.Style ?? XlsxBaseStyle.NameOfDefaultStyle;
 
-                        cell.Style.FormatFromModel((XlsxCellStyle)styles.GetBy(styleName));
-
-
-
-                       // cell.StyleID = package.Workbook.Styles.GetNamedStyleId(styleName);
-
-                       //var a = styles.GetBy(styleName.Replace("_Alternate", string.Empty));
-                       //var b = (XlsxCellStyle)a;
-                       //cell.Style.FormatFromModel(b);
-
-
-                       //cell.StyleName = row.IsOdd()
-                       //    ? $"{value.Style.Name}_Alternate"
-                       //    : value.Style.Name ?? StyleModel.NameOfDefaultStyle;
-
-                       //if (!fieldDictionary.ContainsKey(field))
-                       //{
-                       //    fieldDictionary.Add(field, valueLenght);
-                       //}
-                       //else
-                       //{
-                       //    var entry = fieldDictionary[field];
-                       //    if (valueLenght > entry)
-                       //    {
-                       //        fieldDictionary[field] = valueLenght;
-                       //    }
-                       //}
+                        cell.Style.FormatFromModel((XlsxCellStyle)styles.GetBy(field.Value.Style));
                     }
                 }
             }
@@ -418,6 +402,7 @@ public class InsertTable : InsertLocationBase
             #endregion
 
             #region autofitcolumns
+
             if (table.AutoFitColumns == YesNo.Yes)
             {
                 try
@@ -429,6 +414,7 @@ public class InsertTable : InsertLocationBase
                     //worksheet.AutoFitGroupColumns(fieldDictionary, this);
                 }
             }
+
             #endregion
 
             package.SaveAs(outputStream);
@@ -451,39 +437,6 @@ public class InsertTable : InsertLocationBase
                     OutputStream = input
                 });
         }
-    }
-
-    /// <summary>
-    /// Retrieves <c>Xml</c> content of specified <paramref name="table" /> in a file.
-    /// </summary>
-    /// <param name="fileName">Target filename</param>
-    /// <param name="table">Table to retrieve</param>
-    /// <returns>
-    /// A collection of <see cref="T:System.Xml.Linq.XElement"/> that contains the table content as <strong>XML</strong>.
-    /// </returns>
-    private static IEnumerable<XElement> LoadXmlFromFile(string fileName, string table)
-    {
-        SentinelHelper.IsTrue(string.IsNullOrEmpty(table));
-        SentinelHelper.IsTrue(string.IsNullOrEmpty(fileName));
-
-        IEnumerable<XElement> nodes = null;
-        using var stream = new FileStream(iTin.Core.IO.Path.PathResolver(fileName), FileMode.OpenOrCreate, FileAccess.Read, FileShare.Read);
-        var reader = new XmlTextReader(stream);
-        var document = XDocument.Load(reader);
-        var root = document.Root;
-        if (root != null)
-        {
-            nodes = table == "*"
-                ? root.Elements()
-                : root.Elements(table);
-        }
-
-        ////var query = from element in root.Elements()
-        ////            group element.Attributes().FirstOrDefault() by element.Name;
-        ////var qq = from e in query let c = e.Count() where c > 1 select e.GetEnumerator();
-        ////var vvvv = qq.Cast<XAttribute>().ToList();
-
-        return nodes;
     }
 
     #endregion

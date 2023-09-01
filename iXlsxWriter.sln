@@ -53,6 +53,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iTin.Utilities.Xlsx", "iTin
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iXlsxWriter.Abstractions", "iXlsxWriter.Abstractions", "{A40B1403-36C1-4240-8596-C166E3494367}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iTin.Core.Models", "..\..\iTin\iTin.Core\iTin.Core.Models\src\iTin.Core.Models.csproj", "{490D7E4B-177D-40B4-BCFF-549565655B55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iTin.Core.Models", "iTin.Core.Models", "{B812A378-DA91-4007-A827-B94FDAC031CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +103,10 @@ Global
 		{EE3FFCF3-85AF-4D64-A98C-EA98266055EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE3FFCF3-85AF-4D64-A98C-EA98266055EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE3FFCF3-85AF-4D64-A98C-EA98266055EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{490D7E4B-177D-40B4-BCFF-549565655B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{490D7E4B-177D-40B4-BCFF-549565655B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{490D7E4B-177D-40B4-BCFF-549565655B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{490D7E4B-177D-40B4-BCFF-549565655B55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +134,8 @@ Global
 		{AB07F92B-6225-442A-8428-28F5676D3F90} = {7C32A2E0-A22C-49C0-9E72-99E78869C319}
 		{B4E8E2BA-8EA4-421B-ADE4-7C90E27C835A} = {AB07F92B-6225-442A-8428-28F5676D3F90}
 		{A40B1403-36C1-4240-8596-C166E3494367} = {F18A3601-FC48-40EE-9006-010E5256159B}
+		{490D7E4B-177D-40B4-BCFF-549565655B55} = {B812A378-DA91-4007-A827-B94FDAC031CE}
+		{B812A378-DA91-4007-A827-B94FDAC031CE} = {BFE70C28-628B-4B0D-B45A-EFF03A13EC86}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7E253257-825E-40F1-9BD8-3624F02E7544}

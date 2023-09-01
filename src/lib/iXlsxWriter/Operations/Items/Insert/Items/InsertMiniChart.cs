@@ -31,6 +31,7 @@ public class InsertMiniChart : InsertLocationBase
     public InsertMiniChart()
     {
         SheetName = string.Empty;
+        MiniChart = XlsxMiniChart.Default;
         Location = new XlsxStringRange { Address = "A1:A1" };
     }
 

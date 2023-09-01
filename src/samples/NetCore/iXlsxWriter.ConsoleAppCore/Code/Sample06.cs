@@ -18,7 +18,6 @@ namespace iXlsxWriter.Samples;
 /// </summary>
 internal class Sample06
 {
-    // Generates document
     public static void Generate(ILogger logger)
     {
         #region Initialize timer

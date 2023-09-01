@@ -23,7 +23,6 @@ namespace iXlsxWriter.Samples;
 /// </summary>
 internal class Sample25
 {
-    // Generates document
     public static void Generate(ILogger logger)
     {
         #region Initialize timer
@@ -877,7 +876,7 @@ internal class Sample25
         doc.Insert(new InsertChart
         {
             SheetName = "Stacked area chart",
-            Location = new XlsxPointRange { Column = 10, Row = 1 },
+            Location = new XlsxPointRange { Column = 9, Row = 1 },
             Chart = new XlsxChart
             {
                 Name = "chart1",

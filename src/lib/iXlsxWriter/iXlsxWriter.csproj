@@ -18,6 +18,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ComponentModel\DataInput\**" />
+    <Compile Remove="ComponentModel\DataProvider\**" />
+    <EmbeddedResource Remove="ComponentModel\DataInput\**" />
+    <EmbeddedResource Remove="ComponentModel\DataProvider\**" />
+    <None Remove="ComponentModel\DataInput\**" />
+    <None Remove="ComponentModel\DataProvider\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ComponentModel\ModelService.cs" />
+    <Compile Remove="Operations\Items\Insert\Items\InsertXmlData.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="icon.png" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
 
@@ -25,12 +39,6 @@
     <PackageReference Include="EPPlus" Version="4.5.3.3" />
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.4" />
   </ItemGroup>
-
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties configuration_4schemas_4json_4basexlsxconfigurationschema_1json__JsonSchema="" />
-    </VisualStudio>
-  </ProjectExtensions>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\iTin\iTin.Core\iTin.Core.IO.Compression\src\iTin.Core.IO.Compression.csproj" />
@@ -44,6 +52,11 @@
     </Reference>
   </ItemGroup>
 
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties configuration_4schemas_4json_4basexlsxconfigurationschema_1json__JsonSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
 
   <!-- XlsxOutputResultConfig -->
   <ItemGroup>

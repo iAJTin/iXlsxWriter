@@ -7,6 +7,7 @@ using iTin.Core.ComponentModel;
 using iTin.Core.Models.Design.Enums;
 
 using iTin.Logging.ComponentModel;
+
 using iTin.Utilities.Xlsx.Design;
 using iTin.Utilities.Xlsx.Design.Picture;
 using iTin.Utilities.Xlsx.Design.Shared;
@@ -21,7 +22,6 @@ namespace iXlsxWriter.Samples;
 /// </summary>
 internal class Sample09
 {
-    // Generates document
     public static async Task GenerateAsync(ILogger logger, CancellationToken cancellationToken = default)
     {
         #region Initialize timer

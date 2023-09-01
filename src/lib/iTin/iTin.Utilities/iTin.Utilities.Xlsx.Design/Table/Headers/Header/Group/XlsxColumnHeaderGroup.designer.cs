@@ -11,7 +11,7 @@ namespace iTin.Core.Models.Design.Table.Headers.Header
     [DebuggerStepThrough]
     [DesignerCategory("code")]
     [GeneratedCode("System.Xml", "4.0.30319.18033")]
-    [XmlType(Namespace = "http://schemas.iTin.com/style/v1.0")]
+    [XmlType(Namespace = "http://schemas.itin.com/models/core/v1.0")]
     public partial class XlsxColumnHeaderGroup : BaseModel<XlsxColumnHeaderGroup>
     {
         /// <summary>

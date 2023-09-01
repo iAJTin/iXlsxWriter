@@ -1,0 +1,21 @@
+﻿{
+  "table": {
+    "name": "Invoice",
+    "autoFilter": "yes",
+    "autoFitColumns": "yes",
+    "alias": "Invoice",
+    "resources": {
+      "fixed": {
+        "pieces": {
+          "name": "Fixed",
+          "reference": "SFLDTA"
+        }
+      },
+      "groups": [{
+        "group": {
+          "name": "CustomerName"
+        }
+      }]
+    }
+  }
+}

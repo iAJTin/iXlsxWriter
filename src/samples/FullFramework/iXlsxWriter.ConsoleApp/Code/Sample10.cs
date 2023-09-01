@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-
 using iTin.Core.ComponentModel;
 using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
 
 using iTin.Logging.ComponentModel;
+
 using iTin.Utilities.Xlsx.Design;
 using iTin.Utilities.Xlsx.Design.Shared;
 using iTin.Utilities.Xlsx.Design.Styles;
@@ -24,7 +24,6 @@ namespace iXlsxWriter.Samples;
 /// </summary>
 internal class Sample10
 {
-    // Generates document
     public static void Generate(ILogger logger)
     {
         #region Initialize timer

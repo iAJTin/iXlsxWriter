@@ -21,7 +21,6 @@ namespace iXlsxWriter.Samples;
 /// </summary>
 internal class Sample25
 {
-    // Generates document
     public static async Task GenerateAsync(ILogger logger, CancellationToken cancellationToken = default)
     {
         #region Initialize timer

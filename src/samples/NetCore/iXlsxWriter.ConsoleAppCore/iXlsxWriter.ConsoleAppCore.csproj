@@ -12,4 +12,8 @@
     <ProjectReference Include="..\..\..\lib\iXlsxWriter\iXlsxWriter.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Output\" />
+  </ItemGroup>
+
 </Project>
