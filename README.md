@@ -1893,10 +1893,107 @@ Basic steps, for more details please see [sample15.cs] file.
 
     ![Sample15.image][Sample15.image] 
 
+### Sample 16 - Insert a DataTable or Enumerable by InsertTable action without styles
+
+Basic steps, for more details please see [sample16.cs] file.
+
+1. Creates xlsx input
+
+    ```csharp   
+    var doc = XlsxInput.Create(new[] { "Sheet1" });
+    ```
+        
+2. Insert actions
+    
+    ```csharp  
+    doc.Insert(new InsertTable
+    {
+        SheetName = "Sheet1",
+        Data = new DataTableInput(
+            new Collection<Person>
+                {
+                    new() { Name = "Name-01", Surname = "Surname-01" },
+                    new() { Name = "Name-02", Surname = "Surname-02" },
+                    new() { Name = "Name-03", Surname = "Surname-03" },
+                    new() { Name = "Name-04", Surname = "Surname-04" },
+                    new() { Name = "Name-05", Surname = "Surname-05" },
+                    new() { Name = "Name-06", Surname = "Surname-06" },
+                    new() { Name = "Name-07", Surname = "Surname-07" },
+                    new() { Name = "Name-08", Surname = "Surname-08" },
+                    new() { Name = "Name-09", Surname = "Surname-09" },
+                    new() { Name = "Name-10", Surname = "Surname-10" }
+                }
+                .ToDataTable<Person>("Person")),
+        Location = new XlsxPointRange { Column = 2, Row = 2 },
+        Table =
+        {
+            Name = "Person",
+            Alias = "Person",
+            ShowColumnHeaders = YesNo.Yes,
+            ShowDataValues = YesNo.Yes,
+            Fields =
+            {
+                new DataField { Name = "Name", Alias = "Name", Header = { Show = YesNo.Yes } },
+                new DataField { Name = "Surname", Alias = "Surname", Header = { Show = YesNo.Yes } }
+            }
+        }
+    });
+    ```
+
+3. Try to create xlsx output result
+
+     **sync mode**
+     ```csharp   
+     var result = doc.CreateResult();
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+     **async mode**
+     ```csharp   
+        var result = await doc
+         .CreateResultAsync(cancellationToken: cancellationToken)
+         .ConfigureAwait(false);
+         
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+4. Save xlsx file result
+ 
+    **sync mode**
+    ```csharp   
+    var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-16/Sample-16" });
+   if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+
+    **async mode**
+    ```csharp   
+    var saveResult = await result.Result
+        .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-16/Sample-16" }, cancellationToken);
+        .ConfigureAwait(false);
+
+    if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+5. Output
+
+   ###### Below is an image showing the result
+
+    ![Sample16.image][Sample16.image] 
+
 # Documentation
 
  - For **Writer** code documentation, please see next link documentation.
-
 
 # How can I send feedback!!!
 
@@ -1909,6 +2006,9 @@ My email address is
 [email]: ./assets/email.png "email"
 [documentation]: ./documentation/iXlsxWriterr.md
 [nuget]: ./assets/nuget.png "nuget"
+
+[sample16.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample16.cs
+[Sample16.image]: ./assets/samples/sample-16/Sample-16.png "sample-16"
 
 [sample15.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample15.cs
 [Sample15.image]: ./assets/samples/sample-15/Sample-15.png "sample-15"
