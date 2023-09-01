@@ -52,7 +52,7 @@ class Program
 
         // 09. Generate sample 09
         logger.Info("");
-        logger.Info("> Shows how to insert a picture.");
+        logger.Info("> Shows how to insert a picture with effects");
         Sample09.Generate(logger);
 
         // 10. Generate sample 10

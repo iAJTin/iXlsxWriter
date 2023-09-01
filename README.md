@@ -924,7 +924,7 @@ Basic steps, for more details please see [sample07.cs] file.
 
     ![Sample07.image][Sample07.image] 
 
-### Sample 9 - Insert a picture
+### Sample 9 - Insert a picture with effects
 
 Basic steps, for more details please see [sample09.cs] file.
 
@@ -1035,6 +1035,104 @@ Basic steps, for more details please see [sample09.cs] file.
 
     ![Sample09.image][Sample09.image] 
 
+### Sample 10 - Insert a picture from file and byte array.
+
+Basic steps, for more details please see [sample10.cs] file.
+
+1. Creates xlsx input
+
+    ```csharp   
+    var doc = XlsxInput.Create(new[] { "Sheet1" });
+    ```
+        
+2. Insert actions
+    
+    ```csharp  
+    using var image1 = XlsxImage.FromFile(iTinIO.Path.PathResolver("~/Resources/Sample-10/image-1.jpg"));
+    using var image2 = XlsxImage.FromByteArray(File.ReadAllBytes(iTinIO.Path.PathResolver("~/Resources/Sample-10/image-2.jpg")));
+    doc.Insert(new InsertText
+    {
+        SheetName = "Sheet1",
+        Data = "From ByteArray",
+        Style = cellStyles["Title"],
+        Location = new XlsxPointRange { Column = 4, Row = 2 }
+    }).Insert(new InsertText
+    {
+        SheetName = "Sheet1",
+        Data = "From File",
+        Style = cellStyles["Title"],
+        Location = new XlsxPointRange { Column = 8, Row = 2 }
+    }).Insert(new InsertPicture
+    {
+        SheetName = "Sheet1",
+        Location = new XlsxPointRange { Column = 4, Row = 4 },
+        Picture = image2.AsPicture(
+            "image2",
+            size: new XlsxSize { Width = 150, Height = 150 },
+            border: new XlsxBorder { Width = 2, Color = "Green", Show = YesNo.Yes, Style = KnownLineStyle.DashDot },
+            shapeEffects: new XlsxShapeEffects { Shadow = XlsxOuterShadow.DownRight })
+    }).Insert(new InsertPicture
+    {
+        SheetName = "Sheet1",
+        Location = new XlsxPointRange { Column = 8, Row = 4 },
+        Picture = image1.AsPicture(
+            "image1",
+            size: new XlsxSize { Width = 150, Height = 150 },
+            shapeEffects: new XlsxShapeEffects { Shadow = XlsxOuterShadow.Left })
+    });
+    ```
+
+3. Try to create xlsx output result
+
+     **sync mode**
+     ```csharp   
+     var result = doc.CreateResult();
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+     **async mode**
+     ```csharp   
+        var result = await doc
+         .CreateResultAsync(cancellationToken: cancellationToken)
+         .ConfigureAwait(false);
+         
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+4. Save xlsx file result
+ 
+    **sync mode**
+    ```csharp   
+    var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-10/Sample-10" });
+   if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+
+    **async mode**
+    ```csharp   
+    var saveResult = await result.Result
+        .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-10/Sample-10" }, cancellationToken);
+        .ConfigureAwait(false);
+
+    if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+5. Output
+
+   ###### Below is an image showing the result
+
+    ![Sample10.image][Sample10.image] 
+
 # Documentation
 
  - For **Writer** code documentation, please see next link documentation.
@@ -1051,6 +1149,9 @@ My email address is
 [email]: ./assets/email.png "email"
 [documentation]: ./documentation/iXlsxWriterr.md
 [nuget]: ./assets/nuget.png "nuget"
+
+[sample10.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample10.cs
+[Sample10.image]: ./assets/samples/sample-10/Sample-10.png "sample-10"
 
 [sample09.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample09.cs
 [Sample09.image]: ./assets/samples/sample-09/Sample-09.png "sample-09"
