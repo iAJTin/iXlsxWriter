@@ -1305,6 +1305,12 @@ My email address is
 [documentation]: ./documentation/iXlsxWriterr.md
 [nuget]: ./assets/nuget.png "nuget"
 
+[sample13.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample13.cs
+[Sample13.image]: ./assets/samples/sample-13/Sample-13.png "sample-13"
+
+[sample12.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample12.cs
+[Sample12.image]: ./assets/samples/sample-12/Sample-12.png "sample-12"
+
 [sample11.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample11.cs
 [Sample11.image]: ./assets/samples/sample-11/Sample-11.png "sample-11"
 [Sample11.shadows.image]: ./assets/samples/sample-11/Sample-11-Shadows.png "sample-11"
