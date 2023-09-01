@@ -2114,6 +2114,192 @@ Basic steps, for more details please see [sample17.cs] file.
 
     ![Sample17.image][Sample17.image] 
 
+### Sample 18 - Insert a table with inherits styles and grouped fields
+
+Basic steps, for more details please see [sample18.cs] file.
+
+1. Creates xlsx input
+
+    ```csharp   
+    var doc = XlsxInput.Create(new[] { "Sheet1" });
+    ```
+        
+2. Insert actions
+    
+    ```csharp  
+    doc.Insert(new InsertTable
+    {
+        SheetName = "Sheet1",
+        Data = new XmlInput(new Uri(iTinPath.PathResolver("~/Resources/Sample-18/Input.xml"))),
+        Location = new XlsxPointRange { Column = 1, Row = 2 },
+        Table =
+        {
+            Name = "Invoice",
+            Alias = "Invoice",
+            Resources =
+            {
+                Styles = new XlsxStylesCollection
+                {
+                    new XlsxCellStyle
+                    {
+                        Name = "HeaderStyle",
+                        Font = { Name = "Calibri", Color = "White", Size = 11.0f, Bold = YesNo.Yes },
+                        Borders =
+                        {
+                            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick }
+                        },
+                        Content =
+                        {
+                            Color = "#ED7D31",
+                            DataType = new TextDataType()
+                        }
+                    },
+                    new XlsxCellStyle
+                    {
+                        Name = "CustomerHeaderStyle",
+                        Inherits = "HeaderStyle",
+                        Content = { Color = "Green" }
+                    },
+                    new XlsxCellStyle
+                    {
+                        Name = "NumericStyle",
+                        Font = { Name = "Calibri", Color = "White" },
+                        Content =
+                        {
+                            Color = "#ED7D31",
+                            DataType = new NumberDataType { Decimals = 0 }
+                        }
+                    },
+                    new XlsxCellStyle
+                    {
+                        Name = "DateStyle",
+                        Font = { Name = "Calibri" },
+                        Content =
+                        {
+                            Color = "#FCE4D6",
+                            DataType = new DateTimeDataType { Format = KnownDateTimeFormat.ShortDatePattern }
+                        }
+                    },
+                    new XlsxCellStyle
+                    {
+                        Name = "DateStyle",
+                        Font = { Name = "Calibri" },
+                        Content =
+                        {
+                            Color = "#FCE4D6",
+                            DataType = new DateTimeDataType { Format = KnownDateTimeFormat.ShortDatePattern }
+                        }
+                    },
+                    new XlsxCellStyle
+                    {
+                        Name = "StringStyle",
+                        Font = { Name = "Calibri" },
+                        Content =
+                        {
+                            Color = "#FCE4D6",
+                            DataType = new TextDataType()
+                        }
+                    },
+                    new XlsxCellStyle
+                    {
+                        Name = "CustomerStringStyle",
+                        Inherits = "StringStyle",
+                        Content = { Color = "LightGreen" }
+                    },
+                    new XlsxCellStyle
+                    {
+                        Name = "DecimalStyle",
+                        Font = { Name = "Calibri" },
+                        Content =
+                        {
+                            Alignment = { Horizontal = KnownHorizontalAlignment.Right },
+                            Color = "#FCE4D6",
+                            DataType = new NumberDataType { Separator = YesNo.Yes }
+                        }
+                    },
+                },
+                Groups =  
+                {
+                    new Group
+                    { 
+                        Name = "CustomerName",
+                        Fields =
+                        {
+                            new GroupItem { Name = "CUSTOMERFIRSTNAME", Trim = YesNo.Yes, Separator = ", " },
+                            new GroupItem { Name = "CUSTOMERLASTNAME" }
+                        }
+                    }
+                }
+            },
+            Fields =
+            {
+                new DataField { Name = "ID", Alias = "Id", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "NumericStyle" } },
+                new DataField { Name = "DATE", Alias = "Date", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DateStyle" } },
+                new GroupField { Name = "CustomerName", Alias = "Customer", Header = { Style = "CustomerHeaderStyle", Show = YesNo.Yes }, Value = { Style = "CustomerStringStyle" } },
+                new DataField { Name = "CUSTOMERPHONE", Alias = "Phone", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "StringStyle" } },
+                new DataField { Name = "CUSTOMEREMAIL", Alias = "Email", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "StringStyle" } },
+                new DataField { Name = "BILLINGADDRESS", Alias = "Address", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "StringStyle" } },
+                new DataField { Name = "BILLINGCITY", Alias = "City", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "StringStyle" } },
+                new DataField { Name = "BILLINGSTATE", Alias = "State", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "StringStyle" } },
+                new DataField { Name = "BILLINGCOUNTRY", Alias = "Country", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "StringStyle" } },
+                new DataField { Name = "BILLINGPOSTALCODE", Alias = "Postal Code", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "StringStyle" } },
+                new DataField { Name = "TOTAL", Alias = "Total", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "DecimalStyle" } },
+            }
+        }
+    });
+    ```
+
+3. Try to create xlsx output result
+
+     **sync mode**
+     ```csharp   
+     var result = doc.CreateResult();
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+     **async mode**
+     ```csharp   
+        var result = await doc
+         .CreateResultAsync(cancellationToken: cancellationToken)
+         .ConfigureAwait(false);
+         
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+4. Save xlsx file result
+ 
+    **sync mode**
+    ```csharp   
+    var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-18/Sample-18" });
+   if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+
+    **async mode**
+    ```csharp   
+    var saveResult = await result.Result
+        .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-18/Sample-18" }, cancellationToken);
+        .ConfigureAwait(false);
+
+    if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+5. Output
+
+   ###### Below is an image showing the result
+
+    ![Sample18.image][Sample18.image] 
+
 # Documentation
 
  - For **Writer** code documentation, please see next link documentation.
@@ -2129,6 +2315,9 @@ My email address is
 [email]: ./assets/email.png "email"
 [documentation]: ./documentation/iXlsxWriterr.md
 [nuget]: ./assets/nuget.png "nuget"
+
+[sample18.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample18.cs
+[Sample18.image]: ./assets/samples/sample-18/Sample-18.png "sample-18"
 
 [sample17.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample17.cs
 [Sample17.image]: ./assets/samples/sample-17/Sample-17.png "sample-17"
