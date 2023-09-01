@@ -924,6 +924,117 @@ Basic steps, for more details please see [sample07.cs] file.
 
     ![Sample07.image][Sample07.image] 
 
+### Sample 9 - Insert a picture
+
+Basic steps, for more details please see [sample09.cs] file.
+
+1. Creates xlsx input
+
+    ```csharp   
+    var doc = XlsxInput.Create(new[] { "Sheet1" });
+    ```
+        
+2. Insert actions
+    
+    ```csharp  
+    doc.Insert(new InsertPicture
+    {
+        SheetName = "Sheet1",
+        Location = new XlsxPointRange { Column = 4, Row = 4 },
+        Picture = new XlsxPicture
+        {
+            Show = YesNo.Yes,
+            Name = "image",
+            Path = "~/Resources/Sample-09/image-1.jpg",
+            Size = new XlsxSize
+            {
+                Width = 300,
+                Height = 300
+            },
+            Effects =
+            {
+                new XlsxDarkEffect(),
+                new XlsxDisabledEffect(),
+                new XlsxOpacityEffect { Value = 50.0f }
+            },
+            Border =
+            {
+                Width = 4,
+                Color = "Green",
+                Show = YesNo.Yes,
+                Transparency = 50,
+                Style = KnownLineStyle.DashDot
+            },
+            Content =
+            {
+                Color = "Blue",
+                Show = YesNo.Yes,
+                Transparency = 50,
+            },
+            ShapeEffects =
+            {
+                Shadow = new XlsxOuterShadow
+                {
+                    Offset = 2,
+                    Color = "Yellow",
+                    Show = YesNo.Yes,
+                }
+            }
+        }
+    });
+    ```
+
+3. Try to create xlsx output result
+
+     **sync mode**
+     ```csharp   
+     var result = doc.CreateResult();
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+     **async mode**
+     ```csharp   
+        var result = await doc
+         .CreateResultAsync(cancellationToken: cancellationToken)
+         .ConfigureAwait(false);
+         
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+4. Save xlsx file result
+ 
+    **sync mode**
+    ```csharp   
+    var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-09/Sample-09" });
+   if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+
+    **async mode**
+    ```csharp   
+    var saveResult = await result.Result
+        .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-09/Sample-09" }, cancellationToken);
+        .ConfigureAwait(false);
+
+    if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+5. Output
+
+   ###### Below is an image showing the result
+
+    ![Sample09.image][Sample09.image] 
+
 # Documentation
 
  - For **Writer** code documentation, please see next link documentation.
@@ -940,6 +1051,12 @@ My email address is
 [email]: ./assets/email.png "email"
 [documentation]: ./documentation/iXlsxWriterr.md
 [nuget]: ./assets/nuget.png "nuget"
+
+[sample09.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample09.cs
+[Sample09.image]: ./assets/samples/sample-09/Sample-09.png "sample-09"
+
+[sample08.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample08.cs
+[Sample08.image]: ./assets/samples/sample-08/Sample-08.png "sample-08"
 
 [sample07.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample07.cs
 [Sample07.image]: ./assets/samples/sample-07/Sample-07.png "sample-07"
