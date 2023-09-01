@@ -349,6 +349,345 @@ Basic steps, for more details please see [sample03.cs] file.
 
     ![Sample03.image][Sample03.image] 
 
+### Sample 3 - Add custom sheet properties
+
+Basic steps, for more details please see [sample04.cs] file.
+
+1. Creates xlsx input
+
+    ```csharp   
+    var doc = XlsxInput.Create("Sheet1");
+    ```
+        
+2. Define cell styles to use
+              
+    ```csharp  
+    var cellStyles = new Dictionary<string, XlsxCellStyle>
+    {
+        {
+            "Title",
+            new XlsxCellStyle 
+            {
+                Font =
+                {
+                    Name = "Arial",
+                    Size = 28.0f,
+                    Bold = YesNo.Yes,
+                    Color = "Blue"
+                }
+            }
+        }
+    };
+    ```
+
+3. Insert text
+
+    ```csharp   
+    doc.Insert(
+        new InsertText
+        {
+            SheetName = "Sheet1",
+            Style = cellStyles["Title"],
+            Location = new XlsxPointRange { Column = 2, Row = 1 },
+            Data = "Hello world! from iXlsxWriter"
+        });
+    ```
+
+4. Try to create xlsx output result
+
+     **sync mode**
+     ```csharp   
+     var globalSettings = new XlsxSettings
+     {
+         DocumentSettings =
+         {
+             Author = "iTin",
+             Company = "iTin",
+             Manager = "Filled from iXlsxWriter",
+             Category = "Filled from iXlsxWriter",
+             Subject = "Filled from iXlsxWriter",
+             Url = "http://www.url-test.com",
+             Title = "Filled from iXlsxWriter",
+             Keywords = "Reports, Excel, Summary",
+             Comments = "Filled from iXlsxWriter"
+         },
+         SheetsSettings =
+         {
+             new XlsxSheetSettings
+             {
+                 Size = KnownDocumentSize.A3,
+                 View = KnownDocumentView.Design,
+                 Orientation = KnownDocumentOrientation.Landscape,
+                 FreezePanesPoint =
+                 {
+                     Row = 3,
+                     Column = 3,
+                 },
+                 Margins =
+                 {
+                     Bottom = 25,
+                     Left = 25,
+                     Right = 25,
+                     Top = 25,
+                     Units = KnownUnit.Millimeters
+                 },
+                 Header =
+                 {
+                     Sections =
+                     {
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "Sample header",
+                             Type = KnownHeaderFooterSectionType.Odd,
+                             Alignment = KnownHeaderFooterAlignment.Left,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "Sample header",
+                             Type = KnownHeaderFooterSectionType.Even,
+                             Alignment = KnownHeaderFooterAlignment.Left,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "iTin",
+                             Type = KnownHeaderFooterSectionType.Odd,
+                             Alignment = KnownHeaderFooterAlignment.Center,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "iTin",
+                             Type = KnownHeaderFooterSectionType.Even,
+                             Alignment = KnownHeaderFooterAlignment.Center,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "Header text",
+                             Type = KnownHeaderFooterSectionType.Odd,
+                             Alignment = KnownHeaderFooterAlignment.Right,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "Header text",
+                             Type = KnownHeaderFooterSectionType.Even,
+                             Alignment = KnownHeaderFooterAlignment.Right,
+                          }
+                     }
+                 },
+                 Footer =
+                 {
+                     Sections =
+                     {
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "Sample footer",
+                             Type = KnownHeaderFooterSectionType.Odd,
+                             Alignment = KnownHeaderFooterAlignment.Left,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "Sample footer",
+                             Type = KnownHeaderFooterSectionType.Even,
+                             Alignment = KnownHeaderFooterAlignment.Left,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "iTin",
+                             Type = KnownHeaderFooterSectionType.Odd,
+                             Alignment = KnownHeaderFooterAlignment.Center,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "iTin",
+                             Type = KnownHeaderFooterSectionType.Even,
+                             Alignment = KnownHeaderFooterAlignment.Center,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "@PageNumber / @NumberOfPages",
+                             Type = KnownHeaderFooterSectionType.Odd,
+                             Alignment = KnownHeaderFooterAlignment.Right
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "@PageNumber / @NumberOfPages",
+                             Type = KnownHeaderFooterSectionType.Even,
+                             Alignment = KnownHeaderFooterAlignment.Right
+                         },
+                     }
+                 }
+             }
+         }
+     };
+
+     var result = doc.CreateResult(new XlsxOutputResultConfig { GlobalSettings = globalSettings });
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+     **async mode**
+     ```csharp   
+     var globalSettings = new XlsxSettings
+     {
+         DocumentSettings =
+         {
+             Author = "iTin",
+             Company = "iTin",
+             Manager = "Filled from iXlsxWriter",
+             Category = "Filled from iXlsxWriter",
+             Subject = "Filled from iXlsxWriter",
+             Url = "http://www.url-test.com",
+             Title = "Filled from iXlsxWriter",
+             Keywords = "Reports, Excel, Summary",
+             Comments = "Filled from iXlsxWriter"
+         },
+         SheetsSettings =
+         {
+             new XlsxSheetSettings
+             {
+                 Size = KnownDocumentSize.A3,
+                 View = KnownDocumentView.Design,
+                 Orientation = KnownDocumentOrientation.Landscape,
+                 FreezePanesPoint =
+                 {
+                     Row = 3,
+                     Column = 3,
+                 },
+                 Margins =
+                 {
+                     Bottom = 25,
+                     Left = 25,
+                     Right = 25,
+                     Top = 25,
+                     Units = KnownUnit.Millimeters
+                 },
+                 Header =
+                 {
+                     Sections =
+                     {
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "Sample header",
+                             Type = KnownHeaderFooterSectionType.Odd,
+                             Alignment = KnownHeaderFooterAlignment.Left,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "Sample header",
+                             Type = KnownHeaderFooterSectionType.Even,
+                             Alignment = KnownHeaderFooterAlignment.Left,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "iTin",
+                             Type = KnownHeaderFooterSectionType.Odd,
+                             Alignment = KnownHeaderFooterAlignment.Center,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "iTin",
+                             Type = KnownHeaderFooterSectionType.Even,
+                             Alignment = KnownHeaderFooterAlignment.Center,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "Header text",
+                             Type = KnownHeaderFooterSectionType.Odd,
+                             Alignment = KnownHeaderFooterAlignment.Right,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "Header text",
+                             Type = KnownHeaderFooterSectionType.Even,
+                             Alignment = KnownHeaderFooterAlignment.Right,
+                          }
+                     }
+                 },
+                 Footer =
+                 {
+                     Sections =
+                     {
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "Sample footer",
+                             Type = KnownHeaderFooterSectionType.Odd,
+                             Alignment = KnownHeaderFooterAlignment.Left,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "Sample footer",
+                             Type = KnownHeaderFooterSectionType.Even,
+                             Alignment = KnownHeaderFooterAlignment.Left,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "iTin",
+                             Type = KnownHeaderFooterSectionType.Odd,
+                             Alignment = KnownHeaderFooterAlignment.Center,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "iTin",
+                             Type = KnownHeaderFooterSectionType.Even,
+                             Alignment = KnownHeaderFooterAlignment.Center,
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "@PageNumber / @NumberOfPages",
+                             Type = KnownHeaderFooterSectionType.Odd,
+                             Alignment = KnownHeaderFooterAlignment.Right
+                         },
+                         new XlsxDocumentHeaderFooterSection
+                         {
+                             Text = "@PageNumber / @NumberOfPages",
+                             Type = KnownHeaderFooterSectionType.Even,
+                             Alignment = KnownHeaderFooterAlignment.Right
+                         },
+                     }
+                 }
+             }
+         }
+     };
+
+     var result = await doc
+         .CreateResultAsync(new XlsxOutputResultConfig { GlobalSettings = globalSettings }, cancellationToken)
+         .ConfigureAwait(false);
+
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+5. Save xlsx file result
+ 
+    **sync mode**
+    ```csharp   
+    var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-04/Sample-04" });
+   if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+
+    **async mode**
+    ```csharp   
+    var saveResult = await result.Result
+        .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-04/Sample-04" }, cancellationToken);
+        .ConfigureAwait(false);
+
+    if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+6. Output
+
+   ###### Below is an image showing the result
+
+    ![Sample04.image][Sample04.image] 
+
 # Documentation
 
  - For **Writer** code documentation, please see next link documentation.
@@ -365,6 +704,9 @@ My email address is
 [email]: ./assets/email.png "email"
 [documentation]: ./documentation/iXlsxWriterr.md
 [nuget]: ./assets/nuget.png "nuget"
+
+[sample04.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample04.cs
+[Sample04.image]: ./assets/samples/sample-04/Sample-04.png "sample-04"
 
 [sample03.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample03.cs
 [Sample03.image]: ./assets/samples/sample-03/Sample-03.png "sample-03"
