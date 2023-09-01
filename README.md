@@ -1785,6 +1785,114 @@ Basic steps, for more details please see [sample14.cs] file.
 
     ![Sample14.image][Sample14.image] 
 
+### Sample 15 - Insert mini charts
+
+Basic steps, for more details please see [sample15.cs] file.
+
+1. Creates xlsx input
+
+    ```csharp   
+    var doc = XlsxInput.Create(new[] { "Sheet1" });
+    ```
+        
+2. Insert actions
+    
+    ```csharp  
+    doc.Insert(new InsertTable
+    {
+        // Insert data... (Equals sample 12)
+    });
+
+    // Insert mini-charts
+    for (var i = 2; i <= 17; i++)
+    {
+        doc.Insert(new InsertMiniChart
+        {
+            SheetName = "Sheet1",
+            Location = new XlsxPointRange { Column = i, Row = 16 },
+            MiniChart =
+            {
+                EmptyValueAs = MiniChartEmptyValuesAs.Zero,
+                ChartSize = { HorizontalCells = 1, VerticalCells = 2 },
+                ChartAxes = { Horizontal = { Show = YesNo.Yes, Type = MiniChartHorizontalAxisType.Date } },
+                ChartType =
+                {
+                    Active = MiniChartType.Column,
+                    Column =
+                    {
+                        Serie = { Color = "#376092" },
+                        Points = { High = { Color = "Red" } }
+                    }
+                },
+                ChartRanges =
+                {
+                    Axis = new XlsxRange
+                    {
+                        Start = new XlsxPoint { Column = 1, Row = 4 },
+                        End = new XlsxPoint { Column = 1, Row = 14 }
+                    },
+                    Data = new XlsxRange
+                    {
+                        Start = new XlsxPoint { Column = i, Row = 4 },
+                        End = new XlsxPoint { Column = i, Row = 14 }
+                    }
+                }
+            }
+        });
+    }
+    ```
+
+3. Try to create xlsx output result
+
+     **sync mode**
+     ```csharp   
+     var result = doc.CreateResult();
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+     **async mode**
+     ```csharp   
+        var result = await doc
+         .CreateResultAsync(cancellationToken: cancellationToken)
+         .ConfigureAwait(false);
+         
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+4. Save xlsx file result
+ 
+    **sync mode**
+    ```csharp   
+    var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-15/Sample-15" });
+   if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+
+    **async mode**
+    ```csharp   
+    var saveResult = await result.Result
+        .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-15/Sample-15" }, cancellationToken);
+        .ConfigureAwait(false);
+
+    if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+5. Output
+
+   ###### Below is an image showing the result
+
+    ![Sample15.image][Sample15.image] 
+
 # Documentation
 
  - For **Writer** code documentation, please see next link documentation.
@@ -1801,6 +1909,9 @@ My email address is
 [email]: ./assets/email.png "email"
 [documentation]: ./documentation/iXlsxWriterr.md
 [nuget]: ./assets/nuget.png "nuget"
+
+[sample15.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample15.cs
+[Sample15.image]: ./assets/samples/sample-15/Sample-15.png "sample-15"
 
 [sample14.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample14.cs
 [Sample14.image]: ./assets/samples/sample-14/Sample-14.png "sample-14"
