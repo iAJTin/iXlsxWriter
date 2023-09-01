@@ -1035,7 +1035,7 @@ Basic steps, for more details please see [sample09.cs] file.
 
     ![Sample09.image][Sample09.image] 
 
-### Sample 10 - Insert a picture from file and byte array.
+### Sample 10 - Insert a picture from file and byte array
 
 Basic steps, for more details please see [sample10.cs] file.
 
@@ -1133,6 +1133,161 @@ Basic steps, for more details please see [sample10.cs] file.
 
     ![Sample10.image][Sample10.image] 
 
+### Sample 11 - Insert shapes with effects
+
+Basic steps, for more details please see [sample11.cs] file.
+
+1. Creates xlsx input
+
+    ```csharp   
+    var doc = XlsxInput.Create(new[] { "Shadows", "Illumination", "Reflection", "Soft Edge" });
+    ```
+        
+2. Insert actions
+    
+    **Shadows**
+    ```csharp  
+    doc.Insert(new InsertText
+    {
+        SheetName = "Shadows",
+        Data = "Outer shadows",
+        Location = new XlsxPointRange { Column = 2, Row = 2 },
+        Style = cellStyles["Shadows"]
+    }).Insert(new InsertShape
+    {
+        SheetName = "Shadows",
+        Location = new XlsxPointRange { Column = 2, Row = 4 },
+        Shape = new XlsxShape
+        {
+            ShapeType = ShapeType.Rect,
+            Size = { Width = 128, Height = 128 },
+            Border = { Show = YesNo.Yes, Color = "Yellow", Transparency = 50, Style = KnownLineStyle.DashDot },
+            Content =
+            {
+                Text = "Shape 1",
+                Color = "LightGray",
+                Font = { Color = "Red", Bold = YesNo.Yes },
+                Alignment = { Horizontal = KnownHorizontalAlignment.Center }
+            },
+            ShapeEffects = { Shadow = XlsxOuterShadow.DownLeft }
+        }
+    });
+    ```
+    **Illumination**
+    ```csharp  
+    doc.Insert(new InsertText
+    {
+        SheetName = "Illumination",
+        Data = "Accent 1",
+        Location = new XlsxPointRange { Column = 2, Row = 2 },
+        Style = cellStyles["Illumination"]
+    }).Insert(new InsertShape
+    {
+        SheetName = "Illumination",
+        Location = new XlsxPointRange { Column = 2, Row = 4 },
+        Shape = new XlsxShape
+        {
+            ShapeType = ShapeType.Rect,
+            Size = { Width = 64, Height = 64 },
+            Content = { Color = "LightGray" },
+            ShapeEffects = { Illumination = XlsxIlluminationShapeEffect.Emphasis1Points5 }
+        }
+    });
+    ```
+    **Reflection**
+    ```csharp  
+    doc.Insert(new InsertText
+    {
+        SheetName = "Reflection",
+        Data = "Strong",
+        Location = new XlsxPointRange { Column = 2, Row = 2 },
+        Style = cellStyles["Reflection"]
+    }).Insert(new InsertShape
+    {
+        SheetName = "Reflection",
+        Location = new XlsxPointRange { Column = 2, Row = 4 },
+        Shape = new XlsxShape
+        {
+            ShapeType = ShapeType.Rect,
+            Size = { Width = 128, Height = 128 },
+            Content = { Color = "LightGray" },
+            ShapeEffects = { Reflection = XlsxReflectionShapeEffect.StrongNoOffset }
+        }
+    });
+    ```
+    **Soft Edge**
+    ```csharp  
+    doc.Insert(new InsertText
+    {
+        SheetName = "Soft Edge",
+        Data = "Soft Edge",
+        Location = new XlsxPointRange { Column = 2, Row = 2 },
+        Style = cellStyles["SoftEdge"]
+    }).Insert(new InsertShape
+    {
+        SheetName = "Soft Edge",
+        Location = new XlsxPointRange { Column = 2, Row = 4 },
+        Shape = new XlsxShape
+        {
+            ShapeType = ShapeType.Rect,
+            Size = { Width = 128, Height = 128 },
+            Content = { Color = "LightGray" },
+            ShapeEffects = { SoftEdge = XlsxSoftEdgeShapeEffect.SoftEdge1 }
+        }
+    });
+    ```
+
+3. Try to create xlsx output result
+
+     **sync mode**
+     ```csharp   
+     var result = doc.CreateResult();
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+     **async mode**
+     ```csharp   
+        var result = await doc
+         .CreateResultAsync(cancellationToken: cancellationToken)
+         .ConfigureAwait(false);
+         
+     if (!result.Success)
+     {
+         // Handle errors                 
+     }
+     ```
+
+4. Save xlsx file result
+ 
+    **sync mode**
+    ```csharp   
+    var saveResult = result.Result.Action(new SaveToFile { OutputPath = "~/Output/Sample-11/Sample-11" });
+   if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+
+    **async mode**
+    ```csharp   
+    var saveResult = await result.Result
+        .Action(new SaveToFileAsync { OutputPath = "~/Output/Sample-11/Sample-11" }, cancellationToken);
+        .ConfigureAwait(false);
+
+    if (!saveResult.Success)
+    {
+         // Handle errors                 
+    }
+     ```
+5. Output
+
+   ###### Below is an image showing the result
+
+    ![Sample11.image][Sample11.image] 
+
 # Documentation
 
  - For **Writer** code documentation, please see next link documentation.
@@ -1149,6 +1304,13 @@ My email address is
 [email]: ./assets/email.png "email"
 [documentation]: ./documentation/iXlsxWriterr.md
 [nuget]: ./assets/nuget.png "nuget"
+
+[sample11.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample11.cs
+[Sample11.image]: ./assets/samples/sample-11/Sample-11.png "sample-11"
+[Sample11.shadows.image]: ./assets/samples/sample-11/Sample-11-Shadows.png "sample-11"
+[Sample11.illumination.image]: ./assets/samples/sample-11/Sample-11-Illumination.png "sample-11"
+[Sample11.reflection.image]: ./assets/samples/sample-11/Sample-11-Reflection.png "sample-11"
+[Sample11.softedge.image]: ./assets/samples/sample-11/Sample-11-SoftEdge.png "sample-11"
 
 [sample10.cs]: https://github.com/iAJTin/iXlsxWriter/blob/master/src/samples/NetCore/iXlsxWriter.ConsoleAppCore/Code/Sample10.cs
 [Sample10.image]: ./assets/samples/sample-10/Sample-10.png "sample-10"
