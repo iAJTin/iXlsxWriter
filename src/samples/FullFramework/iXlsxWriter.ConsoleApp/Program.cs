@@ -54,7 +54,7 @@ class Program
 
         // 09. Generate sample 09
         logger.Info("");
-        logger.Info("> Shows how to insert a picture.");
+        logger.Info("> Shows how to insert a picture with effects");
         Sample09.Generate(logger);
 
         // 10. Generate sample 10
@@ -77,7 +77,7 @@ class Program
         logger.Info("> Shows how to use insert a table with styles and column headers.");
         Sample13.Generate(logger);
 
-        // 14. Generate sample 14
+        // 14.Generate sample 14
         logger.Info("");
         logger.Info("> Shows how to use insert a table with styles and data filter.");
         Sample14.Generate(logger);
@@ -87,13 +87,20 @@ class Program
         logger.Info("> Shows the use mini charts.");
         Sample15.Generate(logger);
 
-        // 16.
+        // 16. Generate sample 16
+        logger.Info("");
+        logger.Info("> Shows how to use insert a DataTable by InsertTable action without styles.");
+        Sample16.Generate(logger);
 
-        // 17.
+        // 17. Generate sample 17
+        logger.Info("");
+        logger.Info(">  Shows how to use insert a table with styles and fixed fields.");
+        Sample17.Generate(logger);
 
-        // 18.
-
-        // 19.
+        // 18.Generate sample 18
+        logger.Info("");
+        logger.Info(">  Shows how to use insert a table with inherits styles and grouped fields.");
+        Sample18.Generate(logger);
 
         // 20. Generate sample 20
         logger.Info("");
@@ -119,11 +126,6 @@ class Program
         logger.Info("");
         logger.Info("> Shows the use charts with more than one chart type and secondary axis.");
         Sample26.Generate(logger);
-
-        // 27. Generate sample 27
-        //logger.Info("");
-        //logger.Info("> Shows the use mini charts.");
-        //Sample27.Generate(logger);
 
         logger.Info("");
         logger.Debug(">End Logging<");

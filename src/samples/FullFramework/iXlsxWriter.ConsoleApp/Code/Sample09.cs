@@ -16,7 +16,7 @@ using iXlsxWriter.Operations.Insert;
 namespace iXlsxWriter.Samples;
 
 /// <summary>
-/// Shows how to insert a picture.
+/// Shows how to insert a picture with effects.
 /// </summary>
 internal class Sample09
 {

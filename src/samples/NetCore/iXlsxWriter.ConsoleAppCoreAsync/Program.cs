@@ -85,11 +85,20 @@ class Program
         logger.Info("> Shows the use mini charts.");
         await Sample15.GenerateAsync(logger);
 
-        // 16.
+        // 16. Generate sample 16
+        logger.Info("");
+        logger.Info("> Shows how to use insert a DataTable by InsertTable action without styles.");
+        await Sample16.GenerateAsync(logger);
 
-        // 17.
+        // 17. Generate sample 17
+        logger.Info("");
+        logger.Info(">  Shows how to use insert a table with styles and fixed fields.");
+        await Sample17.GenerateAsync(logger);
 
-        // 18.
+        // 18.Generate sample 18
+        logger.Info("");
+        logger.Info(">  Shows how to use insert a table with inherits styles and grouped fields.");
+        await Sample18.GenerateAsync(logger);
 
         // 19.
 

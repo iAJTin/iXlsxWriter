@@ -1,9 +1,11 @@
 ﻿
+using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
 using iTin.Core.ComponentModel;
+using iTin.Core.Models.Data.Input;
 using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
 using iTin.Core.Models.Design.Table.Fields;
@@ -17,6 +19,8 @@ using iTin.Utilities.Xlsx.Design.Styles;
 using iXlsxWriter.Operations.Actions;
 using iXlsxWriter.Operations.Insert;
 using iXlsxWriter.Operations.Set;
+
+using iTinPath = iTin.Core.IO.Path;
 
 namespace iXlsxWriter.Samples;
 
@@ -57,7 +61,7 @@ internal class Sample15
         doc.Insert(new InsertTable
         {
             SheetName = "Sheet1",
-            Data = "~/Resources/Sample-15/input.xml",
+            Data = new XmlInput(new Uri(iTinPath.PathResolver("~/Resources/Sample-15/input.xml"))),
             Location = new XlsxPointRange { Column = 1, Row = 2 },
             Table =
             {
@@ -65,97 +69,100 @@ internal class Sample15
                 Alias = "Rates",
                 ShowColumnHeaders = YesNo.Yes,
                 ShowDataValues = YesNo.Yes,
-                Styles = new XlsxStylesCollection
+                Resources =
                 {
-                    new XlsxCellStyle
+                    Styles = new XlsxStylesCollection
                     {
-                        Name = "GroupHeaderStyle",
-                        Font = { Name = "Calibri", Size = 11.0f, Color = "White", Bold = YesNo.Yes },
-                        Content =
+                        new XlsxCellStyle
                         {
-                            Alignment = { Horizontal = KnownHorizontalAlignment.Center },
-                            Color = "#ED7D31",
-                            DataType = new TextDataType()
-                        }
-                    },
-                    new XlsxCellStyle
-                    {
-                        Name = "HeaderStyle",
-                        Font = { Name = "Calibri", Size = 11.0f, Color = "White", Bold = YesNo.Yes },
-                        Content =
-                        {
-                            Alignment = { Horizontal = KnownHorizontalAlignment.Right },
-                            Color = "#ED7D31",
-                            DataType = new TextDataType()
-                        }
-                    },
-                    new XlsxCellStyle
-                    {
-                        Name = "DateHeaderStyle",
-                        Font = { Name = "Calibri", Size = 11.0f, Color = "White", Bold = YesNo.Yes },
-                        Content =
-                        {
-                            Alignment = { Horizontal = KnownHorizontalAlignment.Left },
-                            Color = "#ED7D31",
-                            DataType = new TextDataType()
-                        }
-                    },
-                    new XlsxCellStyle
-                    {
-                        Name = "DateValueStyle",
-                        Font = { Name = "Calibri" },
-                        Borders =
-                        {
-                            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Left, Style = KnownBorderStyle.Thick, Color = "#ED7D31" },
-                            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
+                            Name = "GroupHeaderStyle",
+                            Font = { Name = "Calibri", Size = 11.0f, Color = "White", Bold = YesNo.Yes },
+                            Content =
+                            {
+                                Alignment = { Horizontal = KnownHorizontalAlignment.Center },
+                                Color = "#ED7D31",
+                                DataType = new TextDataType()
+                            }
                         },
-                        Content =
+                        new XlsxCellStyle
                         {
-                            Color = "#FCE4D6",
-                            DataType = new DateTimeDataType{ Format = KnownDateTimeFormat.ShortDatePattern }
-                        }
-                    },
-                    new XlsxCellStyle
-                    {
-                        Name = "DecimalValueStyle",
-                        Font = { Name = "Calibri", Size = 11.0f },
-                        Borders =
-                        {
-                            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
+                            Name = "HeaderStyle",
+                            Font = { Name = "Calibri", Size = 11.0f, Color = "White", Bold = YesNo.Yes },
+                            Content =
+                            {
+                                Alignment = { Horizontal = KnownHorizontalAlignment.Right },
+                                Color = "#ED7D31",
+                                DataType = new TextDataType()
+                            }
                         },
-                        Content =
+                        new XlsxCellStyle
                         {
-                            Alignment = { Horizontal = KnownHorizontalAlignment.Right },
-                            DataType = new NumberDataType { Decimals = 5, Separator = YesNo.Yes },
-                        }
-                    },
-                    new XlsxCellStyle
-                    {
-                        Name = "LastFieldDecimalValueStyle",
-                        Font = { Name = "Calibri", Size = 11.0f },
-                        Borders =
-                        {
-                            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Right, Style = KnownBorderStyle.Thick, Color = "#ED7D31" },
-                            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
+                            Name = "DateHeaderStyle",
+                            Font = { Name = "Calibri", Size = 11.0f, Color = "White", Bold = YesNo.Yes },
+                            Content =
+                            {
+                                Alignment = { Horizontal = KnownHorizontalAlignment.Left },
+                                Color = "#ED7D31",
+                                DataType = new TextDataType()
+                            }
                         },
-                        Content =
+                        new XlsxCellStyle
                         {
-                            Alignment = { Horizontal = KnownHorizontalAlignment.Right },
-                            DataType = new NumberDataType { Decimals = 5, Separator = YesNo.Yes },
-                        }
-                    },
-                    new XlsxCellStyle
-                    {
-                        Name = "SekValueStyle",
-                        Font = { Name = "Calibri", Size = 11.0f },
-                        Borders =
-                        {
-                            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
+                            Name = "DateValueStyle",
+                            Font = { Name = "Calibri" },
+                            Borders =
+                            {
+                                new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Left, Style = KnownBorderStyle.Thick, Color = "#ED7D31" },
+                                new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
+                            },
+                            Content =
+                            {
+                                Color = "#FCE4D6",
+                                DataType = new DateTimeDataType{ Format = KnownDateTimeFormat.ShortDatePattern }
+                            }
                         },
-                        Content =
+                        new XlsxCellStyle
                         {
-                            Alignment = { Horizontal = KnownHorizontalAlignment.Right },
-                            DataType = new NumberDataType { Decimals = 0 }
+                            Name = "DecimalValueStyle",
+                            Font = { Name = "Calibri", Size = 11.0f },
+                            Borders =
+                            {
+                                new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
+                            },
+                            Content =
+                            {
+                                Alignment = { Horizontal = KnownHorizontalAlignment.Right },
+                                DataType = new NumberDataType { Decimals = 5, Separator = YesNo.Yes },
+                            }
+                        },
+                        new XlsxCellStyle
+                        {
+                            Name = "LastFieldDecimalValueStyle",
+                            Font = { Name = "Calibri", Size = 11.0f },
+                            Borders =
+                            {
+                                new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Right, Style = KnownBorderStyle.Thick, Color = "#ED7D31" },
+                                new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
+                            },
+                            Content =
+                            {
+                                Alignment = { Horizontal = KnownHorizontalAlignment.Right },
+                                DataType = new NumberDataType { Decimals = 5, Separator = YesNo.Yes },
+                            }
+                        },
+                        new XlsxCellStyle
+                        {
+                            Name = "SekValueStyle",
+                            Font = { Name = "Calibri", Size = 11.0f },
+                            Borders =
+                            {
+                                new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
+                            },
+                            Content =
+                            {
+                                Alignment = { Horizontal = KnownHorizontalAlignment.Right },
+                                DataType = new NumberDataType { Decimals = 0 }
+                            }
                         }
                     }
                 },
