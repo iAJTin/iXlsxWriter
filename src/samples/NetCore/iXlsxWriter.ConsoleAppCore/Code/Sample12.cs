@@ -6,7 +6,6 @@ using iTin.Core.ComponentModel;
 using iTin.Core.Models.Data.Input;
 using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
-using iTin.Core.Models.Design.Table;
 using iTin.Core.Models.Design.Table.Fields;
 
 using iTin.Logging.ComponentModel;
@@ -18,7 +17,7 @@ using iXlsxWriter.Operations.Actions;
 using iXlsxWriter.Operations.Insert;
 using iXlsxWriter.Operations.Set;
 
-using iTinIO = iTin.Core.IO;
+using iTinPath = iTin.Core.IO.Path;
 
 namespace iXlsxWriter.Samples;
 
@@ -59,7 +58,7 @@ internal class Sample12
         doc.Insert(new InsertTable
         {
             SheetName = "Sheet1",
-            Data = new XmlInput(new Uri(iTinIO.Path.PathResolver("~/Resources/Sample-12/input.xml"))),
+            Data = new XmlInput(new Uri(iTinPath.PathResolver("~/Resources/Sample-12/input.xml"))),
             Location = new XlsxPointRange { Column = 1, Row = 2 },
             Table =
             {

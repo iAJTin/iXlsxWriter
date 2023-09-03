@@ -11,7 +11,6 @@ using OfficeOpenXml.Style;
 using iTin.Core.Helpers;
 using iTin.Core.Models.Data.Input;
 using iTin.Core.Models.Design.Enums;
-using iTin.Core.Models.Design.Table;
 using iTin.Core.Models.Design.Table.Fields;
 
 using iTin.Utilities.Xlsx.Design;
@@ -21,6 +20,7 @@ using iTin.Utilities.Xlsx.Design.Table.Headers;
 using iTin.Utilities.Xlsx.Writer;
 
 using iXlsxWriter.Abstractions.Writer.Operations.Results;
+using iXlsxWriter.ComponentModel;
 using iXlsxWriter.Input;
 using iXlsxWriter.Operations.Result.Action;
 
@@ -150,7 +150,7 @@ public class InsertTable : InsertLocationBase
             #region initialize
 
             var fields = table.Fields;
-            var resources = (Resources)table.Resources;
+            var resources = table.Resources;
             var locationAddress = location.ToEppExcelAddress();
             var x = locationAddress.Start.Column;
             var y = locationAddress.Start.Row;
@@ -210,29 +210,28 @@ public class InsertTable : InsertLocationBase
                 {
                     foreach (var field in topAggregates)
                     {
-                        //var aggregate = field.Aggregate;
-                        //var formula = new XlsxFormulaResolver(aggregate)
-                        //{
-                        //    StartRow = hasColumnheaders && table.ShowColumnHeaders == YesNo.Yes ? 3 : 2,
-                        //    EndRow = hasColumnheaders && table.ShowColumnHeaders == YesNo.Yes
-                        //        ? rowsCount + 2
-                        //        : rowsCount + 1,
-                        //    HasAutoFilter = table.AutoFilter,
-                        //};
+                        var aggregate = field.Aggregate;
+                        var formula = new XlsxFormulaResolver(aggregate)
+                        {
+                            StartRow = hasColumnheaders && table.ShowColumnHeaders == YesNo.Yes ? 3 : 2,
+                            EndRow = hasColumnheaders && table.ShowColumnHeaders == YesNo.Yes
+                                ? rowsCount + 2
+                                : rowsCount + 1
+                        };
 
-                        //var column = fields.IndexOf(field);
-                        //var cell = worksheet.Cells[y, x + column];
-                        //cell.StyleName = aggregate.Style ?? StyleModel.NameOfDefaultStyle;
+                        var column = fields.IndexOf(field);
+                        var cell = worksheet.Cells[y, x + column];
+                        cell.Style.FormatFromModel((XlsxCellStyle)styles.GetBy(aggregate.Style ?? XlsxBaseStyle.NameOfDefaultStyle));
 
-                        //var type = aggregate.AggregateType;
-                        //if (type == KnownAggregateType.Text)
-                        //{
-                        //    cell.Value = formula.Resolve();
-                        //}
-                        //else
-                        //{
-                        //    cell.FormulaR1C1 = formula.Resolve();
-                        //}
+                        var type = aggregate.AggregateType;
+                        if (type == KnownAggregateType.Text)
+                        {
+                            cell.Value = formula.Resolve();
+                        }
+                        else
+                        {
+                            cell.FormulaR1C1 = formula.Resolve();
+                        }
                     }
                 }
             }
@@ -352,12 +351,22 @@ public class InsertTable : InsertLocationBase
                         cell.Value = valueInformation.Value;
                         cell.AddErrorComment(valueInformation);
                         cell.Style.WrapText = field.FieldType == KnownFieldType.Group;
+                        var isOdd = row.IsOdd();
+                        cell.Style.FormatFromModel((XlsxCellStyle)styles.GetBy(field.Value.Style), isOdd);
 
-                        var styleName = row.IsOdd()
-                            ? $"{field.Value.Style}_Alternate"
-                            : field.Value.Style ?? XlsxBaseStyle.NameOfDefaultStyle;
-
-                        cell.Style.FormatFromModel((XlsxCellStyle)styles.GetBy(field.Value.Style));
+                        var valueLenght = valueInformation.Value.ToString().Length;
+                        if (!fieldDictionary.ContainsKey(field))
+                        {
+                            fieldDictionary.Add(field, valueLenght);
+                        }
+                        else
+                        {
+                            var entry = fieldDictionary[field];
+                            if (valueLenght > entry)
+                            {
+                                fieldDictionary[field] = valueLenght;
+                            }
+                        }
                     }
                 }
             }
@@ -375,26 +384,26 @@ public class InsertTable : InsertLocationBase
                     foreach (var field in fieldsWithBottomAggregates)
                     {
                         var aggregate = field.Aggregate;
-                        //var formula = new ExcelFormulaResolver(aggregate)
-                        //{
-                        //    EndRow = -1,
-                        //    StartRow = -rowsCount,
-                        //    HasAutoFilter = Table.AutoFilter,
-                        //};
+                       
+                        var formula = new XlsxFormulaResolver(aggregate)
+                        {
+                            EndRow = -1,
+                            StartRow = -rowsCount
+                        };
 
                         var column = fields.IndexOf(field);
                         var cell = worksheet.Cells[y + rowsCount, x + column];
-                        cell.StyleName = aggregate.Style ?? XlsxBaseStyle.NameOfDefaultStyle;
+                        cell.Style.FormatFromModel((XlsxCellStyle)styles.GetBy(aggregate.Style ?? XlsxBaseStyle.NameOfDefaultStyle));
 
-                        //var type = aggregate.AggregateType;
-                        //if (type == KnownAggregateType.Text)
-                        //{
-                        //    cell.Value = formula.Resolve();
-                        //}
-                        //else
-                        //{
-                        //    cell.FormulaR1C1 = formula.Resolve();
-                        //}
+                        var type = aggregate.AggregateType;
+                        if (type == KnownAggregateType.Text)
+                        {
+                            cell.Value = formula.Resolve();
+                        }
+                        else
+                        {
+                            cell.FormulaR1C1 = formula.Resolve();
+                        }
                     }
                 }
             }
@@ -411,13 +420,17 @@ public class InsertTable : InsertLocationBase
                 }
                 catch
                 {
-                    //worksheet.AutoFitGroupColumns(fieldDictionary, this);
+                    worksheet.AutoFitGroupColumns(fieldDictionary, fields, styles);
                 }
             }
 
             #endregion
 
+            #region save
+
             package.SaveAs(outputStream);
+            
+            #endregion
 
             return ActionResult.CreateSuccessResult(new ActionResultData
             {

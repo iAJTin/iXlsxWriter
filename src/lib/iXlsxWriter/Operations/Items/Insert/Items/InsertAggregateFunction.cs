@@ -173,7 +173,7 @@ public class InsertAggregateFunction : InsertLocationBase
 
             if (style.Content.Show == YesNo.Yes)
             {
-                var formula = new XlsxFormulaResolver(aggregate) { HasAutoFilter = aggregate.HasAutoFilter, WorkSheet = sheetName };
+                var formula = new XlsxQualifiedFormulaResolver(aggregate) { HasAutoFilter = aggregate.HasAutoFilter, WorkSheet = sheetName };
                 cell.Formula = formula.Resolve();
 
                 if (merge.Cells > 1)

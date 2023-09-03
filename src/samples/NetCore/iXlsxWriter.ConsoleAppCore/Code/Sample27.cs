@@ -1,8 +1,6 @@
 ﻿
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 
-using iTin.Core;
 using iTin.Core.ComponentModel;
 using iTin.Core.Models.Data.Input;
 using iTin.Core.Models.Design;
@@ -26,7 +24,7 @@ namespace iXlsxWriter.Samples;
 /// </summary>
 internal class Sample27
 {
-    public static void Generate(ILogger logger)
+    public static void Generate(ILogger logger, int rows)
     {
         #region Initialize timer
 
@@ -38,6 +36,24 @@ internal class Sample27
         #region Creates xlsx file reference
 
         var doc = XlsxInput.Create(new[] { "Sheet1" });
+
+        #endregion
+
+        #region Create data input
+
+        var rnd = new Random();
+        var collection = new List<CustomDataModel>();
+
+        for (var row = 1; row <= rows; row++)
+        {
+            collection.Add(new CustomDataModel
+            {
+                Index = row,
+                Text = $"Row {row}",
+                Date = DateTime.Today.AddDays(row),
+                Number = rnd.NextDouble() * 10000
+            });
+        }
 
         #endregion
 
@@ -53,70 +69,145 @@ internal class Sample27
 
         #endregion
 
-        #region Insert Data
+        #region Insert Table
 
         doc.Insert(new InsertTable
         {
             SheetName = "Sheet1",
-            Data = new DataTableInput(
-                new Collection<Person>
-                {
-                    new() { Name = "Name-01", Surname = "Surname-01" },
-                    new() { Name = "Name-02", Surname = "Surname-02" },
-                    new() { Name = "Name-03", Surname = "Surname-03" },
-                    new() { Name = "Name-04", Surname = "Surname-04" },
-                    new() { Name = "Name-05", Surname = "Surname-05" },
-                    new() { Name = "Name-06", Surname = "Surname-06" },
-                    new() { Name = "Name-07", Surname = "Surname-07" },
-                    new() { Name = "Name-08", Surname = "Surname-08" },
-                    new() { Name = "Name-09", Surname = "Surname-09" },
-                    new() { Name = "Name-10", Surname = "Surname-10" }
-                }.ToDataTable<Person>("Person")),
-            Location = new XlsxPointRange { Column = 2, Row = 2 },
+            Data = new EnumerableInput<CustomDataModel>(collection, "CustomDataModel"), // new XmlInput(new Uri(iTinPath.PathResolver("~/Resources/Sample-27/Input.xml"))), //, new DataInputConfiguration { InputNodes = "CustomDataModel", OutputTable = "CustomDataModelTable" }), //, "CustomDataModel"),
+            Location = new XlsxPointRange { Column = 1, Row = 2 },
             Table =
             {
-                Name = "Person",
-                Alias = "Person",
+                Name = "CustomDataModel",
+                Alias = "Custom Data Model",
                 ShowColumnHeaders = YesNo.Yes,
                 ShowDataValues = YesNo.Yes,
-                //Styles = new XlsxStylesCollection
-                //{
-                //    new XlsxCellStyle
-                //    {
-                //        Name = "HeaderStyle",
-                //        Font = { Name = "Calibri", Size = 11.0f, Color = "White", Bold = YesNo.Yes },
-                //        Content = { Color = "#ED7D31", DataType = new TextDataType() }
-                //    },
-                //    new XlsxCellStyle
-                //    {
-                //        Name = "ValueStyle",
-                //        Font = { Name = "Calibri" },
-                //        Borders =
-                //        {
-                //            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Left, Style = KnownBorderStyle.Thick, Color = "#ED7D31" },
-                //            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Right, Style = KnownBorderStyle.Thick, Color = "#ED7D31" },
-                //            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
-                //        },
-                //        Content = { DataType = new TextDataType() }
-                //    },
-                //    new XlsxCellStyle
-                //    {
-                //        Name = "LastFieldValueStyle",
-                //        Font = { Name = "Calibri", Size = 11.0f },
-                //        Borders =
-                //        {
-                //            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Right, Style = KnownBorderStyle.Thick, Color = "#ED7D31" },
-                //            new XlsxStyleBorder { Show = YesNo.Yes, Position = KnownBorderPosition.Bottom, Style = KnownBorderStyle.Thick, Color = "#ED7D31" }
-                //        },
-                //        Content = { DataType = new TextDataType() }
-                //    },
-                //},
-                //Fields =
-                //{
-                //    new DataField { Name = "Name", Alias = "Name", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "ValueStyle" } },
-                //    new DataField { Name = "Surname", Alias = "Surname", Header = { Style = "HeaderStyle", Show = YesNo.Yes }, Value = { Style = "LastFieldValueStyle" } }
-                //}
+                Resources =
+                {
+                    Styles = new XlsxStylesCollection
+                    {
+                        new XlsxCellStyle
+                        {
+                            Name = "HeaderStyle",
+                            Font = { Name = "Calibri", Size = 11.0f, Color = "White", Bold = YesNo.Yes },
+                            Content =
+                            {
+                                Alignment = { Horizontal = KnownHorizontalAlignment.Center },
+                                Color = "Navy",
+                                DataType = new TextDataType()
+                            }
+                        },
+                        new XlsxCellStyle
+                        {
+                            Name = "NumberValueStyle",
+                            Font = { Name = "Calibri", Size = 11.0f },
+                            Content =
+                            {
+                                AlternateColor = "#FCE4D6",
+                                Alignment = { Horizontal = KnownHorizontalAlignment.Right },
+                                DataType = new NumberDataType { Decimals = 0 }
+                            }
+                        },
+                        new XlsxCellStyle
+                        {
+                            Name = "NumberValueAggregateStyle",
+                            Inherits = "HeaderStyle",
+                            Font = { Size = 14.0f },
+                            Content =
+                            {
+                                DataType = new NumberDataType { Decimals = 0 }
+                            }
+                        },
+                        new XlsxCellStyle
+                        {
+                            Name = "StringValueStyle",
+                            Font = { Name = "Calibri", Size = 11.0f },
+                            Content =
+                            {
+                                AlternateColor = "#FCE4D6",
+                                Alignment = { Horizontal = KnownHorizontalAlignment.Left },
+                                DataType = new TextDataType(),
+                            }
+                        },
+                        new XlsxCellStyle
+                        {
+                            Name = "DateValueStyle",
+                            Font = { Name = "Calibri", Size = 11.0f },
+                            Content =
+                            {
+                                AlternateColor = "#FCE4D6",
+                                Alignment = { Horizontal = KnownHorizontalAlignment.Right },
+                                DataType = new DateTimeDataType{ Format = KnownDateTimeFormat.ShortDatePattern }
+                            }
+                        },
+                        new XlsxCellStyle
+                        {
+                            Name = "DecimalValueStyle",
+                            Font = { Name = "Calibri", Size = 11.0f },
+                            Content =
+                            {
+                                AlternateColor = "#FCE4D6",
+                                Alignment = { Horizontal = KnownHorizontalAlignment.Right },
+                                DataType = new NumberDataType { Decimals = 2, Separator = YesNo.Yes },
+                            }
+                        },
+                        new XlsxCellStyle
+                        {
+                            Name = "DecimalValueAggregateStyle",
+                            Font = { Name = "Calibri", Size = 11.0f, Bold = YesNo.Yes },
+                            Content =
+                            {
+                                Color = "LightGray",
+                                Alignment = { Horizontal = KnownHorizontalAlignment.Right },
+                                DataType = new NumberDataType { Decimals = 2, Separator = YesNo.Yes },
+                            }
+                        }
+                    }
+                },
+                Fields =
+                {
+                    new DataField
+                    {
+                        Name = "INDEX", 
+                        Alias = "Index", 
+                        Header = { Style = "HeaderStyle", Show = YesNo.Yes }, 
+                        Value = { Style = "NumberValueStyle" },
+                        Aggregate = { Location = KnownAggregateLocation.Top, AggregateType = KnownAggregateType.Count, Style = "NumberValueAggregateStyle", Show = YesNo.Yes }
+                    },
+                    new DataField
+                    {
+                        Name = "Text",
+                        Alias = "Text", 
+                        Header = { Style = "HeaderStyle", Show = YesNo.Yes }, 
+                        Value = { Style = "StringValueStyle" }
+                    },
+                    new DataField
+                    {
+                        Name = "Date", 
+                        Alias = "Date",
+                        Header = { Style = "HeaderStyle", Show = YesNo.Yes },
+                        Value = { Style = "DateValueStyle" }
+                    },
+                    new DataField
+                    {
+                        Name = "NUMBER", 
+                        Alias = "Number", 
+                        Header = { Style = "HeaderStyle", Show = YesNo.Yes },
+                        Value = { Style = "DecimalValueStyle" }, 
+                        Aggregate = { Location = KnownAggregateLocation.Bottom, AggregateType = KnownAggregateType.Sum, Style = "DecimalValueAggregateStyle", Show = YesNo.Yes }
+                    }
+                }
             }
+        });
+
+        #endregion
+
+        #region Insert AutoFilter
+
+        doc.Insert(new InsertAutoFilter
+        {
+            SheetName = "Sheet1",
+            Location = new XlsxStringRange { Address = "A3:D3" }
         });
 
         #endregion
@@ -125,7 +216,7 @@ internal class Sample27
 
         #region Create output result
 
-        var result = doc.CreateResult();
+        var result = doc.CreateResult(new XlsxOutputResultConfig {AutoFitColumns = true});
         if (!result.Success)
         {
             logger.Info("   > Error creating output result");
@@ -147,13 +238,13 @@ internal class Sample27
         {
             logger.Info("   > Error while saving to disk");
             logger.Info($"     > Error: {saveResult.Errors.AsMessages().ToStringBuilder()}");
-            logger.Info($"   > Elapsed time: { ts.Hours:00}:{ ts.Minutes:00}:{ ts.Seconds:00}.{ ts.Milliseconds / 10:00}");
+            logger.Info($"   > Elapsed time: {ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds / 10:00}");
             return;
         }
 
         logger.Info("   > Saved to disk correctly");
         logger.Info("     > Path: ~/Output/Sample-27/Sample-27.xlsx");
-        logger.Info($"   > Elapsed time: { ts.Hours:00}:{ ts.Minutes:00}:{ ts.Seconds:00}.{ ts.Milliseconds / 10:00}");
+        logger.Info($"   > Elapsed time: {ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds / 10:00}");
 
         #endregion
     }

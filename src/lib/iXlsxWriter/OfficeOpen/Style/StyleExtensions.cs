@@ -90,7 +90,15 @@ internal static class StyleExtensions
 
                 if (cellContent.Color.Equals(BaseContent.DefaultColor, StringComparison.OrdinalIgnoreCase))
                 {
-                    style.Fill.PatternType = ExcelFillStyle.None;
+                    if (useAlternate)
+                    {
+                        style.Fill.PatternType = cellContent.Pattern.PatternType.ToEppPatternFillStyle();
+                        style.Fill.BackgroundColor.SetColor(cellContent.GetAlternateColor());
+                    }
+                    else
+                    {
+                        style.Fill.PatternType = ExcelFillStyle.None;
+                    }
                 }
                 else
                 {

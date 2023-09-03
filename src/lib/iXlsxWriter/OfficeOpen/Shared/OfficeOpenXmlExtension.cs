@@ -12,8 +12,9 @@ using iTin.Core.Helpers;
 
 using iTin.Core.Models.Design.ComponentModel;
 using iTin.Core.Models.Design.Enums;
+using iTin.Core.Models.Design.Table;
 using iTin.Core.Models.Design.Table.Fields;
-using iTin.Core.Models.Design.Table.Headers;
+
 using iTin.Utilities.Xlsx.Design;
 using iTin.Utilities.Xlsx.Design.Charts;
 using iTin.Utilities.Xlsx.Design.Shared;
@@ -98,43 +99,47 @@ internal static class OfficeOpenXmlExtension
         cellComment.Font.UnderLine = font.Underline == YesNo.Yes;
     }
 
-    ///// <summary>
-    ///// Automatics the fit group columns.
-    ///// </summary>
-    ///// <param name="worksheet">The worksheet.</param>
-    ///// <param name="dictionary">Group fields data.</param>
-    ///// <param name="writer">Current writer.</param>
-    //public static void AutoFitGroupColumns(this ExcelWorksheet worksheet, IDictionary<BaseDataField, int> dictionary, IWriter writer)
-    //{
-    //    SentinelHelper.ArgumentNull(worksheet);
-    //    SentinelHelper.ArgumentNull(dictionary);
-    //    SentinelHelper.ArgumentNull(writer);
+    /// <summary>
+    /// Automatics the fit group columns.
+    /// </summary>
+    /// <param name="worksheet">The worksheet.</param>
+    /// <param name="dictionary">Group fields data.</param>
+    /// <param name="fields">Current fields.</param>
+    /// <param name="styles">Current styles.</param>
+    public static void AutoFitGroupColumns(this ExcelWorksheet worksheet, IDictionary<BaseDataField, int> dictionary, FieldsCollection fields, XlsxStylesCollection styles)
+    {
+        SentinelHelper.ArgumentNull(worksheet, nameof(worksheet));
+        SentinelHelper.ArgumentNull(dictionary, nameof(dictionary));
+        SentinelHelper.ArgumentNull(fields, nameof(fields));
+        SentinelHelper.ArgumentNull(styles, nameof(styles));
 
-    //    foreach (var entry in dictionary)
-    //    {
-    //        if (entry.Key.FieldType == KnownFieldType.Group)
-    //        {
-    //            var index = writer.Provider.Input.Model.Table.Fields.IndexOf(entry.Key);
-    //            var style = writer.Provider.Input.Model.Resources.Styles[entry.Key.Value.Style];
+        foreach (var entry in dictionary)
+        {
+            if (entry.Key.FieldType != KnownFieldType.Group)
+            {
+                continue;
+            }
 
-    //            var maxColumnLenght = entry.Key.Alias.Length > entry.Value
-    //                                        ? entry.Key.Alias.Length
-    //                                        : entry.Value;
-    //            using var bitmap = new Bitmap(1, 1);
-    //            using var graphics = Graphics.FromImage(bitmap);
-    //            using var font = style.Font.ToFont();
-    //            using var fontInPoints = new Font(font.Name, font.Size, font.Style, GraphicsUnit.Point);
-    //            var singleCharWidth = graphics.MeasureString("0", fontInPoints).Width;
-    //            var doubleCharWidth = graphics.MeasureString("00", fontInPoints).Width;
+            var index = fields.IndexOf(entry.Key);
+            var style = styles[entry.Key.Value.Style];
 
-    //            var charWidth = doubleCharWidth - singleCharWidth;
-    //            var valueWidth = charWidth * (maxColumnLenght + 1);
-    //            var excelwidth = (valueWidth - 12) / 7;
+            var maxColumnLenght = entry.Key.Alias.Length > entry.Value
+                ? entry.Key.Alias.Length
+                : entry.Value;
+            using var bitmap = new Bitmap(1, 1);
+            using var graphics = Graphics.FromImage(bitmap);
+            using var font = ((XlsxCellStyle)style).Font.ToFont();
+            using var fontInPoints = new Font(font.Name, font.Size, font.Style, GraphicsUnit.Point);
+            var singleCharWidth = graphics.MeasureString("0", fontInPoints).Width;
+            var doubleCharWidth = graphics.MeasureString("00", fontInPoints).Width;
 
-    //            worksheet.Column(index + 1).Width = excelwidth;
-    //        }
-    //    }
-    //}
+            var charWidth = doubleCharWidth - singleCharWidth;
+            var valueWidth = charWidth * (maxColumnLenght + 1);
+            var excelwidth = (valueWidth - 12) / 7;
+
+            worksheet.Column(index + 1).Width = excelwidth;
+        }
+    }
 
     /// <summary>
     /// Creates list of styles.

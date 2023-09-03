@@ -1,9 +1,9 @@
 ﻿
 using System.Diagnostics;
+using System.Globalization;
 
+using iTin.Core.Models.Design;
 using iTin.Core.Models.Design.Enums;
-
-using iTin.Utilities.Xlsx.Design.Shared;
 
 namespace iXlsxWriter.ComponentModel;
 
@@ -13,50 +13,52 @@ namespace iXlsxWriter.ComponentModel;
 public class XlsxFormulaResolver
 {
     #region private readonly members
-
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private readonly QualifiedAggregateDefinition _model;
-
+    private readonly FieldAggregate _model;
     #endregion
 
     #region constructor/s
 
+    #region [public] XlsxFormulaResolver(FieldAggregate): Initializes a new instance of the class
     /// <summary>
-    /// Initializes a new instance of the <see cref="XlsxFormulaResolver"/> class.
+    /// Initializes a new instance of the <see cref="XlsxFormulaResolver" /> class.
     /// </summary>
     /// <param name="aggregate">Aggregate's data.</param>
-    public XlsxFormulaResolver(QualifiedAggregateDefinition aggregate)
+    public XlsxFormulaResolver(FieldAggregate aggregate)
     {
         _model = aggregate;
-
-        WorkSheet = string.Empty;
-        HasAutoFilter = YesNo.No;
     }
+    #endregion
 
     #endregion
 
     #region public properties
 
+    #region [public] (int) EndRow: Gets or sets a value that represents the end row of the range
     /// <summary>
-    /// Gets or sets a value indicating whether the auto filter is enabled. The dafault is <see cref="YesNo.No"/>.
+    /// Gets or sets a value that represents the end row of the range.
     /// </summary>
     /// <value>
-    /// <see cref="YesNo.Yes"/> if auto filter is enabled; otherwise, <see cref="YesNo.No"/>.
+    /// End row of the range.
     /// </value>
-    public YesNo HasAutoFilter { get; set; }
+    public int EndRow { private get; set; }
+    #endregion
 
+    #region [public] (int) StartRow: Gets or sets a value that represents the start row of the range
     /// <summary>
-    /// Gets or sets a value containing worksheet name.
+    /// Gets or sets a value that represents the start row of the range.
     /// </summary>
     /// <value>
-    /// A <see cref="string"/> containing worksheet name.
+    /// Start row of the range.
     /// </value>
-    public string WorkSheet { get; set; }
+    public int StartRow { private get; set; }
+    #endregion
 
     #endregion
 
     #region public methods
 
+    #region [public] (string) Resolve(): Returns string containing aggregate's formula
     /// <summary>
     /// Returns string containing aggregate's formula.
     /// </summary>
@@ -65,25 +67,36 @@ public class XlsxFormulaResolver
     /// </returns>
     public string Resolve()
     {
+        const string pattern = "SUBTOTAL({0},R[{1}]C:R[{2}]C)";
+
+        var type = int.MaxValue;
+        var result = string.Empty;
         if (_model.AggregateType == KnownAggregateType.None)
         {
-            return string.Empty;
+            return result;
+        }
+        if (_model.AggregateType != KnownAggregateType.Text)
+        {
+            type = _model.AggregateType switch
+            {
+                KnownAggregateType.Average => 101,
+                KnownAggregateType.Count => 103,
+                KnownAggregateType.Max => 104,
+                KnownAggregateType.Min => 105,
+                KnownAggregateType.Sum => 109,
+                _ => type
+            };
+
+            result = string.Format(CultureInfo.InvariantCulture, pattern, type, StartRow, EndRow);
+        }
+        else
+        {
+            result = _model.Text;
         }
 
-        var type = _model.AggregateType switch
-        {
-            KnownAggregateType.Average => HasAutoFilter == YesNo.Yes ? 101 : 1,
-            KnownAggregateType.Count => HasAutoFilter == YesNo.Yes ? 103 : 3,
-            KnownAggregateType.Max => HasAutoFilter == YesNo.Yes ? 104 : 4,
-            KnownAggregateType.Min => HasAutoFilter == YesNo.Yes ? 105 : 5,
-            KnownAggregateType.Sum => HasAutoFilter == YesNo.Yes ? 109 : 9,
-            _ => HasAutoFilter == YesNo.Yes ? 109 : 9
-        };
-
-        return string.IsNullOrEmpty(WorkSheet)
-            ? $"SUBTOTAL({type}, {_model.Range})"
-            : $"SUBTOTAL({type}, '{WorkSheet}'!{_model.Range})";
+        return result;
     }
+    #endregion
 
     #endregion
 }
