@@ -1,0 +1,265 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+    <Version>1.0.0.3</Version>
+    <Description>Xlsx design elements</Description>
+    <Copyright>Copyright © 2022</Copyright>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageId>iTin.Utilities.Xlsx.Design</PackageId>
+    <Company>iTin</Company>
+    <Product>iTin.Utilities.Xlsx.Design</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Styles\Items\Cell\Content\DataType\**" />
+    <EmbeddedResource Remove="Styles\Items\Cell\Content\DataType\**" />
+    <None Remove="Styles\Items\Cell\Content\DataType\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\..\iTin\iTin.Core\iTin.Core.Drawing\src\iTin.Core.Drawing.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\iTin\iTin.Core\iTin.Core.Models\iTin.Core.Models.Design.Charting\src\iTin.Core.Models.Design.Charting.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Update="System.Drawing">
+      <SpecificVersion>false</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties configuration_4schemas_4json_4basexlsxconfigurationschema_1json__JsonSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
+
+  <!-- \ -->
+  <ItemGroup>
+    <Compile Update="XlsxImage.*.cs">
+      <DependentUpon>XlsxImage.cs</DependentUpon>
+    </Compile>
+    <Compile Update="XlsxPicture.*.cs">
+      <DependentUpon>XlsxPicture.cs</DependentUpon>
+    </Compile>
+    <Compile Update="XlsxShape.*.cs">
+      <DependentUpon>XlsxShape.cs</DependentUpon>
+    </Compile>
+    <Compile Update="XlsxSettings.*.cs">
+      <DependentUpon>XlsxSettings.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Image -->
+
+  <!-- Picture -->
+  <ItemGroup>
+    <Compile Update="Picture\Effects\Effect\XlsxGrayScaleGreenEffect.designer.cs">
+      <DependentUpon>XlsxGrayScaleGreenEffect.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Picture\Effects\Effect\XlsxGrayScaleEffect.designer.cs">
+      <DependentUpon>XlsxGrayScaleEffect.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Picture\Effects\Effect\XlsxMoreDarkEffect.designer.cs">
+      <DependentUpon>XlsxMoreDarkEffect.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Picture\Effects\Effect\XlsxMoreBrightnessEffect.designer.cs">
+      <DependentUpon>XlsxMoreBrightnessEffect.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Picture\Effects\XlsxEffectsCollection.*.cs">
+      <DependentUpon>XlsxEffectsCollection.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Settings -->
+  <ItemGroup>
+    <Compile Update="Settings\Document\XlsxDocumentMetadataSettings.*.cs">
+      <DependentUpon>XlsxDocumentMetadataSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Settings\Sheets\Sheet\HeaderFooter\HeaderFooterSections\HeaderFooterSection\XlsxDocumentHeaderFooterSection.*.cs">
+      <DependentUpon>XlsxDocumentHeaderFooterSection.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Settings\Sheets\Sheet\HeaderFooter\HeaderFooterSections\XlsxDocumentHeaderFooterSections.*.cs">
+      <DependentUpon>XlsxDocumentHeaderFooterSections.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Settings\Sheets\Sheet\HeaderFooter\XlsxDocumentHeaderFooter.*.cs">
+      <DependentUpon>XlsxDocumentHeaderFooter.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Settings\Sheets\Sheet\Margins\XlsxDocumentMargins.*.cs">
+      <DependentUpon>XlsxDocumentMargins.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Settings\Sheets\Sheet\XlsxSheetSettings.*.cs">
+      <DependentUpon>XlsxSheetSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Settings\Sheets\XlsxSheetsSettingsCollection.*.cs">
+      <DependentUpon>XlsxSheetsSettingsCollection.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Shape -->
+
+  <!-- Shared -->
+  <ItemGroup>
+    <Compile Update="Shared\Border\XlsxBorder.*.cs">
+      <DependentUpon>XlsxBorder.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Border\XlsxBorderOptions.*.cs">
+      <DependentUpon>XlsxBorderOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Elements\DataStyles.*.cs">
+      <DependentUpon>DataStyles.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Elements\DictionaryStyles.*.cs">
+      <DependentUpon>DictionaryStyles.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Elements\HeaderStyles.*.cs">
+      <DependentUpon>HeaderStyles.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Elements\QualifiedAggregateDefinition.*.cs">
+      <DependentUpon>QualifiedAggregateDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Elements\QualifiedPointDefinition.*.cs">
+      <DependentUpon>QualifiedPointDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Elements\QualifiedRangeDefinition.*.cs">
+      <DependentUpon>QualifiedRangeDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Point\XlsxPoint.*.cs">
+      <DependentUpon>XlsxPoint.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Point\XlsxPointOptions.*.cs">
+      <DependentUpon>XlsxPointOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Range\Base\XlsxBaseRange.*.cs">
+      <DependentUpon>XlsxBaseRange.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Range\XlsxPointRange.*.cs">
+      <DependentUpon>XlsxPointRange.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Range\XlsxRange.*.cs">
+      <DependentUpon>XlsxRange.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Range\XlsxStringRange.*.cs">
+      <DependentUpon>XlsxStringRange.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\Illumination\XlsxIlluminationShapeEffect.*.cs">
+      <DependentUpon>XlsxIlluminationShapeEffect.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\Illumination\XlsxIlluminationShapeEffectOptions.*.cs">
+      <DependentUpon>XlsxIlluminationShapeEffectOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\Reflection\XlsxReflectionShapeEffect.*.cs">
+      <DependentUpon>XlsxReflectionShapeEffect.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\Reflection\XlsxReflectionShapeEffectOptions.*.cs">
+      <DependentUpon>XlsxReflectionShapeEffectOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\Shadow\Base\XlsxBaseShadow.*.cs">
+      <DependentUpon>XlsxBaseShadow.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\Shadow\Base\XlsxBaseShadowOptions.*.cs">
+      <DependentUpon>XlsxBaseShadowOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\Shadow\Inner\XlsxInnerShadow.*.cs">
+      <DependentUpon>XlsxInnerShadow.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\Shadow\Inner\XlsxInnerShadowOptions.*.cs">
+      <DependentUpon>XlsxInnerShadowOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\Shadow\Outer\XlsxOuterShadow.*.cs">
+      <DependentUpon>XlsxOuterShadow.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\Shadow\Outer\XlsxOuterShadowOptions.*.cs">
+      <DependentUpon>XlsxOuterShadowOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\Shadow\Perspective\XlsxPerspectiveShadow.*.cs">
+      <DependentUpon>XlsxPerspectiveShadow.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\Shadow\Perspective\XlsxPerspectiveShadowOptions.*.cs">
+      <DependentUpon>XlsxPerspectiveShadowOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\SoftEdge\XlsxSoftEdgeShapeEffect.*.cs">
+      <DependentUpon>XlsxSoftEdgeShapeEffect.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\SoftEdge\XlsxSoftEdgeShapeEffectOptions.*.cs">
+      <DependentUpon>XlsxSoftEdgeShapeEffectOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\XlsxShapeEffects.*.cs">
+      <DependentUpon>XlsxShapeEffects.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\ShapeEffects\XlsxShapeEffectsOptions.*.cs">
+      <DependentUpon>XlsxShapeEffectsOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Shared\Size\XlsxSize.designer.cs">
+      <DependentUpon>XlsxSize.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Table\Headers\Header\XlsxColumnHeader.clone.cs">
+      <DependentUpon>XlsxColumnHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Table\Headers\Header\XlsxColumnHeader.columnheader.cs">
+      <DependentUpon>XlsxColumnHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Table\Headers\Header\XlsxColumnHeader.designer.cs">
+      <DependentUpon>XlsxColumnHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Table\Headers\Header\XlsxColumnHeader.tenant.cs">
+      <DependentUpon>XlsxColumnHeader.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Styles -->
+  <ItemGroup>
+    <Compile Update="Styles\Items\Base\XlsxBaseStyle.*.cs">
+      <DependentUpon>XlsxBaseStyle.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Borders\Border\XlsxStyleBorder.*.cs">
+      <DependentUpon>XlsxStyleBorder.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Borders\XlsxStyleBorders.*.cs">
+      <DependentUpon>XlsxStyleBorders.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Content\Alignment\XlsxCellContentAlignment.*.cs">
+      <DependentUpon>XlsxCellContentAlignment.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Content\Alignment\XlsxCellContentAlignmentOptions.*.cs">
+      <DependentUpon>XlsxCellContentAlignmentOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Content\Merge\XlsxCellMerge.*.cs">
+      <DependentUpon>XlsxCellMerge.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Content\Merge\XlsxCellMergeOptions.*.cs">
+      <DependentUpon>XlsxCellMergeOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Content\Pattern\XlsxCellPattern.*.cs">
+      <DependentUpon>XlsxCellPattern.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Content\Pattern\XlsxCellPatternOptions.*.cs">
+      <DependentUpon>XlsxCellPatternOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Content\XlsxCellContent.*.cs">
+      <DependentUpon>XlsxCellContent.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\Content\XlsxCellContentOptions.*.cs">
+      <DependentUpon>XlsxCellContentOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\XlsxCellStyle.*.cs">
+      <DependentUpon>XlsxCellStyle.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Items\Cell\XlsxCellStyleOptions.*.cs">
+      <DependentUpon>XlsxCellStyleOptions.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Table -->
+
+</Project>
