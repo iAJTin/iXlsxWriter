@@ -23,7 +23,7 @@ I hope it helps someone. :smirk:
 
    | Library | Version | Description |
    |:---|:---|:---|
-   | [iXlsxWriter](https://github.com/iAJTin/iXlsxWriter) | 1.0.1 | **iXlsxWriter** is a lightweight implementation that allows creates a **xlsx** document totally or partially. **Currently only works on Windows** |
+   | [iXlsxWriter](https://github.com/iAJTin/iXlsxWriter/tree/master/iXlsxWriter) | 1.0.1 | **iXlsxWriter** is a lightweight implementation that allows creates a **xlsx** document totally or partially. **Currently only works on Windows** |
 
 
    ### Extensions.
