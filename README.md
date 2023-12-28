@@ -23,7 +23,7 @@ I hope it helps someone. :smirk:
 
    | Library | Version | Description |
    |:---|:---|:---|
-   | [iXlsxWriter](https://github.com/iAJTin/iXlsxWriter/tree/master/iXlsxWriter) | 1.0.1 | **iXlsxWriter** is a lightweight implementation that allows creates a **xlsx** document totally or partially. **Currently only works on Windows** |
+   | [iXlsxWriter](https://github.com/iAJTin/iXlsxWriter) | 1.0.1 | **iXlsxWriter** is a lightweight implementation that allows creates a **xlsx** document totally or partially. **Currently only works on Windows** |
 
 
    ### Extensions.
@@ -31,5 +31,5 @@ I hope it helps someone. :smirk:
    | Extension | Version | Description |
    |:---|:---|:---|
    | [iXlsxWriter.AspNet](https://github.com/iAJTin/iXlsxWriter.AspNet) | 1.0.0 | Extends **iXlsxWriter** to work in *AspNet* (FullFramework) projects, contains extension methods to download **XlsxInput** instances as well as **OutputResult**, facilitating its use in this environment |
-   | [iXlsxWriter.AspNetCore](https://github.com/iAJTin/iXlsxWriter/iXlsxWriter.AspNetCore) | 1.0.0 | Extends **iXlsxWriter** to work in *AspNetCore* projects, contains extension methods to download **XlsxInput** instances as well as **OutputResult**, facilitating its use in this environment |
-   | [iXlsxWriter.Mail](https://github.com/iAJTiniXlsxWriter/iXlsxWriter.Mail) | 1.0.0 | Extends **iXlsxWriter**, contains extension methods to download **XlsxInput** instances as well as **OutputResult** |
+   | [iXlsxWriter.AspNetCore](https://github.com/iAJTin/iXlsxWriter.AspNetCore) | 1.0.0 | Extends **iXlsxWriter** to work in *AspNetCore* projects, contains extension methods to download **XlsxInput** instances as well as **OutputResult**, facilitating its use in this environment |
+   | [iXlsxWriter.Mail](https://github.com/iAJTin/iXlsxWriter.Mail) | 1.0.0 | Extends **iXlsxWriter**, contains extension methods to download **XlsxInput** instances as well as **OutputResult** |
